@@ -1,7 +1,6 @@
 bin/
 obj/
 
+*.dbmdl
 *.suo
 *.user
-/src/Portfolio.Data
-/src/Portfolio.Data.SqlServer
