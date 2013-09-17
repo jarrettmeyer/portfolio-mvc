@@ -19,7 +19,7 @@ namespace Portfolio.Tests.Data.Commands
         [SetUp]
         public void BeforeEachTest()
         {
-            connection = TestBootstrapper.ConnectToDatabase();
+            //connection = TestBootstrapper.ConnectToDatabase();
             //createTask = new CreateTaskImpl(connection);
         }
 

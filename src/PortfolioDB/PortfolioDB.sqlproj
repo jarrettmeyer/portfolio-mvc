@@ -62,6 +62,7 @@
     <Build Include="Tables\TaskStatuses.sql" />
     <Build Include="Tables\Categories.sql" />
     <Build Include="Tables\Statuses.sql" />
+    <Build Include="Tables\StatusWorkflows.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PopulateCategories.sql" />

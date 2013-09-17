@@ -7,7 +7,7 @@
     <ProjectGuid>{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Portfolio.Tests</RootNamespace>
+    <RootNamespace>Portfolio</RootNamespace>
     <AssemblyName>Portfolio.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Commands\CreateTaskImplTests.cs" />
+    <Compile Include="Data\Models\CategoryMapTests.cs" />
+    <Compile Include="Data\NHibernateConfigTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

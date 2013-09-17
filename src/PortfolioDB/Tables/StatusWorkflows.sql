@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[StatusWorkflows]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+	[FromStatus] VARCHAR(256),
+	[ToStatus] VARCHAR(256),
+	[CreatedAt] DATETIME NOT NULL,
+	[Version] ROWVERSION,
+	CONSTRAINT [FK_StatusWorkflows_Statuses_From] FOREIGN KEY ([FromStatus]) REFERENCES [Statuses]([Id]),
+	CONSTRAINT [FK_StatusWorkflows_Statuses_To] FOREIGN KEY ([ToStatus]) REFERENCES [Statuses]([Id])
+)
+GO
+
+CREATE UNIQUE INDEX [IX_StatusWorkflows_UniqueFromTo] ON [dbo].[StatusWorkflows] ([FromStatus], [ToStatus])
+GO
