@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[StatusWorkflows]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 	[FromStatus] VARCHAR(256),
 	[ToStatus] VARCHAR(256),
 	[CreatedAt] DATETIME NOT NULL,

@@ -4,10 +4,10 @@ namespace Portfolio.Data.Models
 {
     public class StatusWorkflow : IVersionedEntity
     {
-        public int Id { get; set; }
-        public Status FromStatus { get; set; }
-        public Status ToStatus { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public byte[] Version { get; set; }
+        public virtual int Id { get; set; }
+        public virtual Status FromStatus { get; set; }
+        public virtual Status ToStatus { get; set; }
+        public virtual DateTime CreatedAt { get; set; }
+        public virtual byte[] Version { get; set; }
     }
 }
