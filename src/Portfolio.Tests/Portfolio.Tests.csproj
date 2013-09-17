@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Data\Commands\CreateTaskImplTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
+    <Compile Include="Data\Models\StatusMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

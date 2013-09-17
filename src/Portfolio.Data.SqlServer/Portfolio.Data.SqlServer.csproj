@@ -48,6 +48,7 @@
     <Compile Include="Commands\CreateTaskImpl.cs" />
     <Compile Include="Commands\UpdateTaskStatusImpl.cs" />
     <Compile Include="Models\CategoryMap.cs" />
+    <Compile Include="Models\StatusMap.Cs" />
     <Compile Include="NHibernateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetTaskByIdImpl.cs" />
