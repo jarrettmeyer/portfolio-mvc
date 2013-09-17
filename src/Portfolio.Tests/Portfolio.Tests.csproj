@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ConfigTests.cs" />
     <Compile Include="Data\Commands\CreateTaskImplTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
     <Compile Include="Data\Models\StatusMapTests.cs" />
@@ -57,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
+      <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
+      <Name>Portfolio.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Data.SqlServer\Portfolio.Data.SqlServer.csproj">
       <Project>{B0B7DB3D-EB10-49AE-9378-9338781694B2}</Project>
       <Name>Portfolio.Data.SqlServer</Name>

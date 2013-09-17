@@ -13,7 +13,7 @@ namespace Portfolio.Common
             set { connectionString = value; }
         }
 
-        private static string GetConfigValue(string key)
+        public static string GetConfigValue(string key)
         {
             string value;
             if (TryGetConfigValueFromEnvironment(key, out value))
