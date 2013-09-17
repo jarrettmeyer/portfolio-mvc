@@ -53,7 +53,7 @@ namespace Portfolio.Data.Commands
             var taskStatus = new TaskStatus
                              {
                                  Task = Task,
-                                 Status = status.Description,
+                                 Status = status,
                                  IsCompleted = status.IsCompleted,
                                  CreatedAt = createdAt
                              };

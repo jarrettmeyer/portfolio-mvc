@@ -51,6 +51,7 @@
     <Compile Include="Models\StatusMap.cs" />
     <Compile Include="Models\StatusWorkflowMap.cs" />
     <Compile Include="Models\TaskMap.cs" />
+    <Compile Include="Models\TaskStatusMap.cs" />
     <Compile Include="NHibernateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetTaskByIdImpl.cs" />
