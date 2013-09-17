@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}</ProjectGuid>
+    <ProjectGuid>{913150BE-8598-4A8B-9161-77DF82E1851B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Portfolio</RootNamespace>
-    <AssemblyName>Portfolio.Tests</AssemblyName>
+    <RootNamespace>Portfolio.Domain</RootNamespace>
+    <AssemblyName>Portfolio.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,15 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\lib\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,38 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ConfigTests.cs" />
-    <Compile Include="Data\Commands\CreateTaskImplTests.cs" />
-    <Compile Include="Data\Models\CategoryMapTests.cs" />
-    <Compile Include="Data\Models\StatusMapTests.cs" />
-    <Compile Include="Data\Models\StatusWorkflowMapTests.cs" />
-    <Compile Include="Data\Models\TaskMapTests.cs" />
-    <Compile Include="Data\NHibernateConfigTests.cs" />
-    <Compile Include="Domain\StatusMapperTests.cs" />
-    <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusMapper.cs" />
+    <Compile Include="TaskMapper.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
-      <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
-      <Name>Portfolio.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Data.SqlServer\Portfolio.Data.SqlServer.csproj">
-      <Project>{B0B7DB3D-EB10-49AE-9378-9338781694B2}</Project>
-      <Name>Portfolio.Data.SqlServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Data\Portfolio.Data.csproj">
       <Project>{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}</Project>
       <Name>Portfolio.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Domain\Portfolio.Domain.csproj">
-      <Project>{913150BE-8598-4A8B-9161-77DF82E1851B}</Project>
-      <Name>Portfolio.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
