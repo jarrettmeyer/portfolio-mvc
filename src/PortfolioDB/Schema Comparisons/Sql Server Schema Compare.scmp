@@ -9,7 +9,7 @@
   </SourceModelProvider>
   <TargetModelProvider>
     <ConnectionBasedModelProvider>
-      <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Portfolio_test;Integrated Security=True;Pooling=False</ConnectionString>
+      <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Portfolio_development;Integrated Security=True;Pooling=False</ConnectionString>
     </ConnectionBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>

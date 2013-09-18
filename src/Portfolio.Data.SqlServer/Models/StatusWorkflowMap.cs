@@ -8,20 +8,21 @@ namespace Portfolio.Data.Models
     {
         public StatusWorkflowMap()
         {
-            Table("StatusWorkflows");
+            Table("[StatusWorkflows]");
             Id(x => x.Id, map => map.Generator(Generators.Identity));
             ManyToOne(x => x.FromStatus, map =>
             {
                 map.Column(col =>
                 {
-                    col.Name("FromStatus");
+                    col.Name("[FromStatus]");                    
                 });
+                
             });
             ManyToOne(x => x.ToStatus, map =>
             {
                 map.Column(col =>
                 {
-                    col.Name("ToStatus");
+                    col.Name("[ToStatus]");
                 });
             });
             Property(x => x.CreatedAt);

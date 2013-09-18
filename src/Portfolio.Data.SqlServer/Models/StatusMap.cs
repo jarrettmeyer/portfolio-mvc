@@ -1,4 +1,5 @@
-﻿using NHibernate.Mapping.ByCode.Conformist;
+﻿using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Conformist;
 
 namespace Portfolio.Data.Models
 {
@@ -10,6 +11,19 @@ namespace Portfolio.Data.Models
             Id(x => x.Id);
             Property(x => x.Description);
             Property(x => x.IsCompleted);
+            Property(x => x.IsDefaultStatus);
+
+            Bag(x => x.Workflows, map =>
+            {
+                map.Cascade(Cascade.All);
+                map.Key(key =>
+                {
+                    key.Column("[FromStatus]");
+                });
+            }, action =>
+            {
+                action.OneToMany();
+            });
         }
     }
 }

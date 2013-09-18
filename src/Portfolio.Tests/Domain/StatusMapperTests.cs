@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Portfolio.Data.Models;
 
 namespace Portfolio.Domain
@@ -20,13 +19,6 @@ namespace Portfolio.Domain
             var view = StatusMapper.Map(status);
             Assert.AreEqual("TEST", view.Id);
             Assert.AreEqual("Test Status", view.Description);
-        }
-
-        [Test]
-        public void throws_exception_when_status_is_null()
-        {
-            status = null;
-            Assert.Throws<ArgumentNullException>(() => StatusMapper.Map(status));
         }
     }
 }

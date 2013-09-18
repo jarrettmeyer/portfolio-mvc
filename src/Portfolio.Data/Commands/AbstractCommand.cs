@@ -10,7 +10,7 @@ namespace Portfolio.Data.Commands
             GC.SuppressFinalize(this);
         }
 
-        public virtual void Dispose(bool isDisposing)
+        protected virtual void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {

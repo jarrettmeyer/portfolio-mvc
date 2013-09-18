@@ -1,5 +1,4 @@
-﻿using System;
-using Portfolio.Data.Models;
+﻿using Portfolio.Data.Models;
 using Portfolio.Domain.ViewModels;
 
 namespace Portfolio.Domain
@@ -8,14 +7,13 @@ namespace Portfolio.Domain
     {
         public static StatusViewModel Map(Status status)
         {
-            if (status == null)
-                throw new ArgumentNullException("status");
-
-            return new StatusViewModel
-                   {
-                       Description = status.Description ?? "",
-                       Id = status.Id
-                   };
+            var statusViewModel = new StatusViewModel();
+            if (status != null)
+            {
+                statusViewModel.Description = status.Description;
+                statusViewModel.Id = status.Id;
+            }
+            return statusViewModel;
         }
     }
 }

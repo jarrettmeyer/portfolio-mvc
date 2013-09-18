@@ -2,8 +2,27 @@
 {
     public class StatusViewModel
     {
-        public string Description { get; set; }
+        private string description = "";
+        private string id = "";
 
-        public string Id { get; set; }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                if (value != null)
+                    description = value;
+            }
+        }
+        
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                if (value != null)
+                    id = value;
+            }
+        }        
     }
 }

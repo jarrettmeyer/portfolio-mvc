@@ -72,6 +72,17 @@ namespace Portfolio
             return InsertNewRecord(status);
         }
 
+        public static StatusWorkflow InsertNewStatusWorkflow(Status fromStatus, Status toStatus)
+        {
+            var statusWorkflow = new StatusWorkflow
+                                 {
+                                     FromStatus = fromStatus,
+                                     ToStatus = toStatus,
+                                     CreatedAt = DateTime.Now
+                                 };
+            return InsertNewRecord(statusWorkflow);
+        }
+
         private static T InsertNewRecord<T>(T inserted)
         {
             using (var session = NHibernateConfig.SessionFactory.OpenSession())
