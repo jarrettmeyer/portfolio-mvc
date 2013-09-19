@@ -144,6 +144,7 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\App\Home.Index.js" />
+    <Content Include="Scripts\App\ko.grid.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
