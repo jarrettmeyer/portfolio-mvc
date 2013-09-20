@@ -1,6 +1,9 @@
 ﻿(function () {
-    var defaultTableName = "ko_grid_table",
-        defaultPagingName = "ko_grid_paging";
+    var defaultTableTemplateName = "ko_grid_table",
+        defaultPagingTemplateName = "ko_grid_paging",
+        tableTemplate,
+        pagingTemplate,
+        writeLog;
 
     ko.grid = {
         viewModel: function (configuration) {
@@ -15,12 +18,16 @@
             self.itemsOnCurrentPage = ko.computed(function () {
                 var startIndex = self.pageSize * self.currentPageIndex();
                 return self.data.slice(startIndex, startIndex + self.pageSize);
-
-            }, self);
+            });
 
             self.maxPageIndex = ko.computed(function () {
-                return Math.ceil(ko.utils.unwrapObservable(self.data).length / self.pageSize) - 1;
-            }, self);
+                var length = ko.utils.unwrapObservable(self.data).length;
+                var value = Math.ceil(length / self.pageSize) - 1;
+                writeLog("Computing max page index. Length: " + length);
+                writeLog("Computing max page index. Page size: " + self.pageSize);
+                writeLog("Computing max page index. Max page index: " + value);
+                return value;
+            });
         }
     };
 
@@ -30,35 +37,51 @@
         document.write("<script type=\"text/html\" id=\"" + templateName + "\">" + templateMarkup + "</script>");
     };
 
-    templateEngine.addTemplate(defaultTableName, "");
+    tableTemplate = "<table class=\"ko-grid-table table table-condensed\">\
+                       <thead>\
+                         <tr data-bind=\"foreach: columns\">\
+                           <th data-bind=\"text: headerText\"></th>\
+                         </tr>\
+                       </thead>\
+                       <tbody data-bind=\"foreach: itemsOnCurrentPage\">\
+                         <tr data-bind=\"foreach: $parent.columns\">\
+                           <td data-bind=\"text: $parent[rowText]\"></td>\
+                         </tr>\
+                       </tbody>\
+                     </table>";
 
-    templateEngine.addTemplate(defaultPagingName, "");
+    pagingTemplate = "";
+    //<td data-bind=\"text: (typeof rowText === 'function') ? rowText($parent) : $parent[rowText] \"></td>\
+
+    templateEngine.addTemplate(defaultTableTemplateName, tableTemplate);
+
+    templateEngine.addTemplate(defaultPagingTemplateName, pagingTemplate);
     
     ko.bindingHandlers.grid = {
         init: function () {
             return { 'controlsDescendantBindings': true };
-        },
-        // This method is called to initialize the node, and will also be called again if you change what the grid is bound to
+        },        
         update: function (element, viewModelAccessor, allBindingsAccessor) {
             var viewModel = viewModelAccessor(), allBindings = allBindingsAccessor();
 
-            // Empty the element
             while (element.firstChild) {
                 ko.removeNode(element.firstChild);
             }
                 
+            var gridTableTemplate = allBindings.gridTableTemplate || defaultTableTemplateName,
+                gridPagingTemplate = allBindings.gridPagingTemplate || defaultPagingTemplateName;
 
-            // Allow the default templates to be overridden
-            var gridTableTemplate = allBindings.gridTableTemplate || defaultTableName,
-                gridPagingTemplate = allBindings.gridPagingTemplate || defaultPagingName;
-
-            // Render the main grid
             var tableContainer = element.appendChild(document.createElement("DIV"));
             ko.renderTemplate(gridTableTemplate, viewModel, { templateEngine: templateEngine }, tableContainer, "replaceNode");
 
-            // Render the page links
             var pagingContainer = element.appendChild(document.createElement("DIV"));
             ko.renderTemplate(gridPagingTemplate, viewModel, { templateEngine: templateEngine }, pagingContainer, "replaceNode");
+        }
+    };
+
+    writeLog = function (message) {
+        if (window.console && window.console.log) {
+            window.console.log(message);
         }
     };
 

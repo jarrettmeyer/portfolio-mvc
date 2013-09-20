@@ -8,9 +8,14 @@
         <title>Portfolio by Jarrett Meyer</title>    
         <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")"></script>
         <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/knockout-2.3.0.js")"></script>
+        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
         <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/App/ko.grid.js")"></script>
+        
+        <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootstrap.min.css")"/>
     </head>
     <body>
-        @RenderBody()
+        <div id="content" class="container">
+            @RenderBody()
+        </div>
     </body>
 </html>

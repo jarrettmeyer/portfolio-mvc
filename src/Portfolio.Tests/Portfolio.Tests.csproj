@@ -55,6 +55,7 @@
     <Compile Include="Data\Models\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
     <Compile Include="Domain\StatusMapperTests.cs" />
+    <Compile Include="Domain\ViewModels\TaskViewModelTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

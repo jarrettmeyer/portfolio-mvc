@@ -21,6 +21,11 @@ namespace Portfolio.Domain.ViewModels
 
         public bool IsCompleted { get; set; }
 
+        public bool IsPastDue
+        {
+            get { return HasDueDate && DueOn < DateTime.Today; }
+        }
+
         public StatusViewModel Status { get; set; }
     }
 }

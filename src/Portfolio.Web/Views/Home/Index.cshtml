@@ -1,6 +1,9 @@
-﻿<div id="task-list" data-bind="simpleGrid: grid"></div>
-<button class="btn" id="add-task" data-bind="click: addTask">
-    Add Task
-</button>
+﻿<div id="task-list" data-bind="grid: gridViewModel"></div>
+
+<div id="task-actions">
+    <button type="button" class="btn btn-primary" id="add-task" data-bind="click: addTask">
+        Add Task
+    </button>
+</div>
 
 <script type="text/javascript" src="@Url.Content("~/Scripts/App/Home.Index.js")"></script>
