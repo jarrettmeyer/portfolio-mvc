@@ -10,6 +10,17 @@
         }
         return defaultValue;
     };
+
+    window.parseMvcDate = function (mvcDate) {
+        if (!mvcDate) {
+            return null;
+        }
+        var ticksAsString = mvcDate.substring(6);
+        var ticksAsInt = parseInt(ticksAsString);
+        var date = new Date(ticksAsInt);
+        return date;        
+    };
+
     
     function getDay(date) {
         var d = date.getDay();

@@ -19,10 +19,25 @@ namespace Portfolio.Data
             this.session = session;
         }
 
+        public void Add<T>(T entity)
+        {
+            using (var transaction = session.BeginTransaction())
+            {
+                session.Save(entity);
+                transaction.Commit();
+            }
+        }
+
         public IEnumerable<T> All<T>()
         {
             var items = session.Query<T>().ToArray();
             return items;
+        }
+
+        public T First<T>(Expression<Func<T, bool>> expression)
+        {
+            var item = session.Query<T>().Where(expression).FirstOrDefault();
+            return item;
         }
 
         public T Load<T>(object id)

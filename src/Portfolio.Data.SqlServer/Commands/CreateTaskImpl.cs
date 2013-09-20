@@ -10,6 +10,7 @@ namespace Portfolio.Data.Commands
         private DateTime createdAt;
         private readonly ISession session;
         private Status status;
+        private TaskStatus taskStatus;
         private ITransaction transaction;
 
         public CreateTaskImpl(ISession session)
@@ -45,12 +46,13 @@ namespace Portfolio.Data.Commands
 
         private void InsertTask()
         {
+            Task.CurrentStatus = status;
             session.Save(Task);
         }
 
         private void InsertTaskStatus()
         {            
-            var taskStatus = new TaskStatus
+            taskStatus = new TaskStatus
                              {
                                  Task = Task,
                                  Status = status,

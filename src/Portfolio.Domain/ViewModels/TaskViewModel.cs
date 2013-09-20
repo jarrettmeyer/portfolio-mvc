@@ -6,7 +6,7 @@ namespace Portfolio.Domain.ViewModels
     {
         public CategoryViewModel Category { get; set; }
 
-        public StatusViewModel CurrentStatus { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public string Description { get; set; }
 

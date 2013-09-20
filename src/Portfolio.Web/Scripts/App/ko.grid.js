@@ -23,9 +23,9 @@
             self.maxPageIndex = ko.computed(function () {
                 var length = ko.utils.unwrapObservable(self.data).length;
                 var value = Math.ceil(length / self.pageSize) - 1;
-                writeLog("Computing max page index. Length: " + length);
-                writeLog("Computing max page index. Page size: " + self.pageSize);
-                writeLog("Computing max page index. Max page index: " + value);
+                //writeLog("Computing max page index. Length: " + length);
+                //writeLog("Computing max page index. Page size: " + self.pageSize);
+                //writeLog("Computing max page index. Max page index: " + value);
                 return value;
             });
 

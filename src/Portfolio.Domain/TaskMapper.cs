@@ -11,11 +11,12 @@ namespace Portfolio.Domain
             if (task != null)
             {
                 taskViewModel.Category = CategoryMapper.Map(task.Category);
-                taskViewModel.CurrentStatus = StatusMapper.Map(task.CurrentStatus);
+                taskViewModel.CreatedAt = task.CreatedAt;
                 taskViewModel.Description = task.Description;
                 taskViewModel.DueOn = task.DueOn;
                 taskViewModel.Id = task.Id;
                 taskViewModel.IsCompleted = task.IsCompleted;
+                taskViewModel.Status = StatusMapper.Map(task.CurrentStatus);
             }
             return taskViewModel;            
         }

@@ -42,6 +42,7 @@
     <Compile Include="Commands\AbstractCommand.cs" />
     <Compile Include="Commands\CreateTask.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommandStore.cs" />
     <Compile Include="Commands\UpdateTaskStatus.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Category.cs" />
