@@ -45,7 +45,7 @@
                        </thead>\
                        <tbody data-bind=\"foreach: itemsOnCurrentPage\">\
                          <tr data-bind=\"foreach: $parent.columns\">\
-                           <td data-bind=\"text: $parent[rowText]\"></td>\
+                           <td data-bind=\"text: (typeof rowText === 'function') ? rowText($parent) : $parent[rowText]\"></td>\
                          </tr>\
                        </tbody>\
                      </table>";

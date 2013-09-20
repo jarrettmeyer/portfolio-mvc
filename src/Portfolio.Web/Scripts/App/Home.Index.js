@@ -12,8 +12,8 @@
                 { headerText: "Description", rowText: "Description" },
                 { headerText: "Category", rowText: "Category" },
                 { headerText: "Status", rowText: "Status" },
-                { headerText: "Created On", rowText: "CreatedAt" },
-                { headerText: "Due On", rowText: "DueOn" }
+                { headerText: "Created On", rowText: function (x) { return formatDate(x.CreatedAt); } },
+                { headerText: "Due On", rowText: function (x) { return formatDate(x.DueOn); } }
             ],
             pageSize: self.pageSize()
         });
