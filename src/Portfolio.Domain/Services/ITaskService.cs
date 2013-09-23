@@ -8,5 +8,7 @@ namespace Portfolio.Domain.Services
         TaskViewModel CreateNewTask(TaskInputModel taskInputModel);
 
         IEnumerable<TaskViewModel> GetAllTasks();
+
+        TaskViewModel UpdateTask(TaskInputModel taskInputModel);
     }
 }

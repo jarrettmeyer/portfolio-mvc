@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
 using Portfolio.Data.Models;
@@ -27,29 +28,6 @@ namespace Portfolio.Domain.Services.Impl
             return taskViewModel;
         }
 
-        private Task CreateTaskEntity(TaskInputModel taskInputModel)
-        {
-            // Get the category
-            Category category = null;
-            if (taskInputModel.Category > 0)
-                category = repo.Load<Category>(taskInputModel.Category);
-
-            // Get the due date.
-            DateTime dueOn;
-            bool hasDueDate = DateTime.TryParse(taskInputModel.DueOn, out dueOn);
-
-            var task = new Task
-                       {
-                           Category = category,
-                           Description = taskInputModel.Description,
-                           DueOn = (hasDueDate) ? dueOn : (DateTime?)null
-                       };
-            var createTaskCommand = commandStore.GetCommand<CreateTask>();
-            createTaskCommand.Task = task;
-            createTaskCommand.ExecuteCommand();
-            return task;
-        }
-
         public IEnumerable<TaskViewModel> GetAllTasks()
         {
             var tasks = repo.All<Task>();
@@ -57,5 +35,35 @@ namespace Portfolio.Domain.Services.Impl
             return taskViewModels;
         }
 
+        public TaskViewModel UpdateTask(TaskInputModel taskInputModel)
+        {
+            var task = repo.Load<Task>(taskInputModel.Id);
+            task.Category = GetCategory(taskInputModel);
+            task.Description = taskInputModel.Description;
+            task.DueOn = taskInputModel.Description.SafeParseDateTime();
+            return TaskMapper.Map(task);            
+        }
+
+        private Task CreateTaskEntity(TaskInputModel taskInputModel)
+        {
+            var task = new Task
+            {
+                Category = GetCategory(taskInputModel),
+                Description = taskInputModel.Description,
+                DueOn = taskInputModel.DueOn.SafeParseDateTime()
+            };
+            var createTaskCommand = commandStore.GetCommand<CreateTask>();
+            createTaskCommand.Task = task;
+            createTaskCommand.ExecuteCommand();
+            return task;
+        }
+
+        private Category GetCategory(TaskInputModel taskInputModel)
+        {
+            Category category = null;
+            if (taskInputModel.Category > 0)
+                category = repo.Load<Category>(taskInputModel.Category);
+            return category;
+        }
     }
 }

@@ -33,6 +33,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\lib\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\lib\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -54,6 +57,7 @@
     <Compile Include="Data\Models\StatusWorkflowMapTests.cs" />
     <Compile Include="Data\Models\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
+    <Compile Include="Domain\Services\Impl\TaskServiceImplTests.cs" />
     <Compile Include="Domain\StatusMapperTests.cs" />
     <Compile Include="Domain\TaskMapperTests.cs" />
     <Compile Include="Domain\ViewModels\TaskViewModelTests.cs" />
