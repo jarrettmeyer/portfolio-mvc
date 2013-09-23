@@ -4,7 +4,7 @@
     {
         private string description;
 
-        public string Category { get; set; }
+        public int Category { get; set; }
 
         public string Description
         {

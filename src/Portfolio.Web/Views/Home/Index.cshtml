@@ -50,37 +50,37 @@
 </div>
 
 <!-- Model dialog for editing tasks -->
-<div id="task-modal-dialog" class="modal fade" role="dialog" aria-hidden="true" style="display: none;">
+<div id="task-modal-dialog" class="modal fade" role="dialog" aria-hidden="true" style="display: none;" data-bind="with: currentTask">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" data-bind="text: currentTask.title"></h3>
+                <h3 class="modal-title" data-bind="text: title"></h3>
             </div><!-- /div.modal-header -->
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">                        
                         <label for="description" class="col-lg-3 control-label">Description</label>
                         <div class="col-lg-9">
-                            <textarea name="description" class="form-control" rows="4" data-bind="value: currentTask.description"></textarea>                            
+                            <textarea name="description" class="form-control" rows="4" data-bind="value: description"></textarea>                            
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="category" class="col-lg-3 control-label">Category</label>
                         <div class="col-lg-9">
-                            <select name="category" class="form-control" data-bind="options: categories, optionsText: function (item) { return item.Description; }, value: currentTask.selectedCategory"></select>
+                            <select name="category" class="form-control" data-bind="options: $parent.categories, optionsText: function (item) { return item.Description; }, value: selectedCategory"></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="dueOn" class="col-lg-3 control-label">Due On</label>
                         <div class="col-lg-9">
-                            <input type="date" name="dueOn" class="form-control" data-bind="value: currentTask.dueOn"/>
+                            <input type="date" name="dueOn" class="form-control" data-bind="value: dueOn"/>
                         </div>
                     </div>
                 </form>
             </div><!-- /div.modal-body -->
             <div class="modal-footer">
-                <button type="button" id="task-modal-cancel-button" class="btn btn-default" data-bind="click: currentTask.cancel">Cancel</button>
-                <button type="button" id="task-modal-save-button" class="btn btn-primary" data-bind="click: currentTask.save">Save</button>
+                <button type="button" id="task-modal-cancel-button" class="btn btn-default" data-bind="click: $parent.cancel">Cancel</button>
+                <button type="button" id="task-modal-save-button" class="btn btn-primary" data-bind="click: $parent.save">Save</button>
             </div><!-- /div.modal-footer -->
         </div><!-- /div.modal-modal-content -->
     </div><!-- /div.modal-dialog -->
@@ -88,7 +88,11 @@
 
 <script type="text/javascript">
     (function () {
-        var $taskModalDialog = $("#task-modal-dialog");
+        var getCategoriesUrl = "/categories",
+            getPageSizeUrl = "/settings/pagesize",
+            getTasksUrl = "/tasks",
+            newTaskUrl = "/tasks/new",
+            $taskModalDialog = $("#task-modal-dialog");
 
         $taskModalDialog.modal({
             keyboard: true,
@@ -152,52 +156,62 @@
             self.addTask = function () {
                 var newTaskModel = new TaskViewModel();
                 self.currentTask(newTaskModel);
-                $taskModalDialog.modal('show');
-            };            
+                $taskModalDialog.modal("show");
+            };
+
+            self.cancel = function() {
+                self.currentTask(null);
+                $taskModalDialog.modal("hide");
+            };
+
+            self.save = function () {
+                $taskModalDialog.modal("hide");
+                var data = self.currentTask().getData();
+                $.post(newTaskUrl, data, function(result) {
+                    self.tasks.push(result);
+                });                
+            };
         };
 
         var TaskViewModel = function (task) {
             var self = this;
 
             task = task || {};
-            self.data = task;
             self.id = task.id || 0;
 
-            self.description = ko.observable(task.description);
+            self.description = ko.observable(task.Description || "");
 
             self.selectedCategory = ko.observable(0);
 
-            self.selectedStatus = ko.observable();
+            self.dueOn = ko.observable(task.DueOn);
 
             self.title = ko.computed(function () {
                 return (self.id === 0) ? "Create New Task" : "Edit Task";
             });
 
-            self.save = function () {
-                self.hideModalDialog();
-            };
-
-            self.cancel = function () {
-                self.hideModalDialog();
-            };
-
-            self.hideModalDialog = function() {
-                $taskModalDialog.modal('hide');
+            self.getData = function () {
+                var data = {
+                    Category: self.selectedCategory().Id,
+                    Description: self.description(),
+                    DueOn: self.dueOn(),
+                    Id: self.id
+                };
+                return data;
             };
         };
 
         window.tasksViewModel = new TasksViewModel([], 5);
         ko.applyBindings(window.tasksViewModel);
         
-        $.get("/tasks", function (result) {
+        $.get(getTasksUrl, function (result) {
             window.tasksViewModel.tasks(result);
         });
 
-        $.get("/categories", function (result) {
+        $.get(getCategoriesUrl, function (result) {
             window.tasksViewModel.categories(result);
         });
 
-        $.get("/settings/pagesize", function(result) {
+        $.get(getPageSizeUrl, function(result) {
             window.tasksViewModel.pageSize(result);
         });
     })();

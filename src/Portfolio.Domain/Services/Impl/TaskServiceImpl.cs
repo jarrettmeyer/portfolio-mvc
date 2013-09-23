@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
@@ -28,9 +29,20 @@ namespace Portfolio.Domain.Services.Impl
 
         private Task CreateTaskEntity(TaskInputModel taskInputModel)
         {
+            // Get the category
+            Category category = null;
+            if (taskInputModel.Category > 0)
+                category = repo.Load<Category>(taskInputModel.Category);
+
+            // Get the due date.
+            DateTime dueOn;
+            bool hasDueDate = DateTime.TryParse(taskInputModel.DueOn, out dueOn);
+
             var task = new Task
                        {
+                           Category = category,
                            Description = taskInputModel.Description,
+                           DueOn = (hasDueDate) ? dueOn : (DateTime?)null
                        };
             var createTaskCommand = commandStore.GetCommand<CreateTask>();
             createTaskCommand.Task = task;

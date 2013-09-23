@@ -21,8 +21,14 @@ namespace Portfolio.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<CategoryViewModel> result = categoryService.GetAllCategories();
-            return Json(result, JsonRequestBehavior.AllowGet);
+            List<CategoryViewModel> result = new List<CategoryViewModel>();
+            
+            // We are ensuring that the list of categories contains an empty
+            // element at the beginning of the list.
+            result.Add(new CategoryViewModel());
+            result.AddRange(categoryService.GetAllCategories());
+
+            return Json(result.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
