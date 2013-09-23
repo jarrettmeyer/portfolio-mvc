@@ -6,6 +6,20 @@ namespace Portfolio.Common
     [TestFixture]
     public class ConfigTests
     {
+        [SetUp]
+        public void before_each_test()
+        {
+            Config.Reset();
+        }
+
+        [Test]
+        public void can_get_and_set_page_size()
+        {
+            int value = 12;
+            Config.PageSize = value;
+            Assert.AreEqual(value, Config.PageSize);
+        }
+
         [Test]
         public void can_get_config_value_from_app_settings()
         {
@@ -20,6 +34,12 @@ namespace Portfolio.Common
             string value = Config.GetConfigValue("PATH");
             Debug.WriteLine("PATH: {0}", value);
             Assert.IsNotNullOrEmpty(value);
+        }
+
+        [Test]
+        public void default_page_size_should_be_10()
+        {
+            Assert.AreEqual(10, Config.PageSize);
         }
 
         [Test]        

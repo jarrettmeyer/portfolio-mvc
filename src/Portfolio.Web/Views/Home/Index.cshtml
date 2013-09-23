@@ -1,4 +1,47 @@
-﻿<div id="task-list" data-bind="grid: gridViewModel"></div>
+﻿<div id="task-list">
+    
+    <div id="task-list-table">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Created On</th>
+                    <th>Due On</th>
+                </tr>                
+            </thead>
+            <tbody data-bind="foreach: itemsOnCurrentPage">
+                <tr>
+                    <td>
+                        <div data-bind="text: Description"></div>
+                        <div class="task-categories">
+                            <span data-bind="text: Category.Description" class="label label-primary"></span>
+                        </div>                        
+                    </td>     
+                    <td data-bind="text: Status.Description"></td>
+                    <td data-bind="text: formatDate(parseMvcDate(CreatedAt))"></td>
+                    <td data-bind="text: formatDate(parseMvcDate(DueOn))"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="task-list-paging">
+        <ul class="pagination">
+            <li data-bind="css: { disabled: $root.disablePreviousLink() }">
+                <a href="#" data-bind="click: function() { $root.goToPreviousLink(); }">&laquo;</a>
+            </li>
+            <!-- ko foreach: ko.utils.range(0, maxPageIndex) -->
+                <li data-bind="css: { active: $data === $root.currentPageIndex() }">
+                    <a href="#" data-bind="text: $data + 1, click: function() { $root.currentPageIndex($data); }"></a>
+                </li>
+            <!-- /ko -->
+            <li data-bind="css: { disabled: $root.disableNextLink() }">
+                <a href="#" data-bind="click: function() { $root.goToNextLink(); }">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <div id="task-actions">
     <button type="button" class="btn btn-primary" id="add-task" data-bind="click: addTask">
@@ -6,4 +49,157 @@
     </button>
 </div>
 
-<script type="text/javascript" src="@Url.Content("~/Scripts/App/Home.Index.js")"></script>
+<!-- Model dialog for editing tasks -->
+<div id="task-modal-dialog" class="modal fade" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" data-bind="text: currentTask.title"></h3>
+            </div><!-- /div.modal-header -->
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">                        
+                        <label for="description" class="col-lg-3 control-label">Description</label>
+                        <div class="col-lg-9">
+                            <textarea name="description" class="form-control" rows="4" data-bind="value: currentTask.description"></textarea>                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="col-lg-3 control-label">Category</label>
+                        <div class="col-lg-9">
+                            <select name="category" class="form-control" data-bind="options: categories, optionsText: function (item) { return item.Description; }, value: currentTask.selectedCategory"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dueOn" class="col-lg-3 control-label">Due On</label>
+                        <div class="col-lg-9">
+                            <input type="date" name="dueOn" class="form-control" data-bind="value: currentTask.dueOn"/>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /div.modal-body -->
+            <div class="modal-footer">
+                <button type="button" id="task-modal-cancel-button" class="btn btn-default" data-bind="click: currentTask.cancel">Cancel</button>
+                <button type="button" id="task-modal-save-button" class="btn btn-primary" data-bind="click: currentTask.save">Save</button>
+            </div><!-- /div.modal-footer -->
+        </div><!-- /div.modal-modal-content -->
+    </div><!-- /div.modal-dialog -->
+</div><!-- /div#task-modal-dialog -->
+
+<script type="text/javascript">
+    (function () {
+        var $taskModalDialog = $("#task-modal-dialog");
+
+        $taskModalDialog.modal({
+            keyboard: true,
+            show: false
+        });
+
+        var TasksViewModel = function (tasks, pageSize) {
+            var self = this;
+
+            self.tasks = ko.observableArray(tasks);
+
+            self.pageSize = ko.observable(pageSize);
+
+            self.currentPageIndex = ko.observable(0);
+
+            self.itemsOnCurrentPage = ko.computed(function() {
+                var startIndex = self.pageSize() * self.currentPageIndex();
+                return self.tasks.slice(startIndex, startIndex + self.pageSize());
+            });
+
+            self.categories = ko.observableArray([]);
+
+            self.currentTask = ko.observable();
+
+            self.maxPageIndex = ko.computed(function () {
+                var length = ko.utils.unwrapObservable(self.tasks).length;
+                var value = Math.ceil(length / self.pageSize()) - 1;
+                return value;
+            });
+
+            self.goToPreviousLink = function () {
+                if (!self.isFirstLink()) {
+                    var current = self.currentPageIndex();
+                    self.currentPageIndex(current - 1);
+                }
+            };
+
+            self.goToNextLink = function () {
+                if (!self.isLastLink()) {
+                    var current = self.currentPageIndex();
+                    self.currentPageIndex(current + 1);
+                }
+            };
+
+            self.isFirstLink = function () {
+                return self.currentPageIndex() === 0;
+            };
+
+            self.isLastLink = function () {
+                return self.currentPageIndex() === self.maxPageIndex();
+            };
+
+            self.disablePreviousLink = ko.computed(function () {
+                return self.isFirstLink();
+            });
+
+            self.disableNextLink = ko.computed(function () {
+                return self.isLastLink();
+            });
+
+            self.addTask = function () {
+                var newTaskModel = new TaskViewModel();
+                self.currentTask(newTaskModel);
+                $taskModalDialog.modal('show');
+            };            
+        };
+
+        var TaskViewModel = function (task) {
+            var self = this;
+
+            task = task || {};
+            self.data = task;
+            self.id = task.id || 0;
+
+            self.description = ko.observable(task.description);
+
+            self.selectedCategory = ko.observable(0);
+
+            self.selectedStatus = ko.observable();
+
+            self.title = ko.computed(function () {
+                return (self.id === 0) ? "Create New Task" : "Edit Task";
+            });
+
+            self.save = function () {
+                self.hideModalDialog();
+            };
+
+            self.cancel = function () {
+                self.hideModalDialog();
+            };
+
+            self.hideModalDialog = function() {
+                $taskModalDialog.modal('hide');
+            };
+        };
+
+        window.tasksViewModel = new TasksViewModel([], 5);
+        ko.applyBindings(window.tasksViewModel);
+        
+        $.get("/tasks", function (result) {
+            window.tasksViewModel.tasks(result);
+        });
+
+        $.get("/categories", function (result) {
+            window.tasksViewModel.categories(result);
+        });
+
+        $.get("/settings/pagesize", function(result) {
+            window.tasksViewModel.pageSize(result);
+        });
+    })();
+</script>
+

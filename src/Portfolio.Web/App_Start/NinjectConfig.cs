@@ -22,6 +22,7 @@ namespace Portfolio.Web
             kernel.Bind<CreateTask>().To<CreateTaskImpl>();
 
             // Service layer bindings
+            kernel.Bind<ICategoryService>().To<CategoryServiceImpl>();
             kernel.Bind<ITaskService>().To<TaskServiceImpl>();
             kernel.Bind<IWorkflowService>().To<WorkflowServiceImpl>();
         }

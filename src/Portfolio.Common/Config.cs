@@ -5,12 +5,32 @@ namespace Portfolio.Common
 {
     public static class Config
     {
+        private const int DEFAULT_PAGE_SIZE = 10;
         private static string connectionString;
+        private static int pageSize;
 
         public static string ConnectionString
         {
             get { return connectionString ?? (connectionString = GetConfigValue("PortfolioDBConnectionString")); }
             set { connectionString = value; }
+        }
+
+        public static int PageSize
+        {
+            get
+            {
+                if (pageSize < 1)
+                {
+                    string pageSizeString = GetConfigValue("PageSize");
+                    int.TryParse(pageSizeString, out pageSize);
+                }
+                if (pageSize < 1)
+                {
+                    pageSize = DEFAULT_PAGE_SIZE;
+                }
+                return pageSize;
+            }
+            set { pageSize = value; }
         }
 
         public static string GetConfigValue(string key)
@@ -22,6 +42,12 @@ namespace Portfolio.Common
                 return value;
             
             return null;
+        }
+
+        public static void Reset()
+        {
+            connectionString = null;
+            pageSize = 0;
         }
 
         private static bool TryGetConfigValueFromAppSettings(string key, out string value)

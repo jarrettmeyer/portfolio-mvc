@@ -129,7 +129,9 @@
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\WorkflowsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -176,6 +178,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
+      <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
+      <Name>Portfolio.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Data.SqlServer\Portfolio.Data.SqlServer.csproj">
       <Project>{B0B7DB3D-EB10-49AE-9378-9338781694B2}</Project>
       <Name>Portfolio.Data.SqlServer</Name>
