@@ -24,6 +24,13 @@ namespace Portfolio.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult Edit(TaskInputModel model)
+        {
+            TaskViewModel result = taskService.UpdateTask(model);
+            return Json(result);
+        }
+
+        [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
             TaskViewModel result = taskService.CreateNewTask(model);

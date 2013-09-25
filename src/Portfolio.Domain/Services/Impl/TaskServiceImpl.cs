@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Portfolio.Common;
 using Portfolio.Data;
@@ -10,9 +9,10 @@ using Portfolio.Domain.ViewModels;
 namespace Portfolio.Domain.Services.Impl
 {
     public class TaskServiceImpl : ITaskService
-    {
+    {        
+        private readonly ICommandStore commandStore;
         private readonly IRepository repo;
-        private readonly ICommandStore commandStore; 
+        private Task task;
 
         public TaskServiceImpl(IRepository repo, ICommandStore commandStore)
         {
@@ -22,10 +22,10 @@ namespace Portfolio.Domain.Services.Impl
 
         public TaskViewModel CreateNewTask(TaskInputModel taskInputModel)
         {
-            var task = CreateTaskEntity(taskInputModel);
-
-            var taskViewModel = TaskMapper.Map(task);
-            return taskViewModel;
+            CreateTaskInstance();
+            UpdateTaskProperties(taskInputModel);
+            ExecuteCreateTaskCommand();
+            return TaskMapper.Map(task);
         }
 
         public IEnumerable<TaskViewModel> GetAllTasks()
@@ -37,25 +37,21 @@ namespace Portfolio.Domain.Services.Impl
 
         public TaskViewModel UpdateTask(TaskInputModel taskInputModel)
         {
-            var task = repo.Load<Task>(taskInputModel.Id);
-            task.Category = GetCategory(taskInputModel);
-            task.Description = taskInputModel.Description;
-            task.DueOn = taskInputModel.Description.SafeParseDateTime();
+            LoadTaskFromRepository(taskInputModel);
+            UpdateTaskProperties(taskInputModel);
             return TaskMapper.Map(task);            
         }
 
-        private Task CreateTaskEntity(TaskInputModel taskInputModel)
+        private void ExecuteCreateTaskCommand()
         {
-            var task = new Task
-            {
-                Category = GetCategory(taskInputModel),
-                Description = taskInputModel.Description,
-                DueOn = taskInputModel.DueOn.SafeParseDateTime()
-            };
             var createTaskCommand = commandStore.GetCommand<CreateTask>();
             createTaskCommand.Task = task;
             createTaskCommand.ExecuteCommand();
-            return task;
+        }
+
+        private void CreateTaskInstance()
+        {
+            task = new Task();
         }
 
         private Category GetCategory(TaskInputModel taskInputModel)
@@ -64,6 +60,18 @@ namespace Portfolio.Domain.Services.Impl
             if (taskInputModel.Category > 0)
                 category = repo.Load<Category>(taskInputModel.Category);
             return category;
+        }
+
+        private void LoadTaskFromRepository(TaskInputModel taskInputModel)
+        {
+            task = repo.Load<Task>(taskInputModel.Id);
+        }
+
+        private void UpdateTaskProperties(TaskInputModel taskInputModel)
+        {
+            task.Category = GetCategory(taskInputModel);
+            task.Description = taskInputModel.Description;
+            task.DueOn = taskInputModel.Description.SafeParseDateTime();
         }
     }
 }

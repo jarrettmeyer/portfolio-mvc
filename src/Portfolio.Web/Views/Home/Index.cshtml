@@ -4,6 +4,7 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Description</th>
                     <th>Status</th>
                     <th>Created On</th>
@@ -12,6 +13,11 @@
             </thead>
             <tbody data-bind="foreach: itemsOnCurrentPage">
                 <tr>
+                    <td>
+                        <a href="#" data-bind="click: function () { $root.editTask(this); }">Edit</a>
+                        <span>&nbsp;|&nbsp;</span>
+                        Delete
+                    </td>
                     <td>
                         <div data-bind="text: Description"></div>
                         <div class="task-categories">
@@ -88,7 +94,8 @@
 
 <script type="text/javascript">
     (function () {
-        var getCategoriesUrl = "/categories",
+        var editTaskUrl = "/tasks/{id}/edit",
+            getCategoriesUrl = "/categories",
             getPageSizeUrl = "/settings/pagesize",
             getTasksUrl = "/tasks",
             newTaskUrl = "/tasks/new",
@@ -102,20 +109,18 @@
         var TasksViewModel = function (tasks, pageSize) {
             var self = this;
 
+            self.isAddingTask = false,
+            self.isEditingTask = false;
+            
+            self.categories = ko.observableArray([]);
+            
+            self.currentPageIndex = ko.observable(0);
+
+            self.currentTask = ko.observable();
+
             self.tasks = ko.observableArray(tasks);
 
             self.pageSize = ko.observable(pageSize);
-
-            self.currentPageIndex = ko.observable(0);
-
-            self.itemsOnCurrentPage = ko.computed(function() {
-                var startIndex = self.pageSize() * self.currentPageIndex();
-                return self.tasks.slice(startIndex, startIndex + self.pageSize());
-            });
-
-            self.categories = ko.observableArray([]);
-
-            self.currentTask = ko.observable();
 
             self.maxPageIndex = ko.computed(function () {
                 var length = ko.utils.unwrapObservable(self.tasks).length;
@@ -123,6 +128,43 @@
                 return value;
             });
 
+            self.addTask = function () {
+                var newTaskModel = new TaskViewModel();
+                self.currentTask(newTaskModel);
+                $taskModalDialog.modal("show");
+                self.isAddingTask = true;
+            };
+
+            self.cancel = function () {
+                self.currentTask(null);
+                $taskModalDialog.modal("hide");
+                self.isAddingTask = false;
+                self.isEditingTask = false;
+            };
+
+            self.editTask = function (task) {                
+                var editTaskModel = new TaskViewModel(task);
+                self.currentTask(editTaskModel);
+                $taskModalDialog.modal("show");
+                self.isEditingTask = true;
+            };
+
+            self.isFirstLink = function () {
+                return self.currentPageIndex() === 0;
+            };
+
+            self.isLastLink = function () {
+                return self.currentPageIndex() === self.maxPageIndex();
+            };
+
+            self.disableNextLink = ko.computed(function () {
+                return self.isLastLink();
+            });
+            
+            self.disablePreviousLink = ko.computed(function () {
+                return self.isFirstLink();
+            });
+            
             self.goToPreviousLink = function () {
                 if (!self.isFirstLink()) {
                     var current = self.currentPageIndex();
@@ -136,54 +178,39 @@
                     self.currentPageIndex(current + 1);
                 }
             };
-
-            self.isFirstLink = function () {
-                return self.currentPageIndex() === 0;
-            };
-
-            self.isLastLink = function () {
-                return self.currentPageIndex() === self.maxPageIndex();
-            };
-
-            self.disablePreviousLink = ko.computed(function () {
-                return self.isFirstLink();
+            
+            self.itemsOnCurrentPage = ko.computed(function () {
+                var startIndex = self.pageSize() * self.currentPageIndex();
+                return self.tasks.slice(startIndex, startIndex + self.pageSize());
             });
-
-            self.disableNextLink = ko.computed(function () {
-                return self.isLastLink();
-            });
-
-            self.addTask = function () {
-                var newTaskModel = new TaskViewModel();
-                self.currentTask(newTaskModel);
-                $taskModalDialog.modal("show");
-            };
-
-            self.cancel = function() {
-                self.currentTask(null);
-                $taskModalDialog.modal("hide");
-            };
-
+            
             self.save = function () {
                 $taskModalDialog.modal("hide");
                 var data = self.currentTask().getData();
-                $.post(newTaskUrl, data, function(result) {
+                
+
+                var url = data.id === 0 ? newTaskUrl : self.currentTask().getEditUrl();
+                $.post(url, data, function(result) {
                     self.tasks.push(result);
                 });                
             };
+            
+            
         };
 
         var TaskViewModel = function (task) {
             var self = this;
-
-            task = task || {};
-            self.id = task.id || 0;
+            task = task || {};            
 
             self.description = ko.observable(task.Description || "");
-
-            self.selectedCategory = ko.observable(0);
-
             self.dueOn = ko.observable(task.DueOn);
+            self.id = task.Id || 0;
+            self.selectedCategory = ko.observable(task.Category);
+
+            self.getEditUrl = function () {
+                var url = editTaskUrl.replace("{id}", self.id);
+                return url;
+            };
 
             self.title = ko.computed(function () {
                 return (self.id === 0) ? "Create New Task" : "Edit Task";
