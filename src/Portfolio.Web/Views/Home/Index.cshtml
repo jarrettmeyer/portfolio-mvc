@@ -225,6 +225,18 @@
                 };
                 return data;
             };
+
+            self.getUrl = function() {
+                if (self.id === 0) {
+                    return newTaskUrl;
+                } else {
+                    return self.getEditUrl();
+                }
+            };
+
+            self.isNewTask = function () {
+                return self.id === 0;
+            };
         };
 
         window.tasksViewModel = new TasksViewModel([], 5);

@@ -33,4 +33,29 @@
         var months = { 0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "Jun", 6: "Jul", 7: "Aug", 8: "Sep", 9: "Oct", 10: "Nov", 11: "Dec" };
         return months[m];        
     }
+
+    Array.prototype.replaceIndex = function (index, item) {
+        var i, len, newArray = [];
+        for (i = 0, len = this.length; i < len; i += 1) {
+            if (i === index) {
+                newArray.push(item);
+            } else {
+                newArray.push(this[i]);
+            }
+        }
+        return newArray;
+    };
+
+    Array.prototype.replaceWhen = function (predicate, item) {
+        var i, len, newArray = [];
+        for (i = 0, len = this.length; i < len; i += 1) {
+            if (predicate(this[i])) {
+                newArray.push(item);
+            } else {
+                newArray.push(this[i]);
+            }
+        }
+        return newArray;
+    };
+
 })();
