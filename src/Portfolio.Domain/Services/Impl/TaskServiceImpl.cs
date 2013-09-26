@@ -39,6 +39,7 @@ namespace Portfolio.Domain.Services.Impl
         {
             LoadTaskFromRepository(taskInputModel);
             UpdateTaskProperties(taskInputModel);
+            SaveAllChanges();
             return TaskMapper.Map(task);            
         }
 
@@ -65,6 +66,11 @@ namespace Portfolio.Domain.Services.Impl
         private void LoadTaskFromRepository(TaskInputModel taskInputModel)
         {
             task = repo.Load<Task>(taskInputModel.Id);
+        }
+
+        private void SaveAllChanges()
+        {
+            repo.SaveChanges();
         }
 
         private void UpdateTaskProperties(TaskInputModel taskInputModel)

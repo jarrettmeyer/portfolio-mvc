@@ -14,6 +14,8 @@ namespace Portfolio.Data
 
         T Load<T>(object id);
 
+        void SaveChanges();
+
         IEnumerable<T> Where<T>(Expression<Func<T, bool>> expression);
     }
 }

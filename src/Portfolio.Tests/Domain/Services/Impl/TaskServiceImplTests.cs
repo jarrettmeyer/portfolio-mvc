@@ -39,6 +39,18 @@ namespace Portfolio.Domain.Services.Impl
             }
 
             [Test]
+            public void should_save_changes()
+            {
+                taskInputModel = new TaskInputModel
+                                 {
+                                     Id = 1,
+                                     Description = "This is an updated description"
+                                 };
+                taskService.UpdateTask(taskInputModel);
+                mockRepository.Verify(x => x.SaveChanges(), Times.Once());
+            }
+
+            [Test]
             public void should_update_description()
             {
                 taskInputModel = new TaskInputModel

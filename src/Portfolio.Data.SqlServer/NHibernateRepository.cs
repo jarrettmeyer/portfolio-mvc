@@ -46,6 +46,14 @@ namespace Portfolio.Data
             return item;
         }
 
+        public void SaveChanges()
+        {
+            using (var transaction = session.BeginTransaction())
+            {
+                transaction.Commit();
+            }
+        }
+
         public IEnumerable<T> Where<T>(Expression<Func<T, bool>> expression)
         {
             var items = session.Query<T>().Where(expression).ToArray();
