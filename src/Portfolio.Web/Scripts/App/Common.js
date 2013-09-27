@@ -58,4 +58,26 @@
         return newArray;
     };
 
+    /**
+     * Converts the string to a JavaScript date object.
+     */
+    String.prototype.toDate = function () {
+        // MVC-date format
+        if (this.match(/\/Date\(\d+\)\//)) { 
+            var ticksAsString = this.substring(6);
+            var ticksAsInt = parseInt(ticksAsString);
+            var date = new Date(ticksAsInt);
+            return date;
+        }
+        
+        // yyyy-mm-dd format used by Twitter Bootstrap
+        if (this.match(/\d{4}-\d{1,2}-\d{1,2}/)) {
+            var dateInt = Date.parse(this);
+            return new Date(dateInt);            
+        }
+        
+        // I have no idea what this is
+        return Date.parse(this);        
+    };
+
 })();

@@ -30,4 +30,21 @@ test("can replace with a predicate", function() {
     deepEqual([1, -1, 3, -1, 5], b);
 });
 
+module("String.toDate");
+test("can parse MVC style date format", function () {
+    expect(1);
+    var s = "/Date(1379716140000)/";
+    var d = s.toDate();
+    var expected = new Date(1379716140000);
+    equal(expected.toString(), d.toString());
+});
+test("can parse yyyy-mm-dd date format", function () {
+    var s = "2013-09-28";
+    var d = s.toDate();
+    var expected = new Date(Date.parse("2013-09-28"));
+    //console.log("expected date: " + expected.toUTCString());
+    equal(expected.toString(), d.toString());
+});
+
+
 console.log("Done with QUnit tests.");

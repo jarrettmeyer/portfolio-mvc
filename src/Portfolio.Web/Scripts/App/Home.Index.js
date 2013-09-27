@@ -109,9 +109,9 @@
         task = task || {};
 
         self.category = ko.observable(task.Category.Description);
-        self.createdAt = ko.observable(task.CreatedAt);
+        self.createdAt = ko.observable(parseMvcDate(task.CreatedAt));
         self.description = ko.observable(task.Description || "");
-        self.dueOn = ko.observable(task.DueOn);
+        self.dueOn = ko.observable(parseMvcDate(task.DueOn));
         self.id = ko.observable(task.Id || 0);
         self.selectedCategory = ko.observable(task.Category);
 
@@ -125,11 +125,11 @@
         });
 
         self.formattedCreatedAt = ko.computed(function () {
-            return formatDate(parseMvcDate(self.createdAt()));
+            return formatDate(self.createdAt());
         });
 
         self.formattedDueOn = ko.computed(function() {
-            return formatDate(parseMvcDate(self.dueOn()));
+            return formatDate(self.dueOn());
         });
 
         self.getData = function () {
