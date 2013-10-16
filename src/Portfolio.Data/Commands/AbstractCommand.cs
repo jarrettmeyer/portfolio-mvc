@@ -2,7 +2,7 @@
 
 namespace Portfolio.Data.Commands
 {
-    public abstract class AbstractCommand : ICommand
+    public abstract class AbstractCommand<TInput, TResult> : ICommand<TInput, TResult>
     {
         public void Dispose()
         {
@@ -18,7 +18,7 @@ namespace Portfolio.Data.Commands
             }
         }
 
-        public abstract void ExecuteCommand();
+        public abstract TResult ExecuteCommand(TInput input);
 
         protected virtual void OnDisposing() { }
     }

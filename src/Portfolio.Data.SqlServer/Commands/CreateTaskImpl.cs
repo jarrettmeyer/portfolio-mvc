@@ -10,6 +10,7 @@ namespace Portfolio.Data.Commands
         private DateTime createdAt;
         private readonly ISession session;
         private Status status;
+        private Task task;
         private TaskStatus taskStatus;
         private ITransaction transaction;
 
@@ -18,8 +19,10 @@ namespace Portfolio.Data.Commands
             this.session = session;
         }
 
-        public override void ExecuteCommand()
+        public override CreateTask.Response ExecuteCommand(CreateTask.Request input)
         {
+            this.task = input.Task;
+
             using (transaction = session.BeginTransaction())
             {
                 SetTaskCreatedAt();
@@ -28,6 +31,8 @@ namespace Portfolio.Data.Commands
                 InsertTaskStatus();
                 CommitTransaction();
             }
+
+            return new CreateTask.Response { Id = task.Id };
         }
 
         protected override void OnDisposing()
@@ -46,15 +51,15 @@ namespace Portfolio.Data.Commands
 
         private void InsertTask()
         {
-            Task.CurrentStatus = status;
-            session.Save(Task);
+            task.CurrentStatus = status;
+            session.Save(task);
         }
 
         private void InsertTaskStatus()
         {            
             taskStatus = new TaskStatus
                              {
-                                 Task = Task,
+                                 Task = task,
                                  Status = status,
                                  IsCompleted = status.IsCompleted,
                                  CreatedAt = createdAt
@@ -70,8 +75,8 @@ namespace Portfolio.Data.Commands
         private void SetTaskCreatedAt()
         {
             createdAt = DateTime.UtcNow;
-            Task.CreatedAt = createdAt;
-            Task.UpdatedAt = createdAt;
+            task.CreatedAt = createdAt;
+            task.UpdatedAt = createdAt;
         }
     }
 }

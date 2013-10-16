@@ -2,6 +2,6 @@
 {
     public interface ICommandStore
     {
-        TCommand GetCommand<TCommand>() where TCommand : AbstractCommand;
+        TCommand GetCommand<TCommand>();
     }
 }

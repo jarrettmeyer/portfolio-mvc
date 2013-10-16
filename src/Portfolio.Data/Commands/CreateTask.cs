@@ -2,8 +2,16 @@
 
 namespace Portfolio.Data.Commands
 {
-    public abstract class CreateTask : AbstractCommand
+    public abstract class CreateTask : AbstractCommand<CreateTask.Request, CreateTask.Response>
     {
-        public Task Task { get; set; }
+        public class Request
+        {
+            public Task Task { get; set; }
+        }
+
+        public class Response
+        {
+            public int Id { get; set; }
+        }
     }
 }

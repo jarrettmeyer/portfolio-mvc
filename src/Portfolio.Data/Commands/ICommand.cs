@@ -2,8 +2,8 @@
 
 namespace Portfolio.Data.Commands
 {
-    public interface ICommand : IDisposable
+    public interface ICommand<TInput, TResult> : IDisposable
     {
-        void ExecuteCommand();
+        TResult ExecuteCommand(TInput input);
     }
 }

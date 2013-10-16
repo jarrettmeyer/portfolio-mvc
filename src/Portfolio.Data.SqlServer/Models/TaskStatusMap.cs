@@ -23,6 +23,7 @@ namespace Portfolio.Data.Models
             });
             Property(x => x.IsCompleted);
             Property(x => x.Comment);
+            Property(x => x.IPAddress);
             Property(x => x.CreatedAt);
             Version(x => x.Version, map =>
             {

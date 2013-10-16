@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Portfolio.Data.Models;
 
 namespace Portfolio.Data.Commands
 {
@@ -11,12 +11,13 @@ namespace Portfolio.Data.Commands
     {
         private readonly IDbConnection connection;
 
-        public override void ExecuteCommand()
+        public override Task ExecuteCommand(Task task)
         {
             using (var txn = connection.BeginTransaction())
             {
                 txn.Commit();
-            }            
+            }
+            return null;
         }
     }
 }

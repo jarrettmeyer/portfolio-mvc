@@ -12,7 +12,7 @@ namespace Portfolio.Web.Lib
             this.kernel = kernel;
         }
 
-        public TCommand GetCommand<TCommand>() where TCommand : AbstractCommand
+        public TCommand GetCommand<TCommand>()
         {
             return kernel.Get<TCommand>();
         }
