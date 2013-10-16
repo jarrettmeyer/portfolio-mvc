@@ -13,11 +13,13 @@ namespace Portfolio.Domain.Services.Impl
         private readonly ICommandStore commandStore;
         private readonly IRepository repo;
         private Task task;
+        private readonly IUserSettings userSettings;
 
-        public TaskServiceImpl(IRepository repo, ICommandStore commandStore)
+        public TaskServiceImpl(IRepository repo, IUserSettings userSettings, ICommandStore commandStore)
         {
             this.repo = repo;
-            this.commandStore = commandStore;
+            this.userSettings = userSettings;
+            this.commandStore = commandStore;            
         }
 
         public TaskViewModel CreateNewTask(TaskInputModel taskInputModel)
@@ -31,7 +33,7 @@ namespace Portfolio.Domain.Services.Impl
         public IEnumerable<TaskViewModel> GetAllTasks()
         {
             var tasks = repo.All<Task>();
-            var taskViewModels = tasks.Select(t => TaskMapper.Map(t));
+            var taskViewModels = tasks.Select(TaskMapper.Map);
             return taskViewModels;
         }
 
@@ -46,7 +48,11 @@ namespace Portfolio.Domain.Services.Impl
         private void ExecuteCreateTaskCommand()
         {
             var createTaskCommand = commandStore.GetCommand<CreateTask>();
-            var request = new CreateTask.Request { Task = task };
+            var request = new CreateTask.Request
+            {
+                Task = task,
+                UserSettings = userSettings
+            };
             createTaskCommand.ExecuteCommand(request);
         }
 

@@ -1,4 +1,5 @@
-﻿using Portfolio.Data.Models;
+﻿using Portfolio.Common;
+using Portfolio.Data.Models;
 
 namespace Portfolio.Data.Commands
 {
@@ -7,6 +8,8 @@ namespace Portfolio.Data.Commands
         public class Request
         {
             public Task Task { get; set; }
+
+            public IUserSettings UserSettings { get; set; }
         }
 
         public class Response

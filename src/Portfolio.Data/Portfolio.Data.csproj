@@ -55,6 +55,12 @@
     <Compile Include="Queries\AbstractQuery.cs" />
     <Compile Include="Queries\IQuery.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
+      <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
+      <Name>Portfolio.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

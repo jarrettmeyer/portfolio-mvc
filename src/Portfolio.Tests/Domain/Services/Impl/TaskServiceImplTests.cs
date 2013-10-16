@@ -24,7 +24,7 @@ namespace Portfolio.Domain.Services.Impl
                 mockRepository.Setup(x => x.Load<Task>(1)).Returns(new Task { Id = 1 });
                 mockCommandStore = new Mock<ICommandStore>();
 
-                taskService = new TaskServiceImpl(mockRepository.Object, mockCommandStore.Object);
+                taskService = new TaskServiceImpl(mockRepository.Object, null, mockCommandStore.Object);
             }
 
             [Test]

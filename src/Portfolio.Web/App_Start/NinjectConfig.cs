@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using Ninject;
+using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
 using Portfolio.Domain.Services;
@@ -25,6 +26,9 @@ namespace Portfolio.Web
             kernel.Bind<ICategoryService>().To<CategoryServiceImpl>();
             kernel.Bind<ITaskService>().To<TaskServiceImpl>();
             kernel.Bind<IWorkflowService>().To<WorkflowServiceImpl>();
+
+            // Web layer bindings
+            kernel.Bind<IUserSettings>().To<HttpUserSettings>();
         }
     }
 }

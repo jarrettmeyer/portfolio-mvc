@@ -9,6 +9,7 @@ namespace Portfolio.Data.Commands
         private const string DEFAULT_STATUS_ID = "NEW";
         private DateTime createdAt;
         private readonly ISession session;
+        private Request request;
         private Status status;
         private Task task;
         private TaskStatus taskStatus;
@@ -16,12 +17,19 @@ namespace Portfolio.Data.Commands
 
         public CreateTaskImpl(ISession session)
         {
+            if (session == null)
+                throw new ArgumentNullException("session");
+
             this.session = session;
         }
 
-        public override CreateTask.Response ExecuteCommand(CreateTask.Request input)
+        public override Response ExecuteCommand(Request input)
         {
-            this.task = input.Task;
+            if (input == null)
+                throw new ArgumentNullException("input");
+
+            request = input;
+            task = input.Task;
 
             using (transaction = session.BeginTransaction())
             {
@@ -32,7 +40,7 @@ namespace Portfolio.Data.Commands
                 CommitTransaction();
             }
 
-            return new CreateTask.Response { Id = task.Id };
+            return new Response { Id = task.Id };
         }
 
         protected override void OnDisposing()
@@ -62,6 +70,7 @@ namespace Portfolio.Data.Commands
                                  Task = task,
                                  Status = status,
                                  IsCompleted = status.IsCompleted,
+                                 IPAddress = request.UserSettings.IPAddress,
                                  CreatedAt = createdAt
                              };
             session.Save(taskStatus);

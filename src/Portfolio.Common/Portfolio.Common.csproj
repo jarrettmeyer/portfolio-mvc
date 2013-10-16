@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="IUserSettings.cs" />
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\Impl\Log4NetLogWriter.cs" />
     <Compile Include="Logging\Log.cs" />
