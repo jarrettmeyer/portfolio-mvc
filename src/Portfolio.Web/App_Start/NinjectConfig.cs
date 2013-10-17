@@ -3,6 +3,7 @@ using Ninject;
 using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
+using Portfolio.Data.Commands.Impl;
 using Portfolio.Domain.Services;
 using Portfolio.Domain.Services.Impl;
 using Portfolio.Web.Lib;

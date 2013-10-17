@@ -48,11 +48,7 @@ namespace Portfolio.Domain.Services.Impl
         private void ExecuteCreateTaskCommand()
         {
             var createTaskCommand = commandStore.GetCommand<CreateTask>();
-            var request = new CreateTask.Request
-            {
-                Task = task,
-                UserSettings = userSettings
-            };
+            var request = new CreateTaskRequest(task, userSettings);            
             createTaskCommand.ExecuteCommand(request);
         }
 

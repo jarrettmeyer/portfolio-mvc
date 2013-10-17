@@ -6,7 +6,7 @@ using Portfolio.Domain.ViewModels;
 namespace Portfolio.Web.Controllers
 {
     public class TasksController : ApplicationController
-    {
+    {        
         private readonly ITaskService taskService;
 
         public TasksController(ITaskService taskService)

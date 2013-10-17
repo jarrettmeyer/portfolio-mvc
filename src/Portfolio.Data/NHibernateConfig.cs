@@ -14,7 +14,7 @@ namespace Portfolio.Data
     {
         private static Configuration configuration;
         private static string connectionString = Config.ConnectionString;
-        private static object mutex = new object();
+        private static readonly object mutex = new object();
         private volatile static ISessionFactory sessionFactory;
 
         public static string ConnectionString

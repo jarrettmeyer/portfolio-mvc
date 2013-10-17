@@ -2,14 +2,14 @@
 using NHibernate;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands
+namespace Portfolio.Data.Commands.Impl
 {
     public class CreateTaskImpl : CreateTask
     {
         private const string DEFAULT_STATUS_ID = "NEW";
         private DateTime createdAt;
         private readonly ISession session;
-        private Request request;
+        private CreateTaskRequest request;
         private Status status;
         private Task task;
         private TaskStatus taskStatus;
@@ -23,7 +23,7 @@ namespace Portfolio.Data.Commands
             this.session = session;
         }
 
-        public override Response ExecuteCommand(Request input)
+        public override CreateTaskResponse ExecuteCommand(CreateTaskRequest input)
         {
             if (input == null)
                 throw new ArgumentNullException("input");
@@ -40,7 +40,7 @@ namespace Portfolio.Data.Commands
                 CommitTransaction();
             }
 
-            return new Response { Id = task.Id };
+            return new CreateTaskResponse(task);
         }
 
         protected override void OnDisposing()
@@ -64,15 +64,15 @@ namespace Portfolio.Data.Commands
         }
 
         private void InsertTaskStatus()
-        {            
+        {
             taskStatus = new TaskStatus
-                             {
-                                 Task = task,
-                                 Status = status,
-                                 IsCompleted = status.IsCompleted,
-                                 IPAddress = request.UserSettings.IPAddress,
-                                 CreatedAt = createdAt
-                             };
+            {
+                Task = task,
+                Status = status,
+                IsCompleted = status.IsCompleted,
+                IPAddress = request.UserSettings.IPAddress,
+                CreatedAt = createdAt
+            };
             session.Save(taskStatus);
         }
 

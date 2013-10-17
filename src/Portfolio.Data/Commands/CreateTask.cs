@@ -3,18 +3,44 @@ using Portfolio.Data.Models;
 
 namespace Portfolio.Data.Commands
 {
-    public abstract class CreateTask : AbstractCommand<CreateTask.Request, CreateTask.Response>
-    {
-        public class Request
-        {
-            public Task Task { get; set; }
+    public abstract class CreateTask : AbstractCommand<CreateTaskRequest, CreateTaskResponse>
+    {        
+    }
 
-            public IUserSettings UserSettings { get; set; }
+    public class CreateTaskRequest
+    {
+        private readonly Task task;
+        private readonly IUserSettings userSettings;
+
+        public CreateTaskRequest(Task task, IUserSettings userSettings)
+        {
+            this.task = task;
+            this.userSettings = userSettings;
         }
 
-        public class Response
+        public Task Task
         {
-            public int Id { get; set; }
+            get { return task; }
+        }
+
+        public IUserSettings UserSettings
+        {
+            get { return userSettings; }
+        }
+    }
+
+    public class CreateTaskResponse
+    {
+        private readonly Task task;
+
+        public CreateTaskResponse(Task task)
+        {
+            this.task = task;
+        }
+
+        public Task Task
+        {
+            get { return task; }
         }
     }
 }

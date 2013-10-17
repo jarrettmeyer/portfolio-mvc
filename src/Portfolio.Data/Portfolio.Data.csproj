@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\lib\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +49,7 @@
     <Compile Include="Commands\CreateTask.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandStore.cs" />
+    <Compile Include="Commands\Impl\CreateTaskImpl.cs" />
     <Compile Include="Commands\UpdateTaskStatus.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Category.cs" />
@@ -60,6 +67,9 @@
       <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
       <Name>Portfolio.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
