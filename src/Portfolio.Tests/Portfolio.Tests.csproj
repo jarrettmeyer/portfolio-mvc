@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\lib\FluentAssertions.2.1.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\lib\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -52,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ConfigTests.cs" />
+    <Compile Include="Data\Commands\Impl\CreateTaskImplTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
     <Compile Include="Data\Models\StatusMapTests.cs" />
     <Compile Include="Data\Models\StatusWorkflowMapTests.cs" />
@@ -68,10 +72,6 @@
     <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
       <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
       <Name>Portfolio.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Data.SqlServer\Portfolio.Data.SqlServer.csproj">
-      <Project>{B0B7DB3D-EB10-49AE-9378-9338781694B2}</Project>
-      <Name>Portfolio.Data.SqlServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Portfolio.Data\Portfolio.Data.csproj">
       <Project>{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}</Project>

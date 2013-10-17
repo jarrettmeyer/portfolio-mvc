@@ -28,7 +28,8 @@ namespace Portfolio.Web
             kernel.Bind<ITaskService>().To<TaskServiceImpl>();
             kernel.Bind<IWorkflowService>().To<WorkflowServiceImpl>();
 
-            // Web layer bindings
+            // Web layer and generic service bindings
+            kernel.Bind<IClock>().To<SystemClock>();
             kernel.Bind<IUserSettings>().To<HttpUserSettings>();
         }
     }

@@ -187,10 +187,6 @@
       <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
       <Name>Portfolio.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Data.SqlServer\Portfolio.Data.SqlServer.csproj">
-      <Project>{B0B7DB3D-EB10-49AE-9378-9338781694B2}</Project>
-      <Name>Portfolio.Data.SqlServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Data\Portfolio.Data.csproj">
       <Project>{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}</Project>
       <Name>Portfolio.Data</Name>

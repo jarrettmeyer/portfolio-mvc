@@ -1,5 +1,4 @@
-﻿using Portfolio.Common;
-using Portfolio.Data.Models;
+﻿using Portfolio.Data.Models;
 
 namespace Portfolio.Data.Commands
 {
@@ -9,23 +8,16 @@ namespace Portfolio.Data.Commands
 
     public class CreateTaskRequest
     {
-        private readonly Task task;
-        private readonly IUserSettings userSettings;
+        private readonly Task task;        
 
-        public CreateTaskRequest(Task task, IUserSettings userSettings)
+        public CreateTaskRequest(Task task)
         {
             this.task = task;
-            this.userSettings = userSettings;
         }
 
         public Task Task
         {
             get { return task; }
-        }
-
-        public IUserSettings UserSettings
-        {
-            get { return userSettings; }
         }
     }
 

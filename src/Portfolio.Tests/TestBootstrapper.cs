@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NHibernate;
 using NHibernate.Linq;
 using Portfolio.Data;
 using Portfolio.Data.Models;
@@ -13,6 +14,15 @@ namespace Portfolio
         public static string ConnectionString
         {
             get { return CONNECTION_STRING; }
+        }
+
+        /// <summary>
+        /// Opens a new NHibernate <see cref="ISession"/> instance.
+        /// </summary>        
+        public static ISession OpenSession()
+        {
+            var session = NHibernateConfig.SessionFactory.OpenSession();
+            return session;
         }
 
         public static int DeleteAll<T>()
@@ -34,20 +44,15 @@ namespace Portfolio
             return deletedCount;
         }
 
-        public static void DeleteAllCategories()
+        public static int DeleteAllCategories()
         {
-            using (var session = NHibernateConfig.SessionFactory.OpenSession())
-            {
-                using (var txn = session.BeginTransaction())
-                {
-                    var allCategories = session.Query<Category>().ToList();
-                    foreach (var c in allCategories)
-                    {
-                        session.Delete(c);
-                    }
-                    txn.Commit();
-                }
-            }
+            return DeleteAll<Category>();
+        }
+
+        public static int DeleteAllTasks()
+        {
+            DeleteAll<TaskStatus>();
+            return DeleteAll<Task>();
         }
 
         public static Category InsertNewCategory(string description = "Test Category")
@@ -61,13 +66,14 @@ namespace Portfolio
             return InsertNewRecord(category);
         }
 
-        public static Status InsertNewStatus(string id = "TEST", string description = "Test Status", bool isCompleted = false)
+        public static Status InsertNewStatus(string id = "TEST", string description = "Test Status", bool isCompleted = false, bool isDefaultStatus = false)
         {
             var status = new Status
                          {
                              Id = id,
                              Description = description,
-                             IsCompleted = isCompleted
+                             IsCompleted = isCompleted,
+                             IsDefaultStatus = isDefaultStatus
                          };
             return InsertNewRecord(status);
         }
