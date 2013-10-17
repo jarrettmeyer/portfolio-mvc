@@ -9,17 +9,17 @@ using Portfolio.Domain.ViewModels;
 namespace Portfolio.Domain.Services.Impl
 {
     public class TaskServiceImpl : ITaskService
-    {        
+    {
+        private readonly IClock clock;
         private readonly ICommandStore commandStore;
         private readonly IRepository repo;
         private Task task;
-        private readonly IUserSettings userSettings;
 
-        public TaskServiceImpl(IRepository repo, IUserSettings userSettings, ICommandStore commandStore)
+        public TaskServiceImpl(IRepository repo, ICommandStore commandStore, IClock clock)
         {
             this.repo = repo;
-            this.userSettings = userSettings;
-            this.commandStore = commandStore;            
+            this.commandStore = commandStore;
+            this.clock = clock;
         }
 
         public TaskViewModel CreateNewTask(TaskInputModel taskInputModel)
@@ -80,6 +80,7 @@ namespace Portfolio.Domain.Services.Impl
             task.Category = GetCategory(taskInputModel);
             task.Description = taskInputModel.Description;
             task.DueOn = taskInputModel.Description.SafeParseDateTime();
+            task.UpdatedAt = clock.Now;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Portfolio.Domain
                 taskViewModel.Id = task.Id;
                 taskViewModel.IsCompleted = task.IsCompleted;
                 taskViewModel.Status = StatusMapper.Map(task.CurrentStatus);
+                taskViewModel.UpdatedAt = task.UpdatedAt;
             }
             return taskViewModel;            
         }

@@ -1,5 +1,8 @@
-﻿using Moq;
+﻿using System;
+using FluentAssertions;
+using Moq;
 using NUnit.Framework;
+using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
 using Portfolio.Data.Models;
@@ -12,8 +15,11 @@ namespace Portfolio.Domain.Services.Impl
         [TestFixture]
         public class UpdateTaskTests
         {
-            private Mock<IRepository> mockRepository;
+            private Mock<IClock> mockClock;
             private Mock<ICommandStore> mockCommandStore;
+            private Mock<IRepository> mockRepository;
+            private DateTime now;
+            
             private TaskInputModel taskInputModel;
             private ITaskService taskService;
             
@@ -22,9 +28,14 @@ namespace Portfolio.Domain.Services.Impl
             {
                 mockRepository = new Mock<IRepository> { DefaultValue = DefaultValue.Mock };
                 mockRepository.Setup(x => x.Load<Task>(1)).Returns(new Task { Id = 1 });
+
                 mockCommandStore = new Mock<ICommandStore>();
 
-                taskService = new TaskServiceImpl(mockRepository.Object, null, mockCommandStore.Object);
+                now = DateTime.Now;
+                mockClock = new Mock<IClock>();
+                mockClock.SetupGet(x => x.Now).Returns(now);
+
+                taskService = new TaskServiceImpl(mockRepository.Object, mockCommandStore.Object, mockClock.Object);
             }
 
             [Test]
@@ -54,12 +65,24 @@ namespace Portfolio.Domain.Services.Impl
             public void should_update_description()
             {
                 taskInputModel = new TaskInputModel
-                                 {
-                                     Id = 1,
-                                     Description = "This is an updated description"
-                                 };
+                {
+                    Id = 1,
+                    Description = "This is an updated description"
+                };
                 var result = taskService.UpdateTask(taskInputModel);
                 Assert.AreEqual("This is an updated description", result.Description);                
+            }
+
+            [Test]
+            public void should_update_updated_at()
+            {
+                taskInputModel = new TaskInputModel
+                {
+                    Id = 1,
+                    Description = "This is an updated description"
+                };
+                var result = taskService.UpdateTask(taskInputModel);
+                result.UpdatedAt.Should().Be(now);
             }
         }
     }

@@ -27,5 +27,7 @@ namespace Portfolio.Domain.ViewModels
         }
 
         public StatusViewModel Status { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
     }
 }
