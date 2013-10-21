@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Ensure.cs" />
     <Compile Include="IClock.cs" />
     <Compile Include="IUserSettings.cs" />
     <Compile Include="Logging\ILogWriter.cs" />

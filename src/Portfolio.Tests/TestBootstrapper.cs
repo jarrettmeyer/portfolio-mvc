@@ -49,6 +49,11 @@ namespace Portfolio
             return DeleteAll<Category>();
         }
 
+        public static int DeleteAllStatuses()
+        {
+            return DeleteAll<Status>();
+        }
+
         public static int DeleteAllTasks()
         {
             DeleteAll<TaskStatus>();
@@ -87,6 +92,23 @@ namespace Portfolio
                                      CreatedAt = DateTime.Now
                                  };
             return InsertNewRecord(statusWorkflow);
+        }
+
+        public static Task InsertNewTask(string description, Status status = null, DateTime? dueOn = null)
+        {
+            var timestamp = DateTime.Now;
+
+            var task = new Task
+            {
+                Description = description,
+                Category = null,
+                CurrentStatus = status,
+                DueOn = dueOn,
+                IsCompleted = (status != null) && status.IsCompleted,
+                CreatedAt = timestamp,
+                UpdatedAt = timestamp
+            };
+            return InsertNewRecord(task);            
         }
 
         private static T InsertNewRecord<T>(T inserted)
