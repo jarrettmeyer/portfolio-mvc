@@ -78,7 +78,7 @@ namespace Portfolio.Data.Commands.Impl
             taskStatus = new TaskStatus
             {
                 Task = task,
-                Status = status,
+                ToStatus = status,
                 IsCompleted = status.IsCompleted,
                 IPAddress = userSettings.IPAddress,
                 CreatedAt = createdAt

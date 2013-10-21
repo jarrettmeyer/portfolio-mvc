@@ -72,4 +72,7 @@
     <None Include="Scripts\PopulateStatuses.sql" />
     <None Include="Schema Comparisons\Sql Server Schema Compare.scmp" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="PortfolioDB.refactorlog" />
+  </ItemGroup>
 </Project>

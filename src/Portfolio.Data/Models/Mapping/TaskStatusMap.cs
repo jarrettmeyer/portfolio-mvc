@@ -2,7 +2,7 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Type;
 
-namespace Portfolio.Data.Models
+namespace Portfolio.Data.Models.Mapping
 {
     public class TaskStatusMap : ClassMapping<TaskStatus>
     {
@@ -17,9 +17,9 @@ namespace Portfolio.Data.Models
             {
                 map.Column(col => col.Name("[TaskId]"));
             });
-            ManyToOne(x => x.Status, map =>
+            ManyToOne(x => x.ToStatus, map =>
             {
-                map.Column(col => col.Name("[Status]"));
+                map.Column(col => col.Name("[ToStatus]"));
             });
             Property(x => x.IsCompleted);
             Property(x => x.Comment);

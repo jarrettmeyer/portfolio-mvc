@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ConfigTests.cs" />
+    <Compile Include="Common\SystemClockTests.cs" />
     <Compile Include="Data\Commands\Impl\CreateTaskImplTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
     <Compile Include="Data\Models\StatusMapTests.cs" />
