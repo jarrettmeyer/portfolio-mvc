@@ -1,0 +1,31 @@
+﻿@model TaskListViewModel
+
+<h2>List Tasks</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("New", "Tasks")">New Task</a>
+</p>
+
+<table class="table table-condensed">
+    <tbody>
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Due On</th>
+            </tr>
+        </thead>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <th></th>
+                <td><a href="@Url.Action("Show", new { controller = "Tasks", id = t.Id })">@t.Id</a></td>
+                <td>@t.Description</td>
+                <td>@t.Status</td>
+                <td>@t.DueOn</td>
+            </tr>
+        }
+    </tbody>
+</table>

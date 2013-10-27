@@ -3,43 +3,34 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
 using Portfolio.Common;
+using Portfolio.Data.Commands;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands.Impl
+namespace Portfolio.Data.Queries
 {
     public class CreateTaskImpl : CreateTask
-    {
-        private readonly IClock clock;
-        private DateTime createdAt;
+    {                
+        private string ipAddress;
         private readonly ISession session;        
         private Status status;
         private Task task;
         private TaskStatus taskStatus;
-        private ITransaction transaction;
-        private readonly IUserSettings userSettings;
+        private DateTime timestamp;
+        private ITransaction transaction;        
 
-        public CreateTaskImpl(ISession session, IUserSettings userSettings, IClock clock)
+        public CreateTaskImpl(ISession session)
         {
-            if (session == null)
-                throw new ArgumentNullException("session");
-
-            if (userSettings == null)
-                throw new ArgumentNullException("userSettings");
-
-            if (clock == null)
-                throw new ArgumentNullException("clock");
-
+            Ensure.ArgumentIsNotNull(session, "session");
             this.session = session;
-            this.userSettings = userSettings;
-            this.clock = clock;
         }
 
-        public override CreateTaskResponse ExecuteCommand(CreateTaskRequest input)
+        public override CreateTaskResponse ExecuteQuery(CreateTaskRequest input)
         {
-            if (input == null)
-                throw new ArgumentNullException("input");
+            Ensure.ArgumentIsNotNull(input, "input");            
             
             task = input.Task;
+            ipAddress = input.IPAddress;
+            timestamp = input.Timestamp;
 
             using (transaction = session.BeginTransaction())
             {
@@ -80,8 +71,8 @@ namespace Portfolio.Data.Commands.Impl
                 Task = task,
                 ToStatus = status,
                 IsCompleted = status.IsCompleted,
-                IPAddress = userSettings.IPAddress,
-                CreatedAt = createdAt
+                IPAddress = ipAddress,
+                CreatedAt = timestamp
             };
             session.Save(taskStatus);
         }
@@ -96,10 +87,9 @@ namespace Portfolio.Data.Commands.Impl
         }
 
         private void SetTaskCreatedAt()
-        {
-            createdAt = clock.Now;
-            task.CreatedAt = createdAt;
-            task.UpdatedAt = createdAt;
+        {            
+            task.CreatedAt = timestamp;
+            task.UpdatedAt = timestamp;
         }
     }
 }

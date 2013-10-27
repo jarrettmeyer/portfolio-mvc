@@ -1,11 +1,17 @@
-﻿namespace Portfolio.Domain.ViewModels
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Portfolio.Web.ViewModels
 {
     public class TaskInputModel
     {
         private string description;
 
-        public int Category { get; set; }
+        public IDictionary<int, string> Categories { get; set; }
 
+        public int SelectedCategory { get; set; }
+
+        [Required]
         public string Description
         {
             get
@@ -29,6 +35,9 @@
 
         public int Id { get; set; }
 
-        public string Status { get; set; }
+        public string Title
+        {
+            get { return Id == 0 ? "New Task" : "Edit Task"; }
+        }
     }
 }

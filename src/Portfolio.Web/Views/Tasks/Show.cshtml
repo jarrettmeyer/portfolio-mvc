@@ -1,0 +1,14 @@
+﻿@model TaskViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>Task Details</h2>
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-default">List Tasks</a>
+    <a href="@Url.Action("Edit", new { controller = "Tasks", id = Model.Id })" class="btn btn-primary">Edit Task</a>
+</div>
+
+<p>@Model.Description</p>

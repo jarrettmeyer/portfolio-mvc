@@ -1,40 +1,61 @@
-﻿using System;
-using System.Web.Mvc;
-using Portfolio.Domain.Services;
-using Portfolio.Domain.ViewModels;
+﻿using System.Web.Mvc;
+using Portfolio.Web.Lib;
+using Portfolio.Web.Lib.Actions;
+using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Controllers
 {
     public class TasksController : ApplicationController
-    {        
-        private readonly ITaskService taskService;
+    {
+        private readonly ActionResolver actionResolver;        
 
-        public TasksController(ITaskService taskService)
+        public TasksController(ActionResolver actionResolver)
         {
-            if (taskService == null)
-                throw new ArgumentNullException("taskService");
-
-            this.taskService = taskService;
+            this.actionResolver = actionResolver;            
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-            var tasks = taskService.GetAllTasks();
-            return Json(tasks, JsonRequestBehavior.AllowGet);
+            return actionResolver.GetAction<GetTasksIndexView>();            
+        }
+
+        [HttpGet]
+        public ActionResult Show(int id)
+        {
+            return actionResolver
+                .GetAction<GetTaskShowView>()
+                .ForId(id);
+        }
+
+        [HttpGet]
+        public ActionResult New()
+        {
+            return actionResolver.GetAction<GetNewTaskView>();
         }
 
         [HttpPost]
         public ActionResult Edit(TaskInputModel model)
         {
-            TaskViewModel result = taskService.UpdateTask(model);
-            return Json(result);
+            //TaskViewModel result = taskService.UpdateTask(model);
+            //return Json(result);
+            return null;
         }
 
         [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
-            TaskViewModel result = taskService.CreateNewTask(model);
-            return Json(result);
+            return actionResolver
+                .GetAction<PostNewTaskForm>()
+                .WithForm(model);
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            return actionResolver
+                .GetAction<DeleteTask>()
+                .ForId(id);            
         }
     }
 }

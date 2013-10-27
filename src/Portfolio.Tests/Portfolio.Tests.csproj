@@ -47,6 +47,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,19 +58,21 @@
   <ItemGroup>
     <Compile Include="Common\ConfigTests.cs" />
     <Compile Include="Common\SystemClockTests.cs" />
-    <Compile Include="Data\Commands\Impl\CreateTaskImplTests.cs" />
-    <Compile Include="Data\Commands\Impl\UpdateTaskStatusImplTests.cs" />
+    <Compile Include="Data\Queries\CreateTaskImplTests.cs" />
+    <Compile Include="Data\Commands\UpdateTaskStatusTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
     <Compile Include="Data\Models\StatusMapTests.cs" />
     <Compile Include="Data\Models\StatusWorkflowMapTests.cs" />
     <Compile Include="Data\Models\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
-    <Compile Include="Domain\Services\Impl\TaskServiceImplTests.cs" />
     <Compile Include="Domain\StatusMapperTests.cs" />
-    <Compile Include="Domain\TaskMapperTests.cs" />
-    <Compile Include="Domain\ViewModels\TaskViewModelTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\Controllers\HomeControllerTests.cs" />
+    <Compile Include="Web\Controllers\TasksControllerTests.cs" />
+    <Compile Include="Web\Lib\Actions\DeleteTaskTests.cs" />
+    <Compile Include="Web\Lib\Actions\PostNewTaskFormTests.cs" />
+    <Compile Include="Web\Lib\ViewResultBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
@@ -83,12 +87,19 @@
       <Project>{913150BE-8598-4A8B-9161-77DF82E1851B}</Project>
       <Name>Portfolio.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Portfolio.Web\Portfolio.Web.csproj">
+      <Project>{8F505E74-AA08-49AE-9175-D15260E7FD89}</Project>
+      <Name>Portfolio.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Services\" />
+    <Folder Include="Domain\ViewModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

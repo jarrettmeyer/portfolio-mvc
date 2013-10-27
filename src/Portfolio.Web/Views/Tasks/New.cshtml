@@ -1,0 +1,32 @@
+﻿@model TaskInputModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("New", "Tasks", FormMethod.Post, new {@class = "form-horizontal", role="form"}))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="form-group">
+        <label for="Description" class="col-lg-2 control-label">Description</label>
+        <div class="col-lg-10">
+            @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="DueOn" class="col-lg-2 control-label">Due On</label>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(x => x.DueOn, new {@class = "form-control", type = "date"})
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="@Url.Action("Index", "Tasks")" class="btn btn-default">Cancel</a>
+        </div>        
+    </div>
+}

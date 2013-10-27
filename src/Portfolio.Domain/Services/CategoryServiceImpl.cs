@@ -5,7 +5,7 @@ using Portfolio.Data;
 using Portfolio.Data.Models;
 using Portfolio.Domain.ViewModels;
 
-namespace Portfolio.Domain.Services.Impl
+namespace Portfolio.Domain.Services
 {
     public class CategoryServiceImpl : ICategoryService
     {

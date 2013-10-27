@@ -46,11 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AbstractCommand.cs" />
-    <Compile Include="Commands\CreateTask.cs" />
+    <Compile Include="Queries\CreateTask.cs" />
+    <Compile Include="Queries\CreateTaskRequest.cs" />
+    <Compile Include="Queries\CreateTaskResponse.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandStore.cs" />
-    <Compile Include="Commands\Impl\CreateTaskImpl.cs" />
-    <Compile Include="Commands\Impl\UpdateTaskStatusImpl.cs" />
+    <Compile Include="Queries\CreateTaskImpl.cs" />
     <Compile Include="Commands\UpdateTaskStatus.cs" />
     <Compile Include="Commands\UpdateTaskStatusRequest.cs" />
     <Compile Include="Commands\UpdateTaskStatusResponse.cs" />
@@ -70,8 +71,15 @@
     <Compile Include="NHibernateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AbstractQuery.cs" />
+    <Compile Include="Queries\DeleteTaskById.cs" />
+    <Compile Include="Queries\FetchAllCategories.cs" />
+    <Compile Include="Queries\FetchAllCategoriesImpl.cs" />
+    <Compile Include="Queries\FetchAllTasks.cs" />
+    <Compile Include="Queries\FetchTaskById.cs" />
+    <Compile Include="Queries\FetchTaskByIdImpl.cs" />
     <Compile Include="Queries\FetchTaskStatusesByTask.cs" />
     <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\IQueryStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">

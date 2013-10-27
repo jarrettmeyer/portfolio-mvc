@@ -8,10 +8,10 @@ using NUnit.Framework;
 using Portfolio.Common;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands.Impl
+namespace Portfolio.Data.Commands
 {
     [TestFixture]
-    public class UpdateTaskStatusImplTests
+    public class UpdateTaskStatusTests
     {
         private Mock<IClock> mockClock;
         private Mock<IUserSettings> mockUserSettings;
@@ -37,7 +37,7 @@ namespace Portfolio.Data.Commands.Impl
             mockUserSettings.SetupGet(x => x.IPAddress).Returns("1.2.3.4");
 
             // Create the new command instance.
-            updateTaskStatus = new UpdateTaskStatusImpl(session, mockUserSettings.Object, mockClock.Object);
+            updateTaskStatus = new UpdateTaskStatus(session, mockUserSettings.Object, mockClock.Object);
         }
 
         [TearDown]

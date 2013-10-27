@@ -2,13 +2,13 @@
 
 namespace Portfolio.Data.Queries
 {
-    public interface IQuery : IDisposable
-    {
-        object ExecuteQuery();
-    }
-
-    public interface IQuery<out TResult>
+    public interface IQuery<out TResult> : IDisposable
     {
         TResult ExecuteQuery();
+    }
+
+    public interface IQuery<in TParams, out TResult> : IDisposable
+    {
+        TResult ExecuteQuery(TParams parameters);
     }
 }

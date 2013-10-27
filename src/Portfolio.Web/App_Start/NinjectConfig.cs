@@ -1,11 +1,11 @@
-﻿using NHibernate;
+﻿using System.Web;
+using NHibernate;
 using Ninject;
 using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Commands;
-using Portfolio.Data.Commands.Impl;
+using Portfolio.Data.Queries;
 using Portfolio.Domain.Services;
-using Portfolio.Domain.Services.Impl;
 using Portfolio.Web.Lib;
 
 namespace Portfolio.Web
@@ -18,14 +18,18 @@ namespace Portfolio.Web
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
             kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
             kernel.Bind<IRepository>().To<NHibernateRepository>();
+            kernel.Bind<CreateTask>().To<CreateTaskImpl>();
+            kernel.Bind<FetchAllCategories>().To<FetchAllCategoriesImpl>();
+            kernel.Bind<FetchTaskById>().To<FetchTaskByIdImpl>();
             
             // Command bindings.
             kernel.Bind<ICommandStore>().To<NinjectCommandStore>();
-            kernel.Bind<CreateTask>().To<CreateTaskImpl>();
+            kernel.Bind<IQueryStore>().To<NinjectQueryStore>();
 
             // Service layer bindings
-            kernel.Bind<ICategoryService>().To<CategoryServiceImpl>();
-            kernel.Bind<ITaskService>().To<TaskServiceImpl>();
+            kernel.Bind<ActionResolver>().To<NinjectActionResolver>();
+            kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
+            kernel.Bind<ICategoryService>().To<CategoryServiceImpl>();            
             kernel.Bind<IWorkflowService>().To<WorkflowServiceImpl>();
 
             // Web layer and generic service bindings

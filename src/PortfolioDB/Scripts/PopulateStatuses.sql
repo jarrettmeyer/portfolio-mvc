@@ -20,6 +20,8 @@
 		left join Statuses s2 on s.id = s2.Id
 	where s2.Id is null;
 
+	update [Statuses] set [IsDefaultStatus] = 1 where [Id] = 'NEW';
+
 commit transaction;
 
 select * from Statuses;

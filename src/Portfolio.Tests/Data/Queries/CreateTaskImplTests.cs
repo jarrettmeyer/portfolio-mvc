@@ -6,9 +6,10 @@ using NHibernate;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Common;
+using Portfolio.Data.Commands;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands.Impl
+namespace Portfolio.Data.Queries
 {
     [TestFixture]
     public class CreateTaskImplTests
@@ -18,7 +19,7 @@ namespace Portfolio.Data.Commands.Impl
         private Mock<IUserSettings> mockUserSettings;
         private DateTime now;
         private CreateTaskRequest request;
-        private CreateTaskResponse response;
+        private CreateTaskResponse response;        
         private ISession session;
         private Task task;
 
@@ -35,7 +36,7 @@ namespace Portfolio.Data.Commands.Impl
             mockClock = new Mock<IClock>();
             mockClock.SetupGet(x => x.Now).Returns(now);
 
-            createTask = new CreateTaskImpl(session, mockUserSettings.Object, mockClock.Object);
+            createTask = new CreateTaskImpl(session);
             
         }
 
@@ -85,7 +86,6 @@ namespace Portfolio.Data.Commands.Impl
                 .First();
             taskStatus.IPAddress.Should().Be("1.2.3.4");
         }
-        
 
         private void CreateNewSession()
         {
@@ -108,8 +108,8 @@ namespace Portfolio.Data.Commands.Impl
                 Description = "This is a test",
                 DueOn = new DateTime(2013, 12, 31)
             };
-            request = new CreateTaskRequest(task);
-            response = createTask.ExecuteCommand(request);
+            request = new CreateTaskRequest(task, "1.2.3.4", now);
+            response = createTask.ExecuteQuery(request);
         }
 
         private void PurgeTestData()
