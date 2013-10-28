@@ -21,5 +21,10 @@ namespace Portfolio.Common.Logging.Impl
         {
             log.Error(message);
         }
+
+        public void WriteError(string message, Exception exception)
+        {
+            log.Error(message, exception);
+        }
     }
 }

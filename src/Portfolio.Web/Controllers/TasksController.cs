@@ -17,21 +17,26 @@ namespace Portfolio.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return actionResolver.GetAction<GetTasksIndexView>();            
+            var action = actionResolver.GetAction<GetTasksIndexView>();            
+            return new ActionResultWrapper(action);
         }
 
         [HttpGet]
         public ActionResult Show(int id)
         {
-            return actionResolver
+            var action = actionResolver
                 .GetAction<GetTaskShowView>()
                 .ForId(id);
+            action.OnSuccess = () => View("Show", action.ViewModel);
+            return new ActionResultWrapper(action);
         }
 
         [HttpGet]
         public ActionResult New()
         {
-            return actionResolver.GetAction<GetNewTaskView>();
+            var action = actionResolver.GetAction<GetNewTaskView>();
+            action.OnSuccess = () => View("New", action.Form);
+            return new ActionResultWrapper(action);
         }
 
         [HttpPost]
@@ -45,17 +50,19 @@ namespace Portfolio.Web.Controllers
         [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
-            return actionResolver
+            var action = actionResolver
                 .GetAction<PostNewTaskForm>()
                 .WithForm(model);
+            return new ActionResultWrapper(action);
         }
 
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            return actionResolver
+            var action = actionResolver
                 .GetAction<DeleteTask>()
                 .ForId(id);            
+            return new ActionResultWrapper(action);
         }
     }
 }

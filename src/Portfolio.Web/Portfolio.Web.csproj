@@ -138,15 +138,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Actions\AbstractAction.cs" />
+    <Compile Include="Lib\ActionResultWrapper.cs" />
     <Compile Include="Lib\Actions\DeleteTask.cs" />
     <Compile Include="Lib\Actions\GetNewTaskView.cs" />
     <Compile Include="Lib\Actions\GetTaskShowView.cs" />
     <Compile Include="Lib\Actions\GetTasksIndexView.cs" />
+    <Compile Include="Lib\Actions\IAction.cs" />
     <Compile Include="Lib\Actions\PostNewTaskForm.cs" />
     <Compile Include="Lib\Actions\RedirectToListTasks.cs" />
     <Compile Include="Lib\HttpSessionStorage.cs" />
     <Compile Include="Lib\HttpUserSettings.cs" />
-    <Compile Include="Lib\IActionResolver.cs" />
+    <Compile Include="Lib\ActionResolver.cs" />
     <Compile Include="Lib\RedirectToRouteResultBuilder.cs" />
     <Compile Include="Lib\ViewResultBuilder.cs" />
     <Compile Include="Lib\NinjectActionResolver.cs" />

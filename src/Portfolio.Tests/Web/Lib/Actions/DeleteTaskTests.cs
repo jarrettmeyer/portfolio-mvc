@@ -19,7 +19,7 @@ namespace Portfolio.Web.Lib.Actions
         [Test]
         public void invokes_execute_query()
         {            
-            deleteTask.ExecuteResult(null);
+            deleteTask.Execute();
             mockQuery.Verify(x => x.ExecuteQuery(100), Times.Once());
         }
     }

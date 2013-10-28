@@ -1,15 +1,17 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace Portfolio.Web.Lib.Actions
+﻿namespace Portfolio.Web.Lib.Actions
 {
-    public class RedirectToListTasks : ActionResult
+    public class RedirectToListTasks : AbstractAction
     {
-        public override void ExecuteResult(ControllerContext context)
+        public RedirectToListTasks()
         {
-            var routeValues = new RouteValueDictionary(new { controller = "Tasks", action = "Index" });
-            var redirect = new RedirectToRouteResult(routeValues);
-            redirect.ExecuteResult(context);
+            OnSuccess = () => new RedirectToRouteResultBuilder()
+                .Controller("Tasks")
+                .Action("Index")
+                .RedirectToRouteResult;
+        }
+
+        public override void Execute()
+        {
         }
     }
 }

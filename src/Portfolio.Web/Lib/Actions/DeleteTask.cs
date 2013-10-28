@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
+using NHibernate.Impl;
 using Portfolio.Data.Queries;
 
 namespace Portfolio.Web.Lib.Actions
 {
-    public class DeleteTask : ActionResult, IDisposable
+    public class DeleteTask : AbstractAction
     {        
         private bool hasSetTaskId = false;
         private readonly DeleteTaskById query;
@@ -15,19 +16,9 @@ namespace Portfolio.Web.Lib.Actions
             this.query = query;
         }
 
-        public void Dispose()
+        public override void Execute()
         {
-            if (query != null)
-            {
-                query.Dispose();
-            }
-            GC.SuppressFinalize(this);
-        }
-
-        public override void ExecuteResult(ControllerContext context)
-        {
-            DeleteTaskFromDatabase();
-            ExecuteEmptyResult(context);
+            DeleteTaskFromDatabase();            
         }
 
         public DeleteTask ForId(int id)
@@ -37,18 +28,17 @@ namespace Portfolio.Web.Lib.Actions
             return this;
         }
 
+        protected override void OnDisposing()
+        {
+            if (query != null)
+                query.Dispose();
+        }
+
         private void DeleteTaskFromDatabase()
         {
             if (!hasSetTaskId)
                 throw new InvalidOperationException("Task ID has not been set. Cannot execute delete task action.");
             query.ExecuteQuery(taskId);            
         }
-
-        private static void ExecuteEmptyResult(ControllerContext context)
-        {
-            var emptyResult = new EmptyResult();
-            emptyResult.ExecuteResult(context);            
-        }
-
     }
 }

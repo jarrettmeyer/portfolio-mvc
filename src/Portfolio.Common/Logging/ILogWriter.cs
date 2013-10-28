@@ -1,8 +1,11 @@
-﻿namespace Portfolio.Common.Logging
+﻿using System;
+
+namespace Portfolio.Common.Logging
 {
     public interface ILogWriter
     {
         void WriteDebug(string message);
         void WriteError(string message);
+        void WriteError(string message, Exception exception);
     }
 }

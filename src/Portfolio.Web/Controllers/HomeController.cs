@@ -15,7 +15,8 @@ namespace Portfolio.Web.Controllers
 
         public ActionResult Index()
         {
-            return actionResolver.GetAction<RedirectToListTasks>();            
+            var action = actionResolver.GetAction<RedirectToListTasks>();
+            return new ActionResultWrapper(action);
         }
 
     }

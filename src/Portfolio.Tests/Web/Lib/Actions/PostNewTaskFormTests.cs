@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Routing;
 using FluentAssertions;
 using Moq;
@@ -15,8 +14,7 @@ namespace Portfolio.Web.Lib.Actions
 {
     public class PostNewTaskFormTests
     {
-        private PostNewTaskForm actionResult;
-        private ControllerContext controllerContext;
+        private PostNewTaskForm action;
         private TaskInputModel form;
         private Mock<IClock> mockClock;
         private Mock<CreateTask> mockCreateTask;
@@ -43,11 +41,11 @@ namespace Portfolio.Web.Lib.Actions
             mockClock.SetupGet(x => x.Now).Returns(now);
 
             // Setup controller context
-            controllerContext = new ControllerContext();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //controllerContext = new ControllerContext();
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             form = new TaskInputModel();
-            actionResult = new StubPostNewTaskForm(mockCreateTask.Object, mockHttpRequest.Object, mockClock.Object)
+            action = new PostNewTaskForm(mockCreateTask.Object, mockHttpRequest.Object, mockClock.Object)
                 .WithForm(form);
         }
 
@@ -60,30 +58,15 @@ namespace Portfolio.Web.Lib.Actions
         [Test]
         public void request_ip_address_should_be_set()
         {
-            actionResult.ExecuteResult(controllerContext);
-            actionResult.CreateTaskRequest.IPAddress.Should().Be("1.2.3.4");
+            action.Execute();
+            action.CreateTaskRequest.IPAddress.Should().Be("1.2.3.4");
         }
 
         [Test]
         public void should_execute_create_task_query()
         {
-            actionResult.ExecuteResult(controllerContext);
+            action.Execute();
             mockCreateTask.Verify(x => x.ExecuteQuery(It.IsAny<CreateTaskRequest>()), Times.Once());
-        }
-
-        internal class StubPostNewTaskForm : PostNewTaskForm
-        {
-            public StubPostNewTaskForm(CreateTask createTask, HttpRequestBase httpRequest, IClock clock) 
-                : base(createTask, httpRequest, clock)
-            {
-            }
-
-            public bool IsRedirected { get; private set; }
-
-            protected override void RedirectToTask(ControllerContext context)
-            {
-                IsRedirected = true;
-            }
         }
     }
 }

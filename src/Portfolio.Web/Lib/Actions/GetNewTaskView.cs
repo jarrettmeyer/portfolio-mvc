@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using Portfolio.Data.Models;
 using Portfolio.Data.Queries;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
-    public class GetNewTaskView : ActionResult
+    public class GetNewTaskView : AbstractAction
     {
         private IEnumerable<Category> categories;
         private readonly FetchAllCategories fetchAllCategories;
@@ -19,17 +18,15 @@ namespace Portfolio.Web.Lib.Actions
             form = new TaskInputModel();
         }
 
-        public override void ExecuteResult(ControllerContext context)
+        public TaskInputModel Form
+        {
+            get { return form; }
+        }
+
+        public override void Execute()
         {
             categories = fetchAllCategories.ExecuteQuery();
-            form.Categories = categories.ToDictionary(c => c.Id, c => c.Description);        
-
-            var viewResult = new ViewResultBuilder()
-                .Controller(context.Controller)
-                .ViewName("New")
-                .Model(form)
-                .ViewResult;
-            viewResult.ExecuteResult(context);
+            form.Categories = categories.ToDictionary(c => c.Id, c => c.Description);
         }
     }
 }

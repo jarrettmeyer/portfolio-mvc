@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Collections.Generic;
 using Portfolio.Data.Models;
 using Portfolio.Data.Queries;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
-    public class GetTasksIndexView : ActionResult, IDisposable
+    public class GetTasksIndexView : AbstractAction
     {
-        private TaskListViewModel model;
+        private TaskListViewModel viewModel;
         private readonly FetchAllTasks query;
         private IEnumerable<Task> tasks;
 
@@ -18,33 +16,28 @@ namespace Portfolio.Web.Lib.Actions
             this.query = query;
         }
 
-        public void Dispose()
+        public TaskListViewModel ViewModel
         {
-            if (query != null)
-                query.Dispose();
-
-            GC.SuppressFinalize(this);
+            get { return viewModel; }
         }
 
-        public override void ExecuteResult(ControllerContext context)
+        public override void Execute()
         {
-            GetViewModel();
-            GenerateResult(context);
-        }
-
-        private void GenerateResult(ControllerContext context)
-        {
-            var viewResult = new ViewResultBuilder()
-                .Controller(context.Controller)
-                .Model(model)
-                .ViewResult;
-            viewResult.ExecuteResult(context);
+            GetViewModel();            
         }
 
         private void GetViewModel()
         {
             tasks = query.ExecuteQuery();
-            model = new TaskListViewModel(tasks);
+            viewModel = new TaskListViewModel(tasks);
+        }
+
+        protected override void OnDisposing()
+        {
+            if (query != null)
+            {
+                query.Dispose();
+            }
         }
     }
 }

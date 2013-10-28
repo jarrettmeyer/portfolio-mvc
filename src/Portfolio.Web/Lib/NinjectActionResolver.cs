@@ -13,10 +13,10 @@ namespace Portfolio.Web.Lib
             this.kernel = kernel;
         }
 
-        public override TActionResult GetAction<TActionResult>()
+        public override TAction GetAction<TAction>()
         {
-            var actionResult = kernel.Get<TActionResult>();
-            return actionResult;
+            var action = kernel.Get<TAction>();
+            return action;
         }
     }
 }

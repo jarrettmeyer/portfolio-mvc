@@ -8,7 +8,7 @@ using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
-    public class PostNewTaskForm : ActionResult
+    public class PostNewTaskForm : AbstractAction
     {
         private readonly IClock clock;
         private readonly CreateTask createTask;
@@ -31,16 +31,10 @@ namespace Portfolio.Web.Lib.Actions
             get { return createTaskRequest; }
         }
 
-        public RedirectToRouteResult RedirectToRouteResult
-        {
-            get { return redirectToRouteResult; }
-        }
-
-        public override void ExecuteResult(ControllerContext context)
+        public override void Execute()
         {
             CreateNewTask();
-            InitializeRedirectToRouteResult();
-            RedirectToTask(context);
+            InitializeRedirectToRouteResult();            
         }
 
         public PostNewTaskForm WithForm(TaskInputModel form)
@@ -61,18 +55,6 @@ namespace Portfolio.Web.Lib.Actions
             createTaskResponse = createTask.ExecuteQuery(createTaskRequest);
         }
 
-        /// <remarks>
-        /// This method is marked as "protected virtual" because it is particularly difficult to test.
-        /// Performing an actual redirect result all but requires a running HTTP server due to the
-        /// number of dependencies on the server/request/context objects. This method is overridden
-        /// in the test double.
-        /// </remarks>
-        /// <param name="context"></param>
-        protected virtual void RedirectToTask(ControllerContext context)
-        {
-            redirectToRouteResult.ExecuteResult(context);
-        }
-
         private void InitializeRedirectToRouteResult()
         {
             redirectToRouteResult = new RedirectToRouteResultBuilder()
@@ -80,6 +62,7 @@ namespace Portfolio.Web.Lib.Actions
                 .Action("Show")
                 .Id(createTaskResponse.Task.Id)
                 .RedirectToRouteResult;
+            OnSuccess = () => redirectToRouteResult;
         }
     }
 }

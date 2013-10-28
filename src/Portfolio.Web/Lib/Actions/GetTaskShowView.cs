@@ -1,11 +1,10 @@
-﻿using System.Web.Mvc;
-using Portfolio.Data.Models;
+﻿using Portfolio.Data.Models;
 using Portfolio.Data.Queries;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
-    public class GetTaskShowView : ActionResult
+    public class GetTaskShowView : AbstractAction
     {
         private readonly FetchTaskById fetchTaskById;
         private int id;
@@ -17,18 +16,15 @@ namespace Portfolio.Web.Lib.Actions
             this.fetchTaskById = fetchTaskById;            
         }
 
-        public override void ExecuteResult(ControllerContext context)
+        public TaskViewModel ViewModel
+        {
+            get { return viewModel; }
+        }
+
+        public override void Execute()
         {
             task = fetchTaskById.ExecuteQuery(id);
             viewModel = TaskViewModel.ForTask(task);
-
-            var viewResult = new ViewResultBuilder()
-                .Controller(context.Controller)
-                .ViewName("Show")
-                .Model(viewModel)
-                .ViewResult;
-
-            viewResult.ExecuteResult(context);
         }
 
         public GetTaskShowView ForId(int id)
