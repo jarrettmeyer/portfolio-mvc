@@ -2,7 +2,6 @@
 using Moq;
 using NUnit.Framework;
 using Portfolio.Web.Lib;
-using Portfolio.Web.Lib.Actions;
 
 namespace Portfolio.Web.Controllers
 {
@@ -25,7 +24,7 @@ namespace Portfolio.Web.Controllers
         public void get_index()
         {
             var actionResult = controller.Index();
-            actionResult.Should().BeAssignableTo<RedirectToListTasks>();
+            actionResult.Should().BeAssignableTo<ActionResultWrapper>();
         }
     }
 }

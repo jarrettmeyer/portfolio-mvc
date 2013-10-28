@@ -20,6 +20,7 @@ namespace Portfolio.Web.Controllers
             {
                 DefaultValue = DefaultValue.Mock
             };
+            mockActionResolver.Setup(x => x.GetAction<GetNewTaskView>()).Returns(new GetNewTaskView(null));
             mockActionResolver.Setup(x => x.GetAction<GetTasksIndexView>()).Returns(new GetTasksIndexView(null));
 
             tasksController = new TasksController(mockActionResolver.Object);
@@ -33,7 +34,7 @@ namespace Portfolio.Web.Controllers
 
             // Assertions
             actionResult.Should().NotBeNull();
-            actionResult.Should().BeAssignableTo<GetTasksIndexView>();
+            actionResult.Should().BeAssignableTo<ActionResultWrapper>();
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace Portfolio.Web.Controllers
             var actionResult = tasksController.New();
 
             // Assertions
-            actionResult.Should().BeAssignableTo<GetNewTaskView>();
+            actionResult.Should().BeAssignableTo<ActionResultWrapper>();
         }
     }
 }

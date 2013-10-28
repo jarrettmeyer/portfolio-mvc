@@ -13,7 +13,7 @@ namespace Portfolio.Common
         public void Now_should_return_the_system_time()
         {
             clock = new SystemClock();
-            clock.Now.Should().Be(DateTime.UtcNow);            
+            clock.Now.Should().BeCloseTo(DateTime.UtcNow);
         }
     }
 }

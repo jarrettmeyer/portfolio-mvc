@@ -18,6 +18,11 @@ namespace Portfolio.Web.Lib
             this.action = action;
         }
 
+        public IAction Action
+        {
+            get { return action; }
+        }
+
         public override void ExecuteResult(ControllerContext context)
         {
             try
