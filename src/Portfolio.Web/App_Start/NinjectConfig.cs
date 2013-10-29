@@ -3,7 +3,6 @@ using NHibernate;
 using Ninject;
 using Portfolio.Common;
 using Portfolio.Data;
-using Portfolio.Data.Commands;
 using Portfolio.Data.Queries;
 using Portfolio.Domain.Services;
 using Portfolio.Web.Lib;
@@ -22,8 +21,7 @@ namespace Portfolio.Web
             kernel.Bind<FetchAllCategories>().To<FetchAllCategoriesImpl>();
             kernel.Bind<FetchTaskById>().To<FetchTaskByIdImpl>();
             
-            // Command bindings.
-            kernel.Bind<ICommandStore>().To<NinjectCommandStore>();
+            // Command bindings.            
             kernel.Bind<IQueryStore>().To<NinjectQueryStore>();
 
             // Service layer bindings

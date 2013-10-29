@@ -1,43 +1,92 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Portfolio.Common;
+using Portfolio.Data.Models;
 
 namespace Portfolio.Web.ViewModels
 {
     public class TaskInputModel
     {
-        private string description;
+        private readonly Task task;
 
-        public IDictionary<int, string> Categories { get; set; }
+        public TaskInputModel()
+            : this(new Task())
+        {            
+        }
+
+        public TaskInputModel(Task task)
+        {
+            Ensure.ArgumentIsNotNull(task, "task");
+            this.task = task;
+        }
+
+        public string ActionName
+        {
+            get { return IsNew ? "New" : "Edit"; }
+        }
+
+        public SelectList Categories { get; set; }
+
+        public string ControllerName
+        {
+            get { return "Tasks"; }
+        }
 
         public int SelectedCategory { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Description
         {
             get
             {
-                if (description == null)
-                {
-                    return "";
-                }
-                return description.Trim();
+                if (task.Description == null)
+                    task.Description = "";
+                
+                return task.Description;                
             }
-            set
+            set 
             {
-                if (value != null)
-                {
-                    description = value;
-                }
+                task.Description = value != null ? value.Trim() : "";
             }
         }
 
-        public string DueOn { get; set; }
+        public string DueOn
+        {
+            get { return task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : ""; }
+            set { task.DueOn = value.SafeParseDateTime(); }
+        }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return task.Id; }
+            set { task.Id = value; }
+        }
+
+        public bool IsNew
+        {
+            get { return Id == 0; }
+        }
+
+        public object RouteValues
+        {
+            get
+            {
+                if (IsNew)
+                    return new { };
+
+                return new { id = Id };                
+            }
+        }
 
         public string Title
         {
             get { return Id == 0 ? "New Task" : "Edit Task"; }
+        }
+
+        public Task GetTask()
+        {
+            return task;
         }
     }
 }

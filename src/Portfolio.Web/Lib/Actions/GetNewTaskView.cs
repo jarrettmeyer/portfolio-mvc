@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Portfolio.Data.Models;
 using Portfolio.Data.Queries;
 using Portfolio.Web.ViewModels;
@@ -26,7 +25,7 @@ namespace Portfolio.Web.Lib.Actions
         public override void Execute()
         {
             categories = fetchAllCategories.ExecuteQuery();
-            form.Categories = categories.ToDictionary(c => c.Id, c => c.Description);
+            form.Categories = categories.ToSelectList(c => c.Id, c => c.Description);
         }
     }
 }

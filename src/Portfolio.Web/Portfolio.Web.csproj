@@ -141,19 +141,21 @@
     <Compile Include="Lib\Actions\AbstractAction.cs" />
     <Compile Include="Lib\ActionResultWrapper.cs" />
     <Compile Include="Lib\Actions\DeleteTask.cs" />
+    <Compile Include="Lib\Actions\GetEditTaskView.cs" />
     <Compile Include="Lib\Actions\GetNewTaskView.cs" />
     <Compile Include="Lib\Actions\GetTaskShowView.cs" />
     <Compile Include="Lib\Actions\GetTasksIndexView.cs" />
     <Compile Include="Lib\Actions\IAction.cs" />
     <Compile Include="Lib\Actions\PostNewTaskForm.cs" />
     <Compile Include="Lib\Actions\RedirectToListTasks.cs" />
+    <Compile Include="Lib\CollectionExtensions.cs" />
     <Compile Include="Lib\HttpSessionStorage.cs" />
     <Compile Include="Lib\HttpUserSettings.cs" />
     <Compile Include="Lib\ActionResolver.cs" />
     <Compile Include="Lib\RedirectToRouteResultBuilder.cs" />
+    <Compile Include="Lib\ResourceRouteConfig.cs" />
     <Compile Include="Lib\ViewResultBuilder.cs" />
     <Compile Include="Lib\NinjectActionResolver.cs" />
-    <Compile Include="Lib\NinjectCommandStore.cs" />
     <Compile Include="Lib\NinjectQueryStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\TaskInputModel.cs" />
@@ -199,6 +201,8 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\New.cshtml" />
     <Content Include="Views\Tasks\Show.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\_Form.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

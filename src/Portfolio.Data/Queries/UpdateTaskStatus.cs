@@ -3,9 +3,9 @@ using NHibernate;
 using Portfolio.Common;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands
+namespace Portfolio.Data.Queries
 {
-    public class UpdateTaskStatus : AbstractCommand<UpdateTaskStatusRequest, UpdateTaskStatusResponse>
+    public class UpdateTaskStatus : AbstractQuery<UpdateTaskStatusRequest, UpdateTaskStatusResponse>
     {
         private readonly IClock clock;
         private readonly ISession session;
@@ -26,7 +26,7 @@ namespace Portfolio.Data.Commands
             this.clock = clock;
         }
 
-        public override UpdateTaskStatusResponse ExecuteCommand(UpdateTaskStatusRequest input)
+        public override UpdateTaskStatusResponse ExecuteQuery(UpdateTaskStatusRequest input)
         {
             SetTimestamp();
 

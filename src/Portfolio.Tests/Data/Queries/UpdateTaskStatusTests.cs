@@ -7,6 +7,7 @@ using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Common;
 using Portfolio.Data.Models;
+using Portfolio.Data.Queries;
 
 namespace Portfolio.Data.Commands
 {
@@ -105,7 +106,7 @@ namespace Portfolio.Data.Commands
         private void ExecuteCommand()
         {
             request = new UpdateTaskStatusRequest(taskId, "ST_2", "my comment");
-            response = updateTaskStatus.ExecuteCommand(request);
+            response = updateTaskStatus.ExecuteQuery(request);
         }
 
         private void InsertDummyData()

@@ -45,16 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AbstractCommand.cs" />
     <Compile Include="Queries\CreateTask.cs" />
     <Compile Include="Queries\CreateTaskRequest.cs" />
     <Compile Include="Queries\CreateTaskResponse.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandStore.cs" />
     <Compile Include="Queries\CreateTaskImpl.cs" />
-    <Compile Include="Commands\UpdateTaskStatus.cs" />
-    <Compile Include="Commands\UpdateTaskStatusRequest.cs" />
-    <Compile Include="Commands\UpdateTaskStatusResponse.cs" />
+    <Compile Include="Queries\UpdateTaskStatus.cs" />
+    <Compile Include="Queries\UpdateTaskStatusRequest.cs" />
+    <Compile Include="Queries\UpdateTaskStatusResponse.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IVersionedEntity.cs" />

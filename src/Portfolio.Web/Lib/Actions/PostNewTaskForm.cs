@@ -45,12 +45,7 @@ namespace Portfolio.Web.Lib.Actions
 
         private void CreateNewTask()
         {
-            task = new Task
-            {
-                Category = null,
-                Description = form.Description,
-                DueOn = form.DueOn.SafeParseDateTime()
-            };
+            task = form.GetTask();
             createTaskRequest = new CreateTaskRequest(task, httpRequest.UserHostAddress, clock.Now);
             createTaskResponse = createTask.ExecuteQuery(createTaskRequest);
         }

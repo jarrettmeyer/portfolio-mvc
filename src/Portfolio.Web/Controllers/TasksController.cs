@@ -17,7 +17,8 @@ namespace Portfolio.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var action = actionResolver.GetAction<GetTasksIndexView>();            
+            var action = actionResolver.GetAction<GetTasksIndexView>();
+            action.OnSuccess = () => View("Index", action.ViewModel);
             return new ActionResultWrapper(action);
         }
 
@@ -36,6 +37,15 @@ namespace Portfolio.Web.Controllers
         {
             var action = actionResolver.GetAction<GetNewTaskView>();
             action.OnSuccess = () => View("New", action.Form);
+            return new ActionResultWrapper(action);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var action = actionResolver.GetAction<GetEditTaskView>()
+                .ForId(id);
+            action.OnSuccess = () => View("Edit", action.Form);
             return new ActionResultWrapper(action);
         }
 

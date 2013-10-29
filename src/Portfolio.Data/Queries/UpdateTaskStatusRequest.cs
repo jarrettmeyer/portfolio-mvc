@@ -1,4 +1,4 @@
-﻿namespace Portfolio.Data.Commands
+﻿namespace Portfolio.Data.Queries
 {
     public class UpdateTaskStatusRequest
     {

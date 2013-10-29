@@ -1,6 +1,6 @@
 ﻿using Portfolio.Data.Models;
 
-namespace Portfolio.Data.Commands
+namespace Portfolio.Data.Queries
 {
     public class UpdateTaskStatusResponse
     {
