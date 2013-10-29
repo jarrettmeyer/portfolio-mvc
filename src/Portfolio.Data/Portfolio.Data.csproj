@@ -49,6 +49,10 @@
     <Compile Include="Queries\CreateTaskRequest.cs" />
     <Compile Include="Queries\CreateTaskResponse.cs" />
     <Compile Include="Queries\CreateTaskImpl.cs" />
+    <Compile Include="Queries\UpdateTask.cs" />
+    <Compile Include="Queries\UpdateTaskImpl.cs" />
+    <Compile Include="Queries\UpdateTaskRequest.cs" />
+    <Compile Include="Queries\UpdateTaskResponse.cs" />
     <Compile Include="Queries\UpdateTaskStatus.cs" />
     <Compile Include="Queries\UpdateTaskStatusRequest.cs" />
     <Compile Include="Queries\UpdateTaskStatusResponse.cs" />
@@ -74,7 +78,6 @@
     <Compile Include="Queries\FetchTaskByIdImpl.cs" />
     <Compile Include="Queries\FetchTaskStatusesByTask.cs" />
     <Compile Include="Queries\IQuery.cs" />
-    <Compile Include="Queries\IQueryStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">

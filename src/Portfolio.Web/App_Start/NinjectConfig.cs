@@ -18,10 +18,8 @@ namespace Portfolio.Web
             kernel.Bind<CreateTask>().To<CreateTaskImpl>();
             kernel.Bind<FetchAllCategories>().To<FetchAllCategoriesImpl>();
             kernel.Bind<FetchTaskById>().To<FetchTaskByIdImpl>();
+            kernel.Bind<UpdateTask>().To<UpdateTaskImpl>();
             
-            // Command bindings.            
-            kernel.Bind<IQueryStore>().To<NinjectQueryStore>();
-
             // Service layer bindings
             kernel.Bind<ActionResolver>().To<NinjectActionResolver>();
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);            

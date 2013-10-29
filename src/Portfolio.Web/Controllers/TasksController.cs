@@ -52,9 +52,11 @@ namespace Portfolio.Web.Controllers
         [HttpPost]
         public ActionResult Edit(TaskInputModel model)
         {
-            //TaskViewModel result = taskService.UpdateTask(model);
-            //return Json(result);
-            return null;
+            var action = actionResolver.GetAction<PostEditTaskForm>()
+                .WithForm(model);
+            action.OnSuccess = () => RedirectToAction("Show", new { id = action.Id });
+            action.OnError = () => View("Edit", model);
+            return new ActionResultWrapper(action);            
         }
 
         [HttpPost]
