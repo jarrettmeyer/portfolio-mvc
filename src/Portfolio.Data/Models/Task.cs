@@ -5,6 +5,7 @@ namespace Portfolio.Data.Models
     public class Task : IVersionedEntity
     {
         public virtual int Id { get; set; }
+        public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         public virtual Category Category { get; set; }
         public virtual Status CurrentStatus { get; set; }

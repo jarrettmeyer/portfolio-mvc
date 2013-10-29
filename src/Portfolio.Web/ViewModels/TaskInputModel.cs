@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Portfolio.Common;
 using Portfolio.Data.Models;
@@ -68,6 +67,11 @@ namespace Portfolio.Web.ViewModels
             get { return Id == 0; }
         }
 
+        public string PageTitle
+        {
+            get { return Id == 0 ? "New Task" : "Edit Task"; }
+        }
+
         public object RouteValues
         {
             get
@@ -79,9 +83,18 @@ namespace Portfolio.Web.ViewModels
             }
         }
 
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(256)]
         public string Title
         {
-            get { return Id == 0 ? "New Task" : "Edit Task"; }
+            get { return task.Title; }
+            set
+            {
+                if (value != null)
+                {
+                    task.Title = value.Trim();
+                }
+            }
         }
 
         public Task GetTask()

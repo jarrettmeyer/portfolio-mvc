@@ -1,59 +1,48 @@
-﻿using System;
-using System.Text;
+﻿using Portfolio.Common;
 using Portfolio.Data.Models;
 
 namespace Portfolio.Web.ViewModels
 {
     public class TaskViewModel
     {
-        private string description;
-        private DateTime? dueOn;
+        private readonly Task task;
+
+        public TaskViewModel(Task task)
+        {
+            Ensure.ArgumentIsNotNull(task, "task");
+            this.task = task;
+        }
 
         public string Description
         {
-            get { return description ?? ""; }            
+            get { return task.Description ?? ""; }
         }
 
         public string DueOn
         {
             get
             {
-                if (dueOn.HasValue)
+                if (task.DueOn.HasValue)
                 {
-                    return dueOn.Value.ToShortDateString();
+                    return task.DueOn.Value.ToShortDateString();
                 }
                 return "";
             }
         }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return task.Id; }
+        }
 
         public string Title
         {
-            get
-            {
-                var sb = new StringBuilder();
-                sb.Append("Task Details");
-                if (!string.IsNullOrEmpty(description))
-                {
-                    sb.Append(": ");
-                    if (description.Length >= 30)
-                    {
-                        sb.Append(description.Substring(0, 30));
-                    }
-                }
-                return sb.ToString();
-            }
+            get { return string.Format("Task Details: {0}", task.Title); }            
         }
 
         public static TaskViewModel ForTask(Task task)
-        {            
-            return new TaskViewModel
-            {
-                description = task.Description,
-                dueOn = task.DueOn,
-                Id = task.Id
-            };            
+        {
+            return new TaskViewModel(task);
         }
     }
 }

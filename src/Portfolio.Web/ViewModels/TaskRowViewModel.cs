@@ -44,5 +44,10 @@ namespace Portfolio.Web.ViewModels
         {
             get { return task.CurrentStatus.Description; }
         }
+
+        public string Title
+        {
+            get { return task.Title; }
+        }
     }
 }

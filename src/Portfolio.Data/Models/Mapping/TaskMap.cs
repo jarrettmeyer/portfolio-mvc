@@ -2,7 +2,7 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Type;
 
-namespace Portfolio.Data.Models
+namespace Portfolio.Data.Models.Mapping
 {
     public class TaskMap : ClassMapping<Task>
     {
@@ -12,6 +12,11 @@ namespace Portfolio.Data.Models
             Id(x => x.Id, map =>
             {
                 map.Generator(Generators.Identity);
+            });
+            Property(x => x.Title, map =>
+            {
+                map.Column("Title");                
+                map.Length(256);
             });
             Property(x => x.Description);
             ManyToOne(x => x.Category, map =>

@@ -1,11 +1,18 @@
 ﻿@model TaskInputModel
 
-<h2>@Model.Title</h2>
+<h2>@Model.PageTitle</h2>
 
 @using (Html.BeginForm(Model.ActionName, Model.ControllerName, Model.RouteValues, FormMethod.Post, new { @class = "form-horizontal", role="form" }))
 {
     @Html.HiddenFor(x => x.Id)
 
+    <div class="form-group">
+        <label for="Title" class="col-lg-2 control-label">Title</label>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+        </div>
+    </div>
+    
     <div class="form-group">
         <label for="Description" class="col-lg-2 control-label">Description</label>
         <div class="col-lg-10">

@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Tasks]
 (
 	[Id] INT NOT NULL IDENTITY(1, 1),
+	[Title] VARCHAR(256) NOT NULL DEFAULT '',
 	[Description] TEXT NOT NULL,
 	[CategoryId] INT,
 	[CurrentStatus] VARCHAR(256),
