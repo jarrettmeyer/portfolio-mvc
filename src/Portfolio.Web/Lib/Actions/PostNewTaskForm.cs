@@ -46,7 +46,7 @@ namespace Portfolio.Web.Lib.Actions
         private void CreateNewTask()
         {
             task = form.GetTask();
-            createTaskRequest = new CreateTaskRequest(task, httpRequest.UserHostAddress, clock.Now);
+            createTaskRequest = new CreateTaskRequest(task, form.SelectedCategory, httpRequest.UserHostAddress, clock.Now);
             createTaskResponse = createTask.ExecuteQuery(createTaskRequest);
         }
 

@@ -11,6 +11,17 @@ namespace Portfolio.Web.ViewModels
             this.task = task;
         }
 
+        public string Category
+        {
+            get
+            {
+                if (task.Category != null)
+                    return task.Category.Description;
+
+                return "";
+            }
+        }
+
         public string Description
         {
             get { return task.Description ?? ""; }

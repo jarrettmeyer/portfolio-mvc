@@ -108,7 +108,7 @@ namespace Portfolio.Data.Queries
                 Description = "This is a test",
                 DueOn = new DateTime(2013, 12, 31)
             };
-            request = new CreateTaskRequest(task, "1.2.3.4", now);
+            request = new CreateTaskRequest(task, null, "1.2.3.4", now);
             response = createTask.ExecuteQuery(request);
         }
 

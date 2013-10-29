@@ -4,7 +4,6 @@ using Ninject;
 using Portfolio.Common;
 using Portfolio.Data;
 using Portfolio.Data.Queries;
-using Portfolio.Domain.Services;
 using Portfolio.Web.Lib;
 
 namespace Portfolio.Web
@@ -15,8 +14,7 @@ namespace Portfolio.Web
         {
             // Data layer bindings
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
-            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
-            kernel.Bind<IRepository>().To<NHibernateRepository>();
+            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());            
             kernel.Bind<CreateTask>().To<CreateTaskImpl>();
             kernel.Bind<FetchAllCategories>().To<FetchAllCategoriesImpl>();
             kernel.Bind<FetchTaskById>().To<FetchTaskByIdImpl>();
@@ -26,9 +24,7 @@ namespace Portfolio.Web
 
             // Service layer bindings
             kernel.Bind<ActionResolver>().To<NinjectActionResolver>();
-            kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
-            kernel.Bind<ICategoryService>().To<CategoryServiceImpl>();            
-            kernel.Bind<IWorkflowService>().To<WorkflowServiceImpl>();
+            kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);            
 
             // Web layer and generic service bindings
             kernel.Bind<IClock>().To<SystemClock>();

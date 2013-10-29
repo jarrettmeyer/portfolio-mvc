@@ -9,8 +9,10 @@ using Portfolio.Data.Models;
 namespace Portfolio.Data.Queries
 {
     public class CreateTaskImpl : CreateTask
-    {                
+    {
+        private Category category;
         private string ipAddress;
+        private int? selectedCategory;
         private readonly ISession session;        
         private Status status;
         private Task task;
@@ -29,11 +31,13 @@ namespace Portfolio.Data.Queries
             Ensure.ArgumentIsNotNull(input, "input");            
             
             task = input.Task;
+            selectedCategory = input.SelectedCategory;
             ipAddress = input.IPAddress;
             timestamp = input.Timestamp;
 
             using (transaction = session.BeginTransaction())
             {
+                SetTaskCategory();
                 SetTaskCreatedAt();
                 LoadDefaultStatus();
                 InsertTask();
@@ -48,7 +52,10 @@ namespace Portfolio.Data.Queries
         {
             if (session != null)
             {
-                session.Close();
+                if (session.IsOpen)
+                {
+                    session.Close();
+                }                
                 session.Dispose();
             }
         }
@@ -84,6 +91,16 @@ namespace Portfolio.Data.Queries
             {
                 throw new NullReferenceException("Could not find a default status in the database.");
             }
+        }
+
+        private void SetTaskCategory()
+        {
+            if (selectedCategory.HasValue)
+            {
+                category = session.Load<Category>(selectedCategory.Value);
+                task.Category = category;
+            }
+            
         }
 
         private void SetTaskCreatedAt()
