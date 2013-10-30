@@ -71,10 +71,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Controllers\HomeControllerTests.cs" />
     <Compile Include="Web\Controllers\TasksControllerTests.cs" />
+    <Compile Include="Web\Lib\Actions\AbstractActionTests.cs" />
     <Compile Include="Web\Lib\Actions\DeleteTaskTests.cs" />
     <Compile Include="Web\Lib\Actions\PostNewTaskFormTests.cs" />
     <Compile Include="Web\Lib\CollectionExtensionsTests.cs" />
     <Compile Include="Web\Lib\ViewResultBuilderTests.cs" />
+    <Compile Include="Web\ViewModels\FlashMessageCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">

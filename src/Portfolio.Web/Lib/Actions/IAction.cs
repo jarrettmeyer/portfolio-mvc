@@ -16,6 +16,11 @@ namespace Portfolio.Web.Lib.Actions
         Func<ActionResult> OnSuccess { get; set; }
 
         /// <summary>
+        /// Gets the temp data for the the given action.
+        /// </summary>
+        TempDataDictionary TempData { get; }
+
+        /// <summary>
         /// Execute the action.
         /// </summary>
         void Execute();

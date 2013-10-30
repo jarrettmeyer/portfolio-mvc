@@ -48,6 +48,7 @@ namespace Portfolio.Web.Lib.Actions
             task = form.GetTask();
             createTaskRequest = new CreateTaskRequest(task, form.SelectedCategory, httpRequest.UserHostAddress, clock.Now);
             createTaskResponse = createTask.ExecuteQuery(createTaskRequest);
+            WriteSuccessMessage();
         }
 
         private void InitializeRedirectToRouteResult()
@@ -58,6 +59,12 @@ namespace Portfolio.Web.Lib.Actions
                 .Id(createTaskResponse.Task.Id)
                 .RedirectToRouteResult;
             OnSuccess = () => redirectToRouteResult;
+        }
+
+        private void WriteSuccessMessage()
+        {
+            var flashMessageCollection = new FlashMessageCollection(TempData);
+            flashMessageCollection.AddSuccessMessage(string.Format("Successfully created new task: {0}", task.Title));
         }
     }
 }

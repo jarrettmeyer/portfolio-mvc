@@ -7,6 +7,7 @@ namespace Portfolio.Web.Lib.Actions
     {
         private Func<ActionResult> onError;
         private Func<ActionResult> onSuccess;
+        private TempDataDictionary tempData;
 
         protected AbstractAction()
         {
@@ -26,6 +27,11 @@ namespace Portfolio.Web.Lib.Actions
             set { onSuccess = value; }
         }
 
+        public TempDataDictionary TempData
+        {
+            get { return tempData; }
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -43,6 +49,12 @@ namespace Portfolio.Web.Lib.Actions
         public virtual IAction WithSuccessAction(Func<ActionResult> onSuccess)
         {
             this.onSuccess = onSuccess;
+            return this;
+        }
+
+        public virtual IAction WithTempData(TempDataDictionary tempData)
+        {
+            this.tempData = tempData;
             return this;
         }
 

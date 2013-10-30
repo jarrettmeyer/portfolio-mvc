@@ -40,6 +40,16 @@ namespace Portfolio.Web.Controllers
             return new ActionResultWrapper(action);
         }
 
+        [HttpPost]
+        public ActionResult New(TaskInputModel model)
+        {
+            var action = actionResolver
+                .GetAction<PostNewTaskForm>()
+                .WithForm(model)
+                .WithTempData(TempData);
+            return new ActionResultWrapper(action);
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -57,15 +67,6 @@ namespace Portfolio.Web.Controllers
             action.OnSuccess = () => RedirectToAction("Show", new { id = action.Id });
             action.OnError = () => View("Edit", model);
             return new ActionResultWrapper(action);            
-        }
-
-        [HttpPost]
-        public ActionResult New(TaskInputModel model)
-        {
-            var action = actionResolver
-                .GetAction<PostNewTaskForm>()
-                .WithForm(model);
-            return new ActionResultWrapper(action);
         }
 
         [HttpDelete]
