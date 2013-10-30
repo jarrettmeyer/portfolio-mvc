@@ -22,6 +22,11 @@ namespace Portfolio.Web.ViewModels
             flashMessages.Add(new FlashMessage(key, message));            
         }
 
+        public void AddErrorMessage(string message)
+        {
+            Add("danger", message);
+        }
+
         public void AddSuccessMessage(string message)
         {
             Add("success", message);            

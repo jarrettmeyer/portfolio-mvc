@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Portfolio.Common;
 using Portfolio.Common.Logging;
 using Portfolio.Web.Lib.Actions;
+using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib
 {
@@ -51,6 +52,10 @@ namespace Portfolio.Web.Lib
             }
             catch (Exception e)
             {
+                if (action.TempData != null)
+                {
+                    new FlashMessageCollection(action.TempData).AddErrorMessage(e.Message);
+                }
                 logWriter.WriteError(string.Format("Error perfoming action {0}", action), e);
                 actionResult = action.OnError.Invoke();
                 actionResult.ExecuteResult(context);
