@@ -105,6 +105,7 @@ namespace Portfolio.Data.Queries
         {
             task = new Task
             {
+                Title = "Testing...",
                 Description = "This is a test",
                 DueOn = new DateTime(2013, 12, 31)
             };

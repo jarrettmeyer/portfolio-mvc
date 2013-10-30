@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using FluentAssertions;
 using Moq;
@@ -14,12 +15,13 @@ namespace Portfolio.Web.Lib.Actions
 {
     public class PostNewTaskFormTests
     {
-        private PostNewTaskForm action;
+        private IAction action;
         private TaskInputModel form;
         private Mock<IClock> mockClock;
         private Mock<CreateTask> mockCreateTask;
         private Mock<HttpRequestBase> mockHttpRequest;
         private DateTime now;
+        private TempDataDictionary tempData;
 
         [SetUp]
         public void before_each_test()
@@ -40,13 +42,12 @@ namespace Portfolio.Web.Lib.Actions
             mockClock = new Mock<IClock>();
             mockClock.SetupGet(x => x.Now).Returns(now);
 
-            // Setup controller context
-            //controllerContext = new ControllerContext();
-            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+            tempData = new TempDataDictionary();
 
             form = new TaskInputModel();
             action = new PostNewTaskForm(mockCreateTask.Object, mockHttpRequest.Object, mockClock.Object)
-                .WithForm(form);
+                .WithForm(form)
+                .WithTempData(tempData);
         }
 
         [TearDown]
@@ -59,7 +60,7 @@ namespace Portfolio.Web.Lib.Actions
         public void request_ip_address_should_be_set()
         {
             action.Execute();
-            action.CreateTaskRequest.IPAddress.Should().Be("1.2.3.4");
+            ((PostNewTaskForm)action).CreateTaskRequest.IPAddress.Should().Be("1.2.3.4");
         }
 
         [Test]

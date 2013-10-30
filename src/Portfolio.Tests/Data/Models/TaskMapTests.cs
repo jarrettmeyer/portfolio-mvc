@@ -31,6 +31,7 @@ namespace Portfolio.Data.Models
             {
                 var task = new Task
                            {
+                               Title = "Test Task",
                                Description = string.Format("This is a test {0}", DateTime.Now.Ticks),
                                Category = category,
                                CurrentStatus = status,

@@ -100,6 +100,7 @@ namespace Portfolio
 
             var task = new Task
             {
+                Title = "Testing...",
                 Description = description,
                 Category = null,
                 CurrentStatus = status,

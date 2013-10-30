@@ -1,5 +1,4 @@
-﻿using System;
-using NHibernate;
+﻿using NHibernate;
 using Portfolio.Common;
 using Portfolio.Data.Models;
 
@@ -7,33 +6,27 @@ namespace Portfolio.Data.Queries
 {
     public class UpdateTaskStatus : AbstractQuery<UpdateTaskStatusRequest, UpdateTaskStatusResponse>
     {
-        private readonly IClock clock;
+        private UpdateTaskStatusRequest request;
         private readonly ISession session;
         private Task task;
         private Status toStatus;
-        private DateTime timestamp;
-        private ITransaction transaction;
-        private readonly IUserSettings userSettings;
+        private ITransaction transaction;        
 
-        public UpdateTaskStatus(ISession session, IUserSettings userSettings, IClock clock)
+        public UpdateTaskStatus(ISession session)
         {
             Ensure.ArgumentIsNotNull(session, "session");
-            Ensure.ArgumentIsNotNull(userSettings, "userSettings");
-            Ensure.ArgumentIsNotNull(clock, "clock");
-
-            this.session = session;
-            this.userSettings = userSettings;
-            this.clock = clock;
+            
+            this.session = session;            
         }
 
         public override UpdateTaskStatusResponse ExecuteQuery(UpdateTaskStatusRequest input)
         {
-            SetTimestamp();
+            this.request = input;
 
             using (transaction = session.BeginTransaction())
             {
-                FetchTaskById(input.TaskId);
-                FetchToStatus(input.ToStatus);
+                FetchTaskById(request.TaskId);
+                FetchToStatus(request.ToStatus);
                 UpdateTask();
                 InsertTaskStatus(input.Comment);
                 CommitTransaction();
@@ -74,22 +67,17 @@ namespace Portfolio.Data.Queries
                 ToStatus = toStatus,
                 IsCompleted = toStatus.IsCompleted,
                 Comment = comment,
-                IPAddress = userSettings.IPAddress,
-                CreatedAt = timestamp
+                IPAddress = request.IPAddress,
+                CreatedAt = request.Timestamp
             };
             session.Save(taskStatus);
-        }
-
-        private void SetTimestamp()
-        {
-            timestamp = clock.Now;
         }
 
         private void UpdateTask()
         {
             task.CurrentStatus = toStatus;
             task.IsCompleted = toStatus.IsCompleted;
-            task.UpdatedAt = timestamp;
+            task.UpdatedAt = request.Timestamp;
         }
     }
 }

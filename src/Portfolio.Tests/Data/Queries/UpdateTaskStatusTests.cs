@@ -7,9 +7,8 @@ using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Common;
 using Portfolio.Data.Models;
-using Portfolio.Data.Queries;
 
-namespace Portfolio.Data.Commands
+namespace Portfolio.Data.Queries
 {
     [TestFixture]
     public class UpdateTaskStatusTests
@@ -38,7 +37,7 @@ namespace Portfolio.Data.Commands
             mockUserSettings.SetupGet(x => x.IPAddress).Returns("1.2.3.4");
 
             // Create the new command instance.
-            updateTaskStatus = new UpdateTaskStatus(session, mockUserSettings.Object, mockClock.Object);
+            updateTaskStatus = new UpdateTaskStatus(session);
         }
 
         [TearDown]
@@ -76,7 +75,12 @@ namespace Portfolio.Data.Commands
         [Test]
         public void Task_UpdatedAt_should_be_modified()
         {
-            request = new UpdateTaskStatusRequest(taskId, "ST_2", "my comment");
+            request = new UpdateTaskStatusRequest
+            {
+                Comment = "my comment",
+                TaskId = taskId,
+                ToStatus = "ST_2"
+            };
             response.Task.UpdatedAt.Should().Be(timestamp);
         }
 
@@ -105,7 +109,13 @@ namespace Portfolio.Data.Commands
 
         private void ExecuteCommand()
         {
-            request = new UpdateTaskStatusRequest(taskId, "ST_2", "my comment");
+            request = new UpdateTaskStatusRequest
+            {
+                Comment = "my comment",
+                TaskId = taskId,
+                Timestamp = timestamp,
+                ToStatus = "ST_2"
+            };              
             response = updateTaskStatus.ExecuteQuery(request);
         }
 
