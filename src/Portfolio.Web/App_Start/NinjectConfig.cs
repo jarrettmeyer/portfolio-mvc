@@ -14,11 +14,9 @@ namespace Portfolio.Web
         {
             // Data layer bindings
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
-            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());            
+            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
+            kernel.Bind<IRepository>().To<NHibernateRepository>();
             kernel.Bind<CreateTask>().To<CreateTaskImpl>();
-            kernel.Bind<FetchAllCategories>().To<FetchAllCategoriesImpl>();
-            kernel.Bind<FetchTaskById>().To<FetchTaskByIdImpl>();
-            kernel.Bind<UpdateTask>().To<UpdateTaskImpl>();
             
             // Service layer bindings
             kernel.Bind<ActionResolver>().To<NinjectActionResolver>();

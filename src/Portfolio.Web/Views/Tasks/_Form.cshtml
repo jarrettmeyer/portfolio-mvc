@@ -1,5 +1,9 @@
 ﻿@model TaskInputModel
 
+@{
+    var categories = CategoriesSelectList.SelectList(Model.SelectedCategory);
+}
+
 <h2>@Model.PageTitle</h2>
 
 @using (Html.BeginForm(Model.ActionName, Model.ControllerName, Model.RouteValues, FormMethod.Post, new { @class = "form-horizontal", role="form" }))
@@ -23,7 +27,7 @@
     <div class="form-group">
         <label for="SelectedCategory" class="col-lg-2 control-label">Category</label>
         <div class="col-lg-10">
-            @Html.DropDownListFor(x => x.SelectedCategory, Model.Categories, "", new { @class="form-control" })
+            @Html.DropDownListFor(x => x.SelectedCategory, @categories, "", new { @class="form-control" })
         </div>
     </div>
     

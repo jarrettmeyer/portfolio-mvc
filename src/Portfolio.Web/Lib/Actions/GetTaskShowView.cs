@@ -1,19 +1,19 @@
-﻿using Portfolio.Data.Models;
-using Portfolio.Data.Queries;
+﻿using Portfolio.Data;
+using Portfolio.Data.Models;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
     public class GetTaskShowView : AbstractAction
     {
-        private readonly FetchTaskById fetchTaskById;
         private int id;
+        private readonly IRepository repository;
         private Task task;
         private TaskViewModel viewModel;
 
-        public GetTaskShowView(FetchTaskById fetchTaskById)
+        public GetTaskShowView(IRepository repository)
         {
-            this.fetchTaskById = fetchTaskById;            
+            this.repository = repository;
         }
 
         public TaskViewModel ViewModel
@@ -23,7 +23,7 @@ namespace Portfolio.Web.Lib.Actions
 
         public override void Execute()
         {
-            task = fetchTaskById.ExecuteQuery(id);
+            task = repository.Load<Task>(id);
             viewModel = TaskViewModel.ForTask(task);
         }
 

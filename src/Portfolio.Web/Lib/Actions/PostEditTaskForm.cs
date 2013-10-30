@@ -1,5 +1,6 @@
-﻿using Portfolio.Data.Models;
-using Portfolio.Data.Queries;
+﻿using Portfolio.Common;
+using Portfolio.Data;
+using Portfolio.Data.Models;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
@@ -7,13 +8,12 @@ namespace Portfolio.Web.Lib.Actions
     public class PostEditTaskForm : AbstractAction
     {
         private TaskInputModel form;
-        private UpdateTask query;
-        private UpdateTaskRequest request;
+        private readonly IRepository repository;
         private Task task;
 
-        public PostEditTaskForm(UpdateTask query)
+        public PostEditTaskForm(IRepository repository)
         {
-            this.query = query;
+            this.repository = repository;
         }
 
         public int Id
@@ -23,12 +23,20 @@ namespace Portfolio.Web.Lib.Actions
 
         public override void Execute()
         {
-            task = form.GetTask();
-            request = new UpdateTaskRequest
-            {
-                Task = task
-            };
-            query.ExecuteQuery(request);            
+            task = repository.Load<Task>(form.Id);
+            task.Title = form.Title;
+            task.Description = form.Description;
+            task.Category = GetCategory();
+            task.DueOn = form.DueOn.SafeParseDateTime();
+            repository.SaveChanges();
+        }
+
+        private Category GetCategory()
+        {
+            if (form.SelectedCategory.HasValue)
+                return repository.Load<Category>(form.SelectedCategory.Value);
+
+            return null;
         }
 
         public PostEditTaskForm WithForm(TaskInputModel form)

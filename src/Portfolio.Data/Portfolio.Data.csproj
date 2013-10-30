@@ -45,14 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepository.cs" />
+    <Compile Include="NHibernateRepository.cs" />
     <Compile Include="Queries\CreateTask.cs" />
     <Compile Include="Queries\CreateTaskRequest.cs" />
     <Compile Include="Queries\CreateTaskResponse.cs" />
     <Compile Include="Queries\CreateTaskImpl.cs" />
-    <Compile Include="Queries\UpdateTask.cs" />
-    <Compile Include="Queries\UpdateTaskImpl.cs" />
-    <Compile Include="Queries\UpdateTaskRequest.cs" />
-    <Compile Include="Queries\UpdateTaskResponse.cs" />
     <Compile Include="Queries\UpdateTaskStatus.cs" />
     <Compile Include="Queries\UpdateTaskStatusRequest.cs" />
     <Compile Include="Queries\UpdateTaskStatusResponse.cs" />
@@ -71,11 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AbstractQuery.cs" />
     <Compile Include="Queries\DeleteTaskById.cs" />
-    <Compile Include="Queries\FetchAllCategories.cs" />
-    <Compile Include="Queries\FetchAllCategoriesImpl.cs" />
     <Compile Include="Queries\FetchAllTasks.cs" />
-    <Compile Include="Queries\FetchTaskById.cs" />
-    <Compile Include="Queries\FetchTaskByIdImpl.cs" />
     <Compile Include="Queries\FetchTaskStatusesByTask.cs" />
     <Compile Include="Queries\IQuery.cs" />
   </ItemGroup>

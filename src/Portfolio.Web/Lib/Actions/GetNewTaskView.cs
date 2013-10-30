@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
+using Portfolio.Data;
 using Portfolio.Data.Models;
-using Portfolio.Data.Queries;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions
 {
     public class GetNewTaskView : AbstractAction
     {
-        private IEnumerable<Category> categories;
-        private readonly FetchAllCategories fetchAllCategories;
+        private IEnumerable<Category> categories;        
         private readonly TaskInputModel form;
+        private readonly IRepository repository;
 
-        public GetNewTaskView(FetchAllCategories fetchAllCategories)
+        public GetNewTaskView(IRepository repository)
         {
-            this.fetchAllCategories = fetchAllCategories;            
+            this.repository = repository;
             form = new TaskInputModel();
         }
 
@@ -24,8 +24,7 @@ namespace Portfolio.Web.Lib.Actions
 
         public override void Execute()
         {
-            categories = fetchAllCategories.ExecuteQuery();
-            form.Categories = categories.ToSelectList(c => c.Id, c => c.Description);
+            CategoriesSelectList.Initialize(repository);            
         }
     }
 }

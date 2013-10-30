@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 using Portfolio.Common;
 using Portfolio.Data.Models;
 
@@ -25,14 +24,12 @@ namespace Portfolio.Web.ViewModels
             get { return IsNew ? "New" : "Edit"; }
         }
 
-        public SelectList Categories { get; set; }
-
         public string ControllerName
         {
             get { return "Tasks"; }
         }
 
-        public int SelectedCategory { get; set; }
+        public int? SelectedCategory { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         public string Description
