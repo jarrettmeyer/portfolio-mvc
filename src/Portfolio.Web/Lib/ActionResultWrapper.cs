@@ -9,13 +9,16 @@ using Portfolio.Web.ViewModels;
 namespace Portfolio.Web.Lib
 {
     /// <summary>
-    /// Common construct for executing actions in an MVC action. If everything works.
+    /// Common construct for executing actions in an MVC action. If everything works, the action's
+    /// OnSuccess delegate will be invoked. If there is an error, via throwing an exception, the
+    /// action's OnError delegate will be invoked.
     /// </summary>
     public class ActionResultWrapper : ActionResult
     {
         private readonly IAction action;
         private ActionResult actionResult;
         private static readonly ILogWriter logWriter = Log.For<ActionResultWrapper>();
+        private Stopwatch stopWatch;
 
         public ActionResultWrapper(IAction action)
         {
@@ -41,25 +44,29 @@ namespace Portfolio.Web.Lib
                 // certain actions get too long, we might want to come back
                 // and make a better judgement about how they are written.
 
-                var stopWatch = new Stopwatch();
+                stopWatch = new Stopwatch();
                 stopWatch.Start();
                 action.Execute();
                 actionResult = action.OnSuccess.Invoke();
                 actionResult.ExecuteResult(context);
-                stopWatch.Stop();
-                var duration = stopWatch.ElapsedMilliseconds;
-                logWriter.WriteDebug(string.Format("Executed action '{0}'. Total time was {1} ms.", action.GetType(), duration));
+                stopWatch.Stop();                
+                logWriter.WriteDebug(string.Format("Executed action '{0}'. Total time was {1} ms.", action.GetType(), stopWatch.ElapsedMilliseconds));
             }
             catch (Exception e)
             {
-                if (action.TempData != null)
-                {
-                    new FlashMessageCollection(action.TempData).AddErrorMessage(e.Message);
-                }
+                AddErrorToFlash(e);
                 logWriter.WriteError(string.Format("Error perfoming action {0}", action), e);
                 actionResult = action.OnError.Invoke();
                 actionResult.ExecuteResult(context);
             }            
+        }
+
+        private void AddErrorToFlash(Exception e)
+        {
+            if (action.TempData != null)
+            {
+                new FlashMessageCollection(action.TempData).AddErrorMessage(e.Message);
+            }
         }
     }
 }
