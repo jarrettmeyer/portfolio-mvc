@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NHibernate;
@@ -28,13 +27,25 @@ namespace Portfolio.Data
             }
         }
 
-        public IEnumerable<T> All<T>()
+        public IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null)
         {
-            var items = session.Query<T>().ToArray();
-            return items;
+            var items = session.Query<T>().Where(expression);
+            if (pageIndex == null || pageSize == null)
+                return items;
+
+            return ApplyPagingToQueryable(items, pageIndex.Value, pageSize.Value);
         }
 
-        public T First<T>(Expression<Func<T, bool>> expression)
+        public IQueryable<T> FindAll<T>(int? pageIndex = null, int? pageSize = null)
+        {
+            var items = session.Query<T>();
+            if (pageIndex == null || pageSize == null)
+                return items;
+
+            return ApplyPagingToQueryable(items, pageIndex.Value, pageSize.Value);
+        }
+
+        public T FindOne<T>(Expression<Func<T, bool>> expression)
         {
             var item = session.Query<T>().Where(expression).FirstOrDefault();
             return item;
@@ -53,10 +64,11 @@ namespace Portfolio.Data
                 transaction.Commit();
             }
         }
-
-        public IEnumerable<T> Where<T>(Expression<Func<T, bool>> expression)
+        
+        private static IQueryable<T> ApplyPagingToQueryable<T>(IQueryable<T> items, int pageIndex, int pageSize)
         {
-            var items = session.Query<T>().Where(expression).ToArray();
+            int startIndex = pageIndex * pageSize;
+            items = items.Skip(startIndex).Take(pageSize);
             return items;
         }
     }

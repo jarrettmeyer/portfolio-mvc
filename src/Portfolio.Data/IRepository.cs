@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Portfolio.Data
@@ -15,14 +15,14 @@ namespace Portfolio.Data
     {
         void Add<T>(T entity);
 
-        IEnumerable<T> All<T>();
+        IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null);
 
-        T First<T>(Expression<Func<T, bool>> expression);
+        IQueryable<T> FindAll<T>(int? pageIndex = null, int? pageSize = null);
+
+        T FindOne<T>(Expression<Func<T, bool>> expression);
 
         T Load<T>(object id);
 
         void SaveChanges();
-
-        IEnumerable<T> Where<T>(Expression<Func<T, bool>> expression);
     }
 }

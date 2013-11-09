@@ -32,7 +32,7 @@ namespace Portfolio.Web.ViewModels
         public static void Initialize(IRepository repository)
         {
             if (!IsInitialized)
-                Categories = repository.All<Category>().ToList();
+                Categories = repository.FindAll<Category>().ToList();
         }
 
         public static SelectList SelectList(int? selected)
