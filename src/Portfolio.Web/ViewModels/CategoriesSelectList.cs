@@ -10,12 +10,12 @@ namespace Portfolio.Web.ViewModels
 {
     public class CategoriesSelectList
     {
-        public static IEnumerable<Category> Categories
+        public static IEnumerable<SelectListItem> Categories
         {
             get
             {
                 var cachedCategories = Cache.Instance.Get("all_categories");
-                return (IEnumerable<Category>)cachedCategories;
+                return (IEnumerable<SelectListItem>)cachedCategories;
             }
             set 
             {
@@ -32,12 +32,20 @@ namespace Portfolio.Web.ViewModels
         public static void Initialize(IRepository repository)
         {
             if (!IsInitialized)
-                Categories = repository.FindAll<Category>().ToList();
+                Categories = repository
+                    .FindAll<Category>()
+                    .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Description });
         }
 
         public static SelectList SelectList(int? selected)
         {
-            return new SelectList(Categories, "Id", "Description", selected);
+            return new SelectList(Categories, "Value", "Text", selected);
+        }
+
+        public class CategorySelectListModel
+        {
+            public int Id { get; set; }
+            public string Description { get; set; }
         }
     }
 }
