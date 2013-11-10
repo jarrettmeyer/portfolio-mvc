@@ -1,5 +1,5 @@
-﻿using Portfolio.Data;
-using Portfolio.Data.Models;
+﻿using Portfolio.Web.Lib.Data;
+using Portfolio.Web.Models;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions

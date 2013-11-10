@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Portfolio.Data.Models;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Web.ViewModels
 {

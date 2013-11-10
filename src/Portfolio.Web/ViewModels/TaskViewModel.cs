@@ -1,5 +1,5 @@
 ﻿using Portfolio.Common;
-using Portfolio.Data.Models;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Web.ViewModels
 {

@@ -6,9 +6,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Portfolio.Common;
-using Portfolio.Data.Commands;
-using Portfolio.Data.Models;
 using Portfolio.Data.Queries;
+using Portfolio.Web.Lib.Queries;
+using Portfolio.Web.Models;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions

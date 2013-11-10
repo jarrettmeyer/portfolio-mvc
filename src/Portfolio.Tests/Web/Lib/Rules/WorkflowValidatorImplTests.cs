@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Portfolio.Data.Models;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Web.Lib.Rules
 {

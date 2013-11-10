@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRepository.cs" />
-    <Compile Include="NHibernateRepository.cs" />
     <Compile Include="Queries\CreateTask.cs" />
     <Compile Include="Queries\CreateTaskRequest.cs" />
     <Compile Include="Queries\CreateTaskResponse.cs" />
@@ -65,7 +63,6 @@
     <Compile Include="Models\StatusWorkflow.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TaskStatus.cs" />
-    <Compile Include="NHibernateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AbstractQuery.cs" />
     <Compile Include="Queries\DeleteTaskById.cs" />

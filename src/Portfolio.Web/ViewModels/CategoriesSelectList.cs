@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using Portfolio.Common.Caching;
-using Portfolio.Data;
-using Portfolio.Data.Models;
+using Portfolio.Web.Lib.Caching;
+using Portfolio.Web.Lib.Data;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Web.ViewModels
 {
@@ -34,7 +35,7 @@ namespace Portfolio.Web.ViewModels
             if (!IsInitialized)
                 Categories = repository
                     .FindAll<Category>()
-                    .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Description });
+                    .Select(x => new SelectListItem { Value = x.Id.ToString(CultureInfo.InvariantCulture), Text = x.Description });
         }
 
         public static SelectList SelectList(int? selected)

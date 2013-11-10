@@ -2,11 +2,12 @@
 using NHibernate;
 using Ninject;
 using Portfolio.Common;
-using Portfolio.Data;
 using Portfolio.Data.Queries;
 using Portfolio.Web.Lib;
+using Portfolio.Web.Lib.Data;
+using Portfolio.Web.Lib.Queries;
 
-namespace Portfolio.Web
+namespace Portfolio.Web.App_Start
 {
     public class NinjectConfig
     {

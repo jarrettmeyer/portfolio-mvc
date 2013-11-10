@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using NHibernate.Linq;
+﻿using System.Diagnostics;
 using NUnit.Framework;
+using Portfolio.Web.Lib.Data;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Data.Models
 {

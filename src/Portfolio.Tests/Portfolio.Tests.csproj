@@ -36,6 +36,10 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\lib\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -79,14 +83,6 @@
     <Compile Include="Web\ViewModels\FlashMessageCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portfolio.Common\Portfolio.Common.csproj">
-      <Project>{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}</Project>
-      <Name>Portfolio.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Data\Portfolio.Data.csproj">
-      <Project>{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}</Project>
-      <Name>Portfolio.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Web\Portfolio.Web.csproj">
       <Project>{8F505E74-AA08-49AE-9175-D15260E7FD89}</Project>
       <Name>Portfolio.Web</Name>

@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Web", "Portfolio.Web\Portfolio.Web.csproj", "{8F505E74-AA08-49AE-9175-D15260E7FD89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Data", "Portfolio.Data\Portfolio.Data.csproj", "{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Tests", "Portfolio.Tests\Portfolio.Tests.csproj", "{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DABC3892-D263-4310-9FEE-20D4178EA17C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{38619A2F-3F09-41F2-9AC8-88D4D0E003D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Common", "Portfolio.Common\Portfolio.Common.csproj", "{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PortfolioDB", "PortfolioDB\PortfolioDB.sqlproj", "{6FF85409-6156-491C-A1BA-BFC0F3FF494A}"
 EndProject
@@ -25,18 +21,10 @@ Global
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C9AE9A8-56AD-41FB-BE2D-1CE730EF5FD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

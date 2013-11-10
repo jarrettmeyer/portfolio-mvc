@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using NHibernate.Impl;
 using Portfolio.Data.Queries;
+using Portfolio.Web.Lib.Queries;
 
 namespace Portfolio.Web.Lib.Actions
 {

@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NUnit.Framework;
+using Portfolio.Web.Lib.Data;
 
 namespace Portfolio.Data
 {
