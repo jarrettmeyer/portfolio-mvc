@@ -2,8 +2,9 @@
 using NHibernate;
 using Ninject;
 using Portfolio.Common;
+using Portfolio.Lib;
+using Portfolio.Lib.Data;
 using Portfolio.Web.Lib;
-using Portfolio.Web.Lib.Data;
 using Portfolio.Web.Lib.Queries;
 
 namespace Portfolio.App_Start

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace Portfolio.Web.Lib.Data
+namespace Portfolio.Lib.Data
 {
     public class NHibernateRepository : IRepository
     {
@@ -18,13 +18,18 @@ namespace Portfolio.Web.Lib.Data
             this.session = session;
         }
 
-        public void Add<T>(T entity)
+        public virtual void Add<T>(T entity)
         {
             using (var transaction = session.BeginTransaction())
             {
                 session.Save(entity);
                 transaction.Commit();
             }
+        }
+
+        public virtual ITransactionAdapter BeginTransaction()
+        {
+            return new NHibernateTransactionAdapter(session.BeginTransaction());
         }
 
         public IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null)

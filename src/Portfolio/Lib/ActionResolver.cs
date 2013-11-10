@@ -1,6 +1,7 @@
-﻿using Portfolio.Web.Lib.Actions;
+﻿using Portfolio.Lib.Actions;
+using Portfolio.Web.Lib.Actions;
 
-namespace Portfolio.Web.Lib
+namespace Portfolio.Lib
 {
     public abstract class ActionResolver
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Portfolio.Web.Lib.Data
+namespace Portfolio.Lib.Data
 {
     /// <summary>
     /// 
@@ -14,6 +14,8 @@ namespace Portfolio.Web.Lib.Data
     public interface IRepository
     {
         void Add<T>(T entity);
+
+        ITransactionAdapter BeginTransaction();
 
         IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null);
 

@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using Portfolio.Common;
 using Portfolio.Data.Queries;
+using Portfolio.Lib.Actions;
 using Portfolio.Web.Lib.Queries;
 using Portfolio.Web.Models;
 using Portfolio.Web.ViewModels;

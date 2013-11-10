@@ -3,7 +3,7 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
 using Portfolio.Data.Models;
-using Portfolio.Web.Lib.Data;
+using Portfolio.Lib.Data;
 using Portfolio.Web.Models;
 
 namespace Portfolio

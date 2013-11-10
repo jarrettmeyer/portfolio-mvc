@@ -1,5 +1,6 @@
 ﻿using Ninject;
 using Portfolio.Common;
+using Portfolio.Lib;
 
 namespace Portfolio.Web.Lib
 {

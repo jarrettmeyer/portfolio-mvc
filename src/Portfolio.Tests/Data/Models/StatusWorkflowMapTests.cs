@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Portfolio.Web.Lib.Data;
+using Portfolio.Lib.Data;
 using Portfolio.Web.Models;
 
 namespace Portfolio.Data.Models

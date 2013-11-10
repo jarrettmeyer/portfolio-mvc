@@ -2,6 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Portfolio.Controllers;
+using Portfolio.Lib;
 using Portfolio.Web.Lib;
 using Portfolio.Web.Lib.Actions;
 

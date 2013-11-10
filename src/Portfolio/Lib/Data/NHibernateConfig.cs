@@ -8,7 +8,7 @@ using NHibernate.Mapping.ByCode;
 using Portfolio.Common;
 using Portfolio.Web.Models.Mapping;
 
-namespace Portfolio.Web.Lib.Data
+namespace Portfolio.Lib.Data
 {
     public class NHibernateConfig
     {

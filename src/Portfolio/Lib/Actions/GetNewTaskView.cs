@@ -1,4 +1,4 @@
-﻿using Portfolio.Web.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Web.Lib.Actions

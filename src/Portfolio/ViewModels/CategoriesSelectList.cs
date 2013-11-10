@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Portfolio.Lib.Data;
 using Portfolio.Web.Lib.Caching;
-using Portfolio.Web.Lib.Data;
 using Portfolio.Web.Models;
 
 namespace Portfolio.Web.ViewModels
