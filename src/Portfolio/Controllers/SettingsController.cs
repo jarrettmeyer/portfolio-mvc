@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Portfolio.Common;
 
-namespace Portfolio.Web.Controllers
+namespace Portfolio.Controllers
 {
     public class SettingsController : ApplicationController
     {

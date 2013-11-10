@@ -2,7 +2,7 @@
 using Portfolio.Web.Lib;
 using Portfolio.Web.Lib.Actions;
 
-namespace Portfolio.Web.Controllers
+namespace Portfolio.Controllers
 {
     public class HomeController : ApplicationController
     {

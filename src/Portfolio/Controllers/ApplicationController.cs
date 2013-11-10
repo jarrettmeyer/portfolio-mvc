@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Portfolio.Web.Controllers
+namespace Portfolio.Controllers
 {
     public abstract class ApplicationController : Controller
     {        

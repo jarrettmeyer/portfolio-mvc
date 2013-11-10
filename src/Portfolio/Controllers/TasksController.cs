@@ -3,7 +3,7 @@ using Portfolio.Web.Lib;
 using Portfolio.Web.Lib.Actions;
 using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Controllers
+namespace Portfolio.Controllers
 {
     public class TasksController : ApplicationController
     {
