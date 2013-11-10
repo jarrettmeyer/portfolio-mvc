@@ -83,17 +83,17 @@
     <Compile Include="Web\ViewModels\FlashMessageCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portfolio.Web\Portfolio.Web.csproj">
-      <Project>{8F505E74-AA08-49AE-9175-D15260E7FD89}</Project>
-      <Name>Portfolio.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portfolio\Portfolio.csproj">
+      <Project>{8f505e74-aa08-49ae-9175-d15260e7fd89}</Project>
+      <Name>Portfolio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
