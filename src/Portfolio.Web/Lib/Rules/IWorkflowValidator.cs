@@ -1,4 +1,4 @@
-﻿namespace Portfolio.Domain
+﻿namespace Portfolio.Web.Lib.Rules
 {
     /// <summary>
     /// Determines if a transition from one status to another is 

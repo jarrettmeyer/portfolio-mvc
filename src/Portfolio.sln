@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{38
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Common", "Portfolio.Common\Portfolio.Common.csproj", "{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Domain", "Portfolio.Domain\Portfolio.Domain.csproj", "{913150BE-8598-4A8B-9161-77DF82E1851B}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PortfolioDB", "PortfolioDB\PortfolioDB.sqlproj", "{6FF85409-6156-491C-A1BA-BFC0F3FF494A}"
 EndProject
 Global
@@ -39,10 +37,6 @@ Global
 		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72FF5FAB-FEF2-4D10-9D9E-DA631ECC1835}.Release|Any CPU.Build.0 = Release|Any CPU
-		{913150BE-8598-4A8B-9161-77DF82E1851B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{913150BE-8598-4A8B-9161-77DF82E1851B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{913150BE-8598-4A8B-9161-77DF82E1851B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{913150BE-8598-4A8B-9161-77DF82E1851B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FF85409-6156-491C-A1BA-BFC0F3FF494A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

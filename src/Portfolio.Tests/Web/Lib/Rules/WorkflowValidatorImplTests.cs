@@ -3,7 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Portfolio.Data.Models;
 
-namespace Portfolio.Domain
+namespace Portfolio.Web.Lib.Rules
 {
     [TestFixture]
     public class WorkflowValidatorImplTests

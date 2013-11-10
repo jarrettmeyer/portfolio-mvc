@@ -153,6 +153,8 @@
     <Compile Include="Lib\ActionResolver.cs" />
     <Compile Include="Lib\RedirectToRouteResultBuilder.cs" />
     <Compile Include="Lib\ResourceRouteConfig.cs" />
+    <Compile Include="Lib\Rules\IWorkflowValidator.cs" />
+    <Compile Include="Lib\Rules\WorkflowValidatorImpl.cs" />
     <Compile Include="Lib\ViewResultBuilder.cs" />
     <Compile Include="Lib\NinjectActionResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -217,10 +219,6 @@
     <ProjectReference Include="..\Portfolio.Data\Portfolio.Data.csproj">
       <Project>{3E1E295D-1ED3-438B-B2DA-6D1389F029AD}</Project>
       <Name>Portfolio.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Domain\Portfolio.Domain.csproj">
-      <Project>{913150BE-8598-4A8B-9161-77DF82E1851B}</Project>
-      <Name>Portfolio.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
