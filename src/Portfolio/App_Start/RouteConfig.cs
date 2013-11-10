@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using Portfolio.Web.Lib;
 
-namespace Portfolio.Web
+namespace Portfolio.App_Start
 {
     public class RouteConfig
     {

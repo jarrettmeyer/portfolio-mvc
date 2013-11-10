@@ -1,16 +1,15 @@
-[assembly: WebActivator.PreApplicationStartMethod(typeof(Portfolio.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Portfolio.Web.App_Start.NinjectWebCommon), "Stop")]
+using System;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
+using Portfolio.App_Start;
 
-namespace Portfolio.Web.App_Start
+[assembly: WebActivator.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
+
+namespace Portfolio.App_Start
 {
-    using System;
-    using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();

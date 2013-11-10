@@ -2,9 +2,10 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Portfolio.Data;
+using Portfolio.App_Start;
+using Portfolio.Web;
 
-namespace Portfolio.Web
+namespace Portfolio
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801

@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace Portfolio.Web
+namespace Portfolio.App_Start
 {
     public class FilterConfig
     {
