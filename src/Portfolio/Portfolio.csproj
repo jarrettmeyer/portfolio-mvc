@@ -166,6 +166,7 @@
     <Compile Include="Lib\HttpUserSettings.cs" />
     <Compile Include="Lib\ActionResolver.cs" />
     <Compile Include="Lib\IClock.cs" />
+    <Compile Include="Lib\InvalidModelStateException.cs" />
     <Compile Include="Lib\IUserSettings.cs" />
     <Compile Include="Lib\Logging\ILogWriter.cs" />
     <Compile Include="Lib\Logging\Impl\Log4NetLogWriter.cs" />
