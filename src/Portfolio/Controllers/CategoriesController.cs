@@ -33,6 +33,7 @@ namespace Portfolio.Controllers
                 UpdatedAt = DateTime.UtcNow
             };
             Repository.Instance.Add(category);
+            CategoriesSelectList.Initialize(Repository.Instance);
             return RedirectToAction("Index");
         }
     }
