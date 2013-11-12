@@ -14,6 +14,14 @@ namespace Portfolio.Models.Mapping
                 map.Generator(Generators.Identity);
             });
             Property(x => x.Description);
+            Property(x => x.IsActive, map =>
+            {
+                map.Column(col =>
+                {
+                    col.Default("(1)");
+                });
+                map.NotNullable(true);
+            });
             Property(x => x.CreatedAt);
             Property(x => x.UpdatedAt);
             Version(x => x.Version, map =>

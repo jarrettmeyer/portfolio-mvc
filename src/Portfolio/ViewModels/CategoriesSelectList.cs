@@ -27,7 +27,7 @@ namespace Portfolio.ViewModels
             if (repository == null)
                 repository = Repository.Instance;
 
-            var categories = repository.FindAll<Category>().OrderBy(c => c.Description).ToArray();
+            var categories = repository.Find<Category>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
             var models = categories.Select(c => new CategorySelectListModel(c.Id, c.Description));
             Cache.Instance.Add(CACHE_KEY, models);
         }

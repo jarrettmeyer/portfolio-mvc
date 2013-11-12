@@ -9,6 +9,15 @@ namespace Portfolio.Controllers
 {
     public class CategoriesController : ApplicationController
     {
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            var category = Repository.Instance.Load<Category>(id);
+            category.IsActive = false;
+            Repository.Instance.SaveChanges();
+            return new EmptyResult();
+        }
+
         [HttpGet]
         public ActionResult Edit(int id)
         {

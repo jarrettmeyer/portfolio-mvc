@@ -20,6 +20,11 @@ namespace Portfolio.Models
         public virtual string Description { get; set; }
 
         /// <summary>
+        /// Indicates if the category is active.
+        /// </summary>
+        public virtual bool IsActive { get; set; }
+
+        /// <summary>
         /// When the category was created.
         /// </summary>
         public virtual DateTime CreatedAt { get; set; }

@@ -152,6 +152,7 @@
     <Compile Include="Lib\Actions\PostEditTaskForm.cs" />
     <Compile Include="Lib\Actions\PostNewTaskForm.cs" />
     <Compile Include="Lib\Actions\RedirectToListTasks.cs" />
+    <Compile Include="Lib\BooleanExtensions.cs" />
     <Compile Include="Lib\Caching\AspNetHttpCache.cs" />
     <Compile Include="Lib\Caching\Cache.cs" />
     <Compile Include="Lib\Caching\ICache.cs" />
@@ -227,6 +228,8 @@
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\cross.png" />
+    <Content Include="Content\images\pencil.png" />
     <Content Include="Content\qunit-1.12.0.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -264,9 +267,7 @@
     <Content Include="Views\Categories\New.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

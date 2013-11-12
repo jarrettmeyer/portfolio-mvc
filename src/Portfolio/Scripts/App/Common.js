@@ -20,7 +20,6 @@
         var date = new Date(ticksAsInt);
         return date;        
     };
-
     
     function getDay(date) {
         var d = date.getDay();
@@ -80,4 +79,21 @@
         return Date.parse(this);        
     };
 
+    /**
+     *
+     */
+    $(function() {
+        $("body").on("click", ".delete-link", function () {
+            var $this = $(this),
+                href = $this.attr("href");
+            $.ajax({
+                url: href,
+                type: "DELETE",
+                success: function() {
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+    });
 })();
