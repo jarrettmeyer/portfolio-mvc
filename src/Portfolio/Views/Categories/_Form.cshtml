@@ -1,0 +1,21 @@
+﻿@model CategoryInputModel
+
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, Model.FormMethod, Model.FormCss))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Description, new { @class = "col-lg-2 control-label"})
+        <div class="col-lg-10">
+            @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Description)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="@Url.Action("Index", "Categories")" class="btn btn-default">Cancel</a>
+        </div>        
+    </div>
+}

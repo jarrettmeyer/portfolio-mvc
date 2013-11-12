@@ -1,0 +1,9 @@
+﻿@model CategoryInputModel
+
+@{
+    ViewBag.Title = Model.PageTitle;
+}
+
+<h2>@Model.PageTitle</h2>
+
+@Html.Partial("_Form", Model)
