@@ -12,6 +12,16 @@
         <link rel="stylesheet" href="@Url.Content("~/Content/stylesheets/Site.css")"/>
     </head>
     <body>
+        <header class="navbar navbar-default navbar-static-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                </ul>
+            </div>
+        </header>
         <div id="content" class="container">
             @Html.Partial("_FlashMessages")
             @RenderBody()
