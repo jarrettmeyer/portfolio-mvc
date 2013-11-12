@@ -262,6 +262,7 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\_Form.cshtml" />
     <Content Include="Views\Categories\New.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
