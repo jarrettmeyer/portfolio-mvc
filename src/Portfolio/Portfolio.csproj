@@ -211,6 +211,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoriesSelectList.cs" />
     <Compile Include="ViewModels\CategoryInputModel.cs" />
+    <Compile Include="ViewModels\CategoryListViewModel.cs" />
+    <Compile Include="ViewModels\CategoryRowViewModel.cs" />
     <Compile Include="ViewModels\CategorySelectListModel.cs" />
     <Compile Include="ViewModels\FlashMessage.cs" />
     <Compile Include="ViewModels\FlashMessageCollection.cs" />
@@ -231,6 +233,7 @@
     <Content Include="Content\images\cross.png" />
     <Content Include="Content\images\pencil.png" />
     <Content Include="Content\qunit-1.12.0.css" />
+    <Content Include="Content\stylesheets\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />

@@ -1,0 +1,8 @@
+﻿tr.inactive {
+    color: #c0c0c0;
+    text-decoration: line-through;
+}
+
+td.no-line-through {
+    text-decoration: none;
+}

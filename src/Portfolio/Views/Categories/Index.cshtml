@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Category>
+﻿@model CategoryListViewModel
 
 @{
-    ViewBag.Title = "Categories";
+    ViewBag.Title = Model.PageTitle;
 }
 
-<h2>Index</h2>
+<h2>@Model.PageTitle</h2>
 
 <table class="table table-condensed">
     <thead>
@@ -18,14 +18,20 @@
     <tbody>
     @foreach (var c in Model)
     {
-        <tr>
-            <td>
-                <a href="@Url.Action("Edit", new { id = c.Id })" title="Edit"><img src="@Url.Content("~/Content/images/pencil.png")" alt="Edit"/></a>
-                <a href="@Url.Action("Delete", new { id = c.Id })" title="Delete" class="delete-link"><img src="@Url.Content("~/Content/images/cross.png")" alt="Delete"/></a>
+        <tr class="@c.RowCss">
+            <td class="no-line-through">
+            @if (c.AllowEdit)
+            {
+                <a href="@Url.Action("Edit", new { id = c.Id })" title="Edit"><img src="@Url.Content("~/Content/images/pencil.png")" alt="Edit"/></a>    
+            }
+            @if (c.AllowDelete)
+            {
+                <a href="@Url.Action("Delete", new { id = c.Id })" title="Delete" class="delete-link"><img src="@Url.Content("~/Content/images/cross.png")" alt="Delete"/></a>    
+            }
             </td>
             <td>@c.Id</td>
             <td>@c.Description</td>
-            <td>@c.IsActive.ToYesNo()</td>
+            <td>@c.IsActive</td>
         </tr>
     }
     </tbody>

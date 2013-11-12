@@ -46,7 +46,8 @@ namespace Portfolio.Controllers
         public ActionResult Index()
         {
             var categories = Repository.Instance.FindAll<Category>().OrderBy(c => c.Description).ToArray();
-            return View("Index", categories);
+            var model = new CategoryListViewModel(categories);
+            return View("Index", model);
         }
 
         [HttpGet]
