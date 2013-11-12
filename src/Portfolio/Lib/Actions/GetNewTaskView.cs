@@ -1,9 +1,7 @@
-﻿using Portfolio.Lib.Actions;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.ViewModels;
-using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class GetNewTaskView : AbstractAction
     {
@@ -23,7 +21,7 @@ namespace Portfolio.Web.Lib.Actions
 
         public override void Execute()
         {
-            CategoriesSelectList.Initialize(repository);            
+            CategoriesSelectList.Initialize();            
         }
     }
 }

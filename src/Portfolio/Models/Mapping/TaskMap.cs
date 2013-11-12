@@ -52,18 +52,16 @@ namespace Portfolio.Models.Mapping
                 });
             });
 
-            Bag<TaskStatus>("statuses", map =>
+            Bag(x => x.Statuses, map =>
             {
-                map.Access(Accessor.Field);
-                map.Table("TaskStatuses");
                 map.Key(key =>
                 {
-                    key.Column("Id");
+                    key.Column("TaskId");
                 });
                 map.Cascade(Cascade.All|Cascade.DeleteOrphans);
-            }, entity =>
+            }, rel =>
             {
-                entity.OneToMany(otm =>
+                rel.OneToMany(otm =>
                 {
                     otm.Class(typeof(TaskStatus));
                 });

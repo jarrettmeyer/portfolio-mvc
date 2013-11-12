@@ -16,17 +16,13 @@ namespace Portfolio.Lib.Actions
         Func<ActionResult> OnSuccess { get; set; }
 
         /// <summary>
-        /// Gets the temp data for the the given action.
+        /// Gets and sets the temp data for the the given action.
         /// </summary>
-        TempDataDictionary TempData { get; }
+        TempDataDictionary TempData { get; set; }
 
         /// <summary>
         /// Execute the action.
         /// </summary>
         void Execute();
-
-        IAction WithErrorAction(Func<ActionResult> onError);
-
-        IAction WithSuccessAction(Func<ActionResult> onSuccess);
     }
 }

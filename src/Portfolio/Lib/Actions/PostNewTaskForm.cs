@@ -24,6 +24,11 @@ namespace Portfolio.Lib.Actions
             this.clock = clock;
         }
 
+        public Task Task
+        {
+            get { return task; }
+        }
+
         public override void Execute()
         {
             FetchDefaultStatus();

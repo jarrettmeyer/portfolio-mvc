@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Caching;
@@ -11,12 +10,12 @@ namespace Portfolio.ViewModels
 {
     public class CategoriesSelectList
     {
-        public static IEnumerable<SelectListItem> Categories
+        public static IEnumerable<CategorySelectListModel> Categories
         {
             get
             {
                 var cachedCategories = Cache.Instance.Get("all_categories");
-                return (IEnumerable<SelectListItem>)cachedCategories;
+                return (IEnumerable<CategorySelectListModel>)cachedCategories;
             }
             set 
             {
@@ -30,23 +29,17 @@ namespace Portfolio.ViewModels
 
         public static bool IsInitialized { get; private set; }
 
-        public static void Initialize(IRepository repository)
+        public static void Initialize()
         {
             if (!IsInitialized)
-                Categories = repository
+                Categories = Repository.Instance
                     .FindAll<Category>()
-                    .Select(x => new SelectListItem { Value = x.Id.ToString(CultureInfo.InvariantCulture), Text = x.Description });
+                    .Select(x => new CategorySelectListModel(x.Id, x.Description));
         }
 
         public static SelectList SelectList(int? selected)
         {
-            return new SelectList(Categories, "Value", "Text", selected);
-        }
-
-        public class CategorySelectListModel
-        {
-            public int Id { get; set; }
-            public string Description { get; set; }
+            return new SelectList(Categories, "Id", "Description", selected);
         }
     }
 }

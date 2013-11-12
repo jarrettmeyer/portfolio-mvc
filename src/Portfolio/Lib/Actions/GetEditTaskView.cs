@@ -1,11 +1,8 @@
-﻿using Portfolio.Lib.Actions;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
-using Portfolio.Web.Models;
-using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class GetEditTaskView : AbstractAction
     {
@@ -29,7 +26,7 @@ namespace Portfolio.Web.Lib.Actions
             task = repository.Load<Task>(id);
             taskInputModel = new TaskInputModel(task);
             
-            CategoriesSelectList.Initialize(repository);
+            CategoriesSelectList.Initialize();
         }
 
         public GetEditTaskView ForId(int id)

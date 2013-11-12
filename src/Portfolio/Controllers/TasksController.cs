@@ -41,6 +41,7 @@ namespace Portfolio.Controllers
                 .GetAction<PostNewTaskForm>()
                 .WithForm(model)
                 .WithTempData(TempData);
+            action.OnSuccess = () => RedirectToAction("Show", new { id = action.Task.Id });
             action.OnError = () => View("New", model);
             return new ActionResultWrapper(action);
         }
