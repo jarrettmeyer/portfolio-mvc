@@ -1,4 +1,7 @@
-﻿using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Actions;
+using Portfolio.Lib.Data;
+using Portfolio.Models;
+using Portfolio.ViewModels;
 using Portfolio.Web.Models;
 using Portfolio.Web.ViewModels;
 

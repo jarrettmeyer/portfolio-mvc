@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Portfolio.Lib.Caching;
 using Portfolio.Lib.Data;
-using Portfolio.Web.Lib.Caching;
 using Portfolio.Web.Models;
 
-namespace Portfolio.Web.ViewModels
+namespace Portfolio.ViewModels
 {
     public class CategoriesSelectList
     {

@@ -1,8 +1,7 @@
 ﻿using Ninject;
 using Portfolio.Common;
-using Portfolio.Lib;
 
-namespace Portfolio.Web.Lib
+namespace Portfolio.Lib
 {
     public class NinjectActionResolver : ActionResolver
     {

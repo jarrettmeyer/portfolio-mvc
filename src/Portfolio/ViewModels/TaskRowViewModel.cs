@@ -1,6 +1,6 @@
-﻿using Portfolio.Web.Models;
+﻿using Portfolio.Models;
 
-namespace Portfolio.Web.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskRowViewModel
     {

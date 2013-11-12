@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Portfolio.Lib.Actions;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public abstract class AbstractAction : IAction
     {

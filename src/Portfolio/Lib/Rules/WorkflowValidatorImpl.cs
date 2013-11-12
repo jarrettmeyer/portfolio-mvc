@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Portfolio.Web.Models;
+using Portfolio.Models;
 
-namespace Portfolio.Web.Lib.Rules
+namespace Portfolio.Lib.Rules
 {
     /// <summary>
     /// This implementation of the workflow validator pulls all workflows into memory. Even for
     /// a very large application, you'd never have more than 100 workflows, so this is going to
     /// be a relatively small object at all times.
     /// </summary>
-    public class WorkflowValidatorImpl : Web.Lib.Rules.IWorkflowValidator
+    public class WorkflowValidatorImpl : IWorkflowValidator
     {
         private readonly IEnumerable<StatusWorkflow> workflows;
 

@@ -6,7 +6,7 @@ using NHibernate.Linq;
 
 namespace Portfolio.Lib.Data
 {
-    public class NHibernateRepository : IRepository
+    public class NHibernateRepository : Repository
     {
         private readonly ISession session;
 
@@ -18,7 +18,7 @@ namespace Portfolio.Lib.Data
             this.session = session;
         }
 
-        public virtual void Add<T>(T entity)
+        public override void Add<T>(T entity)
         {
             using (var transaction = session.BeginTransaction())
             {
@@ -27,12 +27,12 @@ namespace Portfolio.Lib.Data
             }
         }
 
-        public virtual ITransactionAdapter BeginTransaction()
+        public override ITransactionAdapter BeginTransaction()
         {
             return new NHibernateTransactionAdapter(session.BeginTransaction());
         }
 
-        public IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null)
+        public override IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null)
         {
             var items = session.Query<T>().Where(expression);
             if (pageIndex == null || pageSize == null)
@@ -41,7 +41,7 @@ namespace Portfolio.Lib.Data
             return ApplyPagingToQueryable(items, pageIndex.Value, pageSize.Value);
         }
 
-        public IQueryable<T> FindAll<T>(int? pageIndex = null, int? pageSize = null)
+        public override IQueryable<T> FindAll<T>(int? pageIndex = null, int? pageSize = null)
         {
             var items = session.Query<T>();
             if (pageIndex == null || pageSize == null)
@@ -50,19 +50,19 @@ namespace Portfolio.Lib.Data
             return ApplyPagingToQueryable(items, pageIndex.Value, pageSize.Value);
         }
 
-        public T FindOne<T>(Expression<Func<T, bool>> expression)
+        public override T FindOne<T>(Expression<Func<T, bool>> expression)
         {
             var item = session.Query<T>().Where(expression).FirstOrDefault();
             return item;
         }
 
-        public T Load<T>(object id)
+        public override T Load<T>(object id)
         {
             var item = session.Load<T>(id);
             return item;
         }
 
-        public void SaveChanges()
+        public override void SaveChanges()
         {
             using (var transaction = session.BeginTransaction())
             {

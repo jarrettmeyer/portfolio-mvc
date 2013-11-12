@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Portfolio.Controllers;
 using Portfolio.Lib;
+using Portfolio.Lib.Actions;
 using Portfolio.Web.Lib;
 using Portfolio.Web.Lib.Actions;
 
@@ -25,7 +26,7 @@ namespace Portfolio.Web.Controllers
             mockActionResolver.Setup(x => x.GetAction<GetNewTaskView>()).Returns(new GetNewTaskView(null));
             mockActionResolver.Setup(x => x.GetAction<GetTasksIndexView>()).Returns(new GetTasksIndexView(null));
 
-            tasksController = new TasksController(mockActionResolver.Object);
+            tasksController = new TasksController();
         }
 
         [Test]

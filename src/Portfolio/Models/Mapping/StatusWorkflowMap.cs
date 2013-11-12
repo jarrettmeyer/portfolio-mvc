@@ -2,7 +2,7 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Type;
 
-namespace Portfolio.Web.Models.Mapping
+namespace Portfolio.Models.Mapping
 {
     public class StatusWorkflowMap : ClassMapping<StatusWorkflow>
     {

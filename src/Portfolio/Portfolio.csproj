@@ -156,11 +156,13 @@
     <Compile Include="Lib\Caching\ICache.cs" />
     <Compile Include="Lib\CollectionExtensions.cs" />
     <Compile Include="Lib\Config.cs" />
+    <Compile Include="Lib\Data\IFetchStrategy.cs" />
     <Compile Include="Lib\Data\IRepository.cs" />
     <Compile Include="Lib\Data\ITransactionAdapter.cs" />
     <Compile Include="Lib\Data\NHibernateConfig.cs" />
     <Compile Include="Lib\Data\NHibernateRepository.cs" />
     <Compile Include="Lib\Data\NHibernateTransactionAdapter.cs" />
+    <Compile Include="Lib\Data\Repository.cs" />
     <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HttpSessionStorage.cs" />
     <Compile Include="Lib\HttpUserSettings.cs" />

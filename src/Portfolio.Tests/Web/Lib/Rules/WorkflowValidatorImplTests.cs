@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
-using Portfolio.Data.Models;
+using Portfolio.Lib.Rules;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
 namespace Portfolio.Web.Lib.Rules

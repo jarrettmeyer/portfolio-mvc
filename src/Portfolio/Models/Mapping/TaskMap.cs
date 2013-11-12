@@ -1,8 +1,9 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Type;
+using Portfolio.Web.Models;
 
-namespace Portfolio.Web.Models.Mapping
+namespace Portfolio.Models.Mapping
 {
     public class TaskMap : ClassMapping<Task>
     {
@@ -48,6 +49,23 @@ namespace Portfolio.Web.Models.Mapping
                 {
                     col.NotNullable(false);
                     col.SqlType("timestamp");
+                });
+            });
+
+            Bag<TaskStatus>("statuses", map =>
+            {
+                map.Access(Accessor.Field);
+                map.Table("TaskStatuses");
+                map.Key(key =>
+                {
+                    key.Column("Id");
+                });
+                map.Cascade(Cascade.All|Cascade.DeleteOrphans);
+            }, entity =>
+            {
+                entity.OneToMany(otm =>
+                {
+                    otm.Class(typeof(TaskStatus));
                 });
             });
         }

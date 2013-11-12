@@ -6,8 +6,9 @@ using NHibernate;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Common;
+using Portfolio.Lib;
+using Portfolio.Models;
 using Portfolio.Web.Lib.Queries;
-using Portfolio.Web.Models;
 
 namespace Portfolio.Data.Queries
 {

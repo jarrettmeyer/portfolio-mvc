@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
-using Portfolio.Web.Lib.Queries;
-using Portfolio.Web.Models;
-using Portfolio.Web.ViewModels;
+using Portfolio.Lib.Data;
+using Portfolio.Models;
+using Portfolio.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class GetTasksIndexView : AbstractAction
     {
         private TaskListViewModel viewModel;
-        private readonly FetchAllTasks query;
+        private readonly IRepository repository;
         private IEnumerable<Task> tasks;
 
-        public GetTasksIndexView(FetchAllTasks query)
+        public GetTasksIndexView(IRepository repository)
         {
-            this.query = query;
+            this.repository = repository;
         }
 
         public TaskListViewModel ViewModel
@@ -28,16 +28,8 @@ namespace Portfolio.Web.Lib.Actions
 
         private void GetViewModel()
         {
-            tasks = query.ExecuteQuery();
+            tasks = repository.FindAll<Task>();
             viewModel = new TaskListViewModel(tasks);
-        }
-
-        protected override void OnDisposing()
-        {
-            if (query != null)
-            {
-                query.Dispose();
-            }
         }
     }
 }

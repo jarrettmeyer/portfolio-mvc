@@ -1,9 +1,11 @@
 ﻿using Portfolio.Common;
 using Portfolio.Lib.Data;
+using Portfolio.Models;
+using Portfolio.ViewModels;
+using Portfolio.Web.Lib.Actions;
 using Portfolio.Web.Models;
-using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class PostEditTaskForm : AbstractAction
     {

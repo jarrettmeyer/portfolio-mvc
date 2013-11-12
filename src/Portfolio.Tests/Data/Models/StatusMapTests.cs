@@ -2,7 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
-using Portfolio.Web.Models;
+using Portfolio.Models;
 
 namespace Portfolio.Data.Models
 {

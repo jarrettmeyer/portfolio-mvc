@@ -4,6 +4,7 @@ using NHibernate;
 using NHibernate.Linq;
 using Portfolio.Data.Models;
 using Portfolio.Lib.Data;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
 namespace Portfolio

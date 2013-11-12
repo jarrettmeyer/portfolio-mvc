@@ -1,4 +1,4 @@
-﻿namespace Portfolio.Web.Lib.Caching
+﻿namespace Portfolio.Lib.Caching
 {
     public abstract class Cache : ICache
     {

@@ -1,4 +1,5 @@
-﻿using Portfolio.Web.Models;
+﻿using Portfolio.Models;
+using Portfolio.Web.Models;
 
 namespace Portfolio.Data.Queries
 {

@@ -1,7 +1,7 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace Portfolio.Web.Models.Mapping
+namespace Portfolio.Models.Mapping
 {
     public class StatusMap : ClassMapping<Status>
     {

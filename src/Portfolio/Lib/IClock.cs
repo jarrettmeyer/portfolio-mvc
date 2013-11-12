@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Portfolio.Common
+namespace Portfolio.Lib
 {
     public interface IClock
     {

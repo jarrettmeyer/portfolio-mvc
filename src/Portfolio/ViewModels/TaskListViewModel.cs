@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Portfolio.Web.Models;
+using Portfolio.Models;
 
-namespace Portfolio.Web.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskListViewModel : IEnumerable<TaskRowViewModel>
     {

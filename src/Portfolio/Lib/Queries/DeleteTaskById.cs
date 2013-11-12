@@ -1,4 +1,5 @@
 ﻿using NHibernate;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
 namespace Portfolio.Web.Lib.Queries

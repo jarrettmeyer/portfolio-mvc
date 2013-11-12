@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
 namespace Portfolio.Data.Models

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Portfolio.Common;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
-namespace Portfolio.Web.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskInputModel
     {

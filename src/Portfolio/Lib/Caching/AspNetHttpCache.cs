@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Portfolio.Web.Lib.Caching
+namespace Portfolio.Lib.Caching
 {
     public class AspNetHttpCache : Cache
     {

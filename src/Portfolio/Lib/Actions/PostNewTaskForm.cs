@@ -1,40 +1,34 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using Portfolio.Common;
-using Portfolio.Data.Queries;
-using Portfolio.Web.Lib.Queries;
-using Portfolio.Web.Models;
+﻿using System;
+using System.Web;
+using Portfolio.Lib.Data;
+using Portfolio.Models;
+using Portfolio.ViewModels;
 using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class PostNewTaskForm : AbstractAction
     {
         private readonly IClock clock;
-        private readonly CreateTask createTask;
-        private CreateTaskRequest createTaskRequest;
-        private CreateTaskResponse createTaskResponse;
         private TaskInputModel form;
         private readonly HttpRequestBase httpRequest;
-        private RedirectToRouteResult redirectToRouteResult;
+        private readonly IRepository repository;
+        private Status status;
         private Task task;
+        private TaskStatus taskStatus;
 
-        public PostNewTaskForm(CreateTask createTask, HttpRequestBase httpRequest, IClock clock)
+        public PostNewTaskForm(IRepository repository, HttpRequestBase httpRequest, IClock clock)
         {
-            this.createTask = createTask;
+            this.repository = repository;
             this.httpRequest = httpRequest;
             this.clock = clock;
         }
 
-        public CreateTaskRequest CreateTaskRequest
-        {
-            get { return createTaskRequest; }
-        }
-
         public override void Execute()
         {
+            FetchDefaultStatus();
             CreateNewTask();
-            InitializeRedirectToRouteResult();            
+            WriteSuccessMessage();            
         }
 
         public PostNewTaskForm WithForm(TaskInputModel form)
@@ -46,19 +40,29 @@ namespace Portfolio.Web.Lib.Actions
         private void CreateNewTask()
         {
             task = form.GetTask();
-            createTaskRequest = new CreateTaskRequest(task, form.SelectedCategory, httpRequest.UserHostAddress, clock.Now);
-            createTaskResponse = createTask.ExecuteQuery(createTaskRequest);
-            WriteSuccessMessage();
+            task.CurrentStatus = status;
+            task.CreatedAt = clock.Now;
+            task.UpdatedAt = clock.Now;
+
+            taskStatus = new TaskStatus
+            {
+                Comment = "",
+                CreatedAt = clock.Now,
+                IPAddress = httpRequest.UserHostAddress,
+                IsCompleted = status.IsCompleted,
+                ToStatus = status
+            };
+            task.AddStatus(taskStatus);
+
+            repository.Add(task);
+            repository.SaveChanges();
         }
 
-        private void InitializeRedirectToRouteResult()
+        private void FetchDefaultStatus()
         {
-            redirectToRouteResult = new RedirectToRouteResultBuilder()
-                .Controller("Tasks")
-                .Action("Show")
-                .Id(createTaskResponse.Task.Id)
-                .RedirectToRouteResult;
-            OnSuccess = () => redirectToRouteResult;
+            status = repository.FindOne<Status>(s => s.IsDefaultStatus);
+            if (status == null)
+                throw new NullReferenceException("Unable to fetch default status.");
         }
 
         private void WriteSuccessMessage()

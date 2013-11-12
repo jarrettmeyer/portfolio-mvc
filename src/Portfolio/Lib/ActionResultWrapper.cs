@@ -3,11 +3,10 @@ using System.Diagnostics;
 using System.Web.Mvc;
 using Portfolio.Common;
 using Portfolio.Lib.Actions;
-using Portfolio.Web.Lib.Actions;
 using Portfolio.Web.Lib.Logging;
 using Portfolio.Web.ViewModels;
 
-namespace Portfolio.Web.Lib
+namespace Portfolio.Lib
 {
     /// <summary>
     /// Common construct for executing actions in an MVC action. If everything works, the action's
@@ -55,6 +54,7 @@ namespace Portfolio.Web.Lib
             }
             catch (Exception e)
             {
+                e = GetInnermostException(e);
                 AddErrorToFlash(e);
                 logWriter.WriteError(string.Format("Error perfoming action {0}", action), e);
                 actionResult = action.OnError.Invoke();
@@ -68,6 +68,15 @@ namespace Portfolio.Web.Lib
             {
                 new FlashMessageCollection(action.TempData).AddErrorMessage(e.Message);
             }
+        }
+
+        private static Exception GetInnermostException(Exception exception)
+        {
+            while (exception.InnerException != null)
+            {
+                exception = exception.InnerException;
+            }
+            return exception;
         }
     }
 }
