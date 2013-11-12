@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Index</h2>
+
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td></td>
+            <td>@c.Id</td>
+            <td>@c.Description</td>
+        </tr>
+    }
+    </tbody>
+</table>

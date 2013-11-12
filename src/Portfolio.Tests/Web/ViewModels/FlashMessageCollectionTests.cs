@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
 using NUnit.Framework;
+using Portfolio.ViewModels;
 
 namespace Portfolio.Web.ViewModels
 {
@@ -23,7 +24,7 @@ namespace Portfolio.Web.ViewModels
         public void adds_key_to_temp_data()
         {
             var flashData = GetFlashMessagesFromTempData();
-            flashData.Should().BeAssignableTo<List<FlashMessageCollection.FlashMessage>>();
+            flashData.Should().BeAssignableTo<List<FlashMessage>>();
         }
 
         [Test]
@@ -40,9 +41,9 @@ namespace Portfolio.Web.ViewModels
             flashMessages.Count().Should().Be(1);
         }
 
-        private IEnumerable<FlashMessageCollection.FlashMessage> GetFlashMessagesFromTempData()
+        private IEnumerable<FlashMessage> GetFlashMessagesFromTempData()
         {
-            return tempData["FlashMessageCollection"] as List<FlashMessageCollection.FlashMessage>;
+            return tempData["FlashMessageCollection"] as List<FlashMessage>;
         }
     }
 }

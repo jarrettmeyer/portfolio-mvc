@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Portfolio.Web.ViewModels
+namespace Portfolio.ViewModels
 {
-    public class FlashMessageCollection : IEnumerable<FlashMessageCollection.FlashMessage>
+    public class FlashMessageCollection : IEnumerable<FlashMessage>
     {
         private readonly List<FlashMessage> flashMessages;
         private readonly TempDataDictionary tempData;
@@ -49,19 +49,6 @@ namespace Portfolio.Web.ViewModels
                 tempData.Add(tempDataKey, flashMessages);
             else
                 flashMessages.AddRange(messages);
-        }
-
-        public class FlashMessage
-        {
-            public FlashMessage(string key, string message)
-            {
-                Key = key;
-                Message = message;
-            }
-
-            public string Key { get; private set; }
-
-            public string Message { get; private set; }
         }
     }
 }

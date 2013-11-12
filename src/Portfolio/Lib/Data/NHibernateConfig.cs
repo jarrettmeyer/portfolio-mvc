@@ -6,7 +6,7 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
 using Portfolio.Common;
-using Portfolio.Web.Models.Mapping;
+using Portfolio.Models.Mapping;
 
 namespace Portfolio.Lib.Data
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Caching;
 using Portfolio.Lib.Data;
+using Portfolio.Models;
 using Portfolio.Web.Models;
 
 namespace Portfolio.ViewModels

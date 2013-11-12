@@ -133,6 +133,7 @@
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoriesSelectList.cs" />
     <Compile Include="ViewModels\CategorySelectListModel.cs" />
+    <Compile Include="ViewModels\FlashMessage.cs" />
     <Compile Include="ViewModels\FlashMessageCollection.cs" />
     <Compile Include="ViewModels\TaskInputModel.cs" />
     <Compile Include="ViewModels\TaskListViewModel.cs" />
@@ -256,6 +258,7 @@
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\_Form.cshtml" />
     <Content Include="Views\Shared\_FlashMessages.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

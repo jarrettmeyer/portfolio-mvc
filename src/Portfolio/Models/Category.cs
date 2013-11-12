@@ -1,6 +1,7 @@
 ﻿using System;
+using Portfolio.Web.Models;
 
-namespace Portfolio.Web.Models
+namespace Portfolio.Models
 {
     /// <summary>
     /// The category for a task.
