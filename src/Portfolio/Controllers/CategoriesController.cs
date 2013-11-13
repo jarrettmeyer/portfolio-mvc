@@ -33,10 +33,14 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult Edit(int id, CategoryInputModel model)
         {
-            var category = Repository.Instance.FindOne<Category>(c => c.Id == id);
-            category.Description = model.Description.Trim();
-            category.UpdatedAt = DateTime.UtcNow;
-            Repository.Instance.SaveChanges();
+            Category category;
+            using (var transaction = Repository.Instance.BeginTransaction())
+            {
+                category = Repository.Instance.FindOne<Category>(c => c.Id == id);
+                category.Description = model.Description.Trim();
+                category.UpdatedAt = DateTime.UtcNow;
+                transaction.Commit();
+            }
             CategoriesSelectList.Initialize(Repository.Instance);
             FlashMessages.AddSuccessMessage(string.Format("Successfully updated category: {0}", category.Description));
             return RedirectToAction("Index");
@@ -60,13 +64,18 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(CategoryInputModel model)
         {
-            var category = new Category
+            Category category;
+            using (var txn = Repository.Instance.BeginTransaction())
             {
-                Description = model.Description.Trim(),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
-            Repository.Instance.Add(category);
+                category = new Category
+                {
+                    Description = model.Description.Trim(),
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                Repository.Instance.Add(category);
+                txn.Commit();
+            }
             CategoriesSelectList.Initialize(Repository.Instance);
             FlashMessages.AddSuccessMessage(string.Format("Successfully created new category: {0}", category.Description));
             return RedirectToAction("Index");

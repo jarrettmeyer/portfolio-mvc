@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Actions;
+using Portfolio.Lib.Data;
+using Portfolio.Models;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
@@ -18,31 +21,56 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Show(int id)
         {
-            var action = ActionResolver
-                .GetAction<GetTaskShowView>()
-                .ForId(id);
-            action.OnSuccess = () => View("Show", action.ViewModel);
-            return new ActionResultWrapper(action);
+            var task = Repository.Instance.Load<Task>(id);
+            var model = new TaskViewModel(task);
+            return View("Show", model);
         }
 
         [HttpGet]
         public ActionResult New()
         {
-            var action = ActionResolver.GetAction<GetNewTaskView>();
-            action.OnSuccess = () => View("New", action.Form);
-            return new ActionResultWrapper(action);
+            var model = new TaskInputModel();
+            return View("New", model);
         }
 
         [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
-            var action = ActionResolver
-                .GetAction<PostNewTaskForm>()
-                .WithForm(model)
-                .WithTempData(TempData);
-            action.OnSuccess = () => RedirectToAction("Show", new { id = action.Task.Id });
-            action.OnError = () => View("New", model);
-            return new ActionResultWrapper(action);
+            try
+            {
+                Task task;
+                using (var txn = Repository.Instance.BeginTransaction())
+                {
+                    Status status = Repository.Instance.FindOne<Status>(s => s.IsDefaultStatus);
+                    Category category = null;
+                    if (model.SelectedCategory.HasValue)
+                        category = Repository.Instance.FindOne<Category>(c => c.Id == model.SelectedCategory.Value);
+                    task = new Task
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Category = category,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    TaskStatus taskStatus = new TaskStatus
+                    {
+                        ToStatus = status,
+                        Comment = "",
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    task.AddStatus(taskStatus);
+                    Repository.Instance.Add(task);
+                    txn.Commit();
+                }
+                FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
+                return RedirectToAction("Show", new { id = task.Id });
+            }
+            catch (Exception e)
+            {
+                FlashMessages.AddErrorMessage(e.Message);
+                return View("New", model);
+            }
         }
 
         [HttpGet]

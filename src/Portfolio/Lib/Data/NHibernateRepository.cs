@@ -20,11 +20,7 @@ namespace Portfolio.Lib.Data
 
         public override void Add<T>(T entity)
         {
-            using (var transaction = session.BeginTransaction())
-            {
-                session.Save(entity);
-                transaction.Commit();
-            }
+            session.Save(entity);
         }
 
         public override ITransactionAdapter BeginTransaction()
