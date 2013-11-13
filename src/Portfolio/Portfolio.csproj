@@ -190,7 +190,6 @@
     <Compile Include="Lib\Queries\UpdateTaskStatusRequest.cs" />
     <Compile Include="Lib\Queries\UpdateTaskStatusResponse.cs" />
     <Compile Include="Lib\RedirectToRouteResultBuilder.cs" />
-    <Compile Include="Lib\ResourceRouteConfig.cs" />
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
     <Compile Include="Lib\ResourceRouteConfigurationSettings.cs" />
     <Compile Include="Lib\Rules\IWorkflowValidator.cs" />

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Portfolio.Common
+namespace Portfolio.Lib
 {
     public static class ObjectExtensions
     {

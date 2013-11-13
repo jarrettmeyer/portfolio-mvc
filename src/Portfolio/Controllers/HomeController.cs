@@ -1,8 +1,6 @@
 ﻿using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Actions;
-using Portfolio.Web.Lib;
-using Portfolio.Web.Lib.Actions;
 
 namespace Portfolio.Controllers
 {

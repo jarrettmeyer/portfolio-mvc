@@ -1,10 +1,8 @@
-﻿using Portfolio.Lib.Actions;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
-using Portfolio.Web.Models;
-using Portfolio.Web.ViewModels;
+using Portfolio.ViewModels;
 
-namespace Portfolio.Web.Lib.Actions
+namespace Portfolio.Lib.Actions
 {
     public class GetTaskShowView : AbstractAction
     {

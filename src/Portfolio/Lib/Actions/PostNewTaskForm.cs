@@ -3,7 +3,6 @@ using System.Web;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
-using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Lib.Actions
 {

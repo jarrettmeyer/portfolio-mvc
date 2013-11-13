@@ -2,8 +2,6 @@
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
-using Portfolio.Web.Lib.Actions;
-using Portfolio.Web.Models;
 
 namespace Portfolio.Lib.Actions
 {

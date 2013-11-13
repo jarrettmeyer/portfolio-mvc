@@ -5,7 +5,6 @@ using Portfolio.Common;
 using Portfolio.Lib.Actions;
 using Portfolio.ViewModels;
 using Portfolio.Web.Lib.Logging;
-using Portfolio.Web.ViewModels;
 
 namespace Portfolio.Lib
 {

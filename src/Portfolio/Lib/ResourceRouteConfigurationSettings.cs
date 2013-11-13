@@ -2,11 +2,31 @@
 {
     public class ResourceRouteConfigurationSettings
     {
+        private string deleteHttpMethod = "DELETE";
+        private string idConstraint = @"\d+";
+        private bool includeDeleteAction = true;
         private bool includeShowAction = true;
         private string indexActionName = "Index";
         private string showActionName = "Show";
-        private string showActionParameter = "id";
-        private bool useDeleteHttpMethod = true;
+        private bool useDistinctDeleteUrl = true;
+
+        public virtual string DeleteHttpMethod
+        {
+            get { return deleteHttpMethod; }
+            set { deleteHttpMethod = value; }
+        }
+
+        public virtual string IdConstraint
+        {
+            get { return idConstraint; }
+            set { idConstraint = value; }
+        }
+
+        public virtual bool IncludeDeleteAction
+        {
+            get { return includeDeleteAction; }
+            set { includeDeleteAction = value; }
+        }
 
         public virtual bool IncludeShowAction
         {
@@ -26,16 +46,10 @@
             set { showActionName = value; }
         }
 
-        public virtual string ShowActionParameter
+        public virtual bool UseDistinctDeleteUrl
         {
-            get { return showActionParameter; }
-            set { showActionParameter = value; }
-        }
-
-        public virtual bool UseDeleteHttpMethod
-        {
-            get { return useDeleteHttpMethod; }
-            set { useDeleteHttpMethod = value; }
+            get { return useDistinctDeleteUrl; }
+            set { useDistinctDeleteUrl = value; }
         }
     }
 }

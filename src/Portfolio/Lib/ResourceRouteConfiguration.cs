@@ -27,9 +27,25 @@ namespace Portfolio.Lib
 
             if (settings.IncludeShowAction)
             {
-                routes.MapRoute(resourceName + "-Show", resourceName.ToLowerInvariant() + "/{" + settings.ShowActionParameter + "}",
-                    new { controller = controllerName, action = settings.ShowActionName });
+                routes.MapRoute(resourceName + "-Show", resourceName.ToLowerInvariant() + "/{id}",
+                    new { controller = controllerName, action = settings.ShowActionName },
+                    new { id = settings.IdConstraint });
             }
+
+            routes.MapRoute(resourceName + "-New", resourceName.ToLowerInvariant() + "/new",
+                new { controller = controllerName, action = "New" });
+
+            routes.MapRoute(resourceName + "-Edit", resourceName.ToLowerInvariant() + "/{id}/edit",
+                new { controller = controllerName, action = "Edit" },
+                new { id = settings.IdConstraint });
+
+            if (settings.IncludeDeleteAction)
+            {
+                routes.MapRoute(resourceName + "-Delete", resourceName.ToLowerInvariant() + "/{id}/delete",
+                    new { controller = controllerName, action = "Show" },
+                    new { id = settings.IdConstraint, method = new HttpMethodConstraint(settings.DeleteHttpMethod) });    
+            }
+            
         }
     }
 }
