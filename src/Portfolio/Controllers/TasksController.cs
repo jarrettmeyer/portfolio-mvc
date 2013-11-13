@@ -38,31 +38,7 @@ namespace Portfolio.Controllers
         {
             try
             {
-                Task task;
-                using (var txn = Repository.Instance.BeginTransaction())
-                {
-                    Status status = Repository.Instance.FindOne<Status>(s => s.IsDefaultStatus);
-                    Category category = null;
-                    if (model.SelectedCategory.HasValue)
-                        category = Repository.Instance.FindOne<Category>(c => c.Id == model.SelectedCategory.Value);
-                    task = new Task
-                    {
-                        Title = model.Title,
-                        Description = model.Description,
-                        Category = category,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
-                    };
-                    TaskStatus taskStatus = new TaskStatus
-                    {
-                        ToStatus = status,
-                        Comment = "",
-                        CreatedAt = DateTime.UtcNow
-                    };
-                    task.AddStatus(taskStatus);
-                    Repository.Instance.Add(task);
-                    txn.Commit();
-                }
+                var task = CreateNewTask(model);
                 FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
                 return RedirectToAction("Show", new { id = task.Id });
             }
@@ -99,6 +75,36 @@ namespace Portfolio.Controllers
                 .GetAction<DeleteTask>()
                 .ForId(id);            
             return new ActionResultWrapper(action);
+        }
+
+        private static Task CreateNewTask(TaskInputModel model)
+        {
+            Task task;
+            using (var txn = Repository.Instance.BeginTransaction())
+            {
+                Status status = Repository.Instance.FindOne<Status>(s => s.IsDefaultStatus);
+                Category category = null;
+                if (model.SelectedCategory.HasValue)
+                    category = Repository.Instance.FindOne<Category>(c => c.Id == model.SelectedCategory.Value);
+                task = new Task
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Category = category,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                TaskStatus taskStatus = new TaskStatus
+                {
+                    ToStatus = status,
+                    Comment = "",
+                    CreatedAt = DateTime.UtcNow
+                };
+                task.AddStatus(taskStatus);
+                Repository.Instance.Add(task);
+                txn.Commit();
+            }
+            return task;
         }
     }
 }
