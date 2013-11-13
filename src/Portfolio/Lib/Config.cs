@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Portfolio.Common
+namespace Portfolio.Lib
 {
     public static class Config
     {
