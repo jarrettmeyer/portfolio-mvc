@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Actions;
@@ -13,9 +14,9 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var action = ActionResolver.GetAction<GetTasksIndexView>();
-            action.OnSuccess = () => View("Index", action.ViewModel);
-            return new ActionResultWrapper(action);
+            var tasks = Repository.Instance.FindAll<Task>().OrderBy(t => t.Id);
+            var model = new TaskListViewModel(tasks);
+            return View("Index", model);
         }
 
         [HttpGet]
