@@ -62,14 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Tasks.sql" />
-    <Build Include="Tables\TaskStatuses.sql" />
     <Build Include="Tables\Categories.sql" />
-    <Build Include="Tables\Statuses.sql" />
-    <Build Include="Tables\StatusWorkflows.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\PopulateCategories.sql" />
-    <None Include="Scripts\PopulateStatuses.sql" />
     <None Include="Schema Comparisons\Sql Server Schema Compare.scmp" />
   </ItemGroup>
   <ItemGroup>

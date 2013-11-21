@@ -13,8 +13,6 @@
                 <th></th>
                 <th>ID</th>
                 <th>Description</th>
-                <th>Category</th>
-                <th>Status</th>
                 <th>Due On</th>
             </tr>
         </thead>
@@ -24,8 +22,6 @@
                 <th></th>
                 <td><a href="@Url.Action("Show", new { controller = "Tasks", id = t.Id })">@t.Id</a></td>
                 <td>@t.Description</td>
-                <td>@t.Category</td>
-                <td>@t.Status</td>
                 <td>@t.DueOn</td>
             </tr>
         }

@@ -20,14 +20,12 @@ namespace Portfolio.Data.Models
         public void after_each_test()
         {
             TestBootstrapper.DeleteAll<Task>();
-            TestBootstrapper.DeleteAll<Status>();
             TestBootstrapper.DeleteAll<Category>();
         }
 
         [Test]
         public void can_insert_a_new_task()
         {
-            var status = TestBootstrapper.InsertNewStatus();
             var category = TestBootstrapper.InsertNewCategory();
 
             using (var session = NHibernateConfig.SessionFactory.OpenSession())
@@ -36,8 +34,8 @@ namespace Portfolio.Data.Models
                            {
                                Title = "Test Task",
                                Description = string.Format("This is a test {0}", DateTime.Now.Ticks),
-                               Category = category,
-                               CurrentStatus = status,
+                               //Category = category,
+                               //CurrentStatus = status,
                                CreatedAt = DateTime.Now,
                                UpdatedAt = DateTime.Now
                            };

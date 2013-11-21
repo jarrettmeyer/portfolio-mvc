@@ -72,10 +72,11 @@ namespace Portfolio.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            var action = ActionResolver
-                .GetAction<DeleteTask>()
-                .ForId(id);            
-            return new ActionResultWrapper(action);
+            return new EmptyResult();
+            //var action = ActionResolver
+            //    .GetAction<DeleteTask>()
+            //    .ForId(id);            
+            //return new ActionResultWrapper(action);
         }
 
         private static Task CreateNewTask(TaskInputModel model)
@@ -83,25 +84,15 @@ namespace Portfolio.Controllers
             Task task;
             using (var txn = Repository.Instance.BeginTransaction())
             {
-                Status status = Repository.Instance.FindOne<Status>(s => s.IsDefaultStatus);
                 Category category = null;
-                if (model.SelectedCategory.HasValue)
-                    category = Repository.Instance.FindOne<Category>(c => c.Id == model.SelectedCategory.Value);
                 task = new Task
                 {
                     Title = model.Title,
                     Description = model.Description,
-                    Category = category,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
-                TaskStatus taskStatus = new TaskStatus
-                {
-                    ToStatus = status,
-                    Comment = "",
-                    CreatedAt = DateTime.UtcNow
-                };
-                task.AddStatus(taskStatus);
+                
                 Repository.Instance.Add(task);
                 txn.Commit();
             }

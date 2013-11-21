@@ -63,31 +63,27 @@
     <Compile Include="Common\ConfigTests.cs" />
     <Compile Include="Common\ObjectExtensionsTests.cs" />
     <Compile Include="Common\SystemClockTests.cs" />
-    <Compile Include="Data\Queries\CreateTaskImplTests.cs" />
-    <Compile Include="Data\Queries\UpdateTaskStatusTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
-    <Compile Include="Data\Models\StatusMapTests.cs" />
-    <Compile Include="Data\Models\StatusWorkflowMapTests.cs" />
     <Compile Include="Data\Models\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
-    <Compile Include="Web\Lib\Rules\WorkflowValidatorImplTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\Controllers\HomeControllerTests.cs" />
-    <Compile Include="Web\Controllers\TasksControllerTests.cs" />
-    <Compile Include="Web\Lib\Actions\AbstractActionTests.cs" />
-    <Compile Include="Web\Lib\Actions\DeleteTaskTests.cs" />
-    <Compile Include="Web\Lib\Actions\PostNewTaskFormTests.cs" />
-    <Compile Include="Web\Lib\CollectionExtensionsTests.cs" />
-    <Compile Include="Web\Lib\ViewResultBuilderTests.cs" />
-    <Compile Include="Web\ViewModels\FlashMessageCollectionTests.cs" />
+    <Compile Include="Controllers\HomeControllerTests.cs" />
+    <Compile Include="Controllers\TasksControllerTests.cs" />
+    <Compile Include="Lib\Actions\AbstractActionTests.cs" />
+    <Compile Include="Lib\Actions\PostNewTaskFormTests.cs" />
+    <Compile Include="Lib\CollectionExtensionsTests.cs" />
+    <Compile Include="Lib\ViewResultBuilderTests.cs" />
+    <Compile Include="ViewModels\FlashMessageCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Queries\" />
     <Folder Include="Domain\" />
+    <Folder Include="Lib\Rules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio\Portfolio.csproj">

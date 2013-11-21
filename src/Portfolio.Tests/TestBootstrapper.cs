@@ -51,14 +51,8 @@ namespace Portfolio
             return DeleteAll<Category>();
         }
 
-        public static int DeleteAllStatuses()
-        {
-            return DeleteAll<Status>();
-        }
-
         public static int DeleteAllTasks()
         {
-            DeleteAll<TaskStatus>();
             return DeleteAll<Task>();
         }
 
@@ -73,30 +67,7 @@ namespace Portfolio
             return InsertNewRecord(category);
         }
 
-        public static Status InsertNewStatus(string id = "TEST", string description = "Test Status", bool isCompleted = false, bool isDefaultStatus = false)
-        {
-            var status = new Status
-                         {
-                             Id = id,
-                             Description = description,
-                             IsCompleted = isCompleted,
-                             IsDefaultStatus = isDefaultStatus
-                         };
-            return InsertNewRecord(status);
-        }
-
-        public static StatusWorkflow InsertNewStatusWorkflow(Status fromStatus, Status toStatus)
-        {
-            var statusWorkflow = new StatusWorkflow
-                                 {
-                                     FromStatus = fromStatus,
-                                     ToStatus = toStatus,
-                                     CreatedAt = DateTime.Now
-                                 };
-            return InsertNewRecord(statusWorkflow);
-        }
-
-        public static Task InsertNewTask(string description, Status status = null, DateTime? dueOn = null)
+        public static Task InsertNewTask(string description, bool isCompleted = false, DateTime? dueOn = null)
         {
             var timestamp = DateTime.Now;
 
@@ -104,10 +75,8 @@ namespace Portfolio
             {
                 Title = "Testing...",
                 Description = description,
-                Category = null,
-                CurrentStatus = status,
                 DueOn = dueOn,
-                IsCompleted = (status != null) && status.IsCompleted,
+                IsCompleted = isCompleted,
                 CreatedAt = timestamp,
                 UpdatedAt = timestamp
             };

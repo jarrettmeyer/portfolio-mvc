@@ -25,8 +25,7 @@ namespace Portfolio.Lib.Actions
         {
             task = repository.Load<Task>(form.Id);
             task.Title = form.Title;
-            task.Description = form.Description;
-            task.Category = GetCategory();
+            task.Description = form.Description;            
             task.DueOn = form.DueOn.SafeParseDateTime();
             repository.SaveChanges();
         }

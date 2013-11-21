@@ -12,9 +12,7 @@ namespace Portfolio.Lib.Actions
         private TaskInputModel form;
         private readonly HttpRequestBase httpRequest;
         private readonly IRepository repository;
-        private Status status;
         private Task task;
-        private TaskStatus taskStatus;
 
         public PostNewTaskForm(IRepository repository, HttpRequestBase httpRequest, IClock clock)
         {
@@ -30,7 +28,6 @@ namespace Portfolio.Lib.Actions
 
         public override void Execute()
         {
-            FetchDefaultStatus();
             CreateNewTask();
             WriteSuccessMessage();            
         }
@@ -44,29 +41,11 @@ namespace Portfolio.Lib.Actions
         private void CreateNewTask()
         {
             task = form.GetTask();
-            task.CurrentStatus = status;
             task.CreatedAt = clock.Now;
             task.UpdatedAt = clock.Now;
 
-            taskStatus = new TaskStatus
-            {
-                Comment = "",
-                CreatedAt = clock.Now,
-                IPAddress = httpRequest.UserHostAddress,
-                IsCompleted = status.IsCompleted,
-                ToStatus = status
-            };
-            task.AddStatus(taskStatus);
-
             repository.Add(task);
             repository.SaveChanges();
-        }
-
-        private void FetchDefaultStatus()
-        {
-            status = repository.FindOne<Status>(s => s.IsDefaultStatus);
-            if (status == null)
-                throw new NullReferenceException("Unable to fetch default status.");
         }
 
         private void WriteSuccessMessage()

@@ -20,22 +20,6 @@ namespace Portfolio.Models.Mapping
                 map.Length(256);
             });
             Property(x => x.Description);
-            ManyToOne(x => x.Category, map =>
-            {
-                map.Column(col =>
-                {
-                    col.Name("CategoryId");
-                    col.NotNullable(false);
-                });
-            });
-            ManyToOne(x => x.CurrentStatus, map =>
-            {
-                map.Column(col =>
-                {
-                    col.Name("CurrentStatus");
-                    col.NotNullable(false);
-                });
-            });
             Property(x => x.DueOn);
             Property(x => x.IsCompleted);
             Property(x => x.CreatedAt);
@@ -50,22 +34,7 @@ namespace Portfolio.Models.Mapping
                     col.NotNullable(false);
                     col.SqlType("timestamp");
                 });
-            });
-
-            Bag(x => x.Statuses, map =>
-            {
-                map.Key(key =>
-                {
-                    key.Column("TaskId");
-                });
-                map.Cascade(Cascade.All|Cascade.DeleteOrphans);
-            }, rel =>
-            {
-                rel.OneToMany(otm =>
-                {
-                    otm.Class(typeof(TaskStatus));
-                });
-            });
+            });            
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Portfolio.Controllers;
 using Portfolio.Lib;
-using Portfolio.Web.Lib;
 
-namespace Portfolio.Web.Controllers
+namespace Portfolio.Controllers
 {
     public class HomeControllerTests
     {
