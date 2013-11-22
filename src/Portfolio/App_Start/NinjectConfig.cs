@@ -3,6 +3,7 @@ using NHibernate;
 using Ninject;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Services;
 
 namespace Portfolio.App_Start
 {
@@ -25,8 +26,8 @@ namespace Portfolio.App_Start
         }
 
         private static void ConfigureSingletonInstances(IKernel kernel)
-        {
-            Repository.Instance = kernel.Get<IRepository>();
+        {            
+            ServiceLocator.Instance = new NinjectServiceLocator(kernel);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Moq;
 using NHibernate;
 using NHibernate.Linq;
 using Portfolio.Lib.Data;
@@ -15,16 +14,6 @@ namespace Portfolio
         public static string ConnectionString
         {
             get { return CONNECTION_STRING; }
-        }
-
-        public static Mock<IRepository> ConfigureMockRepository()
-        {
-            Mock<IRepository> mockRepository = new Mock<IRepository>
-            {
-                DefaultValue = DefaultValue.Mock
-            };
-            Repository.Instance = mockRepository.Object;
-            return mockRepository;
         }
 
         /// <summary>

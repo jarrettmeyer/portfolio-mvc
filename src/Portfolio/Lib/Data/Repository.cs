@@ -6,20 +6,6 @@ namespace Portfolio.Lib.Data
 {
     public abstract class Repository : IRepository
     {
-        private static volatile IRepository instance;
-
-        public static IRepository Instance
-        {
-            get
-            {
-                if (instance == null)
-                    throw new NullReferenceException("Instance has not been set.");
-
-                return instance;
-            }
-            set { instance = value; }
-        }
-        
         public abstract void Add<T>(T entity);
         
         public abstract ITransactionAdapter BeginTransaction();

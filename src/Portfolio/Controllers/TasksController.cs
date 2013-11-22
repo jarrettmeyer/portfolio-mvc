@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Services;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 
@@ -13,7 +13,8 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var tasks = Repository.Instance.FindAll<Task>().OrderBy(t => t.Id);
+            var repository = ServiceLocator.Instance.GetService<IRepository>();
+            var tasks = repository.FindAll<Task>().OrderBy(t => t.Id);
             var model = new TaskListViewModel(tasks);
             return View("Index", model);
         }
@@ -21,7 +22,8 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Show(int id)
         {
-            var task = Repository.Instance.Load<Task>(id);
+            IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
+            var task = repository.Load<Task>(id);
             var model = new TaskViewModel(task);
             return View("Show", model);
         }
@@ -38,26 +40,20 @@ namespace Portfolio.Controllers
         {
             CheckModelState(() =>
             {
-                FlashMessages.AddErrorMessage("There is something wrong with the form. Please correct the errors and try again.");
+                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
                 return View("New", model);
             });
-            try
-            {
-                var task = CreateNewTask(model);
-                FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
-                return RedirectToAction("Show", new { id = task.Id });
-            }
-            catch (Exception e)
-            {
-                FlashMessages.AddErrorMessage(e.Message);
-                return View("New", model);
-            }
+            ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
+            Task task = service.CreateTask(model);
+            FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
+            return RedirectToAction("Show", new { id = task.Id });            
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var task = Repository.Instance.Load<Task>(id);
+            var repository = ServiceLocator.Instance.GetService<IRepository>();
+            var task = repository.Load<Task>(id);
             var model = new TaskInputModel(task);
             return View("Edit", model);
         }
@@ -65,10 +61,15 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult Edit(TaskInputModel model)
         {
-            CheckModelState(() => View("Edit", model));
-            using (var transaction = Repository.Instance.BeginTransaction())
+            CheckModelState(() =>
             {
-                Task task = Repository.Instance.Load<Task>(model.Id);
+                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
+                return View("Edit", model);
+            });
+            var repository = ServiceLocator.Instance.GetService<IRepository>();
+            using (var transaction = repository.BeginTransaction())
+            {
+                Task task = repository.Load<Task>(model.Id);
                 task.Title = model.Title;
                 task.Description = model.Description;
                 task.DueOn = model.DueOn.SafeParseDateTime();
@@ -80,31 +81,13 @@ namespace Portfolio.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            using (var transaction = Repository.Instance.BeginTransaction())
+            IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
+            using (var transaction = repository.BeginTransaction())
             {
-                Task task = Repository.Instance.Load<Task>(id);
-                Repository.Instance.Delete(task);
+                Task task = repository.Load<Task>(id);
+                repository.Delete(task);
                 transaction.Commit();
                 return new EmptyResult();
-            }
-        }
-
-        private static Task CreateNewTask(TaskInputModel model)
-        {
-            using (var txn = Repository.Instance.BeginTransaction())
-            {
-                Task task = new Task
-                {
-                    Title = model.Title,
-                    Description = model.Description,
-                    DueOn = model.DueOn.SafeParseDateTime(),
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-                
-                Repository.Instance.Add(task);
-                txn.Commit();
-                return task;
             }
         }
     }

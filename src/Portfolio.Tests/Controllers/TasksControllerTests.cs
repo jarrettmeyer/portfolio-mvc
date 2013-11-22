@@ -5,6 +5,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Services;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 
@@ -31,25 +32,45 @@ namespace Portfolio.Controllers
         {            
             public void SetUpContext()
             {
+                // Initialize the controller.
                 Controller = new TasksController();
                 Task = new Task();
                 TaskInputModel = new TaskInputModel();
-                MockRepository = TestBootstrapper.ConfigureMockRepository();
+
+                // Initialize the service locator.
+                MockServiceLocator = new Mock<IServiceLocator>
+                {
+                    DefaultValue = DefaultValue.Mock
+                };
+                ServiceLocator.Instance = MockServiceLocator.Object;
+
+                // Initialize the repository
+                MockRepository = new Mock<IRepository>();
+                MockServiceLocator.Setup(x => x.GetService<IRepository>()).Returns(MockRepository.Object);
                 MockRepository.Setup(x => x.Add(It.IsAny<Task>()))
                     .Callback<Task>(t =>
-                {
-                    Task = t;
-                    Task.Id = 1;
-                });
+                    {
+                        Task = t;
+                        Task.Id = 1;
+                    });
                 MockRepository.Setup(x => x.Load<Task>(It.IsAny<int>()))
                     .Returns(Task)
                     .Callback<int>(i => Task.Id = i);
+
+                // Initialize the task creation service.
+                MockTaskCreationSerivce = new Mock<ITaskCreationService>
+                {
+                    DefaultValue = DefaultValue.Mock
+                };
+                MockServiceLocator.Setup(x => x.GetService<ITaskCreationService>()).Returns(MockTaskCreationSerivce.Object);
             }
 
-            public TasksController Controller { get; private set; }
-            public Task Task { get; private set; }
-            public TaskInputModel TaskInputModel { get; private set; }
-            public Mock<IRepository> MockRepository { get; private set; }
+            public TasksController Controller { get; set; }
+            public Task Task { get; set; }
+            public TaskInputModel TaskInputModel { get; set; }
+            public Mock<IRepository> MockRepository { get; set; }
+            public Mock<IServiceLocator> MockServiceLocator { get; set; }
+            public Mock<ITaskCreationService> MockTaskCreationSerivce { get; set; }
         }
 
         public class GetIndex : TaskControllerTestContext
@@ -119,7 +140,7 @@ namespace Portfolio.Controllers
             public void It_saves_a_new_task()
             {
                 Controller.New(TaskInputModel);
-                MockRepository.Verify(x => x.Add(It.IsAny<Task>()), Times.Once());
+                MockTaskCreationSerivce.Verify(x => x.CreateTask(TaskInputModel), Times.Once());
             }
 
             [Test]
@@ -136,16 +157,6 @@ namespace Portfolio.Controllers
                 var actionResult = Controller.New(TaskInputModel);
                 var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
                 routeValues["Action"].Should().Be("Show");
-            }
-
-            [Test]
-            public void New_task_has_expected_values()
-            {
-                TaskInputModel.Title = "This is a test";
-                TaskInputModel.DueOn = "7/30/2013";
-                Controller.New(TaskInputModel);
-                Task.Title.Should().Be("This is a test");
-                Task.DueOn.Should().Be(new DateTime(2013, 7, 30));
             }
         }
 

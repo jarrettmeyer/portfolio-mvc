@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Caching;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Services;
 using Portfolio.Models;
 
 namespace Portfolio.ViewModels
@@ -25,7 +26,7 @@ namespace Portfolio.ViewModels
         public static void Initialize(IRepository repository = null)
         {
             if (repository == null)
-                repository = Repository.Instance;
+                repository = ServiceLocator.Instance.GetService<IRepository>();
 
             var categories = repository.Find<Category>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
             var models = categories.Select(c => new CategorySelectListModel(c.Id, c.Description));

@@ -7,6 +7,8 @@ namespace Portfolio.Controllers
 {
     public abstract class ApplicationController : Controller
     {
+        public const string DEFAULT_FORM_ERROR_MESSAGE = "There is something wrong with the form. Please correct the errors and try again.";
+
         private FlashMessageCollection flashMessages;
 
         public virtual FlashMessageCollection FlashMessages

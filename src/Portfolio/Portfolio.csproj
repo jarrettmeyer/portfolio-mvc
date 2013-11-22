@@ -168,8 +168,10 @@
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
     <Compile Include="Lib\ResourceRouteConfigurationSettings.cs" />
     <Compile Include="Lib\Services\IServiceLocator.cs" />
+    <Compile Include="Lib\Services\ITaskCreationService.cs" />
     <Compile Include="Lib\Services\NinjectServiceLocator.cs" />
     <Compile Include="Lib\Services\ServiceLocator.cs" />
+    <Compile Include="Lib\Services\TaskCreationServiceImpl.cs" />
     <Compile Include="Lib\StringExtensions.cs" />
     <Compile Include="Lib\SystemClock.cs" />
     <Compile Include="Lib\ViewResultBuilder.cs" />
