@@ -17,7 +17,9 @@ namespace Portfolio.App_Start
             kernel.Bind<IRepository>().To<NHibernateRepository>();
             
             // Service layer bindings
-            kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);            
+            kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
+            kernel.Bind<ICategoryCreationService>().To<CategoryCreationServiceImpl>();
+            kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();
 
             // Web layer and generic service bindings
             kernel.Bind<IClock>().To<SystemClock>();

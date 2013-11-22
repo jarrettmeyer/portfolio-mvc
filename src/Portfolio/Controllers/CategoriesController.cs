@@ -72,18 +72,8 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(CategoryInputModel model)
         {
-            Category category;
-            using (var txn = repository.BeginTransaction())
-            {
-                category = new Category
-                {
-                    Description = model.Description.Trim(),
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-                repository.Add(category);
-                txn.Commit();
-            }
+            ICategoryCreationService service = ServiceLocator.Instance.GetService<ICategoryCreationService>();
+            Category category = service.CreateCategory(model);
             CategoriesSelectList.Initialize(repository);
             FlashMessages.AddSuccessMessage(string.Format("Successfully created new category: {0}", category.Description));
             return RedirectToAction("Index");

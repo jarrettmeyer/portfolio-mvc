@@ -4,7 +4,13 @@
     ViewBag.Title = Model.PageTitle;
 }
 
-<h2>@Model.PageTitle</h2>
+<div class="page-header">
+    <h2>@Model.PageTitle</h2>
+</div>
+
+<p>
+    @Html.ActionLink("New Category", "New", new { controller = "Categories"}, new { @class = "btn btn-primary" })
+</p>
 
 <table class="table table-condensed">
     <thead>
