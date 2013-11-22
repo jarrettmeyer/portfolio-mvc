@@ -63,6 +63,7 @@
   <ItemGroup>
     <Build Include="Tables\Tasks.sql" />
     <Build Include="Tables\Categories.sql" />
+    <Build Include="Tables\Tasks_Categories.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema Comparisons\Sql Server Schema Compare.scmp" />
