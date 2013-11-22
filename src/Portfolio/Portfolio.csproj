@@ -155,16 +155,15 @@
     <Compile Include="Lib\Data\NHibernateTransactionAdapter.cs" />
     <Compile Include="Lib\Data\Repository.cs" />
     <Compile Include="Lib\Ensure.cs" />
-    <Compile Include="Lib\HttpSessionStorage.cs" />
-    <Compile Include="Lib\HttpUserSettings.cs" />
+    <Compile Include="Lib\HttpSessionData.cs" />
+    <Compile Include="Lib\HttpSessionDataImpl.cs" />
     <Compile Include="Lib\IClock.cs" />
+    <Compile Include="Lib\IHttpSessionData.cs" />
     <Compile Include="Lib\InvalidModelStateException.cs" />
-    <Compile Include="Lib\IUserSettings.cs" />
     <Compile Include="Lib\Logging\ILogWriter.cs" />
     <Compile Include="Lib\Logging\Impl\Log4NetLogWriter.cs" />
     <Compile Include="Lib\Logging\Log.cs" />
     <Compile Include="Lib\ObjectExtensions.cs" />
-    <Compile Include="Lib\RedirectToRouteResultBuilder.cs" />
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
     <Compile Include="Lib\ResourceRouteConfigurationSettings.cs" />
     <Compile Include="Lib\Services\CategoryCreationServiceImpl.cs" />
@@ -180,7 +179,6 @@
     <Compile Include="Lib\Services\TaskCreationServiceImpl.cs" />
     <Compile Include="Lib\StringExtensions.cs" />
     <Compile Include="Lib\SystemClock.cs" />
-    <Compile Include="Lib\ViewResultBuilder.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IVersionedEntity.cs" />
     <Compile Include="Models\Mapping\CategoryMap.cs" />

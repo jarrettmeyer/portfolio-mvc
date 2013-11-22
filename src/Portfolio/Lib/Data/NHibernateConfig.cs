@@ -5,7 +5,6 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
-using Portfolio.Common;
 using Portfolio.Models.Mapping;
 
 namespace Portfolio.Lib.Data

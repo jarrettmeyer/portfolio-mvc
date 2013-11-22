@@ -63,8 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lib\ConfigTests.cs" />
-    <Compile Include="Common\ObjectExtensionsTests.cs" />
-    <Compile Include="Common\SystemClockTests.cs" />
+    <Compile Include="Lib\ObjectExtensionsTests.cs" />
+    <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="Models\Mapping\CategoryMapTests.cs" />
     <Compile Include="Models\Mapping\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
@@ -75,16 +75,13 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\TasksControllerTests.cs" />
     <Compile Include="Lib\CollectionExtensionsTests.cs" />
-    <Compile Include="Lib\ViewResultBuilderTests.cs" />
     <Compile Include="ViewModels\FlashMessageCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Portfolio\Portfolio.csproj">
       <Project>{8f505e74-aa08-49ae-9175-d15260e7fd89}</Project>

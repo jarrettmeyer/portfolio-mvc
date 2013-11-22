@@ -1,8 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Portfolio.Lib;
 
-namespace Portfolio.Common
+namespace Portfolio.Lib
 {
     [TestFixture]
     public class ObjectExtensionsTests
