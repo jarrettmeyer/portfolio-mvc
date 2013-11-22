@@ -141,16 +141,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lib\Actions\AbstractAction.cs" />
-    <Compile Include="Lib\ActionResultWrapper.cs" />
-    <Compile Include="Lib\Actions\GetEditTaskView.cs" />
-    <Compile Include="Lib\Actions\GetNewTaskView.cs" />
-    <Compile Include="Lib\Actions\GetTaskShowView.cs" />
-    <Compile Include="Lib\Actions\GetTasksIndexView.cs" />
-    <Compile Include="Lib\Actions\IAction.cs" />
-    <Compile Include="Lib\Actions\PostEditTaskForm.cs" />
-    <Compile Include="Lib\Actions\PostNewTaskForm.cs" />
-    <Compile Include="Lib\Actions\RedirectToListTasks.cs" />
     <Compile Include="Lib\BooleanExtensions.cs" />
     <Compile Include="Lib\Caching\AspNetHttpCache.cs" />
     <Compile Include="Lib\Caching\Cache.cs" />
@@ -167,8 +157,6 @@
     <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HttpSessionStorage.cs" />
     <Compile Include="Lib\HttpUserSettings.cs" />
-    <Compile Include="Lib\ActionResolver.cs" />
-    <Compile Include="Lib\ActionExtensions.cs" />
     <Compile Include="Lib\IClock.cs" />
     <Compile Include="Lib\InvalidModelStateException.cs" />
     <Compile Include="Lib\IUserSettings.cs" />
@@ -185,7 +173,6 @@
     <Compile Include="Lib\StringExtensions.cs" />
     <Compile Include="Lib\SystemClock.cs" />
     <Compile Include="Lib\ViewResultBuilder.cs" />
-    <Compile Include="Lib\NinjectActionResolver.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IVersionedEntity.cs" />
     <Compile Include="Models\Mapping\CategoryMap.cs" />

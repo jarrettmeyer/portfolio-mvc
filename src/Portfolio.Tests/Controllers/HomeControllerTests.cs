@@ -1,30 +1,44 @@
-﻿using FluentAssertions;
-using Moq;
+﻿using System.Web.Mvc;
+using FluentAssertions;
 using NUnit.Framework;
-using Portfolio.Lib;
 
 namespace Portfolio.Controllers
 {
     public class HomeControllerTests
     {
-        private Mock<ActionResolver> mockActionResolver;
         private HomeController controller;
 
         [SetUp]
-        public void before_each_test()
+        public void Before_each_test()
         {
-            mockActionResolver = new Mock<ActionResolver>
-            {
-                DefaultValue = DefaultValue.Mock
-            };
-            controller = new HomeController(mockActionResolver.Object);
+            controller = new HomeController();
         }
 
         [Test]
-        public void get_index()
+        public void It_should_exist()
         {
-            var actionResult = controller.Index();
-            actionResult.Should().BeAssignableTo<ActionResultWrapper>();
+            controller.Should().BeAssignableTo<HomeController>();
+        }
+
+        public class GetIndex
+        {
+            private HomeController controller;
+
+            [SetUp]
+            public void Before_each_test()
+            {
+                controller = new HomeController();
+            }
+
+            [Test]
+            public void It_should_redirect_to_tasks_index()
+            {
+                var actionResult = controller.Index();
+                actionResult.Should().BeAssignableTo<RedirectToRouteResult>();
+                var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
+                routeValues["Controller"].Should().Be("Tasks");
+                routeValues["Action"].Should().Be("Index");
+            }
         }
     }
 }

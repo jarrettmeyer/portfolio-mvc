@@ -10,6 +10,7 @@
         <label for="Title" class="col-lg-2 control-label">Title</label>
         <div class="col-lg-10">
             @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Title)
         </div>
     </div>
     
@@ -17,6 +18,7 @@
         <label for="Description" class="col-lg-2 control-label">Description</label>
         <div class="col-lg-10">
             @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Description)
         </div>
     </div>
     

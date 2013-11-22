@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Portfolio.Common;
-using Portfolio.Lib;
 using Portfolio.Models;
 
 namespace Portfolio.ViewModels
 {
     public class TaskInputModel
     {
-        private readonly Task task;
-
         public TaskInputModel()
             : this(new Task())
         {            
@@ -17,7 +14,10 @@ namespace Portfolio.ViewModels
         public TaskInputModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
-            this.task = task;
+            Description = task.Description;
+            DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
+            Id = task.Id;
+            Title = task.Title;
         }
 
         public string ActionName
@@ -32,33 +32,12 @@ namespace Portfolio.ViewModels
 
         public int? SelectedCategory { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        public string Description
-        {
-            get
-            {
-                if (task.Description == null)
-                    task.Description = "";
-                
-                return task.Description;                
-            }
-            set 
-            {
-                task.Description = value != null ? value.Trim() : "";
-            }
-        }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]
+        public string Description { get; set; }
 
-        public string DueOn
-        {
-            get { return task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : ""; }
-            set { task.DueOn = value.SafeParseDateTime(); }
-        }
+        public string DueOn { get; set; }
 
-        public int Id
-        {
-            get { return task.Id; }
-            set { task.Id = value; }
-        }
+        public int Id { get; set; }
 
         public bool IsNew
         {
@@ -77,27 +56,12 @@ namespace Portfolio.ViewModels
                 if (IsNew)
                     return new { };
 
-                return new { id = Id };                
+                return new { id = Id };
             }
         }
 
-        [Required(AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]
-        public string Title
-        {
-            get { return task.Title; }
-            set
-            {
-                if (value != null)
-                {
-                    task.Title = value.Trim();
-                }
-            }
-        }
-
-        public Task GetTask()
-        {
-            return task;
-        }
+        public string Title { get; set; }
     }
 }

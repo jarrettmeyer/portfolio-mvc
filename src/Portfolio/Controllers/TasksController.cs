@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using NHibernate.Hql.Ast.ANTLR;
-using Portfolio.Common;
 using Portfolio.Lib;
-using Portfolio.Lib.Actions;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
@@ -39,6 +36,11 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
+            CheckModelState(() =>
+            {
+                FlashMessages.AddErrorMessage("There is something wrong with the form. Please correct the errors and try again.");
+                return View("New", model);
+            });
             try
             {
                 var task = CreateNewTask(model);
@@ -55,10 +57,9 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var action = ActionResolver.GetAction<GetEditTaskView>()
-                .ForId(id);
-            action.OnSuccess = () => View("Edit", action.Form);
-            return new ActionResultWrapper(action);
+            var task = Repository.Instance.Load<Task>(id);
+            var model = new TaskInputModel(task);
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -96,6 +97,7 @@ namespace Portfolio.Controllers
                 {
                     Title = model.Title,
                     Description = model.Description,
+                    DueOn = model.DueOn.SafeParseDateTime(),
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };

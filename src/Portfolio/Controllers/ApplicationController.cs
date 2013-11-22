@@ -7,14 +7,7 @@ namespace Portfolio.Controllers
 {
     public abstract class ApplicationController : Controller
     {
-        private ActionResolver actionResolver;
         private FlashMessageCollection flashMessages;
-
-        public virtual ActionResolver ActionResolver
-        {
-            get { return actionResolver ?? (actionResolver = ActionResolver.Instance); }
-            set { actionResolver = value; }
-        }
 
         public virtual FlashMessageCollection FlashMessages
         {
@@ -32,11 +25,15 @@ namespace Portfolio.Controllers
             exception.OnInvalidModelState().ExecuteResult(ControllerContext);
         }
 
-        protected override void OnException(ExceptionContext filterContext)
+        protected override void OnException(ExceptionContext exceptionContext)
         {
-            InvalidModelStateException exception = filterContext.Exception as InvalidModelStateException;
+            InvalidModelStateException exception = exceptionContext.Exception as InvalidModelStateException;
             if (exception != null)
+            {
+                // Mark the exception as handled to keep the error from bubbling to IIS.
+                exceptionContext.ExceptionHandled = true;
                 HandleInvalidModelState(exception);
+            }
         }
     }
 }

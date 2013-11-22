@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ConfigTests.cs" />
+    <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Common\ObjectExtensionsTests.cs" />
     <Compile Include="Common\SystemClockTests.cs" />
     <Compile Include="Data\Models\CategoryMapTests.cs" />
@@ -70,8 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\TasksControllerTests.cs" />
-    <Compile Include="Lib\Actions\AbstractActionTests.cs" />
-    <Compile Include="Lib\Actions\PostNewTaskFormTests.cs" />
     <Compile Include="Lib\CollectionExtensionsTests.cs" />
     <Compile Include="Lib\ViewResultBuilderTests.cs" />
     <Compile Include="ViewModels\FlashMessageCollectionTests.cs" />
@@ -83,7 +81,6 @@
   <ItemGroup>
     <Folder Include="Data\Queries\" />
     <Folder Include="Domain\" />
-    <Folder Include="Lib\Rules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio\Portfolio.csproj">

@@ -1,22 +1,13 @@
 ﻿using System.Web.Mvc;
-using Portfolio.Lib;
-using Portfolio.Lib.Actions;
 
 namespace Portfolio.Controllers
 {
     public class HomeController : ApplicationController
     {
-        private readonly ActionResolver actionResolver;
-
-        public HomeController(ActionResolver actionResolver)
-        {
-            this.actionResolver = actionResolver;
-        }
-
+        [HttpGet]
         public ActionResult Index()
         {
-            var action = actionResolver.GetAction<RedirectToListTasks>();
-            return new ActionResultWrapper(action);
+            return RedirectToAction("Index", "Tasks");
         }
 
     }

@@ -16,7 +16,6 @@ namespace Portfolio.App_Start
             kernel.Bind<IRepository>().To<NHibernateRepository>();
             
             // Service layer bindings
-            kernel.Bind<ActionResolver>().To<NinjectActionResolver>();
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);            
 
             // Web layer and generic service bindings
@@ -27,7 +26,6 @@ namespace Portfolio.App_Start
 
         private static void ConfigureSingletonInstances(IKernel kernel)
         {
-            ActionResolver.Instance = kernel.Get<ActionResolver>();
             Repository.Instance = kernel.Get<IRepository>();
         }
     }
