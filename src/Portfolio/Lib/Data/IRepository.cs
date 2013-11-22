@@ -17,6 +17,8 @@ namespace Portfolio.Lib.Data
 
         ITransactionAdapter BeginTransaction();
 
+        void Delete<T>(T entity);
+
         IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null);
 
         IQueryable<T> FindAll<T>(int? pageIndex = null, int? pageSize = null);

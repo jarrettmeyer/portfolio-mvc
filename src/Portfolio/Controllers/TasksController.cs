@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using NHibernate.Hql.Ast.ANTLR;
+using Portfolio.Common;
 using Portfolio.Lib;
 using Portfolio.Lib.Actions;
 using Portfolio.Lib.Data;
@@ -62,30 +64,35 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult Edit(TaskInputModel model)
         {
-            var action = ActionResolver.GetAction<PostEditTaskForm>()
-                .WithForm(model);
-            action.OnSuccess = () => RedirectToAction("Show", new { id = action.Id });
-            action.OnError = () => View("Edit", model);
-            return new ActionResultWrapper(action);            
+            CheckModelState(() => View("Edit", model));
+            using (var transaction = Repository.Instance.BeginTransaction())
+            {
+                Task task = Repository.Instance.Load<Task>(model.Id);
+                task.Title = model.Title;
+                task.Description = model.Description;
+                task.DueOn = model.DueOn.SafeParseDateTime();
+                transaction.Commit();
+                return RedirectToAction("Show", new { id = model.Id });            
+            }
         }
 
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            return new EmptyResult();
-            //var action = ActionResolver
-            //    .GetAction<DeleteTask>()
-            //    .ForId(id);            
-            //return new ActionResultWrapper(action);
+            using (var transaction = Repository.Instance.BeginTransaction())
+            {
+                Task task = Repository.Instance.Load<Task>(id);
+                Repository.Instance.Delete(task);
+                transaction.Commit();
+                return new EmptyResult();
+            }
         }
 
         private static Task CreateNewTask(TaskInputModel model)
         {
-            Task task;
             using (var txn = Repository.Instance.BeginTransaction())
             {
-                Category category = null;
-                task = new Task
+                Task task = new Task
                 {
                     Title = model.Title,
                     Description = model.Description,
@@ -95,8 +102,8 @@ namespace Portfolio.Controllers
                 
                 Repository.Instance.Add(task);
                 txn.Commit();
+                return task;
             }
-            return task;
         }
     }
 }

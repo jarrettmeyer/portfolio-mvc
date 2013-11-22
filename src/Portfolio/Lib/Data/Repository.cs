@@ -23,6 +23,8 @@ namespace Portfolio.Lib.Data
         public abstract void Add<T>(T entity);
         
         public abstract ITransactionAdapter BeginTransaction();
+
+        public abstract void Delete<T>(T entity);
         
         public abstract IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null);
         

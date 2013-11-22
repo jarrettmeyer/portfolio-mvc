@@ -28,6 +28,11 @@ namespace Portfolio.Lib.Data
             return new NHibernateTransactionAdapter(session.BeginTransaction());
         }
 
+        public override void Delete<T>(T entity)
+        {
+            session.Delete(entity);
+        }
+
         public override IQueryable<T> Find<T>(Expression<Func<T, bool>> expression, int? pageIndex = null, int? pageSize = null)
         {
             var items = session.Query<T>().Where(expression);
