@@ -66,6 +66,7 @@
     <Compile Include="Data\Models\CategoryMapTests.cs" />
     <Compile Include="Data\Models\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
+    <Compile Include="Lib\Services\CategoryCreationServiceImplTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
