@@ -1,7 +1,6 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Type;
-using Portfolio.Web.Models;
 
 namespace Portfolio.Models.Mapping
 {
@@ -34,7 +33,24 @@ namespace Portfolio.Models.Mapping
                     col.NotNullable(false);
                     col.SqlType("timestamp");
                 });
-            });            
+            });       
+     
+            // Many-to-Many Categories
+            Bag(x => x.Categories, map =>
+            {
+                map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                map.Table("[Tasks_Categories]");
+                map.Key(key =>
+                {
+                    key.Column("TaskId");
+                });
+            }, rel =>
+            {
+                rel.ManyToMany(map =>
+                {                    
+                    map.Column("CategoryId");
+                });
+            });
         }
     }
 }

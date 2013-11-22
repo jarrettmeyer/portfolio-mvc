@@ -51,8 +51,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,10 +65,11 @@
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Common\ObjectExtensionsTests.cs" />
     <Compile Include="Common\SystemClockTests.cs" />
-    <Compile Include="Data\Models\CategoryMapTests.cs" />
-    <Compile Include="Data\Models\TaskMapTests.cs" />
+    <Compile Include="Models\Mapping\CategoryMapTests.cs" />
+    <Compile Include="Models\Mapping\TaskMapTests.cs" />
     <Compile Include="Data\NHibernateConfigTests.cs" />
     <Compile Include="Lib\Services\CategoryCreationServiceImplTests.cs" />
+    <Compile Include="Models\TaskTests.cs" />
     <Compile Include="TestBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
@@ -80,7 +83,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Queries\" />
     <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>

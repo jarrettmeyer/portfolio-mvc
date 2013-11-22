@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
-using Portfolio.Models;
-using Portfolio.Web.Models;
 
-namespace Portfolio.Data.Models
+namespace Portfolio.Models.Mapping
 {
     [TestFixture]
     public class CategoryMapTests
@@ -13,19 +11,19 @@ namespace Portfolio.Data.Models
         private int categoryId;
 
         [SetUp]
-        public void before_each_test()
+        public void Before_each_test()
         {
             NHibernateConfig.ConnectionString = TestBootstrapper.ConnectionString;
         }
 
         [TearDown]
-        public void after_each_test()
+        public void After_each_test()
         {
             TestBootstrapper.DeleteAllCategories();
         }
 
         [Test]
-        public void can_insert_a_category()
+        public void Can_insert_a_category()
         {
             category = TestBootstrapper.InsertNewCategory("This is a test");
             categoryId = category.Id;
@@ -39,14 +37,14 @@ namespace Portfolio.Data.Models
         }
 
         [Test]
-        public void default_version_property_is_null()
+        public void Default_version_property_is_null()
         {
             category = new Category();
             Assert.IsNull(category.Version);
         }
 
         [Test]
-        public void version_property_is_not_null_after_loading_from_db()
+        public void Version_property_is_not_null_after_loading_from_db()
         {
             category = TestBootstrapper.InsertNewCategory("Testing Version");
             Assert.IsNotNull(category.Version);
