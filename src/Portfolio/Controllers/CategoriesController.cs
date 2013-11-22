@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -16,13 +15,15 @@ namespace Portfolio.Controllers
         {
             repository = ServiceLocator.Instance.GetService<IRepository>();
         }
-
+        
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            var category = repository.Load<Category>(id);
-            category.IsActive = false;
-            repository.SaveChanges();
+            ICategoryDeletionService service = ServiceLocator.Instance.GetService<ICategoryDeletionService>();
+            Category category = service.DeleteCategory(id);
+            FlashMessages.AddSuccessMessage(string.Format("Deleted category: {0}", category.Description));
+
+            // This will be called with JavaScript, so we don't have an actual result to return.
             return new EmptyResult();
         }
 
@@ -30,25 +31,15 @@ namespace Portfolio.Controllers
         public ActionResult Edit(int id)
         {
             var category = repository.FindOne<Category>(c => c.Id == id);
-            var model = new CategoryInputModel
-            {
-                Description = category.Description,
-                Id = category.Id
-            };
+            var model = new CategoryInputModel(category);            
             return View("Edit", model);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, CategoryInputModel model)
         {
-            Category category;
-            using (var transaction = repository.BeginTransaction())
-            {
-                category = repository.FindOne<Category>(c => c.Id == id);
-                category.Description = model.Description.Trim();
-                category.UpdatedAt = DateTime.UtcNow;
-                transaction.Commit();
-            }
+            ICategoryUpdateService service = ServiceLocator.Instance.GetService<ICategoryUpdateService>();
+            Category category = service.UpdateCategory(model);
             CategoriesSelectList.Initialize(repository);
             FlashMessages.AddSuccessMessage(string.Format("Successfully updated category: {0}", category.Description));
             return RedirectToAction("Index");

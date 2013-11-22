@@ -1,10 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Portfolio.Models;
 
 namespace Portfolio.ViewModels
 {
     public class CategoryInputModel
     {
+        public CategoryInputModel()
+            : this(new Category())
+        {            
+        }
+
+        public CategoryInputModel(Category category)
+        {
+            Description = category.Description;
+            Id = category.Id;
+        }
+
         public string ActionName
         {
             get { return IsNew ? "New" : "Edit"; }
