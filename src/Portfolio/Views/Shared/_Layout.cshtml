@@ -2,14 +2,8 @@
 <html lang="en">
     <head>
         <title>@ViewBag.Title</title>
-
-        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")"></script>
-        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/knockout-2.3.0.js")"></script>
-        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-        <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/App/Common.js")"></script>
-        
-        <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootstrap.min.css")"/>
-        <link rel="stylesheet" href="@Url.Content("~/Content/stylesheets/Site.css")"/>
+        <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/css")" rel="stylesheet" type="text/css" />
+        <script src="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js")" type="text/javascript"></script>
     </head>
     <body>
         <header class="navbar navbar-default navbar-static-top" role="banner">
@@ -18,7 +12,7 @@
                     @Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
                 </div>
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Categories", "Index", "Tags")</li>
+                    <li>@Html.ActionLink("Tags", "Index", "Tags")</li>
                 </ul>
             </div>
         </header>

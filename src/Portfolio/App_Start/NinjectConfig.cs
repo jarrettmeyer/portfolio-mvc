@@ -18,7 +18,7 @@ namespace Portfolio.App_Start
             
             // Service layer bindings
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
-            kernel.Bind<ICategoryCreationService>().To<CategoryCreationServiceImpl>();
+            kernel.Bind<ITagCreationService>().To<TagCreationServiceImpl>();
             kernel.Bind<ICategoryDeletionService>().To<CategoryDeletionServiceImpl>();
             kernel.Bind<ICategoryUpdateService>().To<CategoryUpdateServiceImpl>();
             kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();

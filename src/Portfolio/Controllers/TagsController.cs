@@ -31,12 +31,12 @@ namespace Portfolio.Controllers
         public ActionResult Edit(int id)
         {
             var category = repository.FindOne<Tag>(c => c.Id == id);
-            var model = new CategoryInputModel(category);            
+            var model = new TagInputModel(category);            
             return View("Edit", model);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, CategoryInputModel model)
+        public ActionResult Edit(int id, TagInputModel model)
         {
             ICategoryUpdateService service = ServiceLocator.Instance.GetService<ICategoryUpdateService>();
             Tag tag = service.UpdateCategory(model);
@@ -56,14 +56,14 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            var model = new CategoryInputModel();
+            var model = new TagInputModel();
             return View("New", model);
         }
 
         [HttpPost]
-        public ActionResult New(CategoryInputModel model)
+        public ActionResult New(TagInputModel model)
         {
-            ICategoryCreationService service = ServiceLocator.Instance.GetService<ICategoryCreationService>();
+            ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
             Tag tag = service.CreateCategory(model);
             CategorySelectList.Initialize(repository);
             FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));

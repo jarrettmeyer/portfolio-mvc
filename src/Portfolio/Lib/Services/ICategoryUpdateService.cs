@@ -5,6 +5,6 @@ namespace Portfolio.Lib.Services
 {
     public interface ICategoryUpdateService
     {
-        Tag UpdateCategory(CategoryInputModel categoryInputModel);
+        Tag UpdateCategory(TagInputModel tagInputModel);
     }
 }

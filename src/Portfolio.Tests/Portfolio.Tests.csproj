@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
+    <Compile Include="Lib\SlugGeneratorTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="Models\Mapping\TagMapTests.cs" />
     <Compile Include="Models\Mapping\TaskMapTests.cs" />

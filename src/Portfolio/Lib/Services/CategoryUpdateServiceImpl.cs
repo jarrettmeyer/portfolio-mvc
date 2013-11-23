@@ -15,12 +15,12 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Tag UpdateCategory(CategoryInputModel categoryInputModel)
+        public Tag UpdateCategory(TagInputModel tagInputModel)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                tag = repository.Load<Tag>(categoryInputModel.Id);
-                tag.Description = categoryInputModel.Description.Trim();
+                tag = repository.Load<Tag>(tagInputModel.Id);
+                tag.Description = tagInputModel.Description.Trim();
                 tag.UpdatedAt = DateTime.UtcNow;
                 transaction.Commit();
                 return tag;

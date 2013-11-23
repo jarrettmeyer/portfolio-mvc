@@ -11,42 +11,42 @@ namespace Portfolio.Lib.Services
     public class CategoryCreationServiceImplTests
     {
         private Tag tag;
-        private CategoryInputModel categoryInputModel;
+        private TagInputModel tagInputModel;
         private Mock<IRepository> mockRepository;
-        private ICategoryCreationService service;
+        private ITagCreationService service;
 
         [SetUp]
         public void Before_each_test()
         {
             // Configure the input model
-            categoryInputModel = new CategoryInputModel { Description = "" };
+            tagInputModel = new TagInputModel { Description = "" };
 
             // Configure mock repository
             mockRepository = new Mock<IRepository> { DefaultValue = DefaultValue.Mock };
 
             // Configure service
-            service = new CategoryCreationServiceImpl(mockRepository.Object);
+            service = new TagCreationServiceImpl(mockRepository.Object);
         }
 
         [Test]
         public void It_adds_a_category_to_the_repository()
         {
-            service.CreateCategory(categoryInputModel);
+            service.CreateCategory(tagInputModel);
             mockRepository.Verify(x => x.Add(It.IsAny<Tag>()), Times.Once());
         }
 
         [Test]
         public void It_sets_the_description()
         {
-            categoryInputModel.Description = "This is a test";
-            tag = service.CreateCategory(categoryInputModel);
+            tagInputModel.Description = "This is a test";
+            tag = service.CreateCategory(tagInputModel);
             tag.Description.Should().Be("This is a test");
         }
 
         [Test]
         public void It_sets_the_new_category_as_active()
         {
-            tag = service.CreateCategory(categoryInputModel);
+            tag = service.CreateCategory(tagInputModel);
             tag.IsActive.Should().BeTrue();
         }
     }

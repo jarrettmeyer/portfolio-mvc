@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using Portfolio.App_Start;
 
@@ -16,6 +17,7 @@ namespace Portfolio
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.ConfigureBundles(BundleTable.Bundles);
         }
     }
 }

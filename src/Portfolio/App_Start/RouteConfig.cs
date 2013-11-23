@@ -11,9 +11,8 @@ namespace Portfolio.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             new ResourceRouteConfiguration(routes, "Tasks").Configure();
-            new ResourceRouteConfiguration(routes, "Categories", settings: new ResourceRouteConfigurationSettings { IncludeShowAction = false }).Configure();
-
-            routes.MapRoute("Workflows-Show", "workflows/{status}", new { controller = "Workflows", action = "Show" }, new { status = "[a-zA-Z0-9]+" });
+            new ResourceRouteConfiguration(routes, "Tags", settings: new ResourceRouteConfigurationSettings { IncludeShowAction = false }).Configure();
+            
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
     }
