@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -63,11 +64,19 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(TagInputModel model)
         {
-            ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
-            Tag tag = service.CreateCategory(model);
-            CategorySelectList.Initialize(repository);
-            FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));
-            return RedirectToAction("Index");
+            try
+            {
+                ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
+                Tag tag = service.CreateCategory(model);
+                CategorySelectList.Initialize(repository);
+                FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));
+                return RedirectToAction("Index");
+            }
+            catch (UniqueRecordViolationException ex)
+            {
+                FlashMessages.AddErrorMessage(ex.Message);
+                return View("New", model);                
+            }            
         }
     }
 }

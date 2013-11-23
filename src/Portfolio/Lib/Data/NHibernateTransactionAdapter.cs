@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using NHibernate;
 
 namespace Portfolio.Lib.Data
@@ -17,7 +19,18 @@ namespace Portfolio.Lib.Data
 
         public virtual void Commit()
         {
-            transaction.Commit();
+            try
+            {
+                transaction.Commit();
+            }
+            catch (SqlException ex)
+            {
+                if (new Regex("^Cannot insert duplicate key row in object").IsMatch(ex.Message))
+                {
+                    throw new UniqueRecordViolationException(ex);
+                }
+                throw;
+            }
         }
 
         public void Dispose()

@@ -166,6 +166,7 @@
     <Compile Include="Lib\Data\NHibernateRepository.cs" />
     <Compile Include="Lib\Data\NHibernateTransactionAdapter.cs" />
     <Compile Include="Lib\Data\Repository.cs" />
+    <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
     <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HttpSessionData.cs" />
     <Compile Include="Lib\HttpSessionDataImpl.cs" />

@@ -26,7 +26,5 @@ namespace Portfolio.Lib.Data
         T FindOne<T>(Expression<Func<T, bool>> expression);
 
         T Load<T>(object id);
-
-        void SaveChanges();
     }
 }

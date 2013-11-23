@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using NHibernate;
+using NHibernate.Exceptions;
 using NHibernate.Linq;
 
 namespace Portfolio.Lib.Data
@@ -20,7 +23,18 @@ namespace Portfolio.Lib.Data
 
         public override void Add<T>(T entity)
         {
-            session.Save(entity);
+            try
+            {
+                session.Save(entity);
+            }
+            catch (GenericADOException ex)
+            {
+                if (ex.InnerException is SqlException && new Regex("^Cannot insert duplicate key row in object").IsMatch(ex.InnerException.Message))
+                {
+                    throw new UniqueRecordViolationException(ex.InnerException);
+                }
+                throw;
+            }            
         }
 
         public override ITransactionAdapter BeginTransaction()
@@ -63,14 +77,6 @@ namespace Portfolio.Lib.Data
             return item;
         }
 
-        public override void SaveChanges()
-        {
-            using (var transaction = session.BeginTransaction())
-            {
-                transaction.Commit();
-            }
-        }
-        
         private static IQueryable<T> ApplyPagingToQueryable<T>(IQueryable<T> items, int pageIndex, int pageSize)
         {
             int startIndex = pageIndex * pageSize;

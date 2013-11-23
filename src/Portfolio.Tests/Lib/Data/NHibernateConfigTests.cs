@@ -1,8 +1,7 @@
 ﻿using NHibernate;
 using NUnit.Framework;
-using Portfolio.Lib.Data;
 
-namespace Portfolio.Data
+namespace Portfolio.Lib.Data
 {
     [TestFixture]
     public class NHibernateConfigTests
