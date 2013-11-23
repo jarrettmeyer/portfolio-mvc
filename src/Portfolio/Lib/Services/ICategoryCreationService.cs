@@ -5,6 +5,6 @@ namespace Portfolio.Lib.Services
 {
     public interface ICategoryCreationService
     {
-        Category CreateCategory(CategoryInputModel categoryInputModel);
+        Tag CreateCategory(CategoryInputModel categoryInputModel);
     }
 }

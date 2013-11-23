@@ -54,13 +54,13 @@ namespace Portfolio.Models
         public virtual byte[] Version { get; set; }
 
         /// <summary>
-        /// The list of categories appropriate for the task.
+        /// The list of tags appropriate for the task.
         /// </summary>
-        public virtual IList<Category> Categories { get; set; }
+        public virtual IList<Tag> Tags { get; set; }
 
         private void Initialize()
         {
-            Categories = new List<Category>();
+            Tags = new List<Tag>();
         }
     }
 }

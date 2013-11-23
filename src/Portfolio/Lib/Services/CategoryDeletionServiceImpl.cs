@@ -6,7 +6,7 @@ namespace Portfolio.Lib.Services
 {
     public class CategoryDeletionServiceImpl : ICategoryDeletionService
     {
-        private Category category;
+        private Tag tag;
         private readonly IRepository repository;
 
         public CategoryDeletionServiceImpl(IRepository repository)
@@ -14,15 +14,15 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Category DeleteCategory(int id)
+        public Tag DeleteCategory(int id)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                category = repository.Load<Category>(id);
-                category.IsActive = false;
-                category.UpdatedAt = DateTime.UtcNow;
+                tag = repository.Load<Tag>(id);
+                tag.IsActive = false;
+                tag.UpdatedAt = DateTime.UtcNow;
                 transaction.Commit();
-                return category;
+                return tag;
             }            
         }
     }

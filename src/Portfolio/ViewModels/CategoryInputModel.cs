@@ -7,14 +7,14 @@ namespace Portfolio.ViewModels
     public class CategoryInputModel
     {
         public CategoryInputModel()
-            : this(new Category())
+            : this(new Tag())
         {            
         }
 
-        public CategoryInputModel(Category category)
+        public CategoryInputModel(Tag tag)
         {
-            Description = category.Description;
-            Id = category.Id;
+            Description = tag.Description;
+            Id = tag.Id;
         }
 
         public string ActionName
@@ -50,7 +50,7 @@ namespace Portfolio.ViewModels
 
         public string PageTitle
         {
-            get { return IsNew ? "New Category" : "Edit Category"; }
+            get { return IsNew ? "New Tag" : "Edit Tag"; }
         }
     }
 }

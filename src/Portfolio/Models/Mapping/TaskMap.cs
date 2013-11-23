@@ -35,11 +35,11 @@ namespace Portfolio.Models.Mapping
                 });
             });       
      
-            // Many-to-Many Categories
-            Bag(x => x.Categories, map =>
+            // Many-to-Many Tags
+            Bag(x => x.Tags, map =>
             {
                 map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-                map.Table("[Tasks_Categories]");
+                map.Table("[Tasks_Tags]");
                 map.Key(key =>
                 {
                     key.Column("TaskId");
@@ -48,7 +48,7 @@ namespace Portfolio.Models.Mapping
             {
                 rel.ManyToMany(map =>
                 {                    
-                    map.Column("CategoryId");
+                    map.Column("TagId");
                 });
             });
         }

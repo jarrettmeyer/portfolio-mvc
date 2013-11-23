@@ -10,7 +10,7 @@ namespace Portfolio.Lib.Services
     [TestFixture]
     public class CategoryCreationServiceImplTests
     {
-        private Category category;
+        private Tag tag;
         private CategoryInputModel categoryInputModel;
         private Mock<IRepository> mockRepository;
         private ICategoryCreationService service;
@@ -32,22 +32,22 @@ namespace Portfolio.Lib.Services
         public void It_adds_a_category_to_the_repository()
         {
             service.CreateCategory(categoryInputModel);
-            mockRepository.Verify(x => x.Add(It.IsAny<Category>()), Times.Once());
+            mockRepository.Verify(x => x.Add(It.IsAny<Tag>()), Times.Once());
         }
 
         [Test]
         public void It_sets_the_description()
         {
             categoryInputModel.Description = "This is a test";
-            category = service.CreateCategory(categoryInputModel);
-            category.Description.Should().Be("This is a test");
+            tag = service.CreateCategory(categoryInputModel);
+            tag.Description.Should().Be("This is a test");
         }
 
         [Test]
         public void It_sets_the_new_category_as_active()
         {
-            category = service.CreateCategory(categoryInputModel);
-            category.IsActive.Should().BeTrue();
+            tag = service.CreateCategory(categoryInputModel);
+            tag.IsActive.Should().BeTrue();
         }
     }
 }

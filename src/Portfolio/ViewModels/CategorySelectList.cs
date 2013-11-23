@@ -8,7 +8,7 @@ using Portfolio.Models;
 
 namespace Portfolio.ViewModels
 {
-    public class CategoriesSelectList
+    public class CategorySelectList
     {
         public const string CACHE_KEY = "all_categories";
         public const string TEXT_PROPERTY = "Description";
@@ -28,7 +28,7 @@ namespace Portfolio.ViewModels
             if (repository == null)
                 repository = ServiceLocator.Instance.GetService<IRepository>();
 
-            var categories = repository.Find<Category>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
+            var categories = repository.Find<Tag>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
             var models = categories.Select(c => new CategorySelectListModel(c.Id, c.Description));
             Cache.Instance.Add(CACHE_KEY, models);
         }

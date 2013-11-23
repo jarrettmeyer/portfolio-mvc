@@ -9,7 +9,7 @@ namespace Portfolio.ViewModels
     {
         private readonly List<CategoryRowViewModel> storage = new List<CategoryRowViewModel>();
 
-        public CategoryListViewModel(IEnumerable<Category> categories)
+        public CategoryListViewModel(IEnumerable<Tag> categories)
         {
             storage.AddRange(categories.Select(c => new CategoryRowViewModel(c)));
         }

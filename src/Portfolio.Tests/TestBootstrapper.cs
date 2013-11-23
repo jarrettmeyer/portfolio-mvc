@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NHibernate;
+﻿using System.Linq;
 using NHibernate.Linq;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
@@ -14,15 +12,6 @@ namespace Portfolio
         public static string ConnectionString
         {
             get { return CONNECTION_STRING; }
-        }
-
-        /// <summary>
-        /// Opens a new NHibernate <see cref="ISession"/> instance.
-        /// </summary>        
-        public static ISession OpenSession()
-        {
-            var session = NHibernateConfig.SessionFactory.OpenSession();
-            return session;
         }
 
         public static int DeleteAll<T>()
@@ -44,54 +33,14 @@ namespace Portfolio
             return deletedCount;
         }
 
-        public static int DeleteAllCategories()
+        public static int DeleteAllTags()
         {
-            return DeleteAll<Category>();
+            return DeleteAll<Tag>();
         }
 
         public static int DeleteAllTasks()
         {
             return DeleteAll<Task>();
-        }
-
-        public static Category InsertNewCategory(string description = "Test Category")
-        {
-            var category = new Category
-                           {
-                               Description = description,
-                               CreatedAt = DateTime.UtcNow,
-                               UpdatedAt = DateTime.UtcNow
-                           };            
-            return InsertNewRecord(category);
-        }
-
-        public static Task InsertNewTask(string description, bool isCompleted = false, DateTime? dueOn = null)
-        {
-            var timestamp = DateTime.Now;
-
-            var task = new Task
-            {
-                Title = "Testing...",
-                Description = description,
-                DueOn = dueOn,
-                IsCompleted = isCompleted,
-                CreatedAt = timestamp,
-                UpdatedAt = timestamp
-            };
-            return InsertNewRecord(task);            
-        }
-
-        private static T InsertNewRecord<T>(T inserted)
-        {
-            using (var session = NHibernateConfig.SessionFactory.OpenSession())
-            {
-                using (var txn = session.BeginTransaction())
-                {
-                    session.Save(inserted);
-                    txn.Commit();
-                    return inserted;
-                }
-            }
         }
     }
 }

@@ -1,4 +1,7 @@
 ﻿@model TaskInputModel
+@{
+    IEnumerable<CategorySelectListModel> categoriesSelectList = CategorySelectList.Categories;
+}
 
 <h2>@Model.PageTitle</h2>
 
@@ -30,9 +33,25 @@
     </div>
     
     <div class="form-group">
+        <label class="col-lg-2 control-label">Categories</label>
+        <div class="col-lg-10">
+            @foreach (var cat in Model.Categories)
+            {
+                <div>@cat.Value</div>
+            }
+            <select id="category-select">
+                @foreach (var cat in categoriesSelectList)
+                {
+                    <option value="@cat.Id">@cat.Description</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="@Url.Action("Index", "Tasks")" class="btn btn-default">Cancel</a>
+            @Html.ActionLink("Cancel", "Index", new { controller = "Tasks" }, new { @class = "btn btn-default" })
         </div>        
     </div>
 }

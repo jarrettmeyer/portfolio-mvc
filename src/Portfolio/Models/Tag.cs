@@ -6,36 +6,41 @@ namespace Portfolio.Models
     /// <summary>
     /// The category for a task.
     /// </summary>
-    public class Category : IVersionedEntity
+    public class Tag : IVersionedEntity
     {
         /// <summary>
-        /// The category ID. This is an identity that will be assigned 
+        /// The tag ID. This is an identity that will be assigned 
         /// by the database.        
         /// </summary>
         public virtual int Id { get; set; }
 
         /// <summary>
-        /// The category description.
+        /// The tag description.
         /// </summary>
         public virtual string Description { get; set; }
 
         /// <summary>
-        /// Indicates if the category is active.
+        /// The URL-friendly sluf for the tag.
+        /// </summary>
+        public virtual string Slug { get; set; }
+
+        /// <summary>
+        /// Indicates if the tag is active.
         /// </summary>
         public virtual bool IsActive { get; set; }
 
         /// <summary>
-        /// When the category was created.
+        /// When the tag was created.
         /// </summary>
         public virtual DateTime CreatedAt { get; set; }
 
         /// <summary>
-        /// When the category was updated.
+        /// When the tag was updated.
         /// </summary>
         public virtual DateTime UpdatedAt { get; set; }
         
         /// <summary>
-        /// The category version. This will be assigned by the database.
+        /// The tag version. This will be assigned by the database.
         /// </summary>
         public virtual byte[] Version { get; set; }
     }

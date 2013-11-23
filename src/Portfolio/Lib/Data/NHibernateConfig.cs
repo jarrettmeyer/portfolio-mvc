@@ -27,7 +27,7 @@ namespace Portfolio.Lib.Data
             get
             {
                 var exportedTypes = new List<Type>();
-                exportedTypes.AddRange(typeof(CategoryMap).Assembly.GetExportedTypes());
+                exportedTypes.AddRange(typeof(TagMap).Assembly.GetExportedTypes());
                 return exportedTypes;
             }
         }

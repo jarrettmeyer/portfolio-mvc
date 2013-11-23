@@ -7,11 +7,11 @@ using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {
-    public class CategoriesController : ApplicationController
+    public class TagsController : ApplicationController
     {
         private readonly IRepository repository;
 
-        public CategoriesController()
+        public TagsController()
         {
             repository = ServiceLocator.Instance.GetService<IRepository>();
         }
@@ -20,8 +20,8 @@ namespace Portfolio.Controllers
         public ActionResult Delete(int id)
         {
             ICategoryDeletionService service = ServiceLocator.Instance.GetService<ICategoryDeletionService>();
-            Category category = service.DeleteCategory(id);
-            FlashMessages.AddSuccessMessage(string.Format("Deleted category: {0}", category.Description));
+            Tag tag = service.DeleteCategory(id);
+            FlashMessages.AddSuccessMessage(string.Format("Deleted Tag: {0}", tag.Description));
 
             // This will be called with JavaScript, so we don't have an actual result to return.
             return new EmptyResult();
@@ -30,7 +30,7 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var category = repository.FindOne<Category>(c => c.Id == id);
+            var category = repository.FindOne<Tag>(c => c.Id == id);
             var model = new CategoryInputModel(category);            
             return View("Edit", model);
         }
@@ -39,16 +39,16 @@ namespace Portfolio.Controllers
         public ActionResult Edit(int id, CategoryInputModel model)
         {
             ICategoryUpdateService service = ServiceLocator.Instance.GetService<ICategoryUpdateService>();
-            Category category = service.UpdateCategory(model);
-            CategoriesSelectList.Initialize(repository);
-            FlashMessages.AddSuccessMessage(string.Format("Successfully updated category: {0}", category.Description));
+            Tag tag = service.UpdateCategory(model);
+            CategorySelectList.Initialize(repository);
+            FlashMessages.AddSuccessMessage(string.Format("Successfully updated Tag: {0}", tag.Description));
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = repository.FindAll<Category>().OrderBy(c => c.Description).ToArray();
+            var categories = repository.FindAll<Tag>().OrderBy(c => c.Description).ToArray();
             var model = new CategoryListViewModel(categories);
             return View("Index", model);
         }
@@ -64,9 +64,9 @@ namespace Portfolio.Controllers
         public ActionResult New(CategoryInputModel model)
         {
             ICategoryCreationService service = ServiceLocator.Instance.GetService<ICategoryCreationService>();
-            Category category = service.CreateCategory(model);
-            CategoriesSelectList.Initialize(repository);
-            FlashMessages.AddSuccessMessage(string.Format("Successfully created new category: {0}", category.Description));
+            Tag tag = service.CreateCategory(model);
+            CategorySelectList.Initialize(repository);
+            FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));
             return RedirectToAction("Index");
         }
     }

@@ -7,38 +7,38 @@ namespace Portfolio.Lib.Services
 {
     public class CategoryCreationServiceImpl : ICategoryCreationService
     {
-        private readonly Category category;
+        private readonly Tag tag;
         private readonly IRepository repository;
 
         public CategoryCreationServiceImpl(IRepository repository)
         {
             this.repository = repository;
-            this.category = new Category();
+            this.tag = new Tag();
         }
 
-        public virtual Category CreateCategory(CategoryInputModel categoryInputModel)
+        public virtual Tag CreateCategory(CategoryInputModel categoryInputModel)
         {
             using (var transaction = repository.BeginTransaction())
             {
                 SetCategoryProperties(categoryInputModel);
                 PersistNewCategory(transaction);
-                return category;
+                return tag;
             }
             
         }
 
         private void PersistNewCategory(ITransactionAdapter transaction)
         {
-            repository.Add(category);
+            repository.Add(tag);
             transaction.Commit();
         }
 
         private void SetCategoryProperties(CategoryInputModel categoryInputModel)
         {
-            category.Description = categoryInputModel.Description.Trim();
-            category.IsActive = true;
-            category.CreatedAt = DateTime.UtcNow;
-            category.UpdatedAt = DateTime.UtcNow;
+            tag.Description = categoryInputModel.Description.Trim();
+            tag.IsActive = true;
+            tag.CreatedAt = DateTime.UtcNow;
+            tag.UpdatedAt = DateTime.UtcNow;
         }
     }
 }

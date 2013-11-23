@@ -11,7 +11,7 @@ namespace Portfolio.Models.Mapping
     [TestFixture]
     public class TaskMapTests
     {
-        private Category category;
+        private Tag tag;
         private ISession session;
         private Task task;
         private int taskId;
@@ -26,7 +26,7 @@ namespace Portfolio.Models.Mapping
         public void After_each_test()
         {
             TestBootstrapper.DeleteAll<Task>();
-            TestBootstrapper.DeleteAll<Category>();
+            TestBootstrapper.DeleteAll<Tag>();
         }
 
         [Test]
@@ -34,14 +34,7 @@ namespace Portfolio.Models.Mapping
         {
             using (session = NHibernateConfig.SessionFactory.OpenSession())
             {
-                task = new Task
-                           {
-                               Title = "Test Task",
-                               Description = string.Format("This is a test {0}", DateTime.Now.Ticks),
-                               IsCompleted = false,
-                               CreatedAt = DateTime.UtcNow,
-                               UpdatedAt = DateTime.UtcNow
-                           };
+                task = ObjectMother.NewTask;;
                 session.Save(task);
                 session.Flush();
                 Debug.WriteLine("Inserted new Task. ID: {0}", task.Id);
@@ -54,15 +47,16 @@ namespace Portfolio.Models.Mapping
         {
             using (session = NHibernateConfig.SessionFactory.OpenSession())
             {
-                category = new Category { Description = "Test", IsActive = true, CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow };
-                session.Save(category);
+                tag = ObjectMother.NewTag;
+                tag.Description = "Test";
+                session.Save(tag);
                 session.Flush();
             }
 
             using (session = NHibernateConfig.SessionFactory.OpenSession())
             {
-                task = new Task { Title = "Test", Description = "This is a test", IsCompleted = false, CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow };
-                task.Categories.Add(category);
+                task = ObjectMother.NewTask;
+                task.Tags.Add(tag);
                 session.Save(task);
                 session.Flush();
                 taskId = task.Id;
@@ -71,9 +65,9 @@ namespace Portfolio.Models.Mapping
             using (session = NHibernateConfig.SessionFactory.OpenSession())
             {
                 task = session.Load<Task>(taskId);
-                task.Categories.Should().NotBeNull();
-                task.Categories.Count.Should().Be(1);
-                task.Categories.First().Description.Should().Be("Test");
+                task.Tags.Should().NotBeNull();
+                task.Tags.Count.Should().Be(1);
+                task.Tags.First().Description.Should().Be("Test");
             }
         }
     }

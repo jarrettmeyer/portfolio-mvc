@@ -10,8 +10,8 @@ namespace Portfolio.Models
         public void Default_categories_is_empty()
         {
             var task = new Task();
-            task.Categories.Should().NotBeNull();
-            task.Categories.Count.Should().Be(0);
+            task.Tags.Should().NotBeNull();
+            task.Tags.Count.Should().Be(0);
         }
     }
 }

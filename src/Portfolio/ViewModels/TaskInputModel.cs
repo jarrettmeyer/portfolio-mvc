@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Portfolio.Lib;
 using Portfolio.Models;
 
@@ -14,6 +16,7 @@ namespace Portfolio.ViewModels
         public TaskInputModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
+            Categories = task.Tags.Select(c => new KeyValuePair<int, string>(c.Id, c.Description)).ToArray();
             Description = task.Description;
             DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
             Id = task.Id;
@@ -24,6 +27,8 @@ namespace Portfolio.ViewModels
         {
             get { return IsNew ? "New" : "Edit"; }
         }
+
+        public IEnumerable<KeyValuePair<int, string>> Categories { get; set; }
 
         public string ControllerName
         {

@@ -4,16 +4,17 @@ using NHibernate.Type;
 
 namespace Portfolio.Models.Mapping
 {
-    public class CategoryMap : ClassMapping<Category>
+    public class TagMap : ClassMapping<Tag>
     {
-        public CategoryMap()
+        public TagMap()
         {
-            Table("Categories");
+            Table("Tags");
             Id(x => x.Id, map =>
             {
                 map.Generator(Generators.Identity);
             });
             Property(x => x.Description);
+            Property(x => x.Slug);
             Property(x => x.IsActive, map =>
             {
                 map.Column(col =>
