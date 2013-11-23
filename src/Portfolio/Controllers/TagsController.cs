@@ -40,7 +40,7 @@ namespace Portfolio.Controllers
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             Tag tag = service.UpdateCategory(model);
-            CategorySelectList.Initialize(repository);
+            TagSelectList.Initialize(repository);
             FlashMessages.AddSuccessMessage(string.Format("Successfully updated Tag: {0}", tag.Description));
             return RedirectToAction("Index");
         }
@@ -67,7 +67,7 @@ namespace Portfolio.Controllers
             {
                 ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
                 Tag tag = service.CreateCategory(model);
-                CategorySelectList.Initialize(repository);
+                TagSelectList.Initialize(repository);
                 FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));
                 return RedirectToAction("Index");
             }

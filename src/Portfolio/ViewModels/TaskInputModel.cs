@@ -9,14 +9,15 @@ namespace Portfolio.ViewModels
     public class TaskInputModel
     {
         public TaskInputModel()
-            : this(new Task())
-        {            
+        {
+            Tags = new List<TaskTagInputModel>();
         }
 
         public TaskInputModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
-            Categories = task.Tags.Select(c => new KeyValuePair<int, string>(c.Id, c.Description)).ToArray();
+
+            Tags = task.Tags.Select(tag => new TaskTagInputModel(tag.Id, tag.Description)).ToList();
             Description = task.Description;
             DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
             Id = task.Id;
@@ -28,14 +29,10 @@ namespace Portfolio.ViewModels
             get { return IsNew ? "New" : "Edit"; }
         }
 
-        public IEnumerable<KeyValuePair<int, string>> Categories { get; set; }
-
         public string ControllerName
         {
             get { return "Tasks"; }
         }
-
-        public int? SelectedCategory { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]
         public string Description { get; set; }
@@ -64,6 +61,8 @@ namespace Portfolio.ViewModels
                 return new { id = Id };
             }
         }
+
+        public IList<TaskTagInputModel> Tags { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]

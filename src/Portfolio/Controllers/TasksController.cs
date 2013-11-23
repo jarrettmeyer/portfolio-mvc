@@ -10,6 +10,12 @@ namespace Portfolio.Controllers
 {
     public class TasksController : ApplicationController
     {
+        public TasksController()
+        {
+            if (!TagSelectList.IsInitialized)
+                TagSelectList.Initialize();
+        }
+
         [HttpGet]
         public ActionResult Index()
         {

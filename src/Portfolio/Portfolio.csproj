@@ -198,16 +198,16 @@
     <Compile Include="Models\Mapping\TaskMap.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CategorySelectList.cs" />
+    <Compile Include="ViewModels\TagSelectList.cs" />
     <Compile Include="ViewModels\TagInputModel.cs" />
     <Compile Include="ViewModels\TagListViewModel.cs" />
     <Compile Include="ViewModels\TagRowViewModel.cs" />
-    <Compile Include="ViewModels\CategorySelectListModel.cs" />
     <Compile Include="ViewModels\FlashMessage.cs" />
     <Compile Include="ViewModels\FlashMessageCollection.cs" />
     <Compile Include="ViewModels\TaskInputModel.cs" />
     <Compile Include="ViewModels\TaskListViewModel.cs" />
     <Compile Include="ViewModels\TaskRowViewModel.cs" />
+    <Compile Include="ViewModels\TaskTagInputModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,7 +237,7 @@
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\App\bindDeleteLinks.js" />
     <Content Include="Scripts\App\SlugGenerator.js" />
-    <Content Include="Scripts\App\TasksForm.js" />
+    <Content Include="Scripts\App\TasksFormView.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jasmine-samples\Player.js" />

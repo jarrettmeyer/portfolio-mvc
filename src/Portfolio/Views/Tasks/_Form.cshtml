@@ -1,11 +1,11 @@
 ﻿@model TaskInputModel
 @{
-    IEnumerable<CategorySelectListModel> categoriesSelectList = CategorySelectList.Categories;
+    IEnumerable<SelectListItem> tagSelectList = TagSelectList.Tags;
 }
 
 <h2>@Model.PageTitle</h2>
 
-@using (Html.BeginForm(Model.ActionName, Model.ControllerName, Model.RouteValues, FormMethod.Post, new { @class = "form-horizontal", role="form" }))
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, Model.RouteValues, FormMethod.Post, new { id = "task-form", @class = "form-horizontal", role="form" }))
 {
     @Html.HiddenFor(x => x.Id)
 
@@ -33,18 +33,26 @@
     </div>
     
     <div class="form-group">
-        <label class="col-lg-2 control-label">Categories</label>
+        <label class="col-lg-2 control-label">Tags</label>
         <div class="col-lg-10">
-            @foreach (var cat in Model.Categories)
-            {
-                <div>@cat.Value</div>
-            }
-            <select id="category-select">
-                @foreach (var cat in categoriesSelectList)
+            <div id="current-tags">
+                @if (Model.Tags != null)
                 {
-                    <option value="@cat.Id">@cat.Description</option>
+                    foreach (var tag in Model.Tags)
+                    {
+                        <input type="hidden" name="Tags[{{id}}].Id" value="@tag.Id"/>
+                        <input type="hidden" name="Tags[{{id}}].Description" value="@tag.Description"/>
+                        <div>@tag.Description</div>
+                    }    
+                }                
+            </div>
+            <select id="tag-select" class="form-control" style="width: auto;display:inline;margin-right:1em;">
+                @foreach (var tag in tagSelectList)
+                {
+                    <option value="@tag.Value">@tag.Text</option>
                 }
             </select>
+            <button type="button" class="btn btn-success" id="add-tag">Add</button>
         </div>
     </div>
     
@@ -55,3 +63,5 @@
         </div>        
     </div>
 }
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/App/TasksFormView.js")"></script>
