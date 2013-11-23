@@ -41,9 +41,14 @@ namespace Portfolio.Lib
 
             if (settings.IncludeDeleteAction)
             {
-                routes.MapRoute(resourceName + "-Delete", resourceName.ToLowerInvariant() + "/{id}/delete",
-                    new { controller = controllerName, action = "Show" },
-                    new { id = settings.IdConstraint, method = new HttpMethodConstraint(settings.DeleteHttpMethod) });    
+                string path = resourceName.ToLowerInvariant() + "/{id}";
+                if (settings.UseDistinctDeleteUrl)
+                {
+                    path += "/delete";
+                }
+                routes.MapRoute(resourceName + "-Delete", path,
+                        new { controller = controllerName, action = "Delete" },
+                        new { id = settings.IdConstraint, method = new HttpMethodConstraint(settings.DeleteHttpMethod) });
             }
             
         }

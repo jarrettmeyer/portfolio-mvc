@@ -10,21 +10,36 @@
         window.app = {};
     }
 
-    app.bindDeleteLinks = function (next) {
-        // If no next callback is given, then just reload the page.
-        if (!next) {
-            next = window.location.reload;
-        }
-        $("body").on("click", ".delete-link", function () {
+    app.bindDeleteLinks = function (options) {
+        var self = this;
+        var defaults = {
+            before: function() {
+                console.log("Before sending AJAX request.");
+            },
+            deleteLinkSelector: ".delete-link",
+            events: "click",
+            httpMethod: "DELETE",
+            next: function() {
+                window.location.reload();
+            }
+        };
+        self.options = $.extend(defaults, options);
+                
+        $("body").on(self.options.events, self.options.deleteLinkSelector, function () {
             var url = $(this).attr("href");
+            if (self.options.before) {
+                self.options.before();
+            }
             console.log("Sending delete request. URL: " + url);
             $.ajax({
                 url: url,
-                type: "DELETE",
+                type: self.options.httpMethod,
                 cache: false,
-                onComplete: function (jqXHR, textStatus) {
+                complete: function (jqXHR, textStatus) {
                     console.log("Delete request complete. Text status: " + textStatus);
-                    next();
+                    if (self.options.next) {
+                        self.options.next();
+                    }
                 }
             });
             return false;

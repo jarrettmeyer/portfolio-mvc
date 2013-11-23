@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -25,7 +24,7 @@ namespace Portfolio.Controllers
             FlashMessages.AddSuccessMessage(string.Format("Deleted Tag: {0}", tag.Description));
 
             // This will be called with JavaScript, so we don't have an actual result to return.
-            return new EmptyResult();
+            return Json(new { success = true });
         }
 
         [HttpGet]
