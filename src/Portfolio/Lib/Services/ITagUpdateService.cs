@@ -3,7 +3,7 @@ using Portfolio.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
-    public interface ICategoryUpdateService
+    public interface ITagUpdateService
     {
         Tag UpdateCategory(TagInputModel tagInputModel);
     }

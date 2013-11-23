@@ -1,26 +1,25 @@
 ﻿using System;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
-using Portfolio.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
-    public class CategoryUpdateServiceImpl : ICategoryUpdateService
+    public class TagDeletionServiceImpl : ITagDeletionService
     {
         private Tag tag;
         private readonly IRepository repository;
 
-        public CategoryUpdateServiceImpl(IRepository repository)
+        public TagDeletionServiceImpl(IRepository repository)
         {
             this.repository = repository;
         }
 
-        public Tag UpdateCategory(TagInputModel tagInputModel)
+        public Tag DeleteCategory(int id)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                tag = repository.Load<Tag>(tagInputModel.Id);
-                tag.Description = tagInputModel.Description.Trim();
+                tag = repository.Load<Tag>(id);
+                tag.IsActive = false;
                 tag.UpdatedAt = DateTime.UtcNow;
                 transaction.Commit();
                 return tag;

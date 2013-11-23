@@ -2,7 +2,7 @@
     var slugGenerator;
 
     beforeEach(function() {
-        slugGenerator = new SlugGenerator();
+        slugGenerator = new app.SlugGenerator();
     });    
 
     it("generates the expected slug for undefined values", function () {

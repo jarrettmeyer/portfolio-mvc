@@ -19,7 +19,7 @@ namespace Portfolio.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            ICategoryDeletionService service = ServiceLocator.Instance.GetService<ICategoryDeletionService>();
+            ITagDeletionService service = ServiceLocator.Instance.GetService<ITagDeletionService>();
             Tag tag = service.DeleteCategory(id);
             FlashMessages.AddSuccessMessage(string.Format("Deleted Tag: {0}", tag.Description));
 
@@ -38,7 +38,7 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TagInputModel model)
         {
-            ICategoryUpdateService service = ServiceLocator.Instance.GetService<ICategoryUpdateService>();
+            ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             Tag tag = service.UpdateCategory(model);
             CategorySelectList.Initialize(repository);
             FlashMessages.AddSuccessMessage(string.Format("Successfully updated Tag: {0}", tag.Description));
@@ -49,7 +49,7 @@ namespace Portfolio.Controllers
         public ActionResult Index()
         {
             var categories = repository.FindAll<Tag>().OrderBy(c => c.Description).ToArray();
-            var model = new CategoryListViewModel(categories);
+            var model = new TagListViewModel(categories);
             return View("Index", model);
         }
 

@@ -54,7 +54,7 @@ namespace Portfolio.ViewModels
         }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Slug is required")]
-        [RegularExpression(@"[a-z0-9\.\_\-]+")]
+        //[RegularExpression("[a-z0-9\\.\\_\\-]+")]
         public string Slug { get; set; }
     }
 }

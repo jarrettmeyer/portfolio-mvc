@@ -4,7 +4,11 @@
 (function () {
     "use strict";
 
-    window.SlugGenerator = (function () {
+    if (!window.app) {
+        window.app = {};
+    }
+
+    window.app.SlugGenerator = (function () {
         function SlugGenerator(options) {
             var defaults = {
                 emptyStringValue: "empty",

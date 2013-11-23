@@ -36,6 +36,7 @@ namespace Portfolio.Lib.Services
         private void SetCategoryProperties(TagInputModel tagInputModel)
         {
             tag.Description = tagInputModel.Description.Trim();
+            tag.Slug = tagInputModel.Slug;
             tag.IsActive = true;
             tag.CreatedAt = DateTime.UtcNow;
             tag.UpdatedAt = DateTime.UtcNow;
