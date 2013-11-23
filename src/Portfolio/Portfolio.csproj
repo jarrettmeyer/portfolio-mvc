@@ -189,7 +189,6 @@
     <Compile Include="Lib\Services\NinjectServiceLocator.cs" />
     <Compile Include="Lib\Services\ServiceLocator.cs" />
     <Compile Include="Lib\Services\TaskCreationServiceImpl.cs" />
-    <Compile Include="Lib\SlugGenerator.cs" />
     <Compile Include="Lib\StringExtensions.cs" />
     <Compile Include="Lib\SystemClock.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -255,7 +254,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
-    <Content Include="Views\Test\QUnit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\New.cshtml" />
     <Content Include="Views\Tasks\Show.cshtml" />
