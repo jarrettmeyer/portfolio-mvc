@@ -235,6 +235,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\App\TagsFormView.js" />
     <Content Include="Scripts\App\TagsIndexView.js" />
+    <Content Include="Scripts\App\TasksIndexView.js" />
     <Content Include="Scripts\jasmine\jasmine-html.js" />
     <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jasmine\MIT.LICENSE" />

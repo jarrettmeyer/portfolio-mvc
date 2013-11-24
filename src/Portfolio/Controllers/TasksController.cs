@@ -71,7 +71,8 @@ namespace Portfolio.Controllers
         public ActionResult Index()
         {
             var repository = ServiceLocator.Instance.GetService<IRepository>();
-            var tasks = repository.FindAll<Task>().OrderBy(t => t.Id);
+            var tasks = repository.Find<Task>(t => !t.IsCompleted)
+                .OrderBy(t => t.DueOn).ThenBy(t => t.Id);
             var model = new TaskListViewModel(tasks);
             return View("Index", model);
         }

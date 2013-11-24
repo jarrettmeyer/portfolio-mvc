@@ -7,7 +7,7 @@
 
     window.app.TagsIndexView = (function () {
         function TagsIndexView() {
-            
+            console.log("Created new instance of TagsIndexView");
         }
 
         TagsIndexView.prototype.initialize = function() {
