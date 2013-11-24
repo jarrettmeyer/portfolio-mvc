@@ -17,3 +17,7 @@ span.field-validation-error {
     color: #b94a48;
     font-size: 0.9em;
 }
+
+.soft {
+    color: #606060;
+}

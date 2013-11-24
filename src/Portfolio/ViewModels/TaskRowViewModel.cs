@@ -1,37 +1,40 @@
-﻿using Portfolio.Models;
+﻿using System;
+using System.Linq;
+using Portfolio.Models;
 
 namespace Portfolio.ViewModels
 {
     public class TaskRowViewModel
     {
-        private readonly Task task;
-
         public TaskRowViewModel(Task task)
         {
-            this.task = task;
+            Description = task.Description;
+            DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "None";
+            HasDueDate = task.DueOn.HasValue;
+            Id = task.Id;
+            IsCompleted = task.IsCompleted;
+            IsPastDue = task.DueOn.HasValue && !task.IsCompleted && task.DueOn.Value < DateTime.Today;
+            ShowCompleteButton = !task.IsCompleted;
+            Tags = task.Tags.Select(tag => new TagLabelViewModel(tag.Description, tag.Slug)).ToArray();
+            Title = task.Title;
         }
 
-        public string Description
-        {
-            get { return task.Description ?? ""; }
-        }
+        public string Description { get; set; }        
 
-        public string DueOn
-        {
-            get
-            {
-                return task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
-            }
-        }
+        public string DueOn { get; set; }        
 
-        public int Id
-        {
-            get { return task.Id; }
-        }
+        public bool HasDueDate { get; set; }
 
-        public string Title
-        {
-            get { return task.Title; }
-        }
+        public int Id { get; set; }
+
+        public bool IsCompleted { get; set; }
+
+        public bool IsPastDue { get; set; }
+
+        public bool ShowCompleteButton { get; set; }
+
+        public TagLabelViewModel[] Tags { get; set; }
+
+        public string Title { get; set; }        
     }
 }

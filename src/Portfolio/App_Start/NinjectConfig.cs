@@ -21,6 +21,7 @@ namespace Portfolio.App_Start
             kernel.Bind<ITagCreationService>().To<TagCreationServiceImpl>();
             kernel.Bind<ITagDeletionService>().To<TagDeletionServiceImpl>();
             kernel.Bind<ITagUpdateService>().To<TagUpdateServiceImpl>();
+            kernel.Bind<ITaskCompletionService>().To<TaskCompletionServiceImpl>();
             kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();
 
             // Web layer and generic service bindings

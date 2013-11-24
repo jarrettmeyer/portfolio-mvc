@@ -16,43 +16,26 @@ namespace Portfolio.Controllers
                 TagSelectList.Initialize();
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Complete(int id)
         {
-            var repository = ServiceLocator.Instance.GetService<IRepository>();
-            var tasks = repository.FindAll<Task>().OrderBy(t => t.Id);
-            var model = new TaskListViewModel(tasks);
-            return View("Index", model);
+            ITaskCompletionService service = ServiceLocator.Instance.GetService<ITaskCompletionService>();
+            Task task = service.CompleteTask(id);
+            FlashMessages.AddSuccessMessage(string.Format("Completed task: {0}", task.Title));
+            return Json(new { success = true });
         }
 
-        [HttpGet]
-        public ActionResult Show(int id)
+        [HttpDelete]
+        public ActionResult Delete(int id)
         {
             IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
-            var task = repository.Load<Task>(id);
-            var model = new TaskViewModel(task);
-            return View("Show", model);
-        }
-
-        [HttpGet]
-        public ActionResult New()
-        {
-            var model = new TaskInputModel();
-            return View("New", model);
-        }
-
-        [HttpPost]
-        public ActionResult New(TaskInputModel model)
-        {
-            CheckModelState(() =>
+            using (var transaction = repository.BeginTransaction())
             {
-                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
-                return View("New", model);
-            });
-            ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
-            Task task = service.CreateTask(model);
-            FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
-            return RedirectToAction("Show", new { id = task.Id });            
+                Task task = repository.Load<Task>(id);
+                repository.Delete(task);
+                transaction.Commit();
+                return new EmptyResult();
+            }
         }
 
         [HttpGet]
@@ -80,21 +63,47 @@ namespace Portfolio.Controllers
                 task.Description = model.Description;
                 task.DueOn = model.DueOn.SafeParseDateTime();
                 transaction.Commit();
-                return RedirectToAction("Show", new { id = model.Id });            
+                return RedirectToAction("Show", new { id = model.Id });
             }
         }
 
-        [HttpDelete]
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var repository = ServiceLocator.Instance.GetService<IRepository>();
+            var tasks = repository.FindAll<Task>().OrderBy(t => t.Id);
+            var model = new TaskListViewModel(tasks);
+            return View("Index", model);
+        }
+
+        [HttpGet]
+        public ActionResult New()
+        {
+            var model = new TaskInputModel();
+            return View("New", model);
+        }
+
+        [HttpPost]
+        public ActionResult New(TaskInputModel model)
+        {
+            CheckModelState(() =>
+            {
+                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
+                return View("New", model);
+            });
+            ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
+            Task task = service.CreateTask(model);
+            FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
+            return RedirectToAction("Show", new { id = task.Id });            
+        }
+
+        [HttpGet]
+        public ActionResult Show(int id)
         {
             IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
-            using (var transaction = repository.BeginTransaction())
-            {
-                Task task = repository.Load<Task>(id);
-                repository.Delete(task);
-                transaction.Commit();
-                return new EmptyResult();
-            }
+            var task = repository.Load<Task>(id);
+            var model = new TaskViewModel(task);
+            return View("Show", model);
         }
     }
 }
