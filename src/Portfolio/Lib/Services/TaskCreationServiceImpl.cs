@@ -1,5 +1,4 @@
-﻿using System;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 
@@ -53,8 +52,8 @@ namespace Portfolio.Lib.Services
                 Description = model.Description,
                 DueOn = model.DueOn.SafeParseDateTime(),
                 IsCompleted = false,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                CreatedAt = Clock.Instance.Now,
+                UpdatedAt = Clock.Instance.Now
             };
 
         }

@@ -32,8 +32,7 @@ namespace Portfolio.Controllers
         {            
             public void SetUpContext()
             {
-                // Initialize the controller.
-                Controller = new TasksController();
+                
                 Task = new Task();
                 TaskInputModel = new TaskInputModel();
 
@@ -63,6 +62,9 @@ namespace Portfolio.Controllers
                     DefaultValue = DefaultValue.Mock
                 };
                 MockServiceLocator.Setup(x => x.GetService<ITaskCreationService>()).Returns(MockTaskCreationSerivce.Object);
+
+                // Initialize the controller.
+                Controller = new TasksController();
             }
 
             public TasksController Controller { get; set; }

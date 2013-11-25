@@ -1,5 +1,4 @@
-﻿using System;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
 
 namespace Portfolio.Lib.Services
@@ -20,8 +19,8 @@ namespace Portfolio.Lib.Services
             {
                 task = repository.Load<Task>(id);
                 task.IsCompleted = true;
-                task.CompletedAt = DateTime.UtcNow;
-                task.UpdatedAt = DateTime.UtcNow;
+                task.CompletedAt = Clock.Instance.Now;
+                task.UpdatedAt = Clock.Instance.Now;
                 transaction.Commit();
                 return task;
             }            

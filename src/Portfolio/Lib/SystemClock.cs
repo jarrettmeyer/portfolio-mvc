@@ -2,9 +2,9 @@
 
 namespace Portfolio.Lib
 {
-    public class SystemClock : IClock
+    public class SystemClock : Clock
     {
-        public DateTime Now
+        public override DateTime Now
         {
             get { return DateTime.UtcNow; }
         }

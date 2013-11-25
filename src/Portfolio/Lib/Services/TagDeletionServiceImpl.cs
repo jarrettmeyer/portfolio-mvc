@@ -1,5 +1,4 @@
-﻿using System;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
 
 namespace Portfolio.Lib.Services
@@ -20,7 +19,7 @@ namespace Portfolio.Lib.Services
             {
                 tag = repository.Load<Tag>(id);
                 tag.IsActive = false;
-                tag.UpdatedAt = DateTime.UtcNow;
+                tag.UpdatedAt = Clock.Instance.Now;
                 transaction.Commit();
                 return tag;
             }            

@@ -1,5 +1,4 @@
-﻿using System;
-using Portfolio.Lib.Data;
+﻿using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 
@@ -38,8 +37,8 @@ namespace Portfolio.Lib.Services
             tag.Description = tagInputModel.Description.Trim();
             tag.Slug = tagInputModel.Slug;
             tag.IsActive = true;
-            tag.CreatedAt = DateTime.UtcNow;
-            tag.UpdatedAt = DateTime.UtcNow;
+            tag.CreatedAt = Clock.Instance.Now;
+            tag.UpdatedAt = Clock.Instance.Now;
         }
     }
 }

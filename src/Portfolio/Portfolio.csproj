@@ -157,6 +157,7 @@
     <Compile Include="Lib\Caching\AspNetHttpCache.cs" />
     <Compile Include="Lib\Caching\Cache.cs" />
     <Compile Include="Lib\Caching\ICache.cs" />
+    <Compile Include="Lib\Clock.cs" />
     <Compile Include="Lib\CollectionExtensions.cs" />
     <Compile Include="Lib\Config.cs" />
     <Compile Include="Lib\Data\IFetchStrategy.cs" />
