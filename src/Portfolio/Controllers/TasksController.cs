@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Antlr.Runtime.Misc;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -50,11 +52,7 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult Edit(TaskInputModel model)
         {
-            CheckModelState(() =>
-            {
-                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
-                return View("Edit", model);
-            });
+            CheckModelState(() => OnInvalidTaskForm("Edit", model));
             var repository = ServiceLocator.Instance.GetService<IRepository>();
             using (var transaction = repository.BeginTransaction())
             {
@@ -87,11 +85,7 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(TaskInputModel model)
         {
-            CheckModelState(() =>
-            {
-                FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
-                return View("New", model);
-            });
+            CheckModelState(() => OnInvalidTaskForm("New", model));
             ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
             Task task = service.CreateTask(model);
             FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
@@ -105,6 +99,12 @@ namespace Portfolio.Controllers
             var task = repository.Load<Task>(id);
             var model = new TaskViewModel(task);
             return View("Show", model);
+        }
+
+        private ActionResult OnInvalidTaskForm(string viewName, TaskInputModel model)
+        {
+            FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
+            return View("New", model);
         }
     }
 }
