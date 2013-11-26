@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
+    <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="Models\Mapping\TagMapTests.cs" />

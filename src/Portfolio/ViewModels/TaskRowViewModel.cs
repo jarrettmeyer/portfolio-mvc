@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
+using Portfolio.Lib;
 using Portfolio.Models;
 
 namespace Portfolio.ViewModels
@@ -8,7 +10,7 @@ namespace Portfolio.ViewModels
     {
         public TaskRowViewModel(Task task)
         {
-            Description = task.Description;
+            Description = new HtmlTextFormatter().FormatText(task.Description);
             DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "None";
             HasDueDate = task.DueOn.HasValue;
             Id = task.Id;
@@ -19,7 +21,7 @@ namespace Portfolio.ViewModels
             Title = task.Title;
         }
 
-        public string Description { get; set; }        
+        public IHtmlString Description { get; set; }
 
         public string DueOn { get; set; }        
 

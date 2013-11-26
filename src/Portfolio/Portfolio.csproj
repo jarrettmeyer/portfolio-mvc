@@ -165,6 +165,7 @@
     <Compile Include="Lib\Data\Repository.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
     <Compile Include="Lib\Ensure.cs" />
+    <Compile Include="Lib\HtmlTextFormatter.cs" />
     <Compile Include="Lib\HttpSessionData.cs" />
     <Compile Include="Lib\HttpSessionDataImpl.cs" />
     <Compile Include="Lib\IClock.cs" />

@@ -9,7 +9,16 @@
     border-bottom: 1px solid #c0c0c0;
 }
 
+.task-list-item {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 .task-list .task-title {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
+}
+
+.task-description {
+    padding-left: 3em;
 }
