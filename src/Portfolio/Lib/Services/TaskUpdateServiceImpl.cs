@@ -25,6 +25,7 @@ namespace Portfolio.Lib.Services
                 FetchTaskById(model);
                 UpdateTaskProperties(model);
                 AddNewTagsToTask(model);
+                RemoveOldTagsFromTask(model);
                 transaction.Commit();
                 return task;
             }
@@ -45,6 +46,18 @@ namespace Portfolio.Lib.Services
         {
             task = repository.Load<Task>(model.Id);
             currentTagIds = task.Tags.Select(t => t.Id).ToArray();
+        }
+
+        private void RemoveOldTagsFromTask(TaskInputModel model)
+        {
+            var selectedIds = model.Tags.Select(t => t.Id);
+            var oldTagIds = currentTagIds.Where(id => !selectedIds.Contains(id));
+            foreach (var oldTagId in oldTagIds)
+            {
+                int idToRemove = oldTagId;
+                Tag oldTag = task.Tags.Single(t => t.Id == idToRemove);
+                task.Tags.Remove(oldTag);
+            }
         }
 
         private void UpdateTaskProperties(TaskInputModel model)

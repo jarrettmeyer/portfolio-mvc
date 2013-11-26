@@ -22,6 +22,7 @@ namespace Portfolio.Lib.Services
         {
             SetUpMockRepository();
             taskInputModel = new TaskInputModel { Id = 123 };
+            task = new Task();
 
             service = new TaskUpdateServiceImpl(mockRepository.Object);
         }
@@ -66,6 +67,24 @@ namespace Portfolio.Lib.Services
         }
 
         [Test]
+        public void It_should_remove_tags_that_no_longer_belong()
+        {
+            task.Tags.Add(new Tag { Id = 1 });
+            task.Tags.Add(new Tag { Id = 2 });
+            taskInputModel.Tags = new List<TaskTagInputModel>
+            {
+                new TaskTagInputModel(1, "Tag 1"),
+                new TaskTagInputModel(3, "Tag 3")
+            };
+
+            task = service.UpdateTask(taskInputModel);
+
+            task.Tags.Count.Should().Be(2);
+            task.Tags[0].Id.Should().Be(1);
+            task.Tags[1].Id.Should().Be(3);
+        }
+
+        [Test]
         public void It_should_update_task_properties()
         {
             taskInputModel.Description = "This is a description";
@@ -87,7 +106,6 @@ namespace Portfolio.Lib.Services
             mockRepository.Setup(x => x.BeginTransaction()).Returns(mockTransaction.Object);
             mockRepository.Setup(x => x.Load<Task>(It.IsAny<int>())).Returns<int>(id =>
             {
-                task = new Task();
                 task.Id = id;
                 return task;
             });
