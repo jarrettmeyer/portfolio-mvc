@@ -5,6 +5,6 @@
         /// <summary>
         /// Get a service from the service locator.
         /// </summary>
-        TService GetService<TService>();
+        TService GetService<TService>() where TService : class;
     }
 }

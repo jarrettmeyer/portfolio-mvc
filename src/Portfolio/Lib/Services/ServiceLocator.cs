@@ -10,6 +10,6 @@
             set { instance = value; }
         }
 
-        public abstract TService GetService<TService>();
+        public abstract TService GetService<TService>() where TService : class;
     }
 }

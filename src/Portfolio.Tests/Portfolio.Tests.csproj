@@ -94,6 +94,7 @@
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
+    <Compile Include="MockServiceLocator.cs" />
     <Compile Include="Models\Mapping\TagMapTests.cs" />
     <Compile Include="Models\Mapping\TaskMapTests.cs" />
     <Compile Include="Lib\Data\NHibernateConfigTests.cs" />

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
+using NHibernate.Criterion;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -19,7 +21,14 @@ namespace Portfolio.Controllers
         [SetUp]
         public void Before_each_test()
         {
+            ServiceLocator.Instance = new MockServiceLocator();
             tasksController = new TasksController();
+        }
+
+        [TearDown]
+        public void After_each_test()
+        {
+            ServiceLocator.Instance = null;
         }
 
         [Test]
@@ -32,20 +41,16 @@ namespace Portfolio.Controllers
         {            
             public void SetUpContext()
             {
-                
+                // Initialize the service locator.
+                ServiceLocator.Instance = new MockServiceLocator();
+
                 Task = new Task();
                 TaskInputModel = new TaskInputModel();
-
-                // Initialize the service locator.
-                MockServiceLocator = new Mock<IServiceLocator>
-                {
-                    DefaultValue = DefaultValue.Mock
-                };
-                ServiceLocator.Instance = MockServiceLocator.Object;
+                
+                
 
                 // Initialize the repository
-                MockRepository = new Mock<IRepository>();
-                MockServiceLocator.Setup(x => x.GetService<IRepository>()).Returns(MockRepository.Object);
+                MockRepository = MockServiceLocator.GetMock<IRepository>();                
                 MockRepository.Setup(x => x.Add(It.IsAny<Task>()))
                     .Callback<Task>(t =>
                     {
@@ -57,11 +62,7 @@ namespace Portfolio.Controllers
                     .Callback<int>(i => Task.Id = i);
 
                 // Initialize the task creation service.
-                MockTaskCreationSerivce = new Mock<ITaskCreationService>
-                {
-                    DefaultValue = DefaultValue.Mock
-                };
-                MockServiceLocator.Setup(x => x.GetService<ITaskCreationService>()).Returns(MockTaskCreationSerivce.Object);
+                MockTaskCreationSerivce = MockServiceLocator.GetMock<ITaskCreationService>();
 
                 // Initialize the controller.
                 Controller = new TasksController();
@@ -70,8 +71,7 @@ namespace Portfolio.Controllers
             public TasksController Controller { get; set; }
             public Task Task { get; set; }
             public TaskInputModel TaskInputModel { get; set; }
-            public Mock<IRepository> MockRepository { get; set; }
-            public Mock<IServiceLocator> MockServiceLocator { get; set; }
+            public Mock<IRepository> MockRepository { get; set; }            
             public Mock<ITaskCreationService> MockTaskCreationSerivce { get; set; }
         }
 
@@ -87,7 +87,7 @@ namespace Portfolio.Controllers
             public void It_fetches_tasks()
             {
                 Controller.Index();
-                MockRepository.Verify(x => x.FindAll<Task>(null, null), Times.Once());
+                MockRepository.Verify(x => x.Find(It.IsAny<Expression<Func<Task, bool>>>(), null, null));
             }
 
             [Test]
