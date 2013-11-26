@@ -1,6 +1,7 @@
 bin/
 obj/
 
+error-*.xml
 *.DotSettings
 *.dbmdl
 *.suo

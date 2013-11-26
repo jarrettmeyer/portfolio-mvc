@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Portfolio.Controllers
 {
@@ -10,5 +11,10 @@ namespace Portfolio.Controllers
             return RedirectToAction("Index", "Tasks");
         }
 
+        [HttpGet]
+        public ActionResult Error()
+        {            
+            throw new ApplicationException("This action is used to test ELMAH.");
+        }
     }
 }
