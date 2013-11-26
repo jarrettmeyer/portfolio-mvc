@@ -8,7 +8,7 @@ using Portfolio.ViewModels;
 namespace Portfolio.Lib.Services
 {
     [TestFixture]
-    public class CategoryCreationServiceImplTests
+    public class TagCreationServiceImplTests
     {
         private Tag tag;
         private TagInputModel tagInputModel;
