@@ -31,7 +31,11 @@
                         else
                         {
                             <span class="task-due-on soft">@task.DueOn</span>
-                        }                        
+                        }
+                        @if (task.IsDueToday)
+                        {
+                            <div class="label label-warning">Due Today</div>
+                        }
                     </div>    
                 </div>    
                 <div class="row">

@@ -108,6 +108,7 @@
     <Compile Include="Controllers\TasksControllerTests.cs" />
     <Compile Include="Lib\CollectionExtensionsTests.cs" />
     <Compile Include="ViewModels\FlashMessageCollectionTests.cs" />
+    <Compile Include="ViewModels\TaskRowViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
