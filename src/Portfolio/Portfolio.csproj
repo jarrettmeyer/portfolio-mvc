@@ -178,6 +178,7 @@
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
     <Compile Include="Lib\ResourceRouteConfigurationSettings.cs" />
     <Compile Include="Lib\Services\ITaskCompletionService.cs" />
+    <Compile Include="Lib\Services\ITaskUpdateService.cs" />
     <Compile Include="Lib\Services\TagCreationServiceImpl.cs" />
     <Compile Include="Lib\Services\TagDeletionServiceImpl.cs" />
     <Compile Include="Lib\Services\TagUpdateServiceImpl.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Lib\Services\ServiceLocator.cs" />
     <Compile Include="Lib\Services\TaskCompletionServiceImpl.cs" />
     <Compile Include="Lib\Services\TaskCreationServiceImpl.cs" />
+    <Compile Include="Lib\Services\TaskUpdateServiceImpl.cs" />
     <Compile Include="Lib\StringExtensions.cs" />
     <Compile Include="Lib\SystemClock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
