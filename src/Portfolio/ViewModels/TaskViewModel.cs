@@ -1,48 +1,31 @@
-﻿using Portfolio.Lib;
+﻿using System.Web;
+using Portfolio.Lib;
 using Portfolio.Models;
 
 namespace Portfolio.ViewModels
 {
     public class TaskViewModel
-    {
-        private readonly Task task;
+    {        
+        public TaskViewModel()
+        {
+        }
 
         public TaskViewModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
-            this.task = task;
+
+            Description = new HtmlTextFormatter().FormatText(task.Description);
+            DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "None";
+            Id = task.Id;
+            Title = task.Title;
         }
 
-        public string Description
-        {
-            get { return task.Description ?? ""; }
-        }
+        public IHtmlString Description { get; set; }
 
-        public string DueOn
-        {
-            get
-            {
-                if (task.DueOn.HasValue)
-                {
-                    return task.DueOn.Value.ToShortDateString();
-                }
-                return "";
-            }
-        }
+        public string DueOn { get; set; }        
 
-        public int Id
-        {
-            get { return task.Id; }
-        }
+        public int Id { get; set; }        
 
-        public string Title
-        {
-            get { return string.Format("Task Details: {0}", task.Title); }            
-        }
-
-        public static TaskViewModel ForTask(Task task)
-        {
-            return new TaskViewModel(task);
-        }
+        public string Title { get; set; }
     }
 }

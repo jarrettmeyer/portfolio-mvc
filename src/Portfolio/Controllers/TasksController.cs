@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Antlr.Runtime.Misc;
-using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
 using Portfolio.Models;
@@ -53,16 +50,10 @@ namespace Portfolio.Controllers
         public ActionResult Edit(TaskInputModel model)
         {
             CheckModelState(() => OnInvalidTaskForm("Edit", model));
-            var repository = ServiceLocator.Instance.GetService<IRepository>();
-            using (var transaction = repository.BeginTransaction())
-            {
-                Task task = repository.Load<Task>(model.Id);
-                task.Title = model.Title;
-                task.Description = model.Description;
-                task.DueOn = model.DueOn.SafeParseDateTime();
-                transaction.Commit();
-                return RedirectToAction("Show", new { id = model.Id });
-            }
+            var service = ServiceLocator.Instance.GetService<ITaskUpdateService>();
+            var task = service.UpdateTask(model);
+            FlashMessages.AddSuccessMessage(string.Format("Updated task: {0}", task.Title));
+            return RedirectToAction("Show", new { id = model.Id });            
         }
 
         [HttpGet]
