@@ -17,5 +17,13 @@ namespace Portfolio.ViewModels
             model = new TaskRowViewModel(task);
             model.IsDueToday.Should().BeTrue();
         }
+
+        [Test]
+        public void IsPastDue_is_true_when_task_is_due_yesterday()
+        {
+            task = new Task { DueOn = DateTime.Today.AddDays(-1) };
+            model = new TaskRowViewModel(task);
+            model.IsPastDue.Should().BeTrue();
+        }
     }
 }
