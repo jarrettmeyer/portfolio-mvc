@@ -1,4 +1,4 @@
-﻿namespace Portfolio.Web.Models
+﻿namespace Portfolio.Models
 {
     /// <summary>
     /// Represents an entity that supports versioning.

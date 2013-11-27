@@ -64,6 +64,7 @@
     <Build Include="Tables\Tasks.sql" />
     <Build Include="Tables\Tags.sql" />
     <Build Include="Tables\Tasks_Tags.sql" />
+    <Build Include="Tables\Users.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema Comparisons\Sql Server Schema Compare.scmp" />

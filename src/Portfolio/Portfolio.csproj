@@ -156,6 +156,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib\BooleanExtensions.cs" />
+    <Compile Include="Lib\ByteExtensions.cs" />
     <Compile Include="Lib\Caching\AspNetHttpCache.cs" />
     <Compile Include="Lib\Caching\Cache.cs" />
     <Compile Include="Lib\Caching\ICache.cs" />

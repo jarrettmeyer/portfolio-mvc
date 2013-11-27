@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[Id] INT NOT NULL IDENTITY(1, 1),
+	[Username] VARCHAR(256) NOT NULL,
+	[HashedPassword] VARCHAR(256) NOT NULL,
+	[LastLogonAt] DATETIME NULL,
+	[CreatedAt] DATETIME NOT NULL,
+	[UpdatedAt] DATETIME NOT NULL,
+	[Version] ROWVERSION NOT NULL,
+	CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+
+CREATE UNIQUE INDEX [IX_Users_Username] on [Users] ([Username])
+GO

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Portfolio.Web.Models;
 
 namespace Portfolio.Models
 {
