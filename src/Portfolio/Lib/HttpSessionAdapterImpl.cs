@@ -3,11 +3,11 @@ using System.Web;
 
 namespace Portfolio.Lib
 {
-    public class HttpSessionDataImpl : HttpSessionData
+    public class HttpSessionAdapterImpl : HttpSessionAdapter
     {
         private readonly HttpSessionStateBase sessionState;
 
-        public HttpSessionDataImpl(HttpSessionStateBase sessionState)
+        public HttpSessionAdapterImpl(HttpSessionStateBase sessionState)
         {
             Ensure.ArgumentIsNotNull(sessionState, "sessionState");
             this.sessionState = sessionState;
@@ -22,6 +22,12 @@ namespace Portfolio.Lib
         public override string SessionId
         {
             get { return sessionState.SessionID; }
+        }
+
+        public override string Username
+        {
+            get { return GetValue<string>("Username", null); }
+            set { sessionState["Username"] = value; }
         }
 
         private T GetValue<T>(string key, T defaultValue = default (T))

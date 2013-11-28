@@ -173,10 +173,10 @@
     <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
     <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HtmlTextFormatter.cs" />
-    <Compile Include="Lib\HttpSessionData.cs" />
-    <Compile Include="Lib\HttpSessionDataImpl.cs" />
+    <Compile Include="Lib\HttpSessionAdapter.cs" />
+    <Compile Include="Lib\HttpSessionAdapterImpl.cs" />
     <Compile Include="Lib\IClock.cs" />
-    <Compile Include="Lib\IHttpSessionData.cs" />
+    <Compile Include="Lib\IHttpSessionAdapter.cs" />
     <Compile Include="Lib\InvalidModelStateException.cs" />
     <Compile Include="Lib\Logging\ILogWriter.cs" />
     <Compile Include="Lib\Logging\Impl\Log4NetLogWriter.cs" />

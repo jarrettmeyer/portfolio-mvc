@@ -8,7 +8,7 @@ namespace Portfolio.Lib
         {
             if (obj == null)
             {
-                throw new ArgumentNullException("argumentName");
+                throw new ArgumentNullException(argumentName);
             }
         }
     }

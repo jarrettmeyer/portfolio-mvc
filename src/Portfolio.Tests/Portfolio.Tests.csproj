@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ApplicationControllerTests.cs" />
     <Compile Include="Lib\ByteExtensionsTests.cs" />
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />

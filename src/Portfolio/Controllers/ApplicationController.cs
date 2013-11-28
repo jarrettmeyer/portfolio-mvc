@@ -10,10 +10,17 @@ namespace Portfolio.Controllers
         public const string DEFAULT_FORM_ERROR_MESSAGE = "There is something wrong with the form. Please correct the errors and try again.";
 
         private FlashMessageCollection flashMessages;
+        private IHttpSessionAdapter sessionAdapter;
 
         public virtual FlashMessageCollection FlashMessages
         {
             get { return flashMessages ?? (flashMessages = new FlashMessageCollection(TempData)); }
+        }
+
+        public virtual IHttpSessionAdapter SessionAdapter
+        {
+            get { return sessionAdapter ?? (sessionAdapter = HttpSessionAdapter.Deserialize(Session)); }
+            set { sessionAdapter = value; }
         }
 
         protected virtual void CheckModelState(Func<ActionResult> onInvalidModelState = null)
