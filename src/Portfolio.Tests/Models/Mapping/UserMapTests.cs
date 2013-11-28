@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using FluentAssertions;
 using NHibernate;
+using NHibernate.Exceptions;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Lib;
@@ -68,6 +69,25 @@ namespace Portfolio.Models.Mapping
                 session.Flush();
             }
             user.Id.Should().BeGreaterThan(0);
+        }
+
+        [Test]
+        public void Saving_a_duplicate_username_should_throw_an_exception()
+        {
+            using (session = NHibernateConfig.SessionFactory.OpenSession())
+            {
+                var user1 = CreateUser();
+                var user2 = CreateUser();
+
+                Action saveAction = () =>
+                {
+                    session.Save(user1);
+                    session.Save(user2);
+                    session.Flush();
+                };
+
+                saveAction.ShouldThrow<GenericADOException>();
+            }
         }
 
         [Test]

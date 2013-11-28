@@ -77,6 +77,14 @@ namespace Portfolio.Lib.Data
             return item;
         }
 
+        protected override void OnDisposing()
+        {
+            if (session != null)
+            {
+                session.Dispose();
+            }
+        }
+
         private static IQueryable<T> ApplyPagingToQueryable<T>(IQueryable<T> items, int pageIndex, int pageSize)
         {
             int startIndex = pageIndex * pageSize;

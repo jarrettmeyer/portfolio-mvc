@@ -92,6 +92,7 @@
     <Compile Include="Controllers\ApplicationControllerTests.cs" />
     <Compile Include="Lib\ByteExtensionsTests.cs" />
     <Compile Include="Lib\ConfigTests.cs" />
+    <Compile Include="Lib\Data\NHibernateRepositoryTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />

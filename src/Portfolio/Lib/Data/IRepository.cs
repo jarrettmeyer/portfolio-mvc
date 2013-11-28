@@ -11,7 +11,7 @@ namespace Portfolio.Lib.Data
     /// The repository should be used when the queries are simple. There are no joins to
     /// worry about, etc.
     /// </remarks>
-    public interface IRepository
+    public interface IRepository : IDisposable
     {
         void Add<T>(T entity);
 

@@ -19,5 +19,21 @@ namespace Portfolio.Lib.Data
         public abstract T FindOne<T>(Expression<Func<T, bool>> expression);
         
         public abstract T Load<T>(object id);
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                OnDisposing();
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        protected abstract void OnDisposing();
     }
 }
