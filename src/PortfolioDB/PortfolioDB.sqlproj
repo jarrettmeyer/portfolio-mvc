@@ -61,9 +61,9 @@
     <Folder Include="Schema Comparisons" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Tasks.sql" />
-    <Build Include="Tables\Tags.sql" />
-    <Build Include="Tables\Tasks_Tags.sql" />
+    <Build Include="Tables\tasks.sql" />
+    <Build Include="Tables\tags.sql" />
+    <Build Include="Tables\tasks_tags.sql" />
     <Build Include="Tables\users.sql" />
   </ItemGroup>
   <ItemGroup>

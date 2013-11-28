@@ -1,17 +1,17 @@
-﻿CREATE TABLE [dbo].[Tasks]
+﻿CREATE TABLE [dbo].[tasks]
 (
-	[Id] INT NOT NULL IDENTITY(1, 1),
-	[Title] VARCHAR(256) NOT NULL DEFAULT '',
-	[Description] TEXT NOT NULL,		
-	[DueOn] DATETIME NULL,
-	[IsCompleted] BIT NOT NULL,
-	[CompletedAt] DATETIME NULL,
-	[CreatedAt] DATETIME NOT NULL DEFAULT GETUTCDATE(),
-	[UpdatedAt] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
-    [Version] ROWVERSION NOT NULL, 
-	CONSTRAINT [PK_Tasks] PRIMARY KEY CLUSTERED ([Id] ASC)
+	[task_id] INT NOT NULL IDENTITY(1, 1),
+	[title] VARCHAR(256) NOT NULL DEFAULT '',
+	[description] TEXT NOT NULL,		
+	[due_on] DATETIME NULL,
+	[is_completed] BIT NOT NULL,
+	[completed_at] DATETIME NULL,
+	[created_at] DATETIME NOT NULL DEFAULT GETUTCDATE(),
+	[updated_at] DATETIME NOT NULL DEFAULT GETUTCDATE(), 
+    [version] ROWVERSION NOT NULL, 
+	CONSTRAINT [pk_tasks] PRIMARY KEY CLUSTERED ([task_id] ASC)
 )
 GO
 
-CREATE INDEX [IX_Tasks_IsCompleted] ON [dbo].[Tasks] ([IsCompleted])
+CREATE INDEX [tasks_is_completed] ON [dbo].[tasks] ([is_completed])
 GO

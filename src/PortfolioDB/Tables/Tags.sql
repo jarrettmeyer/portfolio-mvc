@@ -1,18 +1,18 @@
-﻿CREATE TABLE [dbo].[Tags]
+﻿CREATE TABLE [dbo].[tags]
 (
-	[Id] INT NOT NULL IDENTITY(1, 1), 
-    [Description] VARCHAR(256) NOT NULL,
-	[Slug] VARCHAR(256) NOT NULL,
-	[IsActive] BIT NOT NULL DEFAULT((1)), 
-    [CreatedAt] DATETIME NOT NULL, 
-    [UpdatedAt] DATETIME NOT NULL, 
-    [Version] ROWVERSION NOT NULL
-	CONSTRAINT [PK_Tags] PRIMARY KEY CLUSTERED ([Id] ASC)
+	[tag_id] INT NOT NULL IDENTITY(1, 1), 
+    [description] VARCHAR(256) NOT NULL,
+	[slug] VARCHAR(256) NOT NULL,
+	[is_active] BIT NOT NULL DEFAULT((1)), 
+    [created_at] DATETIME NOT NULL, 
+    [updated_at] DATETIME NOT NULL, 
+    [version] ROWVERSION NOT NULL
+	CONSTRAINT [pk_tags] PRIMARY KEY CLUSTERED ([tag_id] ASC)
 )
 GO
 
-CREATE UNIQUE INDEX [IX_Tags_Description] ON [dbo].[Tags] ([Description])
+CREATE UNIQUE INDEX [tags_description] ON [dbo].[tags] ([description])
 GO
 
-CREATE UNIQUE INDEX [IX_Tags_Slug] ON [dbo].[Tags] ([Slug])
+CREATE UNIQUE INDEX [tags_slug] ON [dbo].[tags] ([slug])
 GO

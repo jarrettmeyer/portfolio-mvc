@@ -1,7 +1,7 @@
-﻿CREATE TABLE [dbo].[Tasks_Tags]
+﻿CREATE TABLE [dbo].[tasks_tags]
 (
-	[TaskId] INT NOT NULL,
-    [TagId] INT NOT NULL, 
-    CONSTRAINT [PK_Tasks_Tags] PRIMARY KEY CLUSTERED ([TaskId], [TagId])
+	[task_id] INT NOT NULL,
+    [tag_id] INT NOT NULL, 
+    CONSTRAINT [pk_tasks_tags] PRIMARY KEY CLUSTERED ([task_id], [tag_id])
 )
 GO

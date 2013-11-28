@@ -8,16 +8,32 @@ namespace Portfolio.Models.Mapping
     {
         public UserMap()
         {
-            Table("[Users]");
+            Table("[users]");
             Id(x => x.Id, map =>
             {
+                map.Column("user_id");
                 map.Generator(Generators.Identity);
             });
-            Property(x => x.Username);
-            Property(x => x.HashedPassword);
-            Property(x => x.LastLogonAt);
-            Property(x => x.CreatedAt);
-            Property(x => x.UpdatedAt);
+            Property(x => x.Username, map =>
+            {
+                map.Column("username");
+            });
+            Property(x => x.HashedPassword, map =>
+            {
+                map.Column("hashed_password");
+            });
+            Property(x => x.LastLogonAt, map =>
+            {
+                map.Column("last_logon_at");
+            });
+            Property(x => x.CreatedAt, map =>
+            {
+                map.Column("created_at");
+            });
+            Property(x => x.UpdatedAt, map =>
+            {
+                map.Column("updated_at");
+            });
             Version(x => x.Version, map =>
             {
                 map.UnsavedValue(null);
@@ -25,6 +41,7 @@ namespace Portfolio.Models.Mapping
                 map.Generated(VersionGeneration.Always);
                 map.Column(col =>
                 {
+                    col.Name("version");
                     col.NotNullable(false);
                     col.SqlType("timestamp");
                 });

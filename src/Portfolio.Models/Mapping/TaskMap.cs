@@ -8,21 +8,37 @@ namespace Portfolio.Models.Mapping
     {
         public TaskMap()
         {
-            Table("[Tasks]");
+            Table("[tasks]");
             Id(x => x.Id, map =>
             {
+                map.Column("task_id");
                 map.Generator(Generators.Identity);
             });
             Property(x => x.Title, map =>
             {
-                map.Column("Title");                
+                map.Column("title");
                 map.Length(256);
             });
-            Property(x => x.Description);
-            Property(x => x.DueOn);
-            Property(x => x.IsCompleted);
-            Property(x => x.CreatedAt);
-            Property(x => x.UpdatedAt);
+            Property(x => x.Description, map =>
+            {
+                map.Column("description");
+            });
+            Property(x => x.DueOn, map =>
+            {
+                map.Column("due_on");
+            });
+            Property(x => x.IsCompleted, map =>
+            {
+                map.Column("is_completed");
+            });
+            Property(x => x.CreatedAt, map =>
+            {
+                map.Column("created_at");
+            });
+            Property(x => x.UpdatedAt, map =>
+            {
+                map.Column("updated_at");
+            });
             Version(x => x.Version, map =>
             {
                 map.UnsavedValue(null);
@@ -30,6 +46,7 @@ namespace Portfolio.Models.Mapping
                 map.Generated(VersionGeneration.Always);
                 map.Column(col =>
                 {
+                    col.Name("version");
                     col.NotNullable(false);
                     col.SqlType("timestamp");
                 });
@@ -39,16 +56,16 @@ namespace Portfolio.Models.Mapping
             Bag(x => x.Tags, map =>
             {
                 map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-                map.Table("[Tasks_Tags]");
+                map.Table("[tasks_tags]");
                 map.Key(key =>
                 {
-                    key.Column("TaskId");
+                    key.Column("task_id");
                 });
             }, rel =>
             {
                 rel.ManyToMany(map =>
                 {                    
-                    map.Column("TagId");
+                    map.Column("tag_id");
                 });
             });
         }
