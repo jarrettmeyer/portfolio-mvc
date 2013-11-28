@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using FluentAssertions;
 using Moq;
-using NHibernate.Criterion;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
@@ -19,7 +18,6 @@ namespace Portfolio.Lib.Services
         private Mock<IRepository> mockRepository;
         private Mock<ITransactionAdapter> mockTransaction;
         private ILogonService service;
-        private User user;
 
         [SetUp]
         public void Before_each_test()
@@ -33,12 +31,6 @@ namespace Portfolio.Lib.Services
             service = new LogonServiceImpl(mockRepository.Object, mockPasswordUtility.Object);
 
             credentials = new Credentials("tester", "s3cr3t");
-
-            user = new User
-            {
-                Username = "tester"
-            };            
-            mockRepository.Setup(x => x.FindOne<User>(u => u.Username == "tester")).Returns(user);
         }
 
         [Test]
@@ -59,19 +51,24 @@ namespace Portfolio.Lib.Services
         public void It_should_compare_passwords()
         {
             service.Logon(credentials);
-            mockPasswordUtility.Verify(x => x.CompareText(credentials.Password, user.HashedPassword), Times.Once());
+            mockPasswordUtility.Verify(x => x.CompareText(credentials.Password, It.IsAny<string>()), Times.Once());
         }
 
         [Test]
         public void It_should_fail_when_a_user_is_not_found()
         {
-            Assert.Fail();
+            SetRepositoryHitSuccess(false);
+            logonResult = service.Logon(credentials);
+            logonResult.IsSuccessful.Should().BeFalse();
         }
 
         [Test]
         public void It_should_fail_when_the_password_does_not_match()
         {
-            Assert.Fail();
+            SetRepositoryHitSuccess(true);
+            SetPasswordSuccess(false);            
+            logonResult = service.Logon(credentials);
+            logonResult.IsSuccessful.Should().BeFalse();
         }
 
         [Test]
@@ -84,7 +81,7 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_should_return_successful()
         {
-            mockPasswordUtility.Setup(x => x.CompareText(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            SetPasswordSuccess(true);
             logonResult = service.Logon(credentials);
             logonResult.IsSuccessful.Should().BeTrue();
         }
@@ -92,7 +89,8 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_should_update_LastLogonAt()
         {
-            mockPasswordUtility.Setup(x => x.CompareText(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            SetRepositoryHitSuccess(true);
+            SetPasswordSuccess(true);
             logonResult = service.Logon(credentials);
             logonResult.User.LastLogonAt.Should().BeCloseTo(DateTime.UtcNow);            
         }
@@ -100,9 +98,28 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_should_update_UpdatedAt()
         {
-            mockPasswordUtility.Setup(x => x.CompareText(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            SetRepositoryHitSuccess(true);
+            SetPasswordSuccess(true);
             logonResult = service.Logon(credentials);
             logonResult.User.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow);
+        }
+
+        private void SetPasswordSuccess(bool isSuccessful = true)
+        {
+            mockPasswordUtility.Setup(x => x.CompareText(It.IsAny<string>(), It.IsAny<string>())).Returns(isSuccessful);
+        }
+
+        private void SetRepositoryHitSuccess(bool isSuccessful = true)
+        {
+            User user = null;
+            if (isSuccessful)
+            {
+                user = new User
+                {
+                    Username = "tester"
+                };    
+            }            
+            mockRepository.Setup(x => x.FindOne<User>(u => u.Username == "tester")).Returns(user);
         }
     }
 }
