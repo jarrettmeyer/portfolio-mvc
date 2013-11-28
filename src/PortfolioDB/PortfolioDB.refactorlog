@@ -14,4 +14,53 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TaskId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d482d457-0c80-4879-a635-4867ba147108" ChangeDateTime="11/28/2013 12:31:13">
+    <Property Name="ElementName" Value="[dbo].[Users].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="user_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="36b251ad-9a8e-4eff-980b-e752dd379fff" ChangeDateTime="11/28/2013 12:31:17">
+    <Property Name="ElementName" Value="[dbo].[Users].[Username]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="username" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cfccb798-9a86-4ba1-a20f-9fe960052860" ChangeDateTime="11/28/2013 12:31:20">
+    <Property Name="ElementName" Value="[dbo].[Users].[HashedPassword]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="hashed_password" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d1235989-f0d5-45f8-be52-b96e6171e315" ChangeDateTime="11/28/2013 12:31:26">
+    <Property Name="ElementName" Value="[dbo].[Users].[Version]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="version" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5b8c7b8d-3771-4feb-a236-f617519def29" ChangeDateTime="11/28/2013 12:31:31">
+    <Property Name="ElementName" Value="[dbo].[Users].[LastLogonAt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="last_logon_at" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2951d33d-ae99-4cf4-bf61-4e4dfc553691" ChangeDateTime="11/28/2013 12:31:33">
+    <Property Name="ElementName" Value="[dbo].[Users].[CreatedAt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="created_at" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3d05865b-734f-4f6d-bc5d-753d7737b1fd" ChangeDateTime="11/28/2013 12:31:36">
+    <Property Name="ElementName" Value="[dbo].[Users].[UpdatedAt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="updated_at" />
+  </Operation>
 </Operations>
