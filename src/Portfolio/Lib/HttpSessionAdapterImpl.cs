@@ -19,6 +19,12 @@ namespace Portfolio.Lib
             set { sessionState["CreatedAt"] = value; }
         }
 
+        public override bool IsAuthenticated
+        {
+            get { return GetValue("IsAuthenticated", false); }
+            set { sessionState["IsAuthenticated"] = value; }
+        }
+
         public override string SessionId
         {
             get { return sessionState.SessionID; }
@@ -26,11 +32,11 @@ namespace Portfolio.Lib
 
         public override string Username
         {
-            get { return GetValue<string>("Username", null); }
+            get { return GetValue("Username", "Guest"); }
             set { sessionState["Username"] = value; }
         }
 
-        private T GetValue<T>(string key, T defaultValue = default (T))
+        private T GetValue<T>(string key, T defaultValue = default(T))
         {
             try
             {
@@ -39,7 +45,7 @@ namespace Portfolio.Lib
             }
             catch (Exception)
             {
-                return defaultValue;                
+                return defaultValue;
             }
         }
     }

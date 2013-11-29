@@ -1,4 +1,5 @@
 ﻿using Portfolio.Lib.Data;
+using Portfolio.Lib.Logging;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 
@@ -7,6 +8,7 @@ namespace Portfolio.Lib.Services
     public class LogonServiceImpl : ILogonService
     {
         private LogonResult logonResult;
+        private static readonly ILogWriter logWriter = Log.For<LogonServiceImpl>();
         private readonly IPasswordUtility passwordUtility;
         private readonly IRepository repository;
         private User user;
@@ -31,11 +33,24 @@ namespace Portfolio.Lib.Services
         private void FetchUser(Credentials credentials)
         {
             user = repository.FindOne<User>(u => u.Username == credentials.Username);
+            if (user == null)
+            {
+                logWriter.WriteWarning("No user found. Username: {0}", credentials.Username);
+            }
         }
 
         private bool IsValidCredentials(Credentials credentials)
         {
-            return user != null && passwordUtility.CompareText(credentials.Password, user.HashedPassword);
+            bool isValidCredentials = user != null && passwordUtility.CompareText(credentials.Password, user.HashedPassword);
+            if (isValidCredentials)
+            {
+                logWriter.WriteInfo("Logon successful. Username: {0}", credentials.Username);
+            }
+            else
+            {
+                logWriter.WriteWarning("Logon failed. Username: {0}", credentials.Username);
+            }
+            return isValidCredentials;
         }
 
         private void SetSuccessfulLogonResult()

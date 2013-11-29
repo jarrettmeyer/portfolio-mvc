@@ -151,6 +151,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\JasmineController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
@@ -181,10 +182,11 @@
     <Compile Include="Lib\HttpSessionAdapterImpl.cs" />
     <Compile Include="Lib\IClock.cs" />
     <Compile Include="Lib\IHttpSessionAdapter.cs" />
+    <Compile Include="Lib\IHttpSessionAdapterExtensions.cs" />
     <Compile Include="Lib\InvalidModelStateException.cs" />
     <Compile Include="Lib\IPasswordUtility.cs" />
     <Compile Include="Lib\Logging\ILogWriter.cs" />
-    <Compile Include="Lib\Logging\Impl\Log4NetLogWriter.cs" />
+    <Compile Include="Lib\Logging\Log4NetLogWriter.cs" />
     <Compile Include="Lib\Logging\Log.cs" />
     <Compile Include="Lib\ObjectExtensions.cs" />
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
@@ -287,6 +289,7 @@
     <Content Include="Views\Tags\New.cshtml" />
     <Content Include="Views\Tags\Edit.cshtml" />
     <Content Include="Views\Jasmine\SpecRunner.cshtml" />
+    <Content Include="Views\Session\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Models\Portfolio.Models.csproj">
@@ -306,6 +309,7 @@
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

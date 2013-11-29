@@ -1,7 +1,6 @@
 ﻿using System;
-using Portfolio.Web.Lib.Logging.Impl;
 
-namespace Portfolio.Web.Lib.Logging
+namespace Portfolio.Lib.Logging
 {
     public static class Log
     {

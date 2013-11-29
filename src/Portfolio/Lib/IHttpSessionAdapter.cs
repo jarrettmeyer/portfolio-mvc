@@ -6,8 +6,12 @@ namespace Portfolio.Lib
     {
         DateTime? CreatedAt { get; set; }
 
+        bool IsAuthenticated { get; set; }
+
         string SessionId { get; }
 
         string Username { get; set; }
+
+        void ResetSession();
     }
 }
