@@ -7,12 +7,13 @@ namespace Portfolio.ViewModels
     public class TagInputModel
     {
         public TagInputModel()
-            : this(new Tag())
-        {            
+        {
+            IsNew = true;
         }
 
         public TagInputModel(Tag tag)
         {
+            IsNew = false;
             Description = tag.Description;
             Id = tag.Id;
         }
@@ -41,13 +42,8 @@ namespace Portfolio.ViewModels
             get { return FormMethod.Post; }
         }
 
-        public int Id { get; set; }
-
-        public bool IsNew
-        {
-            get { return Id == 0; }
-        }
-
+        public bool IsNew { get; set; }
+        
         public string PageTitle
         {
             get { return IsNew ? "New Tag" : "Edit Tag"; }
@@ -55,6 +51,6 @@ namespace Portfolio.ViewModels
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Slug is required")]
         //[RegularExpression("[a-z0-9\\.\\_\\-]+")]
-        public string Slug { get; set; }
+        public string Id { get; set; }
     }
 }

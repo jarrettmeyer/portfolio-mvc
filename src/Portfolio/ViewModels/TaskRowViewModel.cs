@@ -18,7 +18,7 @@ namespace Portfolio.ViewModels
             IsDueToday = !task.IsCompleted && task.DueOn.HasValue && task.DueOn.Value == DateTime.Today;
             IsPastDue = !task.IsCompleted && task.DueOn.HasValue && task.DueOn.Value < DateTime.Today;
             ShowCompleteButton = !task.IsCompleted;
-            Tags = task.Tags.Select(tag => new TagLabelViewModel(tag.Description, tag.Slug)).ToArray();
+            Tags = task.Tags.Select(tag => new TagLabelViewModel(tag.Description, tag.Id)).ToArray();
             Title = task.Title;
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
@@ -8,7 +7,7 @@ namespace Portfolio.Lib.Services
 {
     public class TaskUpdateServiceImpl : ITaskUpdateService
     {
-        private int[] currentTagIds;
+        private string[] currentTagIds;
         private readonly IRepository repository;
         private Task task;
 
@@ -54,7 +53,7 @@ namespace Portfolio.Lib.Services
             var oldTagIds = currentTagIds.Where(id => !selectedIds.Contains(id));
             foreach (var oldTagId in oldTagIds)
             {
-                int idToRemove = oldTagId;
+                string idToRemove = oldTagId;
                 Tag oldTag = task.Tags.Single(t => t.Id == idToRemove);
                 task.Tags.Remove(oldTag);
             }

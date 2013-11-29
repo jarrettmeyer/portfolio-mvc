@@ -11,7 +11,7 @@ namespace Portfolio.Models.Mapping
     public class TagMapTests
     {
         private Tag tag;
-        private int tagId;
+        private string tagId;
         private ISession session;
 
         [SetUp]
@@ -60,10 +60,10 @@ namespace Portfolio.Models.Mapping
         }
 
         private void InsertTag(string description = "Test Tag", string slug = "test-tag", bool isActive = true)
-        {
+        {            
             tag = ObjectMother.NewTag;
             tag.Description = description;
-            tag.Slug = slug;
+            tag.Id = slug;
             tag.IsActive = isActive;
             session.Save(tag);
             session.Flush();

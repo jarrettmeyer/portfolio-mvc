@@ -1,8 +1,33 @@
-﻿@model Portfolio.ViewModels.Credentials
+﻿@model Credentials
 
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "Logon";
 }
 
-<h2>New</h2>
+<div class="page-header">
+    <h2>Logon</h2>
+</div>
+
+@using (Html.BeginForm("New", "Session", FormMethod.Post, new { role = "form" }))
+{
+    <div class="row">
+        <div class="col-lg-push-4 col-lg-4">
+            <div class="form-group">
+                <label for="Username" class="control-label">Username</label>
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Username)                
+            </div>        
+            <div class="form-group">
+                <label for="Password" class="control-label">Password</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="@Url.Action("Forgot", "Password")" class="btn btn-default">Forgot Password</a>
+            </div>
+        </div>        
+    </div>    
+}
+
 

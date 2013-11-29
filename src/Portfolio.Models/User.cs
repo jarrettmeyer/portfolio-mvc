@@ -3,15 +3,10 @@ using System.Security.Principal;
 
 namespace Portfolio.Models
 {
-    public class User : IVersionedEntity, IIdentity
+    public class User : IIdentity
     {
         /// <summary>
-        /// Gets the ID for the user. This value is set by the database.
-        /// </summary>
-        public virtual int Id { get; set; }
-
-        /// <summary>
-        /// The username for the user.
+        /// The username for the user. This field is the primary key for the user.
         /// </summary>
         public virtual string Username { get; set; }
 
@@ -25,6 +20,11 @@ namespace Portfolio.Models
         /// user has never logged on.
         /// </summary>
         public virtual DateTime? LastLogonAt { get; set; }
+
+        /// <summary>
+        /// Returns true if the user is active.
+        /// </summary>
+        public virtual bool IsActive { get; set; }
 
         /// <summary>
         /// When the user was created.
@@ -45,17 +45,17 @@ namespace Portfolio.Models
         /// Authentication type is part if the IIdentity interface. Any string
         /// will do here.
         /// </summary>
-        public string AuthenticationType
+        public virtual string AuthenticationType
         {
             get { return "Application"; }
         }
 
         /// <summary>
-        /// A user is authenticated if it has an ID in the database.
+        /// A user is authenticated if it has a Version assignment by the database.
         /// </summary>
         public virtual bool IsAuthenticated
         {
-            get { return Id > 0; }
+            get { return Version != null && Version.Length > 0; }
         }
 
         /// <summary>

@@ -5,23 +5,18 @@ namespace Portfolio.Models
     /// <summary>
     /// The category for a task.
     /// </summary>
-    public class Tag : IVersionedEntity
+    public class Tag : IVersionedEntity<string>
     {
         /// <summary>
         /// The tag ID. This is an identity that will be assigned 
         /// by the database.        
         /// </summary>
-        public virtual int Id { get; set; }
+        public virtual string Id { get; set; }
 
         /// <summary>
         /// The tag description.
         /// </summary>
         public virtual string Description { get; set; }
-
-        /// <summary>
-        /// The URL-friendly sluf for the tag.
-        /// </summary>
-        public virtual string Slug { get; set; }
 
         /// <summary>
         /// Indicates if the tag is active.

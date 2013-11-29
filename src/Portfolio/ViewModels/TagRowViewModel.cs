@@ -10,7 +10,6 @@ namespace Portfolio.ViewModels
             Description = tag.Description;
             Id = tag.Id;
             IsActive = tag.IsActive.ToYesNo();
-            Slug = tag.Slug;            
         }
 
         public bool AllowDelete
@@ -25,7 +24,7 @@ namespace Portfolio.ViewModels
 
         public string Description { get; set; }        
 
-        public int Id { get; set; }        
+        public string Id { get; set; }
 
         public string IsActive { get; set; }        
 
@@ -39,7 +38,5 @@ namespace Portfolio.ViewModels
                 return css;
             }
         }
-
-        public string Slug { get; set; }        
     }
 }

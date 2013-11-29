@@ -3,9 +3,9 @@
     /// <summary>
     /// Represents an entity that supports versioning.
     /// </summary>
-    public interface IVersionedEntity
+    public interface IVersionedEntity<TId>
     {
-        int Id { get; set; }
+        TId Id { get; set; }
         byte[] Version { get; set; }
     }
 }

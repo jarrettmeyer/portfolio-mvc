@@ -65,6 +65,7 @@
     <Build Include="Tables\tags.sql" />
     <Build Include="Tables\tasks_tags.sql" />
     <Build Include="Tables\users.sql" />
+    <Build Include="Tables\password_tokens.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema Comparisons\Sql Server Schema Compare.scmp" />

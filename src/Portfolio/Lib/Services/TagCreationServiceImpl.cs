@@ -34,8 +34,8 @@ namespace Portfolio.Lib.Services
 
         private void SetCategoryProperties(TagInputModel tagInputModel)
         {
+            tag.Id = tagInputModel.Id;
             tag.Description = tagInputModel.Description.Trim();
-            tag.Slug = tagInputModel.Slug;
             tag.IsActive = true;
             tag.CreatedAt = Clock.Instance.Now;
             tag.UpdatedAt = Clock.Instance.Now;

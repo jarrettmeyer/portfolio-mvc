@@ -12,15 +12,11 @@ namespace Portfolio.Models.Mapping
             Id(x => x.Id, map =>
             {
                 map.Column("tag_id");
-                map.Generator(Generators.Identity);
+                map.Generator(Generators.Assigned);
             });
             Property(x => x.Description, map =>
             {
                 map.Column("description");
-            });
-            Property(x => x.Slug, map =>
-            {
-                map.Column("slug");
             });
             Property(x => x.IsActive, map =>
             {

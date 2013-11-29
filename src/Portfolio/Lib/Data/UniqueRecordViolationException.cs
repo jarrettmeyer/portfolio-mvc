@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using NHibernate;
 
 namespace Portfolio.Lib.Data
 {
@@ -30,6 +31,14 @@ namespace Portfolio.Lib.Data
                 uniqueIndex = matches[0].Groups[2].Value;
                 duplicateKeyValue = matches[0].Groups[3].Value;
             }
+        }
+
+        public UniqueRecordViolationException(NonUniqueObjectException innerException)
+            : base(innerException.Message, innerException)
+        {
+            duplicateKeyValue = innerException.Identifier.ToString();
+            table = innerException.EntityName;
+            uniqueIndex = "primary_key";
         }
 
         public string Table

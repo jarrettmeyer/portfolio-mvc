@@ -29,12 +29,18 @@ namespace Portfolio.Lib.Data
             }
             catch (GenericADOException ex)
             {
-                if (ex.InnerException is SqlException && new Regex("^Cannot insert duplicate key row in object").IsMatch(ex.InnerException.Message))
+                SqlException sqlException = ex.InnerException as SqlException;
+                if (sqlException != null && new Regex("^Cannot insert duplicate key row in object").IsMatch(ex.InnerException.Message))
                 {
-                    throw new UniqueRecordViolationException(ex.InnerException);
+                    throw new UniqueRecordViolationException(sqlException);
                 }
                 throw;
-            }            
+            }
+            catch (NonUniqueObjectException ex)
+            {
+                throw new UniqueRecordViolationException(ex);
+                //throw;
+            }
         }
 
         public override ITransactionAdapter BeginTransaction()

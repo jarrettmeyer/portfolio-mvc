@@ -11,8 +11,8 @@ namespace Portfolio
             {
                 return new Tag
                 {
+                    Id = "test-tag",
                     Description = "Test Tag",
-                    Slug = "test-tag",
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow

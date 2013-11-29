@@ -28,7 +28,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             var category = repository.FindOne<Tag>(c => c.Id == id);
             var model = new TagInputModel(category);            

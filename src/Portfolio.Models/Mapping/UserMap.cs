@@ -9,14 +9,10 @@ namespace Portfolio.Models.Mapping
         public UserMap()
         {
             Table("[users]");
-            Id(x => x.Id, map =>
-            {
-                map.Column("user_id");
-                map.Generator(Generators.Identity);
-            });
-            Property(x => x.Username, map =>
+            Id(x => x.Username, map =>
             {
                 map.Column("username");
+                map.Generator(Generators.Assigned);
             });
             Property(x => x.HashedPassword, map =>
             {
@@ -25,6 +21,10 @@ namespace Portfolio.Models.Mapping
             Property(x => x.LastLogonAt, map =>
             {
                 map.Column("last_logon_at");
+            });
+            Property(x => x.IsActive, map =>
+            {
+                map.Column("is_active");
             });
             Property(x => x.CreatedAt, map =>
             {

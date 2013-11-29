@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Portfolio.Models
 {
-    public class Task : IVersionedEntity
+    public class Task : IVersionedEntity<int>
     {
         public Task()
         {

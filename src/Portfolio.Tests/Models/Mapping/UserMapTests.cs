@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
 using FluentAssertions;
 using NHibernate;
 using NHibernate.Exceptions;
@@ -52,23 +51,10 @@ namespace Portfolio.Models.Mapping
                 {
                     user = CreateUser();
                     session.Save(user);
-                    session.Flush();
+                    //session.Flush();
                 }
             };
             saveUserAction.ShouldNotThrow<Exception>();
-        }
-
-        [Test]
-        public void Id_is_set_after_save()
-        {
-            using (session = NHibernateConfig.SessionFactory.OpenSession())
-            {
-                user = CreateUser();
-                user.Id.Should().Be(0);
-                session.Save(user);
-                session.Flush();
-            }
-            user.Id.Should().BeGreaterThan(0);
         }
 
         [Test]
@@ -86,7 +72,7 @@ namespace Portfolio.Models.Mapping
                     session.Flush();
                 };
 
-                saveAction.ShouldThrow<GenericADOException>();
+                saveAction.ShouldThrow<NonUniqueObjectException>();
             }
         }
 
@@ -113,6 +99,7 @@ namespace Portfolio.Models.Mapping
                 Username = "tester",
                 HashedPassword = "tester",
                 LastLogonAt = null,
+                IsActive = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
