@@ -107,6 +107,7 @@
     <Compile Include="Lib\Data\NHibernateConfigTests.cs" />
     <Compile Include="Lib\Services\TagCreationServiceImplTests.cs" />
     <Compile Include="Models\Mapping\UserMapTests.cs" />
+    <Compile Include="Models\PasswordTokenTests.cs" />
     <Compile Include="Models\TaskTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="TestBootstrapper.cs" />
