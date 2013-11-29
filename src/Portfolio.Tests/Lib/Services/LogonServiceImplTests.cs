@@ -60,6 +60,7 @@ namespace Portfolio.Lib.Services
             SetRepositoryHitSuccess(false);
             logonResult = service.Logon(credentials);
             logonResult.IsSuccessful.Should().BeFalse();
+            logonResult.User.Should().BeAssignableTo<Guest>();
         }
 
         [Test]
@@ -118,8 +119,8 @@ namespace Portfolio.Lib.Services
                 {
                     Username = "tester"
                 };    
-            }            
-            mockRepository.Setup(x => x.FindOne<User>(u => u.Username == "tester")).Returns(user);
+            }                        
+            mockRepository.Setup(x => x.FindOne<User>(It.IsAny<Expression<Func<User, bool>>>())).Returns(user);
         }
     }
 }

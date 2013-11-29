@@ -54,7 +54,7 @@ namespace Portfolio.Lib.Services
             logonResult = new LogonResult
             {
                 IsSuccessful = false,
-                User = null
+                User = new Guest()
             };
         }
 
