@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    IHttpSessionAdapter sessionAdapter = HttpSessionAdapter.Deserialize(Session);
+}
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>@ViewBag.Title</title>
@@ -13,6 +16,17 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Tags", "Index", "Tags")</li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    @if (sessionAdapter.IsAuthenticated)
+                    {
+                        <li><a href="#">@sessionAdapter.Username</a></li>
+                        <li>@Html.ActionLink("Logoff", "Delete", "Session")</li>    
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Logon", "New", "Session")</li>
+                    }
                 </ul>
             </div>
         </header>

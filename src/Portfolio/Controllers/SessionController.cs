@@ -8,6 +8,7 @@ namespace Portfolio.Controllers
     public class SessionController : ApplicationController
     {
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult New()
         {
             var credentials = new Credentials();
@@ -15,6 +16,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult New(Credentials credentials)
         {
             CheckModelState(() =>
@@ -37,7 +39,7 @@ namespace Portfolio.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete()
         {
             FlashMessages.AddSuccessMessage("You have successfully logged off.");

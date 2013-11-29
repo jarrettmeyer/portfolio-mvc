@@ -18,6 +18,8 @@ namespace Portfolio.App_Start
             
             // Service layer bindings
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
+            kernel.Bind<ILogonService>().To<LogonServiceImpl>();
+            kernel.Bind<IPasswordUtility>().To<BCryptPasswordUtility>();
             kernel.Bind<ITagCreationService>().To<TagCreationServiceImpl>();
             kernel.Bind<ITagDeletionService>().To<TagDeletionServiceImpl>();
             kernel.Bind<ITagUpdateService>().To<TagUpdateServiceImpl>();

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Diagnostics;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Portfolio.Lib
@@ -25,6 +26,8 @@ namespace Portfolio.Lib
         [Test]        
         public void HashText_teturns_expected_result()
         {
+            Debug.WriteLine("Password: " + passwordUtility.HashText("password"));
+
             string hashedText = passwordUtility.HashText("s3cr3t");
             hashedText.Length.Should().Be(60);
             hashedText.Substring(0, 7).Should().Be("$2a$10$");
