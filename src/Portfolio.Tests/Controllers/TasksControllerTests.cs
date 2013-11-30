@@ -154,11 +154,11 @@ namespace Portfolio.Controllers
             }
 
             [Test]
-            public void It_redirects_to_show()
+            public void It_redirects_to_index()
             {
                 var actionResult = Controller.New(TaskInputModel);
                 var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
-                routeValues["Action"].Should().Be("Show");
+                routeValues["Action"].Should().Be("Index");
             }
         }
 
