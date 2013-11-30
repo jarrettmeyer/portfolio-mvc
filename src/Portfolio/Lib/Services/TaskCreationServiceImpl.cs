@@ -32,7 +32,7 @@ namespace Portfolio.Lib.Services
 
             foreach (var tagInputModel in model.Tags)
             {
-                string id = tagInputModel.Slug;
+                int id = tagInputModel.Id;
                 Tag tag = repository.Load<Tag>(id);
                 task.Tags.Add(tag);
             }

@@ -18,6 +18,10 @@ span.field-validation-error {
     font-size: 0.9em;
 }
 
+.label-link {
+    cursor: pointer;
+}
+
 .soft {
     color: #606060;
 }

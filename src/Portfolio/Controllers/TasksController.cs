@@ -53,7 +53,7 @@ namespace Portfolio.Controllers
             var service = ServiceLocator.Instance.GetService<ITaskUpdateService>();
             var task = service.UpdateTask(model);
             FlashMessages.AddSuccessMessage(string.Format("Updated task: {0}", task.Title));
-            return RedirectToAction("Show", new { id = model.Id });            
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -80,7 +80,7 @@ namespace Portfolio.Controllers
             ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
             Task task = service.CreateTask(model);
             FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
-            return RedirectToAction("Show", new { id = task.Id });            
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

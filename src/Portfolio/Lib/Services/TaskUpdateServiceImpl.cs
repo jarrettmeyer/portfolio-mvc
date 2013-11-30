@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
@@ -8,7 +7,7 @@ namespace Portfolio.Lib.Services
 {
     public class TaskUpdateServiceImpl : ITaskUpdateService
     {
-        private string[] currentTagSlugs;
+        private int[] currentTagIds;
         private readonly IRepository repository;
         private Task task;
 
@@ -33,7 +32,7 @@ namespace Portfolio.Lib.Services
 
         private void AddNewTagsToTask(TaskInputModel model)
         {            
-            var newTags = model.Tags.Where(tag => !currentTagSlugs.Contains(tag.Slug));
+            var newTags = model.Tags.Where(tag => !currentTagIds.Contains(tag.Id));
             foreach (var tagModel in newTags)
             {
                 int newId = tagModel.Id;
@@ -45,17 +44,17 @@ namespace Portfolio.Lib.Services
         private void FetchTaskById(TaskInputModel model)
         {
             task = repository.Load<Task>(model.Id);
-            currentTagSlugs = task.Tags.Select(t => t.Slug).ToArray();
+            currentTagIds = task.Tags.Select(t => t.Id).ToArray();
         }
 
         private void RemoveOldTagsFromTask(TaskInputModel model)
         {
-            IEnumerable<string> selectedSlugs = model.Tags.Select(t => t.Slug);
-            IEnumerable<string> oldTagSlugs = currentTagSlugs.Where(slug => !selectedSlugs.Contains(slug));
-            foreach (var oldTagSlug in oldTagSlugs)
+            var selectedIds = model.Tags.Select(t => t.Id);
+            var idsToRemove = currentTagIds.Where(id => !selectedIds.Contains(id));
+            foreach (var idToRemove in idsToRemove)
             {
-                string slugToRemove = oldTagSlug;
-                Tag oldTag = task.Tags.Single(t => t.Slug == slugToRemove);
+                int id = idToRemove;
+                Tag oldTag = task.Tags.Single(t => t.Id == id);
                 task.Tags.Remove(oldTag);
             }
         }

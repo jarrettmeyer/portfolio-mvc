@@ -55,7 +55,7 @@ namespace Portfolio.Models.Mapping
             // Many-to-Many Tags
             Bag(x => x.Tags, map =>
             {
-                map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                //map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                 map.Table("[tasks_tags]");
                 map.Key(key =>
                 {
