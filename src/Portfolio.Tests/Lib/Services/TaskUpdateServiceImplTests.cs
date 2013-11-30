@@ -30,17 +30,17 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_should_add_new_tags_to_a_task()
         {
-            taskInputModel.Tags = new List<TaskTagInputModel>
+            taskInputModel.Tags = new List<TagViewModel>
             {
-                new TaskTagInputModel("tag-1", "Tag 1"),
-                new TaskTagInputModel("tag-2", "Tag 2")
+                new TagViewModel(1, "tag-1", "Tag 1"),
+                new TagViewModel(2, "tag-2", "Tag 2")
             };
 
             task = service.UpdateTask(taskInputModel);
 
             task.Tags.Count.Should().Be(2);
-            task.Tags[0].Id.Should().Be("tag-1");
-            task.Tags[1].Id.Should().Be("tag-2");
+            task.Tags[0].Slug.Should().Be("tag-1");
+            task.Tags[1].Slug.Should().Be("tag-2");
         }
 
         [Test]
@@ -69,19 +69,19 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_should_remove_tags_that_no_longer_belong()
         {
-            task.Tags.Add(new Tag { Id = "tag-1" });
-            task.Tags.Add(new Tag { Id = "tag-2" });
-            taskInputModel.Tags = new List<TaskTagInputModel>
+            task.Tags.Add(new Tag { Id = 1, Slug = "tag-1" });
+            task.Tags.Add(new Tag { Id = 2, Slug = "tag-2" });
+            taskInputModel.Tags = new List<TagViewModel>
             {
-                new TaskTagInputModel("tag-1", "Tag 1"),
-                new TaskTagInputModel("tag-3", "Tag 3")
+                new TagViewModel(1, "tag-1", "Tag 1"),
+                new TagViewModel(3, "tag-3", "Tag 3")
             };
 
             task = service.UpdateTask(taskInputModel);
 
             task.Tags.Count.Should().Be(2);
-            task.Tags[0].Id.Should().Be("tag-1");
-            task.Tags[1].Id.Should().Be("tag-3");
+            task.Tags[0].Slug.Should().Be("tag-1");
+            task.Tags[1].Slug.Should().Be("tag-3");
         }
 
         [Test]
@@ -109,10 +109,10 @@ namespace Portfolio.Lib.Services
                 task.Id = id;
                 return task;
             });
-            mockRepository.Setup(x => x.Load<Tag>("tag-1")).Returns(new Tag { Id = "tag-1", Description = "Tag 1" });
-            mockRepository.Setup(x => x.Load<Tag>("tag-2")).Returns(new Tag { Id = "tag-2", Description = "Tag 2" });
-            mockRepository.Setup(x => x.Load<Tag>("tag-3")).Returns(new Tag { Id = "tag-3", Description = "Tag 3" });
-            mockRepository.Setup(x => x.Load<Tag>("tag-4")).Returns(new Tag { Id = "tag-4", Description = "Tag 4" });
+            mockRepository.Setup(x => x.Load<Tag>(1)).Returns(new Tag { Id = 1, Slug = "tag-1", Description = "Tag 1" });
+            mockRepository.Setup(x => x.Load<Tag>(2)).Returns(new Tag { Id = 2, Slug = "tag-2", Description = "Tag 2" });
+            mockRepository.Setup(x => x.Load<Tag>(3)).Returns(new Tag { Id = 3, Slug = "tag-3", Description = "Tag 3" });
+            mockRepository.Setup(x => x.Load<Tag>(4)).Returns(new Tag { Id = 4, Slug = "tag-4", Description = "Tag 4" });
         }
     }
 }

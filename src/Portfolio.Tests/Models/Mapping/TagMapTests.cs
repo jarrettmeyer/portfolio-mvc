@@ -10,7 +10,7 @@ namespace Portfolio.Models.Mapping
     public class TagMapTests
     {
         private Tag tag;
-        private string tagId;
+        private int tagId;
         private ISession session;
 
         [SetUp]
@@ -62,7 +62,7 @@ namespace Portfolio.Models.Mapping
         {            
             tag = ObjectMother.NewTag;
             tag.Description = description;
-            tag.Id = slug;
+            tag.Slug = slug;
             tag.IsActive = isActive;
             session.Save(tag);
             session.Flush();

@@ -214,17 +214,16 @@
     <Compile Include="LogonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Credentials.cs" />
-    <Compile Include="ViewModels\TagLabelViewModel.cs" />
     <Compile Include="ViewModels\TagSelectList.cs" />
     <Compile Include="ViewModels\TagInputModel.cs" />
     <Compile Include="ViewModels\TagListViewModel.cs" />
     <Compile Include="ViewModels\TagRowViewModel.cs" />
     <Compile Include="ViewModels\FlashMessage.cs" />
     <Compile Include="ViewModels\FlashMessageCollection.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="ViewModels\TaskInputModel.cs" />
     <Compile Include="ViewModels\TaskListViewModel.cs" />
     <Compile Include="ViewModels\TaskRowViewModel.cs" />
-    <Compile Include="ViewModels\TaskTagInputModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

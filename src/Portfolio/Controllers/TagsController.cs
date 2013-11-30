@@ -28,7 +28,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             var category = repository.FindOne<Tag>(c => c.Id == id);
             var model = new TagInputModel(category);            
@@ -36,7 +36,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(string id, TagInputModel model)
+        public ActionResult Edit(int id, TagInputModel model)
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             Tag tag = service.UpdateCategory(model);

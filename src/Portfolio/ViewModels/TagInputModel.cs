@@ -14,9 +14,10 @@ namespace Portfolio.ViewModels
         public TagInputModel(Tag tag)
         {
             Description = tag.Description;
-            Id = tag.Id;
             IsNew = false;
-            OriginalId = tag.Id;
+            Slug = tag.Slug;
+            
+            Id = tag.Id;
         }
 
         public string ActionName
@@ -43,9 +44,9 @@ namespace Portfolio.ViewModels
             get { return FormMethod.Post; }
         }
 
-        public bool IsNew { get; set; }
+        public int Id { get; set; }
 
-        public string OriginalId { get; set; }
+        public bool IsNew { get; set; }
 
         public string PageTitle
         {
@@ -53,7 +54,7 @@ namespace Portfolio.ViewModels
         }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Slug is required")]
-        //[RegularExpression("[a-z0-9\\.\\_\\-]+")]
-        public string Id { get; set; }
+        [RegularExpression("[a-z0-9\\.\\-_]+")]
+        public string Slug { get; set; }
     }
 }

@@ -41,6 +41,7 @@
                     foreach (var tag in Model.Tags)
                     {
                         <input type="hidden" name="Tags[{{id}}].Id" value="@tag.Id"/>
+                        <input type="hidden" name="Tags[{{id}}].Slug" value="@tag.Slug"/>
                         <input type="hidden" name="Tags[{{id}}].Description" value="@tag.Description"/>
                         <div>@tag.Description</div>
                     }    

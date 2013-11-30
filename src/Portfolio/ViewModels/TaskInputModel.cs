@@ -10,14 +10,14 @@ namespace Portfolio.ViewModels
     {
         public TaskInputModel()
         {
-            Tags = new List<TaskTagInputModel>();
+            Tags = new List<TagViewModel>();
         }
 
         public TaskInputModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
 
-            Tags = task.Tags.Select(tag => new TaskTagInputModel(tag.Id, tag.Description)).ToList();
+            Tags = task.Tags.Select(tag => new TagViewModel(tag.Id, tag.Slug, tag.Description)).ToList();
             Description = task.Description;
             DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
             Id = task.Id;
@@ -62,7 +62,7 @@ namespace Portfolio.ViewModels
             }
         }
 
-        public IList<TaskTagInputModel> Tags { get; set; }
+        public IList<TagViewModel> Tags { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]

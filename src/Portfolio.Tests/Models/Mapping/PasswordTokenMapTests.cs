@@ -17,6 +17,7 @@ namespace Portfolio.Models.Mapping
         [SetUp]
         public void Before_each_test()
         {
+            TestBootstrapper.DeleteAll<User>();
             CreateUser();
         }
 

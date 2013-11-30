@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Portfolio.Lib.Data;
 using Portfolio.Models;
 using Portfolio.ViewModels;
@@ -7,7 +8,7 @@ namespace Portfolio.Lib.Services
 {
     public class TaskUpdateServiceImpl : ITaskUpdateService
     {
-        private string[] currentTagIds;
+        private string[] currentTagSlugs;
         private readonly IRepository repository;
         private Task task;
 
@@ -32,11 +33,11 @@ namespace Portfolio.Lib.Services
 
         private void AddNewTagsToTask(TaskInputModel model)
         {            
-            var newTags = model.Tags.Where(tag => !currentTagIds.Contains(tag.Id));
+            var newTags = model.Tags.Where(tag => !currentTagSlugs.Contains(tag.Slug));
             foreach (var tagModel in newTags)
             {
-                var newId = tagModel.Id;
-                var newTag = repository.Load<Tag>(newId);
+                int newId = tagModel.Id;
+                Tag newTag = repository.Load<Tag>(newId);
                 task.Tags.Add(newTag);
             }
         }
@@ -44,17 +45,17 @@ namespace Portfolio.Lib.Services
         private void FetchTaskById(TaskInputModel model)
         {
             task = repository.Load<Task>(model.Id);
-            currentTagIds = task.Tags.Select(t => t.Id).ToArray();
+            currentTagSlugs = task.Tags.Select(t => t.Slug).ToArray();
         }
 
         private void RemoveOldTagsFromTask(TaskInputModel model)
         {
-            var selectedIds = model.Tags.Select(t => t.Id);
-            var oldTagIds = currentTagIds.Where(id => !selectedIds.Contains(id));
-            foreach (var oldTagId in oldTagIds)
+            IEnumerable<string> selectedSlugs = model.Tags.Select(t => t.Slug);
+            IEnumerable<string> oldTagSlugs = currentTagSlugs.Where(slug => !selectedSlugs.Contains(slug));
+            foreach (var oldTagSlug in oldTagSlugs)
             {
-                string idToRemove = oldTagId;
-                Tag oldTag = task.Tags.Single(t => t.Id == idToRemove);
+                string slugToRemove = oldTagSlug;
+                Tag oldTag = task.Tags.Single(t => t.Slug == slugToRemove);
                 task.Tags.Remove(oldTag);
             }
         }

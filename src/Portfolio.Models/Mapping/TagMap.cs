@@ -12,11 +12,17 @@ namespace Portfolio.Models.Mapping
             Id(x => x.Id, map =>
             {
                 map.Column("tag_id");
-                map.Generator(Generators.Assigned);
+                map.Generator(Generators.Identity);
+            });
+            Property(x => x.Slug, map =>
+            {
+                map.Column("slug");
+                map.NotNullable(true);
             });
             Property(x => x.Description, map =>
             {
                 map.Column("description");
+                map.NotNullable(true);
             });
             Property(x => x.IsActive, map =>
             {
@@ -30,10 +36,12 @@ namespace Portfolio.Models.Mapping
             Property(x => x.CreatedAt, map =>
             {
                 map.Column("created_at");
+                map.NotNullable(true);
             });
             Property(x => x.UpdatedAt, map =>
             {
                 map.Column("updated_at");
+                map.NotNullable(true);
             });
             Version(x => x.Version, map =>
             {

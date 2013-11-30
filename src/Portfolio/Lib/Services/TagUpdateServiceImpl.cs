@@ -18,8 +18,8 @@ namespace Portfolio.Lib.Services
         {
             using (var transaction = repository.BeginTransaction())
             {
-                tag = repository.Load<Tag>(tagInputModel.OriginalId);
-                tag.Id = tagInputModel.Id;
+                tag = repository.Load<Tag>(tagInputModel.Id);
+                tag.Slug = tagInputModel.Slug;
                 tag.Description = tagInputModel.Description.Trim();
                 tag.UpdatedAt = Clock.Instance.Now;
                 transaction.Commit();
