@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Portfolio.ViewModels
 {
+    [Serializable]
     public class FlashMessageCollection : IEnumerable<FlashMessage>
     {
         private readonly List<FlashMessage> flashMessages;

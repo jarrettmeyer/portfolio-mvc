@@ -13,7 +13,7 @@ namespace Portfolio.App_Start
             new ResourceRouteConfiguration(routes, "Tasks").Configure();
             new ResourceRouteConfiguration(routes, "Tags", settings: new ResourceRouteConfigurationSettings
             {
-                IdConstraint = @"[a-z0-9\-\._]+",
+                IdConstraint = @"\d+",
                 IncludeShowAction = false
             }).Configure();
 

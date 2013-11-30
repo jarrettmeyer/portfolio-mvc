@@ -20,7 +20,7 @@ namespace Portfolio.Lib
             if (sessionAdapter.IsAuthenticated)
             {
                 var repository = ServiceLocator.Instance.GetService<IRepository>();
-                var user = repository.Load<User>(sessionAdapter.Username);
+                var user = repository.FindOne<User>(u => u.Username == sessionAdapter.Username);
                 httpContext.User = new GenericPrincipal(user, new string[] {});
                 return true;
             }

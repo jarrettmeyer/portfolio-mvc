@@ -1,5 +1,8 @@
-﻿namespace Portfolio.ViewModels
+﻿using System;
+
+namespace Portfolio.ViewModels
 {
+    [Serializable]
     public class FlashMessage
     {
         public FlashMessage(string key, string message)
