@@ -9,10 +9,14 @@ namespace Portfolio.Models.Mapping
         public UserMap()
         {
             Table("[users]");
-            Id(x => x.Username, map =>
+            Id(x => x.Id, map =>
             {
-                map.Column("username");
-                map.Generator(Generators.Assigned);
+                map.Column("user_id");
+                map.Generator(Generators.Identity);
+            });
+            Property(x => x.Username, map =>
+            {
+                map.Column("username");                
             });
             Property(x => x.HashedPassword, map =>
             {

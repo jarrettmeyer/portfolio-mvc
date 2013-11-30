@@ -23,7 +23,7 @@ namespace Portfolio.Models.Mapping
         [TearDown]
         public void After_each_test()
         {            
-            TestBootstrapper.DeleteAllTags();
+            TestBootstrapper.DeleteAll<Tag>();
         }
 
         [Test]

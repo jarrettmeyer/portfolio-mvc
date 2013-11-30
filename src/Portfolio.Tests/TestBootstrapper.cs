@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using NHibernate.Linq;
 using Portfolio.Lib.Data;
-using Portfolio.Models;
 
 namespace Portfolio
 {
@@ -30,17 +30,8 @@ namespace Portfolio
                     txn.Commit();
                 }
             }
+            Debug.WriteLine("Deleted {0} record(s) of type {1}", deletedCount, typeof(T));
             return deletedCount;
-        }
-
-        public static int DeleteAllTags()
-        {
-            return DeleteAll<Tag>();
-        }
-
-        public static int DeleteAllTasks()
-        {
-            return DeleteAll<Task>();
         }
     }
 }

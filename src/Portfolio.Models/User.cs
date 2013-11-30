@@ -6,7 +6,12 @@ namespace Portfolio.Models
     public class User : IIdentity
     {
         /// <summary>
-        /// The username for the user. This field is the primary key for the user.
+        /// The unique ID for the user. This field is the primary key and set by the database.
+        /// </summary>
+        public virtual int Id { get; set; }
+
+        /// <summary>
+        /// The username for the user.
         /// </summary>
         public virtual string Username { get; set; }
 

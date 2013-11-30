@@ -12,6 +12,7 @@ namespace Portfolio.Models.Mapping
         private PasswordToken passwordToken;
         private ISession session;
         private User user;
+        private int userId;
 
         [SetUp]
         public void Before_each_test()
@@ -19,12 +20,19 @@ namespace Portfolio.Models.Mapping
             CreateUser();
         }
 
+        [TearDown]
+        public void After_each_test()
+        {
+            TestBootstrapper.DeleteAll<PasswordToken>();
+            TestBootstrapper.DeleteAll<User>();
+        }
+
         [Test]
         public void Can_save_a_new_password_token()
         {
             using (session = NHibernateConfig.SessionFactory.OpenSession())
             {
-                user = session.Load<User>("tester");
+                user = session.Load<User>(userId);
                 passwordToken = PasswordToken.GenerateForUser(user);
 
                 Action saveAction = () =>
@@ -51,6 +59,7 @@ namespace Portfolio.Models.Mapping
                 };
                 session.Save(user);
                 session.Flush();
+                userId = user.Id;
             }
         }
     }

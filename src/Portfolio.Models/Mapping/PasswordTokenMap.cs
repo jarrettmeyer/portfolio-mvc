@@ -15,7 +15,7 @@ namespace Portfolio.Models.Mapping
             });
             ManyToOne(x => x.User, map =>
             {
-                map.Column("username");
+                map.Column("user_id");
             });
             Property(x => x.ExpiresAt, map =>
             {

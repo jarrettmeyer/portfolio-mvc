@@ -31,15 +31,7 @@ namespace Portfolio.Models.Mapping
         [TearDown]
         public void After_each_test()
         {
-            using (session = NHibernateConfig.SessionFactory.OpenSession())
-            {
-                var users = session.Query<User>();
-                foreach (User userToDelete in users)
-                {
-                    session.Delete(userToDelete);
-                }
-                session.Flush();
-            }
+            TestBootstrapper.DeleteAll<User>();
         }
 
         [Test]
@@ -72,7 +64,7 @@ namespace Portfolio.Models.Mapping
                     session.Flush();
                 };
 
-                saveAction.ShouldThrow<NonUniqueObjectException>();
+                saveAction.ShouldThrow<GenericADOException>();
             }
         }
 
