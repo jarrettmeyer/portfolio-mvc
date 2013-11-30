@@ -13,9 +13,10 @@ namespace Portfolio.ViewModels
 
         public TagInputModel(Tag tag)
         {
-            IsNew = false;
             Description = tag.Description;
             Id = tag.Id;
+            IsNew = false;
+            OriginalId = tag.Id;
         }
 
         public string ActionName
@@ -43,7 +44,9 @@ namespace Portfolio.ViewModels
         }
 
         public bool IsNew { get; set; }
-        
+
+        public string OriginalId { get; set; }
+
         public string PageTitle
         {
             get { return IsNew ? "New Tag" : "Edit Tag"; }

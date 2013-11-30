@@ -17,7 +17,7 @@ namespace Portfolio.Controllers
         }
         
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             ITagDeletionService service = ServiceLocator.Instance.GetService<ITagDeletionService>();
             Tag tag = service.DeleteCategory(id);
@@ -36,7 +36,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, TagInputModel model)
+        public ActionResult Edit(string id, TagInputModel model)
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             Tag tag = service.UpdateCategory(model);

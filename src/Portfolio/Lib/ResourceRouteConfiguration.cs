@@ -32,12 +32,12 @@ namespace Portfolio.Lib
                     new { id = settings.IdConstraint });
             }
 
-            routes.MapRoute(resourceName + "-New", resourceName.ToLowerInvariant() + "/new",
-                new { controller = controllerName, action = "New" });
-
             routes.MapRoute(resourceName + "-Edit", resourceName.ToLowerInvariant() + "/{id}/edit",
                 new { controller = controllerName, action = "Edit" },
                 new { id = settings.IdConstraint });
+
+            routes.MapRoute(resourceName + "-New", resourceName.ToLowerInvariant() + "/new",
+                new { controller = controllerName, action = "New" });
 
             if (settings.IncludeDeleteAction)
             {

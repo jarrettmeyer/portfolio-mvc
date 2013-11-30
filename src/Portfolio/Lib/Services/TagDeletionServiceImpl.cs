@@ -13,7 +13,7 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Tag DeleteCategory(int id)
+        public Tag DeleteCategory(string id)
         {
             using (var transaction = repository.BeginTransaction())
             {

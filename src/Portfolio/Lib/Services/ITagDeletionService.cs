@@ -4,6 +4,6 @@ namespace Portfolio.Lib.Services
 {
     public interface ITagDeletionService
     {
-        Tag DeleteCategory(int id);
+        Tag DeleteCategory(string id);
     }
 }

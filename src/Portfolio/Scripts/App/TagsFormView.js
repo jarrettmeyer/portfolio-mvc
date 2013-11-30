@@ -1,17 +1,21 @@
 ﻿(function () {
     "use strict";
 
+    if (!window.app) {
+        window.app = {};
+    }
+
     window.app.TagsFormView = (function() {
         function TagsFormView(options) {
             var defaults = {
                 descriptionSelector: "#Description",
-                slugSelector: "#Slug",
+                idSelector: "#Id",
                 updateSlugEvents: "blur focus change keyup"
             };
             this.options = $.extend(defaults, options);
             this.slugGenerator = new app.SlugGenerator();
             this.$description = $(this.options.descriptionSelector);
-            this.$slug = $(this.options.slugSelector);
+            this.$slug = $(this.options.idSelector);
         }
 
         TagsFormView.prototype.bindDescriptionChanged = function () {            

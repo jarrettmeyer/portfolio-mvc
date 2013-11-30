@@ -11,7 +11,11 @@ namespace Portfolio.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             new ResourceRouteConfiguration(routes, "Tasks").Configure();
-            new ResourceRouteConfiguration(routes, "Tags", settings: new ResourceRouteConfigurationSettings { IncludeShowAction = false }).Configure();
+            new ResourceRouteConfiguration(routes, "Tags", settings: new ResourceRouteConfigurationSettings
+            {
+                IdConstraint = @"[a-z0-9\-\._]+",
+                IncludeShowAction = false
+            }).Configure();
 
             routes.MapRoute("Logon", "logon", new { controller = "Session", action = "New" });
             routes.MapRoute("Logoff", "logoff", new { controller = "Session", action = "Delete" });
