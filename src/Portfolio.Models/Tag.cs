@@ -43,5 +43,26 @@ namespace Portfolio.Models
         /// The tag version. This will be assigned by the database.
         /// </summary>
         public virtual byte[] Version { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Tag)obj);
+        }
+
+        protected bool Equals(Tag other)
+        {
+            return Id == other.Id && string.Equals(Slug, other.Slug, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Id * 397) ^ (Slug != null ? Slug.GetHashCode() : 0);
+            }
+        }
     }
 }
