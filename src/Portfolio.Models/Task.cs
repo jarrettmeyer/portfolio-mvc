@@ -71,6 +71,15 @@ namespace Portfolio.Models
                 Tags.Add(tag);
         }
 
+        public virtual void Complete()
+        {
+            if (CompletedAt == null)
+            {
+                CompletedAt = DateTime.UtcNow;
+                IsCompleted = true;    
+            }            
+        }
+
         public virtual bool HasTag(Tag tag)
         {
             return Tags.Any(t => t.Equals(tag));

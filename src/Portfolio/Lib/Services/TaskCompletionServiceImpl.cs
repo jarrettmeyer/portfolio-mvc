@@ -18,8 +18,7 @@ namespace Portfolio.Lib.Services
             using (var transaction = repository.BeginTransaction())
             {
                 task = repository.Load<Task>(id);
-                task.IsCompleted = true;
-                task.CompletedAt = Clock.Instance.Now;
+                task.Complete();
                 task.UpdatedAt = Clock.Instance.Now;
                 transaction.Commit();
                 return task;

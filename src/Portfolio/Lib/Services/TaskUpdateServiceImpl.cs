@@ -37,7 +37,7 @@ namespace Portfolio.Lib.Services
             {
                 int newId = tagModel.Id;
                 Tag newTag = repository.Load<Tag>(newId);
-                task.Tags.Add(newTag);
+                task.AddTag(newTag);                
             }
         }
 
@@ -54,8 +54,7 @@ namespace Portfolio.Lib.Services
             foreach (var idToRemove in idsToRemove)
             {
                 int id = idToRemove;
-                Tag oldTag = task.Tags.Single(t => t.Id == id);
-                task.Tags.Remove(oldTag);
+                task.RemoveTag(id);                
             }
         }
 

@@ -34,7 +34,7 @@ namespace Portfolio.Lib.Services
             {
                 int id = tagInputModel.Id;
                 Tag tag = repository.Load<Tag>(id);
-                task.Tags.Add(tag);
+                task.AddTag(tag);                
             }
         }
 
