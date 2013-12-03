@@ -27,14 +27,10 @@ namespace Portfolio.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
-            using (var transaction = repository.BeginTransaction())
-            {
-                Task task = repository.Load<Task>(id);
-                repository.Delete(task);
-                transaction.Commit();
-                return new EmptyResult();
-            }
+            ITaskDeletionService taskDeletionService = ServiceLocator.Instance.GetService<ITaskDeletionService>();
+            Task task = taskDeletionService.DeleteTask(id);
+            FlashMessages.AddSuccessMessage(string.Format("Deleted Task: {0}", task.Title));
+            return Json(new { success = true });            
         }
 
         [HttpGet]
