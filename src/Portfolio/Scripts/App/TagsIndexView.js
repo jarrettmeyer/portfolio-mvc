@@ -11,8 +11,11 @@
         }
 
         TagsIndexView.prototype.initialize = function() {
-            app.bindDeleteLinks(function () {
-                window.location.reload();
+            app.bindDeleteLinks({
+                next: function () {
+                    window.location.reload();
+                },
+                useAntiForgeryToken: true
             });
         };
 

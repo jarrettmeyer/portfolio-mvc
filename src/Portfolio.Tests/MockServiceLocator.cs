@@ -30,5 +30,10 @@ namespace Portfolio
             Mock<TService> mock = GetMock<TService>();
             return mock.Object;
         }
+
+        public static void Reset()
+        {
+            mocks.Clear();
+        }
     }
 }

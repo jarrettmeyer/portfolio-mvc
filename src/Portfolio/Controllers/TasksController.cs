@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
 using Portfolio.Models;
@@ -25,12 +26,11 @@ namespace Portfolio.Controllers
         }
 
         [HttpDelete]
+        //[ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            ITaskDeletionService taskDeletionService = ServiceLocator.Instance.GetService<ITaskDeletionService>();
-            Task task = taskDeletionService.DeleteTask(id);
-            FlashMessages.AddSuccessMessage(string.Format("Successfully deleted task: {0}", task.Title));
-            return Json(new { success = true });            
+            return new DeleteResponder(this)
+                .RespondWith<ITaskDeletionService>(x => x.DeleteTask(id));            
         }
 
         [HttpGet]

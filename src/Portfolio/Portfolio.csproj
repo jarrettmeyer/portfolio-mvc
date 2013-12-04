@@ -176,6 +176,7 @@
     <Compile Include="Lib\Data\NHibernateTransactionAdapter.cs" />
     <Compile Include="Lib\Data\Repository.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
+    <Compile Include="Lib\DeleteResponder.cs" />
     <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HtmlTextFormatter.cs" />
     <Compile Include="Lib\HttpSessionAdapter.cs" />
@@ -215,6 +216,11 @@
     <Compile Include="Lib\SessionBasedAuthorizeAttibute.cs" />
     <Compile Include="LogonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Credentials.cs" />
     <Compile Include="ViewModels\TagSelectList.cs" />
     <Compile Include="ViewModels\TagInputModel.cs" />
@@ -311,7 +317,12 @@
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

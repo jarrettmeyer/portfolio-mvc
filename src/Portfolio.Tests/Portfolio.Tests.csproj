@@ -95,6 +95,7 @@
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Lib\Data\NHibernateRepositoryTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
+    <Compile Include="Lib\DeleteResponderTests.cs" />
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\Services\LogonServiceImplTests.cs" />
