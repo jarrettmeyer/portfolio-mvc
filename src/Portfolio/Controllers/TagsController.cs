@@ -21,9 +21,7 @@ namespace Portfolio.Controllers
         {
             ITagDeletionService service = ServiceLocator.Instance.GetService<ITagDeletionService>();
             Tag tag = service.DeleteCategory(id);
-            FlashMessages.AddSuccessMessage(string.Format("Deleted Tag: {0}", tag.Description));
-
-            // This will be called with JavaScript, so we don't have an actual result to return.
+            FlashMessages.AddSuccessMessage(string.Format("Successfully deleted tag: {0}", tag.Description));
             return Json(new { success = true });
         }
 

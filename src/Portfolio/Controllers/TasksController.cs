@@ -29,7 +29,7 @@ namespace Portfolio.Controllers
         {
             ITaskDeletionService taskDeletionService = ServiceLocator.Instance.GetService<ITaskDeletionService>();
             Task task = taskDeletionService.DeleteTask(id);
-            FlashMessages.AddSuccessMessage(string.Format("Deleted Task: {0}", task.Title));
+            FlashMessages.AddSuccessMessage(string.Format("Successfully deleted task: {0}", task.Title));
             return Json(new { success = true });            
         }
 
