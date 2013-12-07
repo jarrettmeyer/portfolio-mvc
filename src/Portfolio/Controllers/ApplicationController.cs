@@ -25,24 +25,18 @@ namespace Portfolio.Controllers
 
         protected virtual void CheckModelState(Func<ActionResult> onInvalidModelState = null)
         {
-            if (!ViewData.ModelState.IsValid)
-                throw new InvalidModelStateException("", ViewData.ModelState, onInvalidModelState);
-        }
+            // By default, if the model state is not valid, we are going to display the form again.
+            // If you don't like this default functionality, I suggest you
+            if (onInvalidModelState == null)
+                onInvalidModelState = () => View(ViewData.Model);
 
-        protected virtual void HandleInvalidModelState(InvalidModelStateException exception)
-        {
-            exception.OnInvalidModelState().ExecuteResult(ControllerContext);
+            if (!ViewData.ModelState.IsValid)
+                onInvalidModelState.Invoke().ExecuteResult(ControllerContext);
         }
 
         protected override void OnException(ExceptionContext exceptionContext)
         {
-            InvalidModelStateException exception = exceptionContext.Exception as InvalidModelStateException;
-            if (exception != null)
-            {
-                // Mark the exception as handled to keep the error from bubbling to IIS.
-                exceptionContext.ExceptionHandled = true;
-                HandleInvalidModelState(exception);
-            }
+            base.OnException(exceptionContext);
         }
     }
 }
