@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace Portfolio.Models
 {
-    public class User : IIdentity
+    public class User : IPrincipal
     {
         /// <summary>
         /// The unique ID for the user. This field is the primary key and set by the database.
@@ -47,28 +47,19 @@ namespace Portfolio.Models
         public virtual byte[] Version { get; set; }
 
         /// <summary>
-        /// Authentication type is part if the IIdentity interface. Any string
-        /// will do here.
+        /// Ideally, we would have a 'roles' table, and this method would return true
+        /// if the user had that role. There's no real need to build something like
+        /// that for this demo application, so we're just going to return 'true' all
+        /// the time, instead.
         /// </summary>
-        public virtual string AuthenticationType
+        public virtual bool IsInRole(string role)
         {
-            get { return "Application"; }
+            return true;
         }
 
-        /// <summary>
-        /// A user is authenticated if it has a Version assignment by the database.
-        /// </summary>
-        public virtual bool IsAuthenticated
+        public virtual IIdentity Identity
         {
-            get { return Version != null && Version.Length > 0; }
-        }
-
-        /// <summary>
-        /// Alias for username property. This property is required by the IIdentity interface.
-        /// </summary>
-        public virtual string Name
-        {
-            get { return Username; }
+            get { return new ApplicationIdentity(this); }
         }
     }
 }

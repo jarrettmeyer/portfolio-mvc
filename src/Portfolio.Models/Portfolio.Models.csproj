@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationIdentity.cs" />
     <Compile Include="Guest.cs" />
     <Compile Include="IVersionedEntity.cs" />
     <Compile Include="Mapping\PasswordTokenMap.cs" />

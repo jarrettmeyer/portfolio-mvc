@@ -11,11 +11,11 @@ namespace Portfolio.Models
         }
 
         /// <summary>
-        /// A guest is never authenticated.
+        /// Guests don't have any roles in this application.
         /// </summary>
-        public override bool IsAuthenticated
+        public override bool IsInRole(string role)
         {
-            get { return false; }
+            return false;
         }
     }
 }

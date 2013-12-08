@@ -43,6 +43,7 @@ namespace Portfolio.Controllers
         public ActionResult Delete()
         {
             FlashMessages.AddSuccessMessage("You have successfully logged off.");
+            SessionAdapter.ResetSession();
             return RedirectToAction("New", "Session");
         }
 	}

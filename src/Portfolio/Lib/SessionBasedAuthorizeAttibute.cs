@@ -1,5 +1,4 @@
-﻿using System.Security.Principal;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
@@ -21,7 +20,7 @@ namespace Portfolio.Lib
             {
                 var repository = ServiceLocator.Instance.GetService<IRepository>();
                 var user = repository.FindOne<User>(u => u.Username == sessionAdapter.Username);
-                httpContext.User = new GenericPrincipal(user, new string[] {});
+                httpContext.User = user ?? new Guest();
                 return true;
             }
             else
