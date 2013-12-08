@@ -21,7 +21,11 @@ namespace Portfolio.ViewModels
 
         public void Add(string key, string message)
         {
-            flashMessages.Add(new FlashMessage(key, message));            
+            flashMessages.Add(new FlashMessage(key, message));
+
+            // By default, reading a temp data key will delete the object from temp data.
+            // Keep the key until the collection of messages is iterated.
+            tempData.Keep(tempDataKey);
         }
 
         public void AddErrorMessage(string message)
@@ -36,7 +40,15 @@ namespace Portfolio.ViewModels
 
         public IEnumerator<FlashMessage> GetEnumerator()
         {
-            return flashMessages.GetEnumerator();
+            try
+            {
+                return flashMessages.GetEnumerator();
+            }
+            finally
+            {
+                // Remove the temp data key when we iterate through the list of messages.
+                tempData.Remove(tempDataKey);
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
