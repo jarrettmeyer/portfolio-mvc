@@ -285,6 +285,11 @@
     <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\qunit-1.12.0.js" />
     <Content Include="Scripts\Tests\SlugGenerator.Tests.js" />
     <Content Include="Web.config">
