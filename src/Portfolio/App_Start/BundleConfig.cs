@@ -26,7 +26,7 @@ namespace Portfolio.App_Start
             var jsBundle = new ScriptBundle("~/Scripts/js")
                 .Include("~/Scripts/jquery-2.0.3.js")
                 .Include("~/Scripts/jquery.validate.js")
-                .Include("~/Scripts/jquery.validate.unobtrustive.js")
+                .Include("~/Scripts/jquery.validate.unobtrusive.js")
                 .Include("~/Scripts/bootstrap.js")
                 .Include("~/Scripts/App/bindDeleteLinks.js")
                 .Include("~/Scripts/App/SlugGenerator.js");

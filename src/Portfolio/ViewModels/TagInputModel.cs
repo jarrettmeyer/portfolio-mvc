@@ -31,7 +31,8 @@ namespace Portfolio.ViewModels
         }
 
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(200, ErrorMessage = "Description cannot exceed 200 characters")]
+        [StringLength(30, ErrorMessage = "Description cannot exceed 30 characters")]
+        [DataType(DataType.Text)]
         public string Description { get; set; }
 
         public object FormCss
@@ -55,6 +56,7 @@ namespace Portfolio.ViewModels
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Slug is required")]
         [RegularExpression("[a-z0-9\\.\\-_]+")]
+        [DataType(DataType.Text)]
         public string Slug { get; set; }
     }
 }
