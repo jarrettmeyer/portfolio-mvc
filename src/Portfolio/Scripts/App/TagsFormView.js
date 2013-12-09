@@ -5,17 +5,17 @@
         window.app = {};
     }
 
-    window.app.TagsFormView = (function() {
+    window.app.TagsFormView = (function () {
+        var defaults = {
+            descriptionSelector: "#Description",
+            slugSelector: "#Slug",
+            updateSlugEvents: "blur focus change keyup"
+        };
+
         function TagsFormView(options) {
-            var defaults = {
-                descriptionSelector: "#Description",
-                slugSelector: "#Slug",
-                updateSlugEvents: "blur focus change keyup"
-            };
+            console.log("TagsFormView: creating new instance.");
             this.options = $.extend(defaults, options);
-            this.slugGenerator = new app.SlugGenerator();
-            this.$description = $(this.options.descriptionSelector);
-            this.$slug = $(this.options.slugSelector);
+            this.initialize();
         }
 
         TagsFormView.prototype.bindDescriptionChanged = function () {            
@@ -27,12 +27,14 @@
         };
 
         TagsFormView.prototype.initialize = function () {
+            this.slugGenerator = new app.SlugGenerator();
+            this.$description = $(this.options.descriptionSelector);
+            this.$slug = $(this.options.slugSelector);
             this.bindDescriptionChanged();
         };
 
         return TagsFormView;
     })();
 
-    var tagsFormView = new app.TagsFormView();
-    tagsFormView.initialize();
+    window.tagsFormView = new app.TagsFormView();    
 })();

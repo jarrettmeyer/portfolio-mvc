@@ -1,4 +1,6 @@
-﻿namespace Portfolio.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Portfolio.ViewModels
 {
     public class Credentials
     {
@@ -10,8 +12,10 @@
             Password = password;
         }
 
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; }
     }
 }

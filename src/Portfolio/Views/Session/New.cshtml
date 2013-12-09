@@ -8,8 +8,9 @@
     <h2>Logon</h2>
 </div>
 
-@using (Html.BeginForm("New", "Session", FormMethod.Post, new { role = "form" }))
+@using (Html.BeginForm("New", "Session", FormMethod.Post, new { id = "new-session-form", role = "form" }))
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-lg-push-4 col-lg-4">
             <div class="form-group">
@@ -30,4 +31,4 @@
     </div>    
 }
 
-
+<script type="text/javascript" src="@Url.Content("~/Scripts/App/NewSessionView.js")"></script>

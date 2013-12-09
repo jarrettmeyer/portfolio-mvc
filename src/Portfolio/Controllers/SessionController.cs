@@ -17,6 +17,7 @@ namespace Portfolio.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult New(Credentials credentials)
         {
             CheckModelState(() =>

@@ -43,6 +43,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(TaskInputModel model)
         {
             CheckModelState(() => OnInvalidTaskForm("Edit", model));
@@ -70,6 +71,7 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult New(TaskInputModel model)
         {
             CheckModelState(() => OnInvalidTaskForm("New", model));

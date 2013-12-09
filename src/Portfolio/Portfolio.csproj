@@ -267,6 +267,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\App\NewSessionView.js" />
     <Content Include="Scripts\App\TagsFormView.js" />
     <Content Include="Scripts\App\TagsIndexView.js" />
     <Content Include="Scripts\App\TasksIndexView.js" />
