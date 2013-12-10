@@ -188,7 +188,6 @@
     <Compile Include="Lib\Data\Repository.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
     <Compile Include="Lib\DeleteResponder.cs" />
-    <Compile Include="Lib\Ensure.cs" />
     <Compile Include="Lib\HtmlTextFormatter.cs" />
     <Compile Include="Lib\HttpSessionAdapter.cs" />
     <Compile Include="Lib\HttpSessionAdapterImpl.cs" />
@@ -320,6 +319,10 @@
     <Content Include="Views\Password\Forgot.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Lib\Portfolio.Lib.csproj">
+      <Project>{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}</Project>
+      <Name>Portfolio.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Portfolio.Models\Portfolio.Models.csproj">
       <Project>{100838ce-09bf-4e6e-80df-177b4c1cf66b}</Project>
       <Name>Portfolio.Models</Name>
