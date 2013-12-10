@@ -1,11 +1,9 @@
 ﻿using System.Web;
 using NHibernate;
 using Ninject;
-using Portfolio.Lib;
 using Portfolio.Lib.Data;
-using Portfolio.Lib.Services;
 
-namespace Portfolio.App_Start
+namespace Portfolio.Lib.Services
 {
     public class NinjectConfig
     {

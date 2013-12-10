@@ -132,6 +132,7 @@
     <Compile Include="Services\ITaskDeletionService.cs" />
     <Compile Include="Services\ITaskUpdateService.cs" />
     <Compile Include="Services\LogonServiceImpl.cs" />
+    <Compile Include="Services\NinjectConfig.cs" />
     <Compile Include="Services\NinjectServiceLocator.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\TagCreationServiceImpl.cs" />
