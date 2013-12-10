@@ -2,6 +2,8 @@
 using Moq;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
+using Portfolio.Lib.ViewModels;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 

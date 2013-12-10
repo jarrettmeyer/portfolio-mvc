@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Services;
-using Portfolio.ViewModels;
+using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Controllers
 {

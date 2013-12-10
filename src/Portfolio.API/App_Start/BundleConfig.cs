@@ -15,19 +15,25 @@ namespace Portfolio.API.App_Start
         private static void ConfigureCssBundles(BundleCollection bundles)
         {
             var cssBundle = new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap")
-                .Include("~/Content/Site");
+                .Include("~/Content/bootstrap.css")
+                .Include("~/Content/Site.css");
             bundles.Add(cssBundle);
         }
 
         private static void ConfigureJsBundles(BundleCollection bundles)
         {
-            var jsBundle = new ScriptBundle("~/Scripts/js")
-                .Include("~/Scripts/jquery-*")                
-                .Include("~/Scripts/modernizer-*")
-                .Include("~/Scripts/require")
-                .Include("~/Scripts/bootstrap.js");
-            bundles.Add(jsBundle);
+            var baseJsBundle = new ScriptBundle("~/Scripts/js")
+                .Include("~/Scripts/jquery-2.0.3.js")                
+                .Include("~/Scripts/modernizer-2.6.2.js")
+                .Include("~/Scripts/underscore.js")
+                .Include("~/Scripts/require.js")
+                .Include("~/Scripts/bootstrap.js")
+                .Include("~/Scripts/backbone.js");
+
+            var appJsBundle = new ScriptBundle("~/Scripts/js/app")
+                .Include("~/Scripts/app/MainWindowView.js");
+
+            bundles.Add(baseJsBundle);
         }
     }
 }

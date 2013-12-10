@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Portfolio.Lib.Models;
 
 namespace Portfolio.Models
 {

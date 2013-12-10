@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
-using Portfolio.Models;
-using Portfolio.ViewModels;
+using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Controllers
 {

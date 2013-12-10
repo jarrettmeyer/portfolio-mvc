@@ -1,4 +1,5 @@
 ﻿using System;
+using Portfolio.Lib.Models;
 using Portfolio.Models;
 
 namespace Portfolio

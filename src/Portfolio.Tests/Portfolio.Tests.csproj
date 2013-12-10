@@ -125,9 +125,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Portfolio.Models\Portfolio.Models.csproj">
-      <Project>{100838ce-09bf-4e6e-80df-177b4c1cf66b}</Project>
-      <Name>Portfolio.Models</Name>
+    <ProjectReference Include="..\Portfolio.Lib\Portfolio.Lib.csproj">
+      <Project>{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}</Project>
+      <Name>Portfolio.Lib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Portfolio\Portfolio.csproj">
       <Project>{8f505e74-aa08-49ae-9175-d15260e7fd89}</Project>

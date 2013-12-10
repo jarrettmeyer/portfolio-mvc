@@ -7,6 +7,7 @@ using NHibernate.Linq;
 using NUnit.Framework;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
 
 namespace Portfolio.Models.Mapping
 {

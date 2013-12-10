@@ -1,4 +1,4 @@
-﻿using Portfolio.Models;
+﻿using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib
 {

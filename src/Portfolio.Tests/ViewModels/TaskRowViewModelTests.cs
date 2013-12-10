@@ -1,6 +1,8 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
+using Portfolio.Lib.Models;
+using Portfolio.Lib.ViewModels;
 using Portfolio.Models;
 
 namespace Portfolio.ViewModels

@@ -43,9 +43,6 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\lib\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="BCrypt.Net">
-      <HintPath>..\..\lib\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\..\lib\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
@@ -170,80 +167,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lib\BCryptPasswordUtility.cs" />
-    <Compile Include="Lib\BooleanExtensions.cs" />
-    <Compile Include="Lib\ByteExtensions.cs" />
-    <Compile Include="Lib\Caching\AspNetHttpCache.cs" />
-    <Compile Include="Lib\Caching\Cache.cs" />
-    <Compile Include="Lib\Caching\ICache.cs" />
-    <Compile Include="Lib\Clock.cs" />
     <Compile Include="Lib\CollectionExtensions.cs" />
-    <Compile Include="Lib\Config.cs" />
-    <Compile Include="Lib\Data\IFetchStrategy.cs" />
-    <Compile Include="Lib\Data\IRepository.cs" />
-    <Compile Include="Lib\Data\ITransactionAdapter.cs" />
-    <Compile Include="Lib\Data\NHibernateConfig.cs" />
-    <Compile Include="Lib\Data\NHibernateRepository.cs" />
-    <Compile Include="Lib\Data\NHibernateTransactionAdapter.cs" />
-    <Compile Include="Lib\Data\Repository.cs" />
-    <Compile Include="Lib\Data\UniqueRecordViolationException.cs" />
     <Compile Include="Lib\DeleteResponder.cs" />
-    <Compile Include="Lib\HtmlTextFormatter.cs" />
     <Compile Include="Lib\HttpSessionAdapter.cs" />
     <Compile Include="Lib\HttpSessionAdapterImpl.cs" />
-    <Compile Include="Lib\IClock.cs" />
     <Compile Include="Lib\IHttpSessionAdapter.cs" />
     <Compile Include="Lib\IHttpSessionAdapterExtensions.cs" />
-    <Compile Include="Lib\IPasswordUtility.cs" />
-    <Compile Include="Lib\Logging\ILogWriter.cs" />
-    <Compile Include="Lib\Logging\Log4NetLogWriter.cs" />
-    <Compile Include="Lib\Logging\Log.cs" />
-    <Compile Include="Lib\ObjectExtensions.cs" />
     <Compile Include="Lib\ResourceRouteConfiguration.cs" />
     <Compile Include="Lib\ResourceRouteConfigurationSettings.cs" />
-    <Compile Include="Lib\Services\ILogonService.cs" />
-    <Compile Include="Lib\Services\ITaskCompletionService.cs" />
-    <Compile Include="Lib\Services\ITaskDeletionService.cs" />
-    <Compile Include="Lib\Services\ITaskUpdateService.cs" />
-    <Compile Include="Lib\Services\LogonServiceImpl.cs" />
-    <Compile Include="Lib\Services\TagCreationServiceImpl.cs" />
-    <Compile Include="Lib\Services\TagDeletionServiceImpl.cs" />
-    <Compile Include="Lib\Services\TagUpdateServiceImpl.cs" />
-    <Compile Include="Lib\Services\ITagCreationService.cs" />
-    <Compile Include="Lib\Services\ITagDeletionService.cs" />
-    <Compile Include="Lib\Services\ITagUpdateService.cs" />
-    <Compile Include="Lib\Services\IServiceLocator.cs" />
-    <Compile Include="Lib\Services\ITaskCreationService.cs" />
-    <Compile Include="Lib\Services\NinjectServiceLocator.cs" />
-    <Compile Include="Lib\Services\ServiceLocator.cs" />
-    <Compile Include="Lib\Services\TaskCompletionServiceImpl.cs" />
-    <Compile Include="Lib\Services\TaskCreationServiceImpl.cs" />
-    <Compile Include="Lib\Services\TaskDeletionServiceImpl.cs" />
-    <Compile Include="Lib\Services\TaskUpdateServiceImpl.cs" />
-    <Compile Include="Lib\StringExtensions.cs" />
-    <Compile Include="Lib\SystemClock.cs" />
     <Compile Include="Lib\SessionBasedAuthorizeAttibute.cs" />
-    <Compile Include="LogonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Credentials.cs" />
-    <Compile Include="ViewModels\PasswordForgotViewModel.cs" />
-    <Compile Include="ViewModels\PasswordTestViewModel.cs" />
-    <Compile Include="ViewModels\TagSelectList.cs" />
-    <Compile Include="ViewModels\TagInputModel.cs" />
-    <Compile Include="ViewModels\TagListViewModel.cs" />
-    <Compile Include="ViewModels\TagRowViewModel.cs" />
-    <Compile Include="ViewModels\FlashMessage.cs" />
-    <Compile Include="ViewModels\FlashMessageCollection.cs" />
-    <Compile Include="ViewModels\TagViewModel.cs" />
-    <Compile Include="ViewModels\TaskInputModel.cs" />
-    <Compile Include="ViewModels\TaskListViewModel.cs" />
-    <Compile Include="ViewModels\TaskRowViewModel.cs" />
-    <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -265,7 +203,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\App\NewSessionView.js" />
     <Content Include="Scripts\App\TagsFormView.js" />
     <Content Include="Scripts\App\TagsIndexView.js" />
@@ -322,10 +259,6 @@
     <ProjectReference Include="..\Portfolio.Lib\Portfolio.Lib.csproj">
       <Project>{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}</Project>
       <Name>Portfolio.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portfolio.Models\Portfolio.Models.csproj">
-      <Project>{100838ce-09bf-4e6e-80df-177b4c1cf66b}</Project>
-      <Name>Portfolio.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

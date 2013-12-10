@@ -7,7 +7,9 @@ using Moq;
 using NHibernate.Criterion;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
+using Portfolio.Lib.ViewModels;
 using Portfolio.Models;
 using Portfolio.ViewModels;
 

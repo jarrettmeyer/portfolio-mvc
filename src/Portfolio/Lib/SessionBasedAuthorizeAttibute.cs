@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
-using Portfolio.Models;
 
 namespace Portfolio.Lib
 {

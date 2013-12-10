@@ -5,6 +5,7 @@ using FluentAssertions;
 using NHibernate;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
 
 namespace Portfolio.Models.Mapping
 {

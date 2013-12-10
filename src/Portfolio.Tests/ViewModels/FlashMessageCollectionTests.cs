@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
 using NUnit.Framework;
+using Portfolio.Lib.ViewModels;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Web.ViewModels

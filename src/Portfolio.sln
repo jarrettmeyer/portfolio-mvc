@@ -13,8 +13,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PortfolioDB", "PortfolioDB\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio", "Portfolio\Portfolio.csproj", "{8F505E74-AA08-49AE-9175-D15260E7FD89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Models", "Portfolio.Models\Portfolio.Models.csproj", "{100838CE-09BF-4E6E-80DF-177B4C1CF66B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.API", "Portfolio.API\Portfolio.API.csproj", "{18F8D16F-EA78-40E3-9518-F38E1C1BF0EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Lib", "Portfolio.Lib\Portfolio.Lib.csproj", "{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}"
@@ -39,10 +37,6 @@ Global
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F505E74-AA08-49AE-9175-D15260E7FD89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{100838CE-09BF-4E6E-80DF-177B4C1CF66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{100838CE-09BF-4E6E-80DF-177B4C1CF66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{100838CE-09BF-4E6E-80DF-177B4C1CF66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{100838CE-09BF-4E6E-80DF-177B4C1CF66B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18F8D16F-EA78-40E3-9518-F38E1C1BF0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18F8D16F-EA78-40E3-9518-F38E1C1BF0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F8D16F-EA78-40E3-9518-F38E1C1BF0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
