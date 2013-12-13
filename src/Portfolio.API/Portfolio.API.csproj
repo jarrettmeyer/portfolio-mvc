@@ -137,10 +137,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServerInfoController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ApiResult.cs" />
+    <Compile Include="Results\ErrorDef.cs" />
+    <Compile Include="Results\GetServerInfo.cs" />
+    <Compile Include="Results\GetSession.cs" />
+    <Compile Include="Results\PostSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -165,6 +172,8 @@
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\knockout-2.2.1.debug.js" />
+    <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
@@ -191,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Providers\" />
-    <Folder Include="Results\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

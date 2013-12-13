@@ -31,9 +31,13 @@ namespace Portfolio.API.App_Start
                 .Include("~/Scripts/backbone.js");
 
             var appJsBundle = new ScriptBundle("~/Scripts/js/app")
-                .Include("~/Scripts/app/MainWindowView.js");
+                .Include("~/Scripts/app/views/MainWindowView.js") // Keep app/views/MainWindowView first, just for a bit of sanity.
+                .Include("~/Scripts/app/models/CurrentUser.js")
+                .Include("~/Scripts/app/views/LogonView.js");
+                
 
             bundles.Add(baseJsBundle);
+            bundles.Add(appJsBundle);
         }
     }
 }

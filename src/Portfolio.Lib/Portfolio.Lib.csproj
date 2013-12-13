@@ -101,6 +101,7 @@
     <Compile Include="Data\NHibernateTransactionAdapter.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UniqueRecordViolationException.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="HtmlTextFormatter.cs" />
     <Compile Include="IClock.cs" />
