@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using MvcFlashMessages;
 using Portfolio.Controllers;
 using Portfolio.Lib.Services;
 using Portfolio.Properties;
@@ -35,7 +36,7 @@ namespace Portfolio.Lib
             {
                 var resourceKey = string.Format("flash_{0}_{1}_success", controllerName, controllerAction);
                 message = Resources.ResourceManager.GetString(resourceKey, Resources.Culture);
-                controller.FlashMessages.AddSuccessMessage(message);    
+                controller.Flash("success", message);
             }            
         }
 

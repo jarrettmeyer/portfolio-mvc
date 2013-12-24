@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using MvcFlashMessages;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
@@ -39,7 +40,7 @@ namespace Portfolio.Controllers
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             Tag tag = service.UpdateCategory(model);
             TagSelectList.Initialize(repository);
-            FlashMessages.AddSuccessMessage(string.Format("Successfully updated Tag: {0}", tag.Description));
+            this.Flash("success", string.Format("Successfully updated Tag: {0}", tag.Description));
             return RedirectToAction("Index");
         }
 
@@ -66,12 +67,12 @@ namespace Portfolio.Controllers
                 ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
                 Tag tag = service.CreateCategory(model);
                 TagSelectList.Initialize(repository);
-                FlashMessages.AddSuccessMessage(string.Format("Successfully created new Tag: {0}", tag.Description));
+                this.Flash("success", string.Format("Successfully created new Tag: {0}", tag.Description));
                 return RedirectToAction("Index");
             }
             catch (UniqueRecordViolationException ex)
             {
-                FlashMessages.AddErrorMessage(ex.Message);
+                this.Flash("danger", ex.Message);
                 return View("New", model);                
             }            
         }

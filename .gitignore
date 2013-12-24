@@ -1,6 +1,7 @@
 bin/
 obj/
 
+TestResult.xml
 error-*.xml
 *.DotSettings
 *.dbmdl

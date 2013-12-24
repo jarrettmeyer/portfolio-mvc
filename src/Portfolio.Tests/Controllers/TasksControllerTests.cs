@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
+using MvcFlashMessages;
 using NHibernate.Criterion;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
@@ -151,7 +152,7 @@ namespace Portfolio.Controllers
             public void It_adds_a_success_message()
             {
                 Controller.New(TaskInputModel);
-                var flashMessage = Controller.FlashMessages.First(m => m.Key == "success");
+                var flashMessage = Controller.TempData.GetFlashMessages().First(m => m.Key == "success");
                 flashMessage.Message.Should().Contain("Created new task:");                
             }
 

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using FluentAssertions;
 using Moq;
+using MvcFlashMessages;
 using NUnit.Framework;
 using Portfolio.Controllers;
 using Portfolio.Lib.Data;
@@ -40,7 +41,7 @@ namespace Portfolio.Lib
         public void Should_add_flash_message()
         {
             deleteResponder.RespondWith<ITaskDeletionService>(x => x.DeleteTask(1));
-            var flashMessage = controller.FlashMessages.First();
+            var flashMessage = controller.TempData.GetFlashMessages().First();
             flashMessage.Key.Should().Be("success");
             flashMessage.Message.Should().Be("Successfully deleted task");
         }

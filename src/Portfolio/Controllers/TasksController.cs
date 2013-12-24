@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using MvcFlashMessages;
 using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
@@ -21,7 +22,7 @@ namespace Portfolio.Controllers
         {
             ITaskCompletionService service = ServiceLocator.Instance.GetService<ITaskCompletionService>();
             Task task = service.CompleteTask(id);
-            FlashMessages.AddSuccessMessage(string.Format("Completed task: {0}", task.Title));
+            this.Flash("success", string.Format("Completed task: {0}", task.Title));
             return Json(new { success = true });
         }
 
@@ -49,7 +50,7 @@ namespace Portfolio.Controllers
             CheckModelState(() => OnInvalidTaskForm("Edit", model));
             var service = ServiceLocator.Instance.GetService<ITaskUpdateService>();
             var task = service.UpdateTask(model);
-            FlashMessages.AddSuccessMessage(string.Format("Updated task: {0}", task.Title));
+            this.Flash("success", string.Format("Updated task: {0}", task.Title));
             return RedirectToAction("Index");
         }
 
@@ -77,7 +78,7 @@ namespace Portfolio.Controllers
             CheckModelState(() => OnInvalidTaskForm("New", model));
             ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
             Task task = service.CreateTask(model);
-            FlashMessages.AddSuccessMessage(string.Format("Created new task: {0}", task.Title));
+            this.Flash("success", string.Format("Created new task: {0}", task.Title));
             return RedirectToAction("Index");
         }
 
@@ -92,8 +93,8 @@ namespace Portfolio.Controllers
 
         private ActionResult OnInvalidTaskForm(string viewName, TaskInputModel model)
         {
-            FlashMessages.AddErrorMessage(DEFAULT_FORM_ERROR_MESSAGE);
-            return View("New", model);
+            this.Flash("danger", DEFAULT_FORM_ERROR_MESSAGE);
+            return View(viewName, model);
         }
     }
 }

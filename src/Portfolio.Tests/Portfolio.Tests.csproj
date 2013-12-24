@@ -47,6 +47,9 @@
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="MvcFlashMessages">
+      <HintPath>..\..\lib\MvcFlashMessages.0.2.0\lib\MvcFlashMessages.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -117,14 +120,15 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\TasksControllerTests.cs" />
     <Compile Include="Lib\CollectionExtensionsTests.cs" />
-    <Compile Include="ViewModels\FlashMessageCollectionTests.cs" />
     <Compile Include="ViewModels\TaskRowViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\flash-messages.css" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Lib\Portfolio.Lib.csproj">
       <Project>{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}</Project>

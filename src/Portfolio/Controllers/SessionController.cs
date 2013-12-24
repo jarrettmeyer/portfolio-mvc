@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MvcFlashMessages;
 using Portfolio.Lib;
 using Portfolio.Lib.Services;
 using Portfolio.Lib.ViewModels;
@@ -22,7 +23,7 @@ namespace Portfolio.Controllers
         {
             CheckModelState(() =>
             {
-                FlashMessages.AddErrorMessage("Both a username and password are required.");
+                this.Flash("danger", "Both a username and password are required.");
                 return View("New", credentials);
             });
             var service = ServiceLocator.Instance.GetService<ILogonService>();
@@ -30,12 +31,12 @@ namespace Portfolio.Controllers
             if (logonResult.IsSuccessful)
             {
                 SessionAdapter.SetUpSession(logonResult.User);
-                FlashMessages.AddSuccessMessage(string.Format("Welcome back, {0}", logonResult.User.Username));
+                this.Flash("success", string.Format("Welcome back, {0}", logonResult.User.Username));
                 return RedirectToAction("Index", "Tasks");    
             }
             else
             {
-                FlashMessages.AddErrorMessage("Invalid credentials");
+                this.Flash("danger", "Invalid credentials");
                 return View("New", credentials);
             }
         }
@@ -43,7 +44,7 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Delete()
         {
-            FlashMessages.AddSuccessMessage("You have successfully logged off.");
+            this.Flash("info", "You have successfully logged off.");
             SessionAdapter.ResetSession();
             return RedirectToAction("New", "Session");
         }
