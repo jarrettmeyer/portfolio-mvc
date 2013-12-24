@@ -1,41 +1,37 @@
 ﻿using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
     public class TagCreationServiceImpl : ITagCreationService
     {
-        private readonly Tag tag;
         private readonly IRepository repository;
+        private Tag tag;
+        private ITransactionAdapter transaction;
 
         public TagCreationServiceImpl(IRepository repository)
         {
-            this.repository = repository;
-            this.tag = new Tag();
+            this.repository = repository;            
         }
 
-        public virtual Tag CreateCategory(TagInputModel tagInputModel)
+        public virtual void CreateTag(Tag tag)
         {
-            using (var transaction = repository.BeginTransaction())
+            this.tag = tag;
+            using (transaction = repository.BeginTransaction())
             {
-                SetCategoryProperties(tagInputModel);
-                PersistNewCategory(transaction);
-                return tag;
+                SetTagProperties();
+                PersistNewTag();
             }
-            
         }
 
-        private void PersistNewCategory(ITransactionAdapter transaction)
+        private void PersistNewTag()
         {
             repository.Add(tag);
             transaction.Commit();
         }
 
-        private void SetCategoryProperties(TagInputModel tagInputModel)
+        private void SetTagProperties()
         {
-            tag.Slug = tagInputModel.Slug;
-            tag.Description = tagInputModel.Description.Trim();
             tag.IsActive = true;
             tag.CreatedAt = Clock.Instance.Now;
             tag.UpdatedAt = Clock.Instance.Now;

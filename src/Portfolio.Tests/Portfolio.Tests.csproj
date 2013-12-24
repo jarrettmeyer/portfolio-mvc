@@ -47,8 +47,9 @@
     <Reference Include="Moq">
       <HintPath>..\..\lib\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="MvcFlashMessages">
-      <HintPath>..\..\lib\MvcFlashMessages.0.2.0\lib\MvcFlashMessages.dll</HintPath>
+    <Reference Include="MvcFlashMessages, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\MvcFlashMessages.0.2.1\lib\MvcFlashMessages.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
@@ -127,9 +128,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\flash-messages.css" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Portfolio.Lib\Portfolio.Lib.csproj">
       <Project>{B4A837C3-D599-4DA7-8BE5-075BAA0B1F24}</Project>
       <Name>Portfolio.Lib</Name>
@@ -138,6 +136,9 @@
       <Project>{8f505e74-aa08-49ae-9175-d15260e7fd89}</Project>
       <Name>Portfolio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\flash-messages.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

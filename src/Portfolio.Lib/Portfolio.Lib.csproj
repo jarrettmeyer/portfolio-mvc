@@ -148,7 +148,6 @@
     <Compile Include="ViewModels\Credentials.cs" />
     <Compile Include="ViewModels\PasswordForgotViewModel.cs" />
     <Compile Include="ViewModels\PasswordTestViewModel.cs" />
-    <Compile Include="ViewModels\TagInputModel.cs" />
     <Compile Include="ViewModels\TagListViewModel.cs" />
     <Compile Include="ViewModels\TagRowViewModel.cs" />
     <Compile Include="ViewModels\TagSelectList.cs" />

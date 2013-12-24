@@ -1,6 +1,7 @@
-﻿using Portfolio.Lib.Models;
+﻿using Portfolio.Lib;
+using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TagRowViewModel
     {

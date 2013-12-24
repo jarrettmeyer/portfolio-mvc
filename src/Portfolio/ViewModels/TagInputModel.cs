@@ -2,22 +2,20 @@
 using System.Web.Mvc;
 using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TagInputModel
     {
+        private readonly Tag tag;
+
         public TagInputModel()
+            : this(new Tag())
         {
-            IsNew = true;
         }
 
         public TagInputModel(Tag tag)
         {
-            Description = tag.Description;
-            IsNew = false;
-            Slug = tag.Slug;
-            
-            Id = tag.Id;
+            this.tag = tag;            
         }
 
         public string ActionName
@@ -33,7 +31,11 @@ namespace Portfolio.Lib.ViewModels
         [Required(ErrorMessage = "Description is required")]
         [StringLength(30, ErrorMessage = "Description cannot exceed 30 characters")]
         [DataType(DataType.Text)]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return tag.Description; }
+            set { tag.Description = value; }
+        }
 
         public object FormCss
         {
@@ -45,9 +47,16 @@ namespace Portfolio.Lib.ViewModels
             get { return FormMethod.Post; }
         }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return tag.Id; }
+            set { tag.Id = value; }
+        }
 
-        public bool IsNew { get; set; }
+        public bool IsNew
+        {
+            get { return Id == 0; }
+        }
 
         public string PageTitle
         {
@@ -57,6 +66,15 @@ namespace Portfolio.Lib.ViewModels
         [Required(AllowEmptyStrings = false, ErrorMessage = "Slug is required")]
         [RegularExpression("[a-z0-9\\.\\-_]+")]
         [DataType(DataType.Text)]
-        public string Slug { get; set; }
+        public string Slug
+        {
+            get { return tag.Slug; }
+            set { tag.Slug = value; }
+        }
+
+        public Tag ToTag()
+        {
+            return tag;
+        }
     }
 }

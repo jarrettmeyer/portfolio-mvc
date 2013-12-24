@@ -44,7 +44,8 @@
     it("allows special characters", function() {
         var tests = {
             ".NET": ".net",
-            "A-B Testing": "a-b-testing"
+            "A-B Testing": "a-b-testing",
+            "Red, White & Blue": "red-white-and-blue"
         };
         $.each(tests, function (index, item) {
             var slug = slugGenerator.toSlug(index);

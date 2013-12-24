@@ -15,7 +15,7 @@ namespace Portfolio.App_Start
         private static void ConfigureCssBundles(BundleCollection bundles)
         {
             var cssBundle = new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap/bootstrap.css")
+                .Include("~/Content/bootstrap.css")
                 .Include("~/Content/stylesheets/Site.css")
                 .Include("~/Content/stylesheets/TaskList.css");
             bundles.Add(cssBundle);

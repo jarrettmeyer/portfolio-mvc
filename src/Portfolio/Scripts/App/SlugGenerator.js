@@ -14,6 +14,8 @@
                 emptyStringValue: "empty",
                 nullValue: "null",
                 replacementCharacters: {
+                    ",": "",
+                    "&": "and",
                     "\\s+": "-",
                     "[^\\x00-\\x7F]": "-",
                     "[^0-9a-z\\.\\-\\_]": "-"

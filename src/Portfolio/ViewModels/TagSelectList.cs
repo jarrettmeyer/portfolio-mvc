@@ -6,7 +6,7 @@ using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public static class TagSelectList
     {

@@ -6,6 +6,7 @@ using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
 using Portfolio.Lib.ViewModels;
+using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {

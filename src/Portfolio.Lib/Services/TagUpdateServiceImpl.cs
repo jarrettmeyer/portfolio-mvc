@@ -1,12 +1,10 @@
 ﻿using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
     public class TagUpdateServiceImpl : ITagUpdateService
     {
-        private Tag tag;
         private readonly IRepository repository;
 
         public TagUpdateServiceImpl(IRepository repository)
@@ -14,17 +12,21 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Tag UpdateCategory(TagInputModel tagInputModel)
+        public void UpdateTag(Tag tag)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                tag = repository.Load<Tag>(tagInputModel.Id);
-                tag.Slug = tagInputModel.Slug;
-                tag.Description = tagInputModel.Description.Trim();
-                tag.UpdatedAt = Clock.Instance.Now;
+                UpdateTagProperties(tag);
                 transaction.Commit();
-                return tag;
-            }            
+            }
+        }
+
+        private void UpdateTagProperties(Tag tag)
+        {
+            Tag stub = repository.Load<Tag>(tag.Id);
+            stub.Slug = tag.Slug;
+            stub.Description = tag.Description.Trim();
+            stub.UpdatedAt = Clock.Instance.Now;
         }
     }
 }

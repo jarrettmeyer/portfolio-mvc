@@ -33,7 +33,7 @@ namespace Portfolio.Lib.Services
         [Test]
         public void It_adds_a_category_to_the_repository()
         {
-            service.CreateCategory(tagInputModel);
+            service.CreateTag(tagInputModel);
             mockRepository.Verify(x => x.Add(It.IsAny<Tag>()), Times.Once());
         }
 
@@ -41,14 +41,14 @@ namespace Portfolio.Lib.Services
         public void It_sets_the_description()
         {
             tagInputModel.Description = "This is a test";
-            tag = service.CreateCategory(tagInputModel);
+            tag = service.CreateTag(tagInputModel);
             tag.Description.Should().Be("This is a test");
         }
 
         [Test]
         public void It_sets_the_new_category_as_active()
         {
-            tag = service.CreateCategory(tagInputModel);
+            tag = service.CreateTag(tagInputModel);
             tag.IsActive.Should().BeTrue();
         }
     }

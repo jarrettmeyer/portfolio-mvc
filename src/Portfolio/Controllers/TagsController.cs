@@ -5,7 +5,7 @@ using Portfolio.Lib;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Services;
-using Portfolio.Lib.ViewModels;
+using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {
@@ -29,8 +29,8 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var category = repository.FindOne<Tag>(c => c.Id == id);
-            var model = new TagInputModel(category);            
+            var tag = repository.FindOne<Tag>(c => c.Id == id);
+            var model = new TagInputModel(tag);            
             return View("Edit", model);
         }
 
@@ -38,9 +38,9 @@ namespace Portfolio.Controllers
         public ActionResult Edit(int id, TagInputModel model)
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
-            Tag tag = service.UpdateCategory(model);
+            service.UpdateTag(model.ToTag());
             TagSelectList.Initialize(repository);
-            this.Flash("success", string.Format("Successfully updated Tag: {0}", tag.Description));
+            this.Flash("success", string.Format("Successfully updated Tag: {0}", model.Description));
             return RedirectToAction("Index");
         }
 
@@ -65,9 +65,9 @@ namespace Portfolio.Controllers
             try
             {
                 ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
-                Tag tag = service.CreateCategory(model);
+                service.CreateTag(model.ToTag());
                 TagSelectList.Initialize(repository);
-                this.Flash("success", string.Format("Successfully created new Tag: {0}", tag.Description));
+                this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
                 return RedirectToAction("Index");
             }
             catch (UniqueRecordViolationException ex)
