@@ -18,6 +18,7 @@ namespace Portfolio.Lib.Services
         {
             using (var transaction = repository.BeginTransaction())
             {
+                task = new Task();
                 UpdateTaskProperties(taskDto);
                 AddTagsToTask(taskDto);
                 PersistTask(transaction);
@@ -45,8 +46,7 @@ namespace Portfolio.Lib.Services
         }
 
         private void UpdateTaskProperties(TaskDTO taskDto)
-        {
-            task = repository.Load<Task>(taskDto.Id);
+        {            
             task.Title = taskDto.Title;
             task.Description = taskDto.Description;
             task.DueOn = taskDto.DueOn;

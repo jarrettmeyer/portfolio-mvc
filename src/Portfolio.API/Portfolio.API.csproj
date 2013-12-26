@@ -161,9 +161,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\app\collections\TagsCollection.js" />
     <Content Include="Scripts\app\models\CurrentUser.js" />
+    <Content Include="Scripts\app\models\Tag.js" />
     <Content Include="Scripts\app\views\LogonView.js" />
     <Content Include="Scripts\app\views\MainWindowView.js" />
+    <Content Include="Scripts\app\views\MenuView.js" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\bootstrap.js" />

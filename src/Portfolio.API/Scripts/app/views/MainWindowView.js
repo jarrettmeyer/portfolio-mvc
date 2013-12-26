@@ -5,17 +5,22 @@
     }
 
     window.app.MainWindowView = Backbone.View.extend({
-        
-        tagName: "div",
+
         className: ".body-content",
         
         initialize: function() {
             console.log("app.MainWindowView: initializing view");
+            this.currentUser = new app.CurrentUser();
+            this.logonView = new app.LogonView({
+                 currentUser: this.currentUser
+            });
         },
 
         render: function() {
             
-        }
+        },
+        
+        tagName: "div"
         
     });
 
