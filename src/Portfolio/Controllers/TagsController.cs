@@ -38,7 +38,7 @@ namespace Portfolio.Controllers
         public ActionResult Edit(int id, TagInputModel model)
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
-            service.UpdateTag(model.ToTag());
+            service.UpdateTag(model.ToTagDTO());
             TagSelectList.Initialize(repository);
             this.Flash("success", string.Format("Successfully updated Tag: {0}", model.Description));
             return RedirectToAction("Index");
@@ -65,7 +65,7 @@ namespace Portfolio.Controllers
             try
             {
                 ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
-                service.CreateTag(model.ToTag());
+                service.CreateTag(model.ToTagDTO());
                 TagSelectList.Initialize(repository);
                 this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
                 return RedirectToAction("Index");

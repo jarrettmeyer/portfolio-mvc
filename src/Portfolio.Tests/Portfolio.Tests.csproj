@@ -104,6 +104,7 @@
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\Services\LogonServiceImplTests.cs" />
+    <Compile Include="Lib\Services\TagUpdateServiceImplTests.cs" />
     <Compile Include="Lib\Services\TaskUpdateServiceImplTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="MockServiceLocator.cs" />

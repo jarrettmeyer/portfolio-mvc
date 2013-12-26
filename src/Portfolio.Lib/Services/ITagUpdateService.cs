@@ -1,9 +1,10 @@
-﻿using Portfolio.Lib.Models;
+﻿using Portfolio.Lib.DTOs;
+using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Services
 {
     public interface ITagUpdateService
     {
-        void UpdateTag(Tag tag);
+        Tag UpdateTag(TagDTO tagDTO);
     }
 }

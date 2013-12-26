@@ -1,4 +1,5 @@
 ﻿using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Services
@@ -14,13 +15,14 @@ namespace Portfolio.Lib.Services
             this.repository = repository;            
         }
 
-        public virtual void CreateTag(Tag tag)
+        public virtual Tag CreateTag(TagDTO tagDto)
         {
-            this.tag = tag;
             using (transaction = repository.BeginTransaction())
             {
-                SetTagProperties();
+                tag = new Tag();
+                SetTagProperties(tagDto);
                 PersistNewTag();
+                return tag;
             }
         }
 
@@ -30,8 +32,10 @@ namespace Portfolio.Lib.Services
             transaction.Commit();
         }
 
-        private void SetTagProperties()
+        private void SetTagProperties(TagDTO tagDto)
         {
+            tag.Slug = tagDto.Slug;
+            tag.Description = tagDto.Description;
             tag.IsActive = true;
             tag.CreatedAt = Clock.Instance.Now;
             tag.UpdatedAt = Clock.Instance.Now;

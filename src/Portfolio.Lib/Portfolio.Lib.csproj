@@ -145,6 +145,7 @@
     <Compile Include="Services\TaskUpdateServiceImpl.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="SystemClock.cs" />
+    <Compile Include="DTOs\TagDTO.cs" />
     <Compile Include="ViewModels\Credentials.cs" />
     <Compile Include="ViewModels\PasswordForgotViewModel.cs" />
     <Compile Include="ViewModels\PasswordTestViewModel.cs" />

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.ViewModels
@@ -72,9 +73,14 @@ namespace Portfolio.ViewModels
             set { tag.Slug = value; }
         }
 
-        public Tag ToTag()
+        public TagDTO ToTagDTO()
         {
-            return tag;
+            return new TagDTO
+            {
+                Description = this.Description,
+                Id = this.Id,
+                Slug = this.Slug
+            };
         }
     }
 }

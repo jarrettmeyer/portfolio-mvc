@@ -1,4 +1,5 @@
 ﻿using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Services
@@ -6,27 +7,29 @@ namespace Portfolio.Lib.Services
     public class TagUpdateServiceImpl : ITagUpdateService
     {
         private readonly IRepository repository;
+        private Tag tag;
 
         public TagUpdateServiceImpl(IRepository repository)
         {
             this.repository = repository;
         }
 
-        public void UpdateTag(Tag tag)
+        public Tag UpdateTag(TagDTO tagDto)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                UpdateTagProperties(tag);
+                UpdateTagProperties(tagDto);
                 transaction.Commit();
+                return tag;
             }
         }
 
-        private void UpdateTagProperties(Tag tag)
+        private void UpdateTagProperties(TagDTO tagDto)
         {
-            Tag stub = repository.Load<Tag>(tag.Id);
-            stub.Slug = tag.Slug;
-            stub.Description = tag.Description.Trim();
-            stub.UpdatedAt = Clock.Instance.Now;
+            tag = repository.Load<Tag>(tagDto.Id);
+            tag.Slug = tagDto.Slug;
+            tag.Description = tagDto.Description.Trim();
+            tag.UpdatedAt = Clock.Instance.Now;            
         }
     }
 }
