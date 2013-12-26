@@ -50,7 +50,7 @@ namespace Portfolio.Controllers
         {
             CheckModelState(() => OnInvalidTaskForm("Edit", model));
             var service = ServiceLocator.Instance.GetService<ITaskUpdateService>();
-            var task = service.UpdateTask(model);
+            var task = service.UpdateTask(model.ToTask());
             this.Flash("success", string.Format("Updated task: {0}", task.Title));
             return RedirectToAction("Index");
         }
@@ -78,7 +78,7 @@ namespace Portfolio.Controllers
         {
             CheckModelState(() => OnInvalidTaskForm("New", model));
             ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
-            Task task = service.CreateTask(model);
+            Task task = service.CreateTask(model.ToTask());
             this.Flash("success", string.Format("Created new task: {0}", task.Title));
             return RedirectToAction("Index");
         }

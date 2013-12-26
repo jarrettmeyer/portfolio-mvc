@@ -4,9 +4,6 @@ using System.Linq.Expressions;
 
 namespace Portfolio.Lib.Data
 {
-    /// <summary>
-    /// 
-    /// </summary>
     /// <remarks>
     /// The repository should be used when the queries are simple. There are no joins to
     /// worry about, etc.
@@ -25,6 +22,6 @@ namespace Portfolio.Lib.Data
 
         T FindOne<T>(Expression<Func<T, bool>> expression);
 
-        T Load<T>(object id);
+        T Load<T>(object id);        
     }
 }

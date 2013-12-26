@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using Portfolio.Lib;
 using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskRowViewModel
     {

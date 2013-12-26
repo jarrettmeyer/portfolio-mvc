@@ -14,7 +14,7 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Task CreateTask(TaskInputModel model)
+        public Task CreateTask(Task model)
         {
             using (var transaction = repository.BeginTransaction())
             {
@@ -25,7 +25,7 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void AddTagsToTask(TaskInputModel model)
+        private void AddTagsToTask(Task model)
         {
             if (model.Tags == null)
                 return;
@@ -44,13 +44,13 @@ namespace Portfolio.Lib.Services
             transaction.Commit();
         }
 
-        private void UpdateTaskProperties(TaskInputModel model)
+        private void UpdateTaskProperties(Task model)
         {
             task = new Task
             {
                 Title = model.Title,
                 Description = model.Description,
-                DueOn = model.DueOn.SafeParseDateTime(),
+                DueOn = model.DueOn,
                 IsCompleted = false,
                 CreatedAt = Clock.Instance.Now,
                 UpdatedAt = Clock.Instance.Now

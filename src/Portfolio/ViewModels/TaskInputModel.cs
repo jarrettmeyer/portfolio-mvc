@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Portfolio.Lib;
 using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskInputModel
     {
+        private readonly Task task;
+
         public TaskInputModel()
-        {
-            Tags = new List<TagViewModel>();
+            : this(new Task())
+        {            
         }
 
         public TaskInputModel(Task task)
         {
             Ensure.ArgumentIsNotNull(task, "task");
+            this.task = task;
 
             Tags = task.Tags.Select(tag => new TagViewModel(tag.Id, tag.Slug, tag.Description)).ToList();
-            Description = task.Description;
-            DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
-            Id = task.Id;
-            Title = task.Title;
         }
 
         public string ActionName
@@ -34,11 +34,29 @@ namespace Portfolio.Lib.ViewModels
         }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return task.Description; }
+            set
+            {
+                if (value == null)
+                    return;
 
-        public string DueOn { get; set; }
+                task.Description = value.Trim();
+            }
+        }
 
-        public int Id { get; set; }
+        public string DueOn
+        {
+            get { return task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : ""; }
+            set { task.DueOn = value.SafeParseDateTime(); }
+        }
+
+        public int Id
+        {
+            get { return task.Id; }
+            set { task.Id = value; }
+        }
 
         public bool IsNew
         {
@@ -65,6 +83,21 @@ namespace Portfolio.Lib.ViewModels
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return task.Title; }
+            set
+            {
+                if (value == null)
+                    return;
+
+                task.Title = value.Trim();
+            }
+        }
+
+        public Task ToTask()
+        {
+            return task;
+        }
     }
 }

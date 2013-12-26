@@ -63,7 +63,9 @@ namespace Portfolio.Lib.Data
                             db.Dialect<MsSql2008Dialect>();
                             db.Driver<SqlClientDriver>();
                             db.Timeout = 20;
-                        });
+                            db.LogFormattedSql = Config.LogSql;
+                            db.LogSqlInConsole = Config.LogSql;
+                        });                        
                         var modelMapper = new ModelMapper();
                         modelMapper.AddMappings(ExportedTypes);
                         var mappingDocument = modelMapper.CompileMappingForAllExplicitlyAddedEntities();

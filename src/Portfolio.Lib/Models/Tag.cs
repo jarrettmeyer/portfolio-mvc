@@ -52,17 +52,28 @@ namespace Portfolio.Lib.Models
             return Equals((Tag)obj);
         }
 
-        protected bool Equals(Tag other)
-        {
-            return Id == other.Id && string.Equals(Slug, other.Slug, StringComparison.InvariantCultureIgnoreCase);
-        }
-
         public override int GetHashCode()
         {
             unchecked
             {
                 return (Id * 397) ^ (Slug != null ? Slug.GetHashCode() : 0);
             }
+        }
+        
+        public override string ToString()
+        {
+            return string.Format("Tag ID: {0}, Slug: {1}, Description: {2}, Active: {3}, Created at: {4}, Updated at: {5}", 
+                Id, 
+                Slug, 
+                Description, 
+                IsActive,
+                CreatedAt,
+                UpdatedAt);
+        }
+
+        protected bool Equals(Tag other)
+        {
+            return Id == other.Id && string.Equals(Slug, other.Slug, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

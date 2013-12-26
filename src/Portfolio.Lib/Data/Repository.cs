@@ -7,7 +7,7 @@ namespace Portfolio.Lib.Data
     public abstract class Repository : IRepository
     {
         public abstract void Add<T>(T entity);
-        
+
         public abstract ITransactionAdapter BeginTransaction();
 
         public abstract void Delete<T>(T entity);

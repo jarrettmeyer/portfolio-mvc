@@ -193,6 +193,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\TagInputModel.cs" />
+    <Compile Include="ViewModels\TagListViewModel.cs" />
+    <Compile Include="ViewModels\TagRowViewModel.cs" />
+    <Compile Include="ViewModels\TagSelectList.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
+    <Compile Include="ViewModels\TaskInputModel.cs" />
+    <Compile Include="ViewModels\TaskListViewModel.cs" />
+    <Compile Include="ViewModels\TaskRowViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

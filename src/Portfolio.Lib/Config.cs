@@ -7,12 +7,28 @@ namespace Portfolio.Lib
     {
         private const int DEFAULT_PAGE_SIZE = 10;
         private static string connectionString;
+        private static bool? logSql;
         private static int pageSize;
 
         public static string ConnectionString
         {
             get { return connectionString ?? (connectionString = GetConfigValue("PortfolioDBConnectionString")); }
             set { connectionString = value; }
+        }
+
+        public static bool LogSql
+        {
+            get
+            {
+                if (logSql.HasValue)
+                    return logSql.Value;
+
+                string value = GetConfigValue("LogSql");
+                bool temp;
+                logSql = bool.TryParse(value, out temp) && temp;
+                return logSql.Value;
+            }
+            set { logSql = value; }
         }
 
         public static int PageSize

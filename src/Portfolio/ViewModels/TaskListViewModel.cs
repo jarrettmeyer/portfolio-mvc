@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class TaskListViewModel : IEnumerable<TaskRowViewModel>
     {

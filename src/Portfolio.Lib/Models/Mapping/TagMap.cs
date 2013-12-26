@@ -9,6 +9,8 @@ namespace Portfolio.Lib.Models.Mapping
         public TagMap()
         {
             Table("[tags]");
+            DynamicUpdate(true);
+
             Id(x => x.Id, map =>
             {
                 map.Column("tag_id");

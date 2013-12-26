@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Portfolio.Lib.Models;
-using Portfolio.Models;
 
 namespace Portfolio.Lib.Data
 {
@@ -22,6 +21,8 @@ namespace Portfolio.Lib.Data
         public void After_each_test()
         {
             repository.Dispose();
+            TestBootstrapper.DeleteAll<Tag>();
+            TestBootstrapper.DeleteAll<User>();
         }
 
         [Test]
@@ -48,7 +49,7 @@ namespace Portfolio.Lib.Data
             return new User
             {
                 Username = "tester",
-                HashedPassword = "tester",
+                HashedPassword = "junk",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

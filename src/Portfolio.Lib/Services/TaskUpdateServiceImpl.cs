@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
@@ -17,7 +16,7 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Task UpdateTask(TaskInputModel model)
+        public Task UpdateTask(Task model)
         {
             using (var transaction = repository.BeginTransaction())
             {
@@ -30,7 +29,7 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void AddNewTagsToTask(TaskInputModel model)
+        private void AddNewTagsToTask(Task model)
         {            
             var newTags = model.Tags.Where(tag => !currentTagIds.Contains(tag.Id));
             foreach (var tagModel in newTags)
@@ -41,13 +40,13 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void FetchTaskById(TaskInputModel model)
+        private void FetchTaskById(Task model)
         {
             task = repository.Load<Task>(model.Id);
             currentTagIds = task.Tags.Select(t => t.Id).ToArray();
         }
 
-        private void RemoveOldTagsFromTask(TaskInputModel model)
+        private void RemoveOldTagsFromTask(Task model)
         {
             var selectedIds = model.Tags.Select(t => t.Id);
             var idsToRemove = currentTagIds.Where(id => !selectedIds.Contains(id));
@@ -58,10 +57,10 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void UpdateTaskProperties(TaskInputModel model)
+        private void UpdateTaskProperties(Task model)
         {
             task.Description = model.Description;
-            task.DueOn = model.DueOn.SafeParseDateTime();
+            task.DueOn = model.DueOn;
             task.Title = model.Title;
             task.UpdatedAt = Clock.Instance.Now;
         }
