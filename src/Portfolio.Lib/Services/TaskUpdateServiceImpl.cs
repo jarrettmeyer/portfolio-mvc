@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Services
@@ -16,22 +17,25 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Task UpdateTask(Task model)
+        public Task UpdateTask(TaskDTO taskDto)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                FetchTaskById(model);
-                UpdateTaskProperties(model);
-                AddNewTagsToTask(model);
-                RemoveOldTagsFromTask(model);
+                FetchTaskById(taskDto);
+                UpdateTaskProperties(taskDto);
+                AddNewTagsToTask(taskDto);
+                RemoveOldTagsFromTask(taskDto);
                 transaction.Commit();
                 return task;
             }
         }
 
-        private void AddNewTagsToTask(Task model)
-        {            
-            var newTags = model.Tags.Where(tag => !currentTagIds.Contains(tag.Id));
+        private void AddNewTagsToTask(TaskDTO taskDto)
+        {
+            if (taskDto.Tags == null)
+                return;
+
+            var newTags = taskDto.Tags.Where(tag => !currentTagIds.Contains(tag.Id));
             foreach (var tagModel in newTags)
             {
                 int newId = tagModel.Id;
@@ -40,15 +44,18 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void FetchTaskById(Task model)
+        private void FetchTaskById(TaskDTO taskDto)
         {
-            task = repository.Load<Task>(model.Id);
+            task = repository.Load<Task>(taskDto.Id);
             currentTagIds = task.Tags.Select(t => t.Id).ToArray();
         }
 
-        private void RemoveOldTagsFromTask(Task model)
+        private void RemoveOldTagsFromTask(TaskDTO taskDto)
         {
-            var selectedIds = model.Tags.Select(t => t.Id);
+            if (taskDto.Tags == null)
+                return;
+
+            var selectedIds = taskDto.Tags.Select(t => t.Id);
             var idsToRemove = currentTagIds.Where(id => !selectedIds.Contains(id));
             foreach (var idToRemove in idsToRemove)
             {
@@ -57,11 +64,11 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private void UpdateTaskProperties(Task model)
+        private void UpdateTaskProperties(TaskDTO taskDto)
         {
-            task.Description = model.Description;
-            task.DueOn = model.DueOn;
-            task.Title = model.Title;
+            task.Description = taskDto.Description;
+            task.DueOn = taskDto.DueOn;
+            task.Title = taskDto.Title;
             task.UpdatedAt = Clock.Instance.Now;
         }
     }

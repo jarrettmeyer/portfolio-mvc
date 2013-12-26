@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Portfolio.Lib;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.ViewModels
@@ -95,9 +96,16 @@ namespace Portfolio.ViewModels
             }
         }
 
-        public Task ToTask()
+        public TaskDTO ToTaskDTO()
         {
-            return task;
+            return new TaskDTO
+            {
+                Description = this.Description,
+                DueOn = this.DueOn.SafeParseDateTime(),
+                Id = this.Id,
+                Tags = this.Tags.Select(t => new TagDTO(t.Id, t.Slug, t.Description)).ToArray(),
+                Title = this.Title
+            };
         }
     }
 }

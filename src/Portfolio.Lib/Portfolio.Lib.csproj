@@ -102,6 +102,7 @@
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UniqueRecordViolationException.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="DTOs\TaskDTO.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="HtmlTextFormatter.cs" />
     <Compile Include="IClock.cs" />

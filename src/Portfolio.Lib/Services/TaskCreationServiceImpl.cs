@@ -1,6 +1,6 @@
 ﻿using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
@@ -14,25 +14,25 @@ namespace Portfolio.Lib.Services
             this.repository = repository;
         }
 
-        public Task CreateTask(Task model)
+        public Task CreateTask(TaskDTO taskDto)
         {
             using (var transaction = repository.BeginTransaction())
             {
-                UpdateTaskProperties(model);
-                AddTagsToTask(model);
+                UpdateTaskProperties(taskDto);
+                AddTagsToTask(taskDto);
                 PersistTask(transaction);
                 return task;
             }
         }
 
-        private void AddTagsToTask(Task model)
+        private void AddTagsToTask(TaskDTO taskDto)
         {
-            if (model.Tags == null)
+            if (taskDto.Tags == null)
                 return;
 
-            foreach (var tagInputModel in model.Tags)
+            foreach (TagDTO tagDto in taskDto.Tags)
             {
-                int id = tagInputModel.Id;
+                int id = tagDto.Id;
                 Tag tag = repository.Load<Tag>(id);
                 task.AddTag(tag);                
             }
@@ -44,18 +44,15 @@ namespace Portfolio.Lib.Services
             transaction.Commit();
         }
 
-        private void UpdateTaskProperties(Task model)
+        private void UpdateTaskProperties(TaskDTO taskDto)
         {
-            task = new Task
-            {
-                Title = model.Title,
-                Description = model.Description,
-                DueOn = model.DueOn,
-                IsCompleted = false,
-                CreatedAt = Clock.Instance.Now,
-                UpdatedAt = Clock.Instance.Now
-            };
-
+            task = repository.Load<Task>(taskDto.Id);
+            task.Title = taskDto.Title;
+            task.Description = taskDto.Description;
+            task.DueOn = taskDto.DueOn;
+            task.IsCompleted = false;
+            task.CreatedAt = Clock.Instance.Now;
+            task.UpdatedAt = Clock.Instance.Now;
         }
     }
 }
