@@ -7,7 +7,6 @@ using Moq;
 using MvcFlashMessages;
 using NUnit.Framework;
 using Portfolio.Controllers;
-using Portfolio.Lib.Data;
 using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
@@ -15,7 +14,7 @@ namespace Portfolio.Lib
     [TestFixture]
     public class DeleteResponderTests
     {
-        private TasksController controller;
+        private ApplicationController controller;
         private DeleteResponder deleteResponder;
         private Mock<HttpContextBase> mockHttpContext;
         private MockServiceLocator mockServiceLocator;
@@ -29,7 +28,7 @@ namespace Portfolio.Lib
 
             mockHttpContext = new Mock<HttpContextBase>();
 
-            controller = new TasksController();
+            controller = new FakeController();
             controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new RouteData(), controller);
             controller.RouteData.Values.Add("controller", "Tasks");
             controller.RouteData.Values.Add("action", "Delete");
@@ -62,6 +61,10 @@ namespace Portfolio.Lib
             var jsonResult = (JsonResult)actionResult;
             var objectDictionary = jsonResult.Data.ToDictionary();
             objectDictionary["success"].Should().Be(true);
+        }
+
+        class FakeController : ApplicationController
+        {
         }
     }
 }

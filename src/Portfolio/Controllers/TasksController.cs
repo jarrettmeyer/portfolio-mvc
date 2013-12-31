@@ -1,19 +1,24 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Lib;
-using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
+using Portfolio.Lib.Queries;
 using Portfolio.Lib.Services;
-using Portfolio.Lib.ViewModels;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {
     public class TasksController : ApplicationController
     {
-        public TasksController()
+        readonly IMediator mediator;
+
+        public TasksController(IMediator mediator)
         {
+            Contract.Requires<ArgumentNullException>(mediator != null);
+            this.mediator = mediator;
+
             if (!TagSelectList.IsInitialized)
                 TagSelectList.Initialize();
         }
@@ -36,10 +41,9 @@ namespace Portfolio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            var repository = ServiceLocator.Instance.GetService<IRepository>();
-            var task = repository.Load<Task>(id);
+        public ActionResult Edit(TaskByIdQuery query)
+        {            
+            var task = mediator.Request(query);
             var model = new TaskInputModel(task);
             return View("Edit", model);
         }
@@ -58,9 +62,7 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var repository = ServiceLocator.Instance.GetService<IRepository>();
-            var tasks = repository.Find<Task>(t => !t.IsCompleted)
-                .OrderBy(t => t.DueOn).ThenBy(t => t.Id);
+            var tasks = mediator.Request(new OpenTasksQuery());
             var model = new TaskListViewModel(tasks);
             return View("Index", model);
         }
@@ -84,10 +86,9 @@ namespace Portfolio.Controllers
         }
 
         [HttpGet]
-        public ActionResult Show(int id)
+        public ActionResult Show(TaskByIdQuery query)
         {
-            IRepository repository = ServiceLocator.Instance.GetService<IRepository>();
-            var task = repository.Load<Task>(id);
+            var task = mediator.Request(query);
             var model = new TaskViewModel(task);
             return View("Show", model);
         }

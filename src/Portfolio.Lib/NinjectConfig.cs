@@ -1,7 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web;
 using NHibernate;
 using Ninject;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Models;
+using Portfolio.Lib.Queries;
 using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
@@ -10,6 +14,8 @@ namespace Portfolio.Lib
     {
         public static void RegisterServices(IKernel kernel)
         {
+            Contract.Requires<ArgumentNullException>(kernel != null);
+
             // Data layer bindings
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
             kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
@@ -26,6 +32,10 @@ namespace Portfolio.Lib
             kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();
             kernel.Bind<ITaskDeletionService>().To<TaskDeletionServiceImpl>();
             kernel.Bind<ITaskUpdateService>().To<TaskUpdateServiceImpl>();
+
+            // Queries
+            kernel.Bind<IQueryHandler<OpenTasksQuery, TaskCollection>>().To<OpenTasksQueryHandler>();
+            kernel.Bind<IQueryHandler<TaskByIdQuery, Task>>().To<TaskByIdQueryHandler>();
 
             // Web layer and generic service bindings
             kernel.Bind<IClock>().To<SystemClock>();
