@@ -2,8 +2,9 @@
 using NHibernate;
 using Ninject;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.Services;
 
-namespace Portfolio.Lib.Services
+namespace Portfolio.Lib
 {
     public class NinjectConfig
     {

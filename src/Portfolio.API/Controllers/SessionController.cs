@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Portfolio.API.ApiModels;
 using Portfolio.API.Results;
 
 namespace Portfolio.API.Controllers
@@ -15,7 +16,7 @@ namespace Portfolio.API.Controllers
             return result;
         }
 
-        public ApiResult<PostSession> Post()
+        public ApiResult<PostSession> Post(PostSessionRequest form)
         {
             var result = new ApiResult<PostSession>();
             return result;
