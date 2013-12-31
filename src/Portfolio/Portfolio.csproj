@@ -192,6 +192,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Credentials.cs" />
     <Compile Include="ViewModels\TagInputModel.cs" />
     <Compile Include="ViewModels\TagListViewModel.cs" />
     <Compile Include="ViewModels\TagRowViewModel.cs" />

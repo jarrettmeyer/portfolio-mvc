@@ -4,17 +4,15 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
-using Portfolio.Models;
-using Portfolio.ViewModels;
 
 namespace Portfolio.Lib.Services
 {
     [TestFixture]
     public class LogonServiceImplTests
     {
-        private Credentials credentials;
+        private CredentialsDTO credentials;
         private LogonResult logonResult;
         private Mock<IPasswordUtility> mockPasswordUtility;
         private Mock<IRepository> mockRepository;
@@ -32,7 +30,7 @@ namespace Portfolio.Lib.Services
 
             service = new LogonServiceImpl(mockRepository.Object, mockPasswordUtility.Object);
 
-            credentials = new Credentials("tester", "s3cr3t");
+            credentials = new CredentialsDTO("tester", "s3cr3t");
         }
 
         [Test]
@@ -53,7 +51,7 @@ namespace Portfolio.Lib.Services
         public void It_should_compare_passwords()
         {
             service.Logon(credentials);
-            mockPasswordUtility.Verify(x => x.CompareText(credentials.Password, It.IsAny<string>()), Times.Once());
+            mockPasswordUtility.Verify(x => x.CompareText(credentials.PlainTextPassword, It.IsAny<string>()), Times.Once());
         }
 
         [Test]
@@ -122,7 +120,7 @@ namespace Portfolio.Lib.Services
                     Username = "tester"
                 };    
             }                        
-            mockRepository.Setup(x => x.FindOne<User>(It.IsAny<Expression<Func<User, bool>>>())).Returns(user);
+            mockRepository.Setup(x => x.FindOne(It.IsAny<Expression<Func<User, bool>>>())).Returns(user);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Portfolio.Lib.DTOs;
 
-namespace Portfolio.Lib.ViewModels
+namespace Portfolio.ViewModels
 {
     public class Credentials
     {
@@ -17,5 +18,14 @@ namespace Portfolio.Lib.ViewModels
 
         [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; }
+
+        public CredentialsDTO ToDTO()
+        {
+            return new CredentialsDTO
+            {
+                PlainTextPassword = Password,
+                Username = Username
+            };
+        }
     }
 }

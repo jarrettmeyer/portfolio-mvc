@@ -2,7 +2,7 @@
 using MvcFlashMessages;
 using Portfolio.Lib;
 using Portfolio.Lib.Services;
-using Portfolio.Lib.ViewModels;
+using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {
@@ -27,7 +27,7 @@ namespace Portfolio.Controllers
                 return View("New", credentials);
             });
             var service = ServiceLocator.Instance.GetService<ILogonService>();
-            var logonResult = service.Logon(credentials);
+            var logonResult = service.Logon(credentials.ToDTO());
             if (logonResult.IsSuccessful)
             {
                 SessionAdapter.SetUpSession(logonResult.User);

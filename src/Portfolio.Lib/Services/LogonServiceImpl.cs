@@ -1,4 +1,5 @@
 ﻿using Portfolio.Lib.Data;
+using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Logging;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.ViewModels;
@@ -19,7 +20,7 @@ namespace Portfolio.Lib.Services
             this.passwordUtility = passwordUtility;
         }
 
-        public LogonResult Logon(Credentials credentials)
+        public LogonResult Logon(CredentialsDTO credentials)
         {
             using (var transaction = repository.BeginTransaction())
             {
@@ -30,7 +31,7 @@ namespace Portfolio.Lib.Services
             }            
         }
 
-        private void FetchUser(Credentials credentials)
+        private void FetchUser(CredentialsDTO credentials)
         {
             user = repository.FindOne<User>(u => u.Username == credentials.Username);
             if (user == null)
@@ -39,9 +40,9 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private bool IsValidCredentials(Credentials credentials)
+        private bool IsValidCredentials(CredentialsDTO credentials)
         {
-            bool isValidCredentials = user != null && passwordUtility.CompareText(credentials.Password, user.HashedPassword);
+            bool isValidCredentials = user != null && passwordUtility.CompareText(credentials.PlainTextPassword, user.HashedPassword);
             if (isValidCredentials)
             {
                 logWriter.WriteInfo("Logon successful. Username: {0}", credentials.Username);
@@ -73,7 +74,7 @@ namespace Portfolio.Lib.Services
             };
         }
 
-        private void ValidateCredentials(Credentials credentials)
+        private void ValidateCredentials(CredentialsDTO credentials)
         {
             if (IsValidCredentials(credentials))
             {

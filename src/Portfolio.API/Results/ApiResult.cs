@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Portfolio.Lib;
 
@@ -11,9 +12,17 @@ namespace Portfolio.API.Results
         private readonly IList<ErrorDef> errors = new List<ErrorDef>();
         private readonly long timestamp = DateTime.UtcNow.ToEpoch();
 
-        public ApiResult()
+        public ApiResult(bool isSuccessful = true)
         {
-            data = new TData();
+            this.data = new TData();
+            this.IsSuccessful = isSuccessful;
+        }
+
+        public ApiResult(TData data, bool isSuccessful = true)
+        {
+            Contract.Requires<ArgumentNullException>(data != null);
+            this.data = data;
+            this.IsSuccessful = isSuccessful;
         }
 
         public TData Data

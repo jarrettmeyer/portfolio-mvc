@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using Portfolio.API.Results;
-using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.API.Controllers
 {
@@ -9,13 +9,13 @@ namespace Portfolio.API.Controllers
     {
         public ApiResult<GetSession> Get(HttpRequestMessage message)
         {
-            var cookies = message.Headers.GetCookies();
+            AuthenticationHeaderValue authentication  = message.Headers.Authorization;
             var result = new ApiResult<GetSession>();
             result.IsSuccessful = false;
             return result;
         }
 
-        public ApiResult<PostSession> Post(Credentials credentials)
+        public ApiResult<PostSession> Post()
         {
             var result = new ApiResult<PostSession>();
             return result;

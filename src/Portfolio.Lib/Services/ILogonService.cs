@@ -1,9 +1,9 @@
-﻿using Portfolio.Lib.ViewModels;
+﻿using Portfolio.Lib.DTOs;
 
 namespace Portfolio.Lib.Services
 {
     public interface ILogonService
     {
-        LogonResult Logon(Credentials credentials);
+        LogonResult Logon(CredentialsDTO credentials);
     }
 }
