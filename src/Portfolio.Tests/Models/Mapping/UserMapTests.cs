@@ -85,17 +85,18 @@ namespace Portfolio.Models.Mapping
             user.Version.Length.Should().Be(8);
         }
 
-        private User CreateUser()
+        private static User CreateUser()
         {
-            return new User
+            var user = new User
             {
                 Username = "tester",
-                HashedPassword = "tester",
                 LastLogonAt = null,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
+            user.SetHashedPassword("tester", new FakePasswordUtility());
+            return user;
         }
     }
 }

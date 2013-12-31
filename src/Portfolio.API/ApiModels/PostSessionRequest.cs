@@ -1,4 +1,4 @@
-﻿using Portfolio.Lib.DTOs;
+﻿using Portfolio.Lib.Commands;
 
 namespace Portfolio.API.ApiModels
 {
@@ -8,9 +8,9 @@ namespace Portfolio.API.ApiModels
 
         public string Username { get; set; }
 
-        public CredentialsDTO ToDTO()
+        public LogonCommand ToCommand()
         {
-            return new CredentialsDTO
+            return new LogonCommand
             {
                 PlainTextPassword = Password,
                 Username = Username

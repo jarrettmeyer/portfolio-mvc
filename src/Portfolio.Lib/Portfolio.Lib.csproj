@@ -139,7 +139,7 @@
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UniqueRecordViolationException.cs" />
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="DTOs\CredentialsDTO.cs" />
+    <Compile Include="Commands\LogonCommand.cs" />
     <Compile Include="DTOs\TaskDTO.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="HtmlTextFormatter.cs" />
@@ -149,7 +149,7 @@
     <Compile Include="Logging\ILogWriter.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\Log4NetLogWriter.cs" />
-    <Compile Include="LogonResult.cs" />
+    <Compile Include="Commands\LogonResult.cs" />
     <Compile Include="ApplicationIdentity.cs" />
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\IVersionedEntity.cs" />
@@ -171,7 +171,6 @@
     <Compile Include="Queries\OpenTasksQueryHandler.cs" />
     <Compile Include="Queries\TaskByIdQuery.cs" />
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
-    <Compile Include="Services\ILogonService.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
     <Compile Include="Services\ITagCreationService.cs" />
     <Compile Include="Services\ITagDeletionService.cs" />
@@ -180,7 +179,7 @@
     <Compile Include="Services\ITaskCreationService.cs" />
     <Compile Include="Services\ITaskDeletionService.cs" />
     <Compile Include="Services\ITaskUpdateService.cs" />
-    <Compile Include="Services\LogonServiceImpl.cs" />
+    <Compile Include="Commands\LogonCommandHandler.cs" />
     <Compile Include="NinjectConfig.cs" />
     <Compile Include="Services\NinjectServiceLocator.cs" />
     <Compile Include="Services\ServiceLocator.cs" />

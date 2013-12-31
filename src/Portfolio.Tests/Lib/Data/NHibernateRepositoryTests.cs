@@ -46,13 +46,16 @@ namespace Portfolio.Lib.Data
 
         private static User CreateUser()
         {
-            return new User
+            var user = new User
             {
                 Username = "tester",
-                HashedPassword = "junk",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
+            user.SetHashedPassword("junk", new FakePasswordUtility());
+            return user;
         }
+
+
     }
 }

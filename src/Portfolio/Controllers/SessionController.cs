@@ -1,13 +1,22 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Lib;
-using Portfolio.Lib.Services;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
 {
     public class SessionController : ApplicationController
     {
+        readonly IMediator mediator;
+
+        public SessionController(IMediator mediator)
+        {
+            Contract.Requires<ArgumentNullException>(mediator != null);
+            this.mediator = mediator;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult New()
@@ -21,13 +30,15 @@ namespace Portfolio.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult New(Credentials credentials)
         {
+            Contract.Requires<ArgumentNullException>(credentials != null);
+
             CheckModelState(() =>
             {
                 this.Flash("danger", "Both a username and password are required.");
                 return View("New", credentials);
             });
-            var service = ServiceLocator.Instance.GetService<ILogonService>();
-            var logonResult = service.Logon(credentials.ToDTO());
+                        
+            var logonResult = mediator.Send(credentials.ToCommand());
             if (logonResult.IsSuccessful)
             {
                 SessionAdapter.SetUpSession(logonResult.User);

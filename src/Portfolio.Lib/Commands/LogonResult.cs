@@ -1,6 +1,6 @@
 ﻿using Portfolio.Lib.Models;
 
-namespace Portfolio.Lib
+namespace Portfolio.Lib.Commands
 {
     public class LogonResult
     {

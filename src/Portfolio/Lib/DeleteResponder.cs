@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Controllers;
@@ -16,6 +17,8 @@ namespace Portfolio.Lib
 
         public DeleteResponder(ApplicationController controller)
         {
+            Contract.Requires<ArgumentNullException>(controller != null);
+
             this.controller = controller;
             this.controllerName = controller.RouteData.Values["controller"].ToString().ToLowerInvariant();
             this.controllerAction = controller.RouteData.Values["action"].ToString().ToLowerInvariant();

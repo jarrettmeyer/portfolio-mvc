@@ -1,26 +1,29 @@
 ﻿using Portfolio.Lib.Data;
-using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Logging;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.ViewModels;
 
-namespace Portfolio.Lib.Services
+namespace Portfolio.Lib.Commands
 {
-    public class LogonServiceImpl : ILogonService
+    public class LogonCommandHandler : ICommandHandler<LogonCommand, LogonResult>
     {
         private LogonResult logonResult;
-        private static readonly ILogWriter logWriter = Log.For<LogonServiceImpl>();
+        private static readonly ILogWriter logWriter = Log.For<LogonCommandHandler>();
         private readonly IPasswordUtility passwordUtility;
         private readonly IRepository repository;
         private User user;
 
-        public LogonServiceImpl(IRepository repository, IPasswordUtility passwordUtility)
+        public LogonCommandHandler(IRepository repository, IPasswordUtility passwordUtility)
         {
             this.repository = repository;
             this.passwordUtility = passwordUtility;
         }
 
-        public LogonResult Logon(CredentialsDTO credentials)
+        public LogonResult Handle(LogonCommand command)
+        {
+            return Logon(command);
+        }
+
+        public LogonResult Logon(LogonCommand credentials)
         {
             using (var transaction = repository.BeginTransaction())
             {
@@ -31,7 +34,7 @@ namespace Portfolio.Lib.Services
             }            
         }
 
-        private void FetchUser(CredentialsDTO credentials)
+        private void FetchUser(LogonCommand credentials)
         {
             user = repository.FindOne<User>(u => u.Username == credentials.Username);
             if (user == null)
@@ -40,7 +43,7 @@ namespace Portfolio.Lib.Services
             }
         }
 
-        private bool IsValidCredentials(CredentialsDTO credentials)
+        private bool IsValidCredentials(LogonCommand credentials)
         {
             bool isValidCredentials = user != null && passwordUtility.CompareText(credentials.PlainTextPassword, user.HashedPassword);
             if (isValidCredentials)
@@ -74,7 +77,7 @@ namespace Portfolio.Lib.Services
             };
         }
 
-        private void ValidateCredentials(CredentialsDTO credentials)
+        private void ValidateCredentials(LogonCommand credentials)
         {
             if (IsValidCredentials(credentials))
             {
@@ -85,5 +88,7 @@ namespace Portfolio.Lib.Services
                 SetUnsuccessfulLogonResult();
             }
         }
+
+        
     }
 }

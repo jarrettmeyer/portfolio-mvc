@@ -1,12 +1,12 @@
-﻿namespace Portfolio.Lib.DTOs
+﻿namespace Portfolio.Lib.Commands
 {
-    public class CredentialsDTO
+    public class LogonCommand : ICommand<LogonResult>
     {
-        public CredentialsDTO()
+        public LogonCommand()
         {            
         }
 
-        public CredentialsDTO(string username, string plainTextPassword)
+        public LogonCommand(string username, string plainTextPassword)
         {
             this.Username = username;
             this.PlainTextPassword = plainTextPassword;

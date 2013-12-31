@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Portfolio.Lib.DTOs;
+using Portfolio.Lib.Commands;
 
 namespace Portfolio.ViewModels
 {
@@ -19,9 +19,9 @@ namespace Portfolio.ViewModels
         [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; }
 
-        public CredentialsDTO ToDTO()
+        public LogonCommand ToCommand()
         {
-            return new CredentialsDTO
+            return new LogonCommand
             {
                 PlainTextPassword = Password,
                 Username = Username

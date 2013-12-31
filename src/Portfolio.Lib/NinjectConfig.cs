@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Web;
 using NHibernate;
 using Ninject;
+using Portfolio.Lib.Commands;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
@@ -23,7 +24,7 @@ namespace Portfolio.Lib
             
             // Service layer bindings
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
-            kernel.Bind<ILogonService>().To<LogonServiceImpl>();
+            kernel.Bind<IMediator>().ToMethod(ctx => new NinjectMediator(ctx.Kernel));
             kernel.Bind<IPasswordUtility>().To<BCryptPasswordUtility>();
             kernel.Bind<ITagCreationService>().To<TagCreationServiceImpl>();
             kernel.Bind<ITagDeletionService>().To<TagDeletionServiceImpl>();
@@ -32,6 +33,9 @@ namespace Portfolio.Lib
             kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();
             kernel.Bind<ITaskDeletionService>().To<TaskDeletionServiceImpl>();
             kernel.Bind<ITaskUpdateService>().To<TaskUpdateServiceImpl>();
+
+            // Commands
+            kernel.Bind<ICommandHandler<LogonCommand, LogonResult>>().To<LogonCommandHandler>();
 
             // Queries
             kernel.Bind<IQueryHandler<OpenTasksQuery, TaskCollection>>().To<OpenTasksQueryHandler>();

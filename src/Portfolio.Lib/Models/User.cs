@@ -18,7 +18,7 @@ namespace Portfolio.Lib.Models
         /// <summary>
         /// A hashed representation of the password for the user.
         /// </summary>
-        public virtual string HashedPassword { get; set; }        
+        public virtual string HashedPassword { get; protected set; }        
 
         /// <summary>
         /// Gets and sets the last time the user logged on. A null value indicates that the
@@ -55,6 +55,11 @@ namespace Portfolio.Lib.Models
         public virtual bool IsInRole(string role)
         {
             return true;
+        }
+
+        public virtual void SetHashedPassword(string plainTextPassword, IPasswordUtility passwordUtility)
+        {
+            this.HashedPassword = passwordUtility.HashText(plainTextPassword);
         }
 
         public virtual IIdentity Identity

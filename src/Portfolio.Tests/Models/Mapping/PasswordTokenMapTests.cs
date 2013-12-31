@@ -54,11 +54,10 @@ namespace Portfolio.Models.Mapping
                 user = new User
                 {
                     Username = "tester",
-                    HashedPassword = "hashed_password",
-                    
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
+                user.SetHashedPassword("hashed_password", new FakePasswordUtility());
                 session.Save(user);
                 session.Flush();
                 userId = user.Id;
