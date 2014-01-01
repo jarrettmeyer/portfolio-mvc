@@ -1,194 +1,127 @@
-﻿//using System;
-//using System.Linq;
-//using System.Linq.Expressions;
-//using System.Web.Mvc;
-//using FluentAssertions;
-//using Moq;
-//using MvcFlashMessages;
-//using NHibernate.Criterion;
-//using NUnit.Framework;
-//using Portfolio.Lib.Data;
-//using Portfolio.Lib.Models;
-//using Portfolio.Lib.Services;
-//using Portfolio.Lib.ViewModels;
-//using Portfolio.Models;
-//using Portfolio.ViewModels;
+﻿using System.Web.Mvc;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using Portfolio.Lib;
+using Portfolio.Lib.Commands;
+using Portfolio.Lib.Queries;
+using Portfolio.Lib.Services;
+using Portfolio.ViewModels;
 
-//namespace Portfolio.Controllers
-//{
-//    [TestFixture]
-//    public class TasksControllerTests
-//    {
-//        private TasksController tasksController;
+namespace Portfolio.Controllers
+{
+    [TestFixture]
+    public class TasksControllerTests
+    {
+        private Mock<IMediator> mockMediator;
+        private TasksController tasksController;
 
-//        [SetUp]
-//        public void Before_each_test()
-//        {
-//            ServiceLocator.Instance = new MockServiceLocator();
-//            tasksController = new TasksController();
-//        }
+        [SetUp]
+        public void Before_each_test()
+        {
+            mockMediator = new Mock<IMediator> { DefaultValue = DefaultValue.Mock };            
+            ServiceLocator.Instance = new MockServiceLocator();
+            tasksController = new TasksController(mockMediator.Object);
+            MvcTest.SetupControllerContext(tasksController);
+        }
 
-//        [TearDown]
-//        public void After_each_test()
-//        {
-//            ServiceLocator.Instance = null;
-//        }
+        [TearDown]
+        public void After_each_test()
+        {
+            ServiceLocator.Instance = null;
+        }
 
-//        [Test]
-//        public void It_should_exist()
-//        {
-//            tasksController.Should().BeAssignableTo<TasksController>();
-//        }
+        [Test]
+        public void Controller_should_exist()
+        {
+            tasksController.Should().BeAssignableTo<TasksController>();
+        }
 
-//        public class TaskControllerTestContext
-//        {            
-//            public void SetUpContext()
-//            {
-//                // Initialize the service locator.
-//                ServiceLocator.Instance = new MockServiceLocator();
+        [Test]
+        public void Delete_Delete_should_return_a_JSON_result()
+        {
+            var result = tasksController.Delete(new DeleteTaskCommand(1));
+            MvcTest.HasExpectedActionResult<JsonResult>(result);
+        }
 
-//                Task = new Task();
-//                TaskInputModel = new TaskInputModel();
-                
-                
+        [Test]
+        public void Delete_Delete_should_send_delete_task_command()
+        {
+            var command = new DeleteTaskCommand(1);
+            tasksController.Delete(command);
+            mockMediator.Verify(x => x.Send(command), Times.Once());
+        }
 
-//                // Initialize the repository
-//                MockRepository = MockServiceLocator.GetMock<IRepository>();                
-//                MockRepository.Setup(x => x.Add(It.IsAny<Task>()))
-//                    .Callback<Task>(t =>
-//                    {
-//                        Task = t;
-//                        Task.Id = 1;
-//                    });
-//                MockRepository.Setup(x => x.Load<Task>(It.IsAny<int>()))
-//                    .Returns(Task)
-//                    .Callback<int>(i => Task.Id = i);
+        [Test]
+        public void Get_Edit_should_have_the_expected_view_model()
+        {
+            var result = tasksController.Edit(new TaskByIdQuery(1));
+            MvcTest.HasExpectedModel<TaskInputModel>(result);
+        }
 
-//                // Initialize the task creation service.
-//                MockTaskCreationSerivce = MockServiceLocator.GetMock<ITaskCreationService>();
+        [Test]
+        public void Get_Edit_should_return_a_view()
+        {
+            var result = tasksController.Edit(new TaskByIdQuery(1));
+            MvcTest.HasExpectedActionResult<ViewResult>(result);
+        }
 
-//                // Initialize the controller.
-//                Controller = new TasksController();
-//            }
+        [Test]
+        public void Get_Edit_should_request_task_by_id()
+        {
+            var query = new TaskByIdQuery(1);
+            tasksController.Edit(query);
+            mockMediator.Verify(x => x.Request(query), Times.Once());
+        }
 
-//            public TasksController Controller { get; set; }
-//            public Task Task { get; set; }
-//            public TaskInputModel TaskInputModel { get; set; }
-//            public Mock<IRepository> MockRepository { get; set; }            
-//            public Mock<ITaskCreationService> MockTaskCreationSerivce { get; set; }
-//        }
+        [Test]
+        public void Get_Index_should_fetch_all_open_tasks()
+        {
+            tasksController.Index();
+            mockMediator.Verify(x => x.Request(It.IsAny<OpenTasksQuery>()), Times.Once());
+        }
 
-//        public class GetIndex : TaskControllerTestContext
-//        {
-//            [SetUp]
-//            public void Before_each_test()
-//            {
-//                SetUpContext();                
-//            }
+        [Test]
+        public void Get_Index_should_have_expected_view_model()
+        {
+            var actionResult = tasksController.Index();
+            MvcTest.HasExpectedModel<TaskListViewModel>(actionResult);
+        }
 
-//            [Test]
-//            public void It_fetches_tasks()
-//            {
-//                Controller.Index();
-//                MockRepository.Verify(x => x.Find(It.IsAny<Expression<Func<Task, bool>>>(), null, null));
-//            }
+        [Test]
+        public void Get_Index_should_return_a_view()
+        {
+            var actionResult = tasksController.Index();
+            MvcTest.HasExpectedActionResult<ViewResult>(actionResult);
+        }
 
-//            [Test]
-//            public void It_assigns_the_expected_view_model()
-//            {
-//                var actionResult = Controller.Index();
-//                object model = ((ViewResult)actionResult).Model;
-//                model.Should().BeAssignableTo<TaskListViewModel>();
-//            }
+        [Test]
+        public void Get_New_should_return_a_view()
+        {
+            var actionResult = tasksController.New();
+            MvcTest.HasExpectedActionResult<ViewResult>(actionResult);
+        }
 
-//            [Test]
-//            public void It_Returns_a_view()
-//            {
-//                var actionResult = Controller.Index();
-//                actionResult.Should().BeAssignableTo<ViewResult>();
-//            }
-//        }
+        [Test]
+        public void Get_New_should_have_expected_view_model()
+        {
+            var actionResult = tasksController.New();
+            MvcTest.HasExpectedModel<TaskInputModel>(actionResult);
+        }
 
-//        public class GetNew : TaskControllerTestContext
-//        {
-//            [SetUp]
-//            public void Before_each_test()
-//            {
-//                SetUpContext();
-//            }
+        [Test]
+        public void Post_Complete_should_return_a_JSON_result()
+        {
+            var result = tasksController.Complete(new CompleteTaskCommand(1));
+            MvcTest.HasExpectedActionResult<JsonResult>(result);
+        }
 
-//            [Test]
-//            public void It_returns_a_view()
-//            {
-//                var actionResult = Controller.New();
-//                actionResult.Should().BeAssignableTo<ViewResult>();
-//            }
-
-//            [Test]
-//            public void It_has_the_expected_view_model()
-//            {
-//                var actionResult = Controller.New();
-//                var model = ((ViewResult)actionResult).Model;
-//                model.Should().BeAssignableTo<TaskInputModel>();
-//            }
-//        }
-
-//        public class PostNewWorks : TaskControllerTestContext
-//        {
-//            [SetUp]
-//            public void Before_each_test()
-//            {
-//                SetUpContext();
-//            }
-
-//            [Test]
-//            public void It_saves_a_new_task()
-//            {
-//                Controller.New(TaskInputModel);
-//                MockTaskCreationSerivce.Verify(x => x.CreateTask(TaskInputModel), Times.Once());
-//            }
-
-//            [Test]
-//            public void It_adds_a_success_message()
-//            {
-//                Controller.New(TaskInputModel);
-//                var flashMessage = Controller.TempData.GetFlashMessages().First(m => m.Key == "success");
-//                flashMessage.Message.Should().Contain("Created new task:");                
-//            }
-
-//            [Test]
-//            public void It_redirects_to_index()
-//            {
-//                var actionResult = Controller.New(TaskInputModel);
-//                var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
-//                routeValues["Action"].Should().Be("Index");
-//            }
-//        }
-
-//        public class GetEdit : TaskControllerTestContext
-//        {
-//            [SetUp]
-//            public void Before_each_test()
-//            {
-//                SetUpContext();
-//            }
-
-//            [Test]
-//            public void It_fetches_a_task()
-//            {
-//                Controller.Edit(123);
-//                MockRepository.Verify(x => x.Load<Task>(123), Times.Once());
-//            }
-
-//            [Test]
-//            public void It_has_the_expected_view_model()
-//            {
-//                var actionResult = Controller.Edit(123);
-//                object model = ((ViewResult)actionResult).Model;
-//                model.Should().BeAssignableTo<TaskInputModel>();
-//                var taskInputModel = (TaskInputModel)model;
-//                taskInputModel.Id.Should().Be(123);
-//            }
-//        }
-//    }
-//}
+        [Test]
+        public void Post_Complete_should_send_to_mediator()
+        {
+            var command = new CompleteTaskCommand(1);
+            tasksController.Complete(command);
+            mockMediator.Verify(x => x.Send(command), Times.Once());
+        }
+    }
+}

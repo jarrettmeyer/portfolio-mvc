@@ -7,6 +7,11 @@ namespace Portfolio.Lib.Models
     {
         readonly IEnumerable<Task> storage;
 
+        public TaskCollection()
+            : this(null)
+        {
+        }
+
         public TaskCollection(IEnumerable<Task> tasks)
         {
             this.storage = tasks ?? new List<Task>();

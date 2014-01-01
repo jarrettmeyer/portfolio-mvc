@@ -7,6 +7,11 @@ namespace Portfolio.Lib.Models
     {
         private readonly IEnumerable<Tag> tags;
 
+        public TagCollection()
+            : this(null)
+        {
+        }
+
         public TagCollection(IEnumerable<Tag> tags)
         {
             this.tags = tags ?? new List<Tag>();

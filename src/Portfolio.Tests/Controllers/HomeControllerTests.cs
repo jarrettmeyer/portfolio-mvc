@@ -15,30 +15,19 @@ namespace Portfolio.Controllers
         }
 
         [Test]
-        public void It_should_exist()
+        public void Controller_should_exist()
         {
             controller.Should().BeAssignableTo<HomeController>();
         }
 
-        public class GetIndex
+        [Test]
+        public void GetIndex_should_redirect_to_tasks_index()
         {
-            private HomeController controller;
-
-            [SetUp]
-            public void Before_each_test()
-            {
-                controller = new HomeController();
-            }
-
-            [Test]
-            public void It_should_redirect_to_tasks_index()
-            {
-                var actionResult = controller.Index();
-                actionResult.Should().BeAssignableTo<RedirectToRouteResult>();
-                var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
-                routeValues["Controller"].Should().Be("Tasks");
-                routeValues["Action"].Should().Be("Index");
-            }
+            var actionResult = controller.Index();
+            actionResult.Should().BeAssignableTo<RedirectToRouteResult>();
+            var routeValues = ((RedirectToRouteResult)actionResult).RouteValues;
+            routeValues["Controller"].Should().Be("Tasks");
+            routeValues["Action"].Should().Be("Index");
         }
     }
 }
