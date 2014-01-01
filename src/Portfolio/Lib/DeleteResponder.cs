@@ -34,10 +34,12 @@ namespace Portfolio.Lib
             return jsonResult;
         }
 
-        public ActionResult RespondWith<T>(IMediator mediator, ICommand<T> command, bool addSuccessMessageToFlash = true)
+        public ActionResult RespondWith<T>(IMediator mediator, ICommand<T> command, bool addSuccessMessageToFlash = true, Action afterCommandSent = null)
         {
-            mediator.Send(command);            
+            mediator.Send(command);
             AddSuccessFlashMessage(addSuccessMessageToFlash);
+            if (afterCommandSent != null)
+                afterCommandSent.Invoke();
             var jsonResult = CreateSuccessfulJsonResult();
             return jsonResult;
         }

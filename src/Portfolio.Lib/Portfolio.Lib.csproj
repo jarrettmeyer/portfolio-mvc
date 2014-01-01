@@ -203,9 +203,6 @@
     <Compile Include="ViewModels\PasswordTestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

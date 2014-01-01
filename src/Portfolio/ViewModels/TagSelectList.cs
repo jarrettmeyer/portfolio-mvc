@@ -10,7 +10,7 @@ namespace Portfolio.ViewModels
 {
     public static class TagSelectList
     {
-        public const string CACHE_KEY = "all_tags";
+        public const string CACHE_KEY = "active_tags";
         public const string TEXT_PROPERTY = "Text";
         public const string VALUE_PROPERTY = "Value";
 
@@ -30,8 +30,13 @@ namespace Portfolio.ViewModels
             if (repository == null)
                 repository = ServiceLocator.Instance.GetService<IRepository>();
 
-            var categories = repository.Find<Tag>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
-            var models = categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Description });
+            var tags = repository.Find<Tag>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
+            Initialize(tags);
+        }
+
+        public static void Initialize(IEnumerable<Tag> tags)
+        {
+            var models = tags.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Description });
             Cache.Instance.Add(CACHE_KEY, models);
             IsInitialized = true;
         }

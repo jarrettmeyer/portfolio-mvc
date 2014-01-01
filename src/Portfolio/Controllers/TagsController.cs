@@ -29,7 +29,7 @@ namespace Portfolio.Controllers
         public ActionResult Delete(DeleteTagCommand command)
         {
             return new DeleteResponder(this)
-                .RespondWith(mediator, command);
+                .RespondWith(mediator, command, afterCommandSent: UpdateTagSelectList);
         }
 
         [HttpGet]
@@ -45,7 +45,7 @@ namespace Portfolio.Controllers
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             service.UpdateTag(model.ToTagDTO());
-            TagSelectList.Initialize(repository);
+            UpdateTagSelectList();
             this.Flash("success", string.Format("Successfully updated Tag: {0}", model.Description));
             return RedirectToAction("Index");
         }
@@ -71,7 +71,7 @@ namespace Portfolio.Controllers
             try
             {
                 mediator.Send(model.ToCreateTagCommand());
-                TagSelectList.Initialize(repository);
+                UpdateTagSelectList();
                 this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
                 return RedirectToAction("Index");
             }
@@ -80,6 +80,12 @@ namespace Portfolio.Controllers
                 this.Flash("danger", ex.Message);
                 return View("New", model);                
             }            
+        }
+
+        private void UpdateTagSelectList()
+        {
+            var tags = mediator.Request(new ActiveTagsQuery());
+            TagSelectList.Initialize(tags);
         }
     }
 }

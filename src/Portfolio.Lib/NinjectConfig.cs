@@ -38,6 +38,7 @@ namespace Portfolio.Lib
             kernel.Bind<ICommandHandler<LogonCommand, LogonResult>>().To<LogonCommandHandler>();
 
             // Queries
+            kernel.Bind<IQueryHandler<ActiveTagsQuery, TagCollection>>().To<ActiveTagsQueryHandler>();
             kernel.Bind<IQueryHandler<OpenTasksQuery, TaskCollection>>().To<OpenTasksQueryHandler>();
             kernel.Bind<IQueryHandler<TagByIdQuery, Tag>>().To<TagByIdQueryHandler>();
             kernel.Bind<IQueryHandler<TagsQuery, TagCollection>>().To<TagsQueryHandler>();
