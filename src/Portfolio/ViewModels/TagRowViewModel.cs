@@ -1,4 +1,6 @@
-﻿using Portfolio.Lib;
+﻿using System;
+using System.Diagnostics.Contracts;
+using Portfolio.Lib;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.ViewModels
@@ -7,6 +9,7 @@ namespace Portfolio.ViewModels
     {
         public TagRowViewModel(Tag tag)
         {
+            Contract.Requires<ArgumentNullException>(tag != null);
             Description = tag.Description;
             Id = tag.Id;
             IsActive = tag.IsActive.ToYesNo();

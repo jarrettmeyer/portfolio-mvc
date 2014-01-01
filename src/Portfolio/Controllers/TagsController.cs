@@ -7,7 +7,6 @@ using Portfolio.Lib.Commands;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
-using Portfolio.Lib.Services;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
@@ -15,13 +14,11 @@ namespace Portfolio.Controllers
     public class TagsController : ApplicationController
     {
         readonly IMediator mediator;
-        private readonly IRepository repository;
 
         public TagsController(IMediator mediator)
         {
             Contract.Requires<ArgumentNullException>(mediator != null);
-            this.mediator = mediator;
-            repository = ServiceLocator.Instance.GetService<IRepository>();
+            this.mediator = mediator;            
         }
         
         [HttpDelete]
@@ -42,11 +39,10 @@ namespace Portfolio.Controllers
 
         [HttpPost]
         public ActionResult Edit(TagInputModel model)
-        {
-            ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
-            service.UpdateTag(model.ToTagDTO());
+        {            
+            var tag = mediator.Send(model.ToUpdateTagCommand());
             UpdateTagSelectList();
-            this.Flash("success", string.Format("Successfully updated Tag: {0}", model.Description));
+            this.Flash("success", string.Format("Successfully updated Tag: {0}", tag.Description));
             return RedirectToAction("Index");
         }
 

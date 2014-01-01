@@ -28,6 +28,7 @@ namespace Portfolio.Lib
         public ActionResult RespondWith<TService>(Action<TService> action, bool addSuccessMessageToFlash = true) 
             where TService : class
         {
+            Contract.Requires<ArgumentNullException>(action != null);
             InvokeService(action);
             AddSuccessFlashMessage(addSuccessMessageToFlash);
             var jsonResult = CreateSuccessfulJsonResult();
@@ -36,6 +37,9 @@ namespace Portfolio.Lib
 
         public ActionResult RespondWith<T>(IMediator mediator, ICommand<T> command, bool addSuccessMessageToFlash = true, Action afterCommandSent = null)
         {
+            Contract.Requires<ArgumentNullException>(mediator != null);
+            Contract.Requires<ArgumentNullException>(command != null);
+
             mediator.Send(command);
             AddSuccessFlashMessage(addSuccessMessageToFlash);
             if (afterCommandSent != null)
@@ -60,7 +64,7 @@ namespace Portfolio.Lib
             jsonResult.Data = new
             {
                 success = true,
-                message = message
+                message
             };
             return jsonResult;
         }

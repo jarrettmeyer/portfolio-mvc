@@ -83,6 +83,16 @@ namespace Portfolio.ViewModels
             };
         }
 
+        public UpdateTagCommand ToUpdateTagCommand()
+        {
+            return new UpdateTagCommand
+            {
+                Description = this.Description,
+                Id = this.Id,
+                Slug = this.Slug
+            };
+        }
+
         public TagDTO ToTagDTO()
         {
             return new TagDTO

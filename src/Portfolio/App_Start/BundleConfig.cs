@@ -1,5 +1,5 @@
-﻿using System.Web.Optimization;
-using Portfolio.Lib;
+﻿using System.Diagnostics.Contracts;
+using System.Web.Optimization;
 
 namespace Portfolio.App_Start
 {
@@ -7,7 +7,7 @@ namespace Portfolio.App_Start
     {
         public static void ConfigureBundles(BundleCollection bundles)
         {
-            Ensure.ArgumentIsNotNull(bundles, "bundles");
+            Contract.Requires(bundles != null);            
             ConfigureCssBundles(bundles);
             ConfigureJsBundles(bundles);
         }

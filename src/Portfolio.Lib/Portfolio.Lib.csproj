@@ -53,7 +53,7 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -132,6 +132,7 @@
     <Compile Include="Commands\DeleteTagCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\UpdateTagCommand.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Data\IFetchStrategy.cs" />
     <Compile Include="Data\IRepository.cs" />
@@ -169,6 +170,8 @@
     <Compile Include="NinjectMediator.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\ActiveTagsQuery.cs" />
+    <Compile Include="Queries\ActiveTagsQueryHandler.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\OpenTasksQuery.cs" />
@@ -180,8 +183,6 @@
     <Compile Include="Queries\TaskByIdQuery.cs" />
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
-    <Compile Include="Services\ITagDeletionService.cs" />
-    <Compile Include="Services\ITagUpdateService.cs" />
     <Compile Include="Services\ITaskCompletionService.cs" />
     <Compile Include="Services\ITaskCreationService.cs" />
     <Compile Include="Services\ITaskDeletionService.cs" />
@@ -191,7 +192,7 @@
     <Compile Include="Services\NinjectServiceLocator.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Commands\DeleteTagCommandHandler.cs" />
-    <Compile Include="Services\TagUpdateServiceImpl.cs" />
+    <Compile Include="Commands\UpdateTagCommandHandler.cs" />
     <Compile Include="Services\TaskCompletionServiceImpl.cs" />
     <Compile Include="Services\TaskCreationServiceImpl.cs" />
     <Compile Include="Services\TaskDeletionServiceImpl.cs" />
