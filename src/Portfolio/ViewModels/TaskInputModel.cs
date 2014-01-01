@@ -12,19 +12,21 @@ namespace Portfolio.ViewModels
 {
     public class TaskInputModel
     {
-        private IList<TagViewModel> tags;
-        private readonly Task task;
+        private IList<TagViewModel> tags;        
 
-        public TaskInputModel()
-            : this(new Task())
+        public TaskInputModel()            
         {            
         }
 
         public TaskInputModel(Task task)
         {
             Contract.Requires<ArgumentNullException>(task != null);
-            this.task = task;
-            Tags = task.Tags.Select(tag => new TagViewModel(tag.Id, tag.Slug, tag.Description)).ToList();
+
+            this.Description = task.Description;
+            this.DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : "";
+            this.Id = task.Id;
+            this.Tags = task.Tags.Select(tag => new TagViewModel(tag.Id, tag.Slug, tag.Description)).ToList();
+            this.Title = task.Title;
         }
 
         public string ActionName
@@ -38,29 +40,11 @@ namespace Portfolio.ViewModels
         }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]
-        public string Description
-        {
-            get { return task.Description; }
-            set
-            {
-                if (value == null)
-                    return;
+        public string Description { get; set; }        
 
-                task.Description = value.Trim();
-            }
-        }
+        public string DueOn { get; set; }        
 
-        public string DueOn
-        {
-            get { return task.DueOn.HasValue ? task.DueOn.Value.ToShortDateString() : ""; }
-            set { task.DueOn = value.SafeParseDateTime(); }
-        }
-
-        public int Id
-        {
-            get { return task.Id; }
-            set { task.Id = value; }
-        }
+        public int Id { get; set; }        
 
         public bool IsNew
         {
@@ -91,17 +75,7 @@ namespace Portfolio.ViewModels
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]
-        public string Title
-        {
-            get { return task.Title; }
-            set
-            {
-                if (value == null)
-                    return;
-
-                task.Title = value.Trim();
-            }
-        }
+        public string Title { get; set; }        
 
         public CreateTaskCommand ToCreateTaskCommand()
         {
@@ -109,6 +83,18 @@ namespace Portfolio.ViewModels
             {
                 Description = this.Description,
                 DueOn = this.DueOn.SafeParseDateTime(),
+                TagIds = this.Tags.Select(t => t.Id),
+                Title = this.Title
+            };
+        }
+
+        public UpdateTaskCommand ToUpdateTaskCommand()
+        {
+            return new UpdateTaskCommand
+            {
+                Description = this.Description,
+                DueOn = this.DueOn.SafeParseDateTime(),
+                Id = this.Id,
                 TagIds = this.Tags.Select(t => t.Id),
                 Title = this.Title
             };

@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Portfolio.Lib.Caching;
-using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
-using Portfolio.Lib.Services;
 
 namespace Portfolio.ViewModels
 {
@@ -23,15 +21,6 @@ namespace Portfolio.ViewModels
                 var cachedTags = Cache.Instance.Get(CACHE_KEY);
                 return (IEnumerable<SelectListItem>)cachedTags;
             }
-        }
-
-        public static void Initialize(IRepository repository = null)
-        {
-            if (repository == null)
-                repository = ServiceLocator.Instance.GetService<IRepository>();
-
-            var tags = repository.Find<Tag>(c => c.IsActive).OrderBy(c => c.Description).ToArray();
-            Initialize(tags);
         }
 
         public static void Initialize(IEnumerable<Tag> tags)

@@ -1,6 +1,7 @@
-﻿using Portfolio.Lib.Data;
+﻿using NHibernate;
 using Portfolio.Lib.Logging;
 using Portfolio.Lib.Models;
+using Portfolio.Lib.Queries;
 
 namespace Portfolio.Lib.Commands
 {
@@ -8,35 +9,32 @@ namespace Portfolio.Lib.Commands
     {
         private LogonResult logonResult;
         private static readonly ILogWriter logWriter = Log.For<LogonCommandHandler>();
+        private readonly IMediator mediator;
         private readonly IPasswordUtility passwordUtility;
-        private readonly IRepository repository;
+        private readonly ISession session;
         private User user;
 
-        public LogonCommandHandler(IRepository repository, IPasswordUtility passwordUtility)
+        public LogonCommandHandler(ISession session, IMediator mediator, IPasswordUtility passwordUtility)
         {
-            this.repository = repository;
+            this.session = session;
+            this.mediator = mediator;
             this.passwordUtility = passwordUtility;
         }
 
         public LogonResult Handle(LogonCommand command)
         {
-            return Logon(command);
-        }
-
-        public LogonResult Logon(LogonCommand credentials)
-        {
-            using (var transaction = repository.BeginTransaction())
+            using (var transaction = session.BeginTransaction())
             {
-                FetchUser(credentials);
-                ValidateCredentials(credentials);
+                FetchUser(command);
+                ValidateCredentials(command);
                 transaction.Commit();
                 return logonResult;
-            }            
+            }
         }
 
         private void FetchUser(LogonCommand credentials)
         {
-            user = repository.FindOne<User>(u => u.Username == credentials.Username);
+            user = mediator.Request(new UserByUsernameQuery(credentials.Username));
             if (user == null)
             {
                 logWriter.WriteWarning("No user found. Username: {0}", credentials.Username);
@@ -88,7 +86,5 @@ namespace Portfolio.Lib.Commands
                 SetUnsuccessfulLogonResult();
             }
         }
-
-        
     }
 }

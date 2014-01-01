@@ -6,7 +6,6 @@ using Portfolio.Lib;
 using Portfolio.Lib.Commands;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
-using Portfolio.Lib.Services;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
@@ -19,16 +18,13 @@ namespace Portfolio.Controllers
         {
             Contract.Requires<ArgumentNullException>(mediator != null);
             this.mediator = mediator;
-
-            if (!TagSelectList.IsInitialized)
-                TagSelectList.Initialize();
+            InitializeTagSelectList();
         }
 
         [HttpPost]
-        public ActionResult Complete(int id)
-        {
-            ITaskCompletionService service = ServiceLocator.Instance.GetService<ITaskCompletionService>();
-            Task task = service.CompleteTask(id);
+        public ActionResult Complete(CompleteTaskCommand command)
+        {            
+            Task task = mediator.Send(command);
             this.Flash("success", string.Format("Completed task: {0}", task.Title));
             return Json(new { success = true });
         }
@@ -54,8 +50,7 @@ namespace Portfolio.Controllers
         public ActionResult Edit(TaskInputModel model)
         {
             CheckModelState(() => OnInvalidTaskForm("Edit", model));
-            var service = ServiceLocator.Instance.GetService<ITaskUpdateService>();
-            var task = service.UpdateTask(model.ToTaskDTO());
+            var task = mediator.Send(model.ToUpdateTaskCommand());            
             this.Flash("success", string.Format("Updated task: {0}", task.Title));
             return RedirectToAction("Index");
         }
@@ -91,6 +86,15 @@ namespace Portfolio.Controllers
             var task = mediator.Request(query);
             var model = new TaskViewModel(task);
             return View("Show", model);
+        }
+
+        private void InitializeTagSelectList()
+        {
+            if (!TagSelectList.IsInitialized)
+            {
+                var tags = mediator.Request(new ActiveTagsQuery());
+                TagSelectList.Initialize(tags);
+            }
         }
 
         private ActionResult OnInvalidTaskForm(string viewName, TaskInputModel model)

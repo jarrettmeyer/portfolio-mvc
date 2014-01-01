@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics.Contracts;
 
 namespace Portfolio.Lib
 {
@@ -51,6 +52,8 @@ namespace Portfolio.Lib
 
         public static string GetConfigValue(string key)
         {
+            Contract.Requires<ArgumentException>(string.IsNullOrEmpty(key) == false);
+
             string value;
             if (TryGetConfigValueFromEnvironment(key, out value))
                 return value;

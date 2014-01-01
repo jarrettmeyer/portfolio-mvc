@@ -20,22 +20,21 @@ namespace Portfolio.Lib
             // Data layer bindings
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
             kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
-            kernel.Bind<IRepository>().To<NHibernateRepository>();
             
             // Service layer bindings
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
             kernel.Bind<IMediator>().ToMethod(ctx => new NinjectMediator(ctx.Kernel));
-            kernel.Bind<IPasswordUtility>().To<BCryptPasswordUtility>();                        
-            kernel.Bind<ITaskCompletionService>().To<TaskCompletionServiceImpl>();                        
-            kernel.Bind<ITaskUpdateService>().To<TaskUpdateServiceImpl>();
+            kernel.Bind<IPasswordUtility>().To<BCryptPasswordUtility>();                                    
 
             // Commands
             kernel.Bind<ICommandHandler<CreateTagCommand, Tag>>().To<CreateTagCommandHandler>();
             kernel.Bind<ICommandHandler<CreateTaskCommand, Task>>().To<CreateTaskCommandHandler>();
+            kernel.Bind<ICommandHandler<CompleteTaskCommand, Task>>().To<CompleteTaskCommandHandler>();
             kernel.Bind<ICommandHandler<DeleteTagCommand, Tag>>().To<DeleteTagCommandHandler>();
             kernel.Bind<ICommandHandler<DeleteTaskCommand, Task>>().To<DeleteTaskCommandHandler>();
             kernel.Bind<ICommandHandler<LogonCommand, LogonResult>>().To<LogonCommandHandler>();
             kernel.Bind<ICommandHandler<UpdateTagCommand, Tag>>().To<UpdateTagCommandHandler>();
+            kernel.Bind<ICommandHandler<UpdateTaskCommand, Task>>().To<UpdateTaskCommandHandler>();
 
             // Queries
             kernel.Bind<IQueryHandler<ActiveTagsQuery, TagCollection>>().To<ActiveTagsQueryHandler>();

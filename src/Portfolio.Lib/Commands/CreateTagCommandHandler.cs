@@ -1,16 +1,19 @@
-﻿using NHibernate;
+﻿using System;
+using System.Diagnostics.Contracts;
+using NHibernate;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Commands
 {
     public class CreateTagCommandHandler : ICommandHandler<CreateTagCommand, Tag>
     {
-        readonly ISession session;
-        Tag tag;
-        ITransaction transaction;
+        private readonly ISession session;
+        private Tag tag;
+        private ITransaction transaction;
 
         public CreateTagCommandHandler(ISession session)
         {
+            Contract.Requires<ArgumentNullException>(session != null);
             this.session = session;
         }
 

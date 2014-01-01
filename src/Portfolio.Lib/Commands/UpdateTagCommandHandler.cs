@@ -1,21 +1,24 @@
-﻿using Portfolio.Lib.Data;
+﻿using System;
+using System.Diagnostics.Contracts;
+using NHibernate;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.Lib.Commands
 {
     public class UpdateTagCommandHandler : ICommandHandler<UpdateTagCommand, Tag>
     {
-        private readonly IRepository repository;
+        private readonly ISession session;
         private Tag tag;
 
-        public UpdateTagCommandHandler(IRepository repository)
+        public UpdateTagCommandHandler(ISession session)
         {
-            this.repository = repository;
+            Contract.Requires<ArgumentNullException>(session != null);
+            this.session = session;
         }
 
         public Tag Handle(UpdateTagCommand command)
         {
-            using (var transaction = repository.BeginTransaction())
+            using (var transaction = session.BeginTransaction())
             {
                 UpdateTagProperties(command);
                 transaction.Commit();
@@ -25,7 +28,7 @@ namespace Portfolio.Lib.Commands
 
         private void UpdateTagProperties(UpdateTagCommand command)
         {
-            tag = repository.Load<Tag>(command.Id);
+            tag = session.Load<Tag>(command.Id);
             tag.Slug = command.Slug;
             tag.Description = command.Description.Trim();
             tag.UpdatedAt = Clock.Instance.Now;            

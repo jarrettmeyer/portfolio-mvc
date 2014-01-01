@@ -7,13 +7,13 @@ namespace Portfolio.Lib.Data
     public class NHibernateConfigTests
     {
         [SetUp]
-        public void before_each_test()
+        public void Before_each_test()
         {
             NHibernateConfig.ConnectionString = TestBootstrapper.ConnectionString;
         }
 
         [Test]
-        public void can_create_session_factory()
+        public void Can_create_session_factory()
         {
             var sessionFactory = NHibernateConfig.SessionFactory;
             Assert.IsInstanceOf<ISessionFactory>(sessionFactory);

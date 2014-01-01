@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
+using Portfolio.Lib.Queries;
 using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
@@ -15,11 +15,12 @@ namespace Portfolio.Lib
             if (httpContext.Session == null)
                 return false;
 
-            IHttpSessionAdapter sessionAdapter = HttpSessionAdapter.Deserialize(httpContext.Session);
-            if (sessionAdapter.IsAuthenticated)
+            IHttpSessionAdapter httpSessionAdapter = HttpSessionAdapter.Deserialize(httpContext.Session);
+            if (httpSessionAdapter.IsAuthenticated)
             {
-                var repository = ServiceLocator.Instance.GetService<IRepository>();
-                var user = repository.FindOne<User>(u => u.Username == sessionAdapter.Username);
+                var mediator = ServiceLocator.Instance.GetService<IMediator>();
+                var query = new UserByUsernameQuery(httpSessionAdapter.Username);
+                var user = mediator.Request(query);
                 httpContext.User = user ?? new Guest();
                 return true;
             }

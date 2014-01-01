@@ -110,15 +110,15 @@
     <Compile Include="Lib\BCryptPasswordUtilityTests.cs" />
     <Compile Include="Lib\ByteExtensionsTests.cs" />
     <Compile Include="Lib\ConfigTests.cs" />
-    <Compile Include="Lib\Data\NHibernateRepositoryTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
     <Compile Include="Lib\DateTimeExtensionsTests.cs" />
     <Compile Include="Lib\DeleteResponderTests.cs" />
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\NinjectMediatorTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
-    <Compile Include="Lib\Comands\LogonServiceImplTests.cs" />
+    <Compile Include="Lib\Comands\LogonCommandHandlerTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
+    <Compile Include="SessionTests.cs" />
     <Compile Include="MockServiceLocator.cs" />
     <Compile Include="Models\Mapping\PasswordTokenMapTests.cs" />
     <Compile Include="Models\Mapping\TagMapTests.cs" />
