@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Lib;
+using Portfolio.Lib.Commands;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
+using Portfolio.Lib.Queries;
 using Portfolio.Lib.Services;
 using Portfolio.ViewModels;
 
@@ -11,31 +14,34 @@ namespace Portfolio.Controllers
 {
     public class TagsController : ApplicationController
     {
+        readonly IMediator mediator;
         private readonly IRepository repository;
 
-        public TagsController()
+        public TagsController(IMediator mediator)
         {
+            Contract.Requires<ArgumentNullException>(mediator != null);
+            this.mediator = mediator;
             repository = ServiceLocator.Instance.GetService<IRepository>();
         }
         
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(DeleteTagCommand command)
         {
             return new DeleteResponder(this)
-                .RespondWith<ITagDeletionService>(x => x.DeleteTag(id));
+                .RespondWith(mediator, command);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(TagByIdQuery query)
         {
-            var tag = repository.FindOne<Tag>(c => c.Id == id);
+            var tag = mediator.Request(query);
             var model = new TagInputModel(tag);            
             return View("Edit", model);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, TagInputModel model)
+        public ActionResult Edit(TagInputModel model)
         {
             ITagUpdateService service = ServiceLocator.Instance.GetService<ITagUpdateService>();
             service.UpdateTag(model.ToTagDTO());
@@ -47,8 +53,8 @@ namespace Portfolio.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = repository.FindAll<Tag>().OrderBy(c => c.Description).ToArray();
-            var model = new TagListViewModel(categories);
+            TagCollection tags = mediator.Request(new TagsQuery());
+            var model = new TagListViewModel(tags);
             return View("Index", model);
         }
 
@@ -64,8 +70,7 @@ namespace Portfolio.Controllers
         {
             try
             {
-                ITagCreationService service = ServiceLocator.Instance.GetService<ITagCreationService>();
-                service.CreateTag(model.ToTagDTO());
+                mediator.Send(model.ToCreateTagCommand());
                 TagSelectList.Initialize(repository);
                 this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
                 return RedirectToAction("Index");

@@ -117,16 +117,13 @@
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
     <Compile Include="Lib\NinjectMediatorTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
-    <Compile Include="Lib\Services\LogonServiceImplTests.cs" />
-    <Compile Include="Lib\Services\TagUpdateServiceImplTests.cs" />
-    <Compile Include="Lib\Services\TaskUpdateServiceImplTests.cs" />
+    <Compile Include="Lib\Comands\LogonServiceImplTests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="MockServiceLocator.cs" />
     <Compile Include="Models\Mapping\PasswordTokenMapTests.cs" />
     <Compile Include="Models\Mapping\TagMapTests.cs" />
     <Compile Include="Models\Mapping\TaskMapTests.cs" />
     <Compile Include="Lib\Data\NHibernateConfigTests.cs" />
-    <Compile Include="Lib\Services\TagCreationServiceImplTests.cs" />
     <Compile Include="Models\Mapping\UserMapTests.cs" />
     <Compile Include="Models\PasswordTokenTests.cs" />
     <Compile Include="Models\TaskTests.cs" />
@@ -154,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\flash-messages.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Lib\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\lib\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\lib\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />

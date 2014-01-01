@@ -127,6 +127,9 @@
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Clock.cs" />
+    <Compile Include="Commands\CreateTagCommand.cs" />
+    <Compile Include="Commands\CreateTagCommandHandler.cs" />
+    <Compile Include="Commands\DeleteTagCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Config.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\PasswordToken.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TagCollection.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TaskCollection.cs" />
     <Compile Include="Models\User.cs" />
@@ -169,10 +173,13 @@
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\OpenTasksQuery.cs" />
     <Compile Include="Queries\OpenTasksQueryHandler.cs" />
+    <Compile Include="Queries\TagByIdQuery.cs" />
+    <Compile Include="Queries\TagByIdQueryHandler.cs" />
+    <Compile Include="Queries\TagsQuery.cs" />
+    <Compile Include="Queries\TagsQueryHandler.cs" />
     <Compile Include="Queries\TaskByIdQuery.cs" />
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
-    <Compile Include="Services\ITagCreationService.cs" />
     <Compile Include="Services\ITagDeletionService.cs" />
     <Compile Include="Services\ITagUpdateService.cs" />
     <Compile Include="Services\ITaskCompletionService.cs" />
@@ -183,8 +190,7 @@
     <Compile Include="NinjectConfig.cs" />
     <Compile Include="Services\NinjectServiceLocator.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Services\TagCreationServiceImpl.cs" />
-    <Compile Include="Services\TagDeletionServiceImpl.cs" />
+    <Compile Include="Commands\DeleteTagCommandHandler.cs" />
     <Compile Include="Services\TagUpdateServiceImpl.cs" />
     <Compile Include="Services\TaskCompletionServiceImpl.cs" />
     <Compile Include="Services\TaskCreationServiceImpl.cs" />

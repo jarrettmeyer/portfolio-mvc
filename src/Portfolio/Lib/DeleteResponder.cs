@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Controllers;
+using Portfolio.Lib.Commands;
 using Portfolio.Lib.Services;
 using Portfolio.Properties;
 
@@ -28,6 +29,14 @@ namespace Portfolio.Lib
             where TService : class
         {
             InvokeService(action);
+            AddSuccessFlashMessage(addSuccessMessageToFlash);
+            var jsonResult = CreateSuccessfulJsonResult();
+            return jsonResult;
+        }
+
+        public ActionResult RespondWith<T>(IMediator mediator, ICommand<T> command, bool addSuccessMessageToFlash = true)
+        {
+            mediator.Send(command);            
             AddSuccessFlashMessage(addSuccessMessageToFlash);
             var jsonResult = CreateSuccessfulJsonResult();
             return jsonResult;
