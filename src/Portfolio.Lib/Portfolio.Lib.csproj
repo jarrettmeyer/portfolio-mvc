@@ -129,7 +129,9 @@
     <Compile Include="Clock.cs" />
     <Compile Include="Commands\CreateTagCommand.cs" />
     <Compile Include="Commands\CreateTagCommandHandler.cs" />
+    <Compile Include="Commands\CreateTaskCommand.cs" />
     <Compile Include="Commands\DeleteTagCommand.cs" />
+    <Compile Include="Commands\DeleteTaskCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\UpdateTagCommand.cs" />
@@ -184,8 +186,6 @@
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
     <Compile Include="Services\ITaskCompletionService.cs" />
-    <Compile Include="Services\ITaskCreationService.cs" />
-    <Compile Include="Services\ITaskDeletionService.cs" />
     <Compile Include="Services\ITaskUpdateService.cs" />
     <Compile Include="Commands\LogonCommandHandler.cs" />
     <Compile Include="NinjectConfig.cs" />
@@ -194,8 +194,8 @@
     <Compile Include="Commands\DeleteTagCommandHandler.cs" />
     <Compile Include="Commands\UpdateTagCommandHandler.cs" />
     <Compile Include="Services\TaskCompletionServiceImpl.cs" />
-    <Compile Include="Services\TaskCreationServiceImpl.cs" />
-    <Compile Include="Services\TaskDeletionServiceImpl.cs" />
+    <Compile Include="Commands\CreateTaskCommandHandler.cs" />
+    <Compile Include="Commands\DeleteTaskCommandHandler.cs" />
     <Compile Include="Services\TaskUpdateServiceImpl.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="SystemClock.cs" />

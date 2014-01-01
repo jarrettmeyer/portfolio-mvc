@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Portfolio.Lib;
+using Portfolio.Lib.Commands;
 using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
@@ -9,6 +12,7 @@ namespace Portfolio.ViewModels
 {
     public class TaskInputModel
     {
+        private IList<TagViewModel> tags;
         private readonly Task task;
 
         public TaskInputModel()
@@ -18,9 +22,8 @@ namespace Portfolio.ViewModels
 
         public TaskInputModel(Task task)
         {
-            Ensure.ArgumentIsNotNull(task, "task");
+            Contract.Requires<ArgumentNullException>(task != null);
             this.task = task;
-
             Tags = task.Tags.Select(tag => new TagViewModel(tag.Id, tag.Slug, tag.Description)).ToList();
         }
 
@@ -80,7 +83,11 @@ namespace Portfolio.ViewModels
             }
         }
 
-        public IList<TagViewModel> Tags { get; set; }
+        public IList<TagViewModel> Tags
+        {
+            get { return tags ?? new List<TagViewModel>(); }
+            set { tags = value; }
+        }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Title is required")]
         [StringLength(256)]
@@ -94,6 +101,17 @@ namespace Portfolio.ViewModels
 
                 task.Title = value.Trim();
             }
+        }
+
+        public CreateTaskCommand ToCreateTaskCommand()
+        {
+            return new CreateTaskCommand
+            {
+                Description = this.Description,
+                DueOn = this.DueOn.SafeParseDateTime(),
+                TagIds = this.Tags.Select(t => t.Id),
+                Title = this.Title
+            };
         }
 
         public TaskDTO ToTaskDTO()

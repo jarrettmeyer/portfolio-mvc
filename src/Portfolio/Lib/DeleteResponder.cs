@@ -25,16 +25,6 @@ namespace Portfolio.Lib
             this.controllerAction = controller.RouteData.Values["action"].ToString().ToLowerInvariant();
         }
 
-        public ActionResult RespondWith<TService>(Action<TService> action, bool addSuccessMessageToFlash = true) 
-            where TService : class
-        {
-            Contract.Requires<ArgumentNullException>(action != null);
-            InvokeService(action);
-            AddSuccessFlashMessage(addSuccessMessageToFlash);
-            var jsonResult = CreateSuccessfulJsonResult();
-            return jsonResult;
-        }
-
         public ActionResult RespondWith<T>(IMediator mediator, ICommand<T> command, bool addSuccessMessageToFlash = true, Action afterCommandSent = null)
         {
             Contract.Requires<ArgumentNullException>(mediator != null);
@@ -64,7 +54,7 @@ namespace Portfolio.Lib
             jsonResult.Data = new
             {
                 success = true,
-                message
+                message = this.message
             };
             return jsonResult;
         }

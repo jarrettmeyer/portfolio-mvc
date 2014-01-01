@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Lib;
+using Portfolio.Lib.Commands;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
 using Portfolio.Lib.Services;
@@ -34,10 +35,10 @@ namespace Portfolio.Controllers
 
         [HttpDelete]
         //[ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(DeleteTaskCommand command)
         {
             return new DeleteResponder(this)
-                .RespondWith<ITaskDeletionService>(x => x.DeleteTask(id));            
+                .RespondWith(mediator, command);
         }
 
         [HttpGet]
@@ -79,8 +80,7 @@ namespace Portfolio.Controllers
         public ActionResult New(TaskInputModel model)
         {
             CheckModelState(() => OnInvalidTaskForm("New", model));
-            ITaskCreationService service = ServiceLocator.Instance.GetService<ITaskCreationService>();
-            Task task = service.CreateTask(model.ToTaskDTO());
+            Task task = mediator.Send(model.ToCreateTaskCommand());
             this.Flash("success", string.Format("Created new task: {0}", task.Title));
             return RedirectToAction("Index");
         }

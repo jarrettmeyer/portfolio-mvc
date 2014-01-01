@@ -26,14 +26,14 @@ namespace Portfolio.Lib
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
             kernel.Bind<IMediator>().ToMethod(ctx => new NinjectMediator(ctx.Kernel));
             kernel.Bind<IPasswordUtility>().To<BCryptPasswordUtility>();                        
-            kernel.Bind<ITaskCompletionService>().To<TaskCompletionServiceImpl>();
-            kernel.Bind<ITaskCreationService>().To<TaskCreationServiceImpl>();
-            kernel.Bind<ITaskDeletionService>().To<TaskDeletionServiceImpl>();
+            kernel.Bind<ITaskCompletionService>().To<TaskCompletionServiceImpl>();                        
             kernel.Bind<ITaskUpdateService>().To<TaskUpdateServiceImpl>();
 
             // Commands
             kernel.Bind<ICommandHandler<CreateTagCommand, Tag>>().To<CreateTagCommandHandler>();
+            kernel.Bind<ICommandHandler<CreateTaskCommand, Task>>().To<CreateTaskCommandHandler>();
             kernel.Bind<ICommandHandler<DeleteTagCommand, Tag>>().To<DeleteTagCommandHandler>();
+            kernel.Bind<ICommandHandler<DeleteTaskCommand, Task>>().To<DeleteTaskCommandHandler>();
             kernel.Bind<ICommandHandler<LogonCommand, LogonResult>>().To<LogonCommandHandler>();
             kernel.Bind<ICommandHandler<UpdateTagCommand, Tag>>().To<UpdateTagCommandHandler>();
 
