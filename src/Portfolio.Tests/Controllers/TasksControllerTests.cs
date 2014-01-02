@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
+using MvcFlashMessages;
 using NUnit.Framework;
 using Portfolio.Lib;
 using Portfolio.Lib.Commands;
@@ -14,6 +16,7 @@ namespace Portfolio.Controllers
     public class TasksControllerTests
     {
         private Mock<IMediator> mockMediator;
+        private TaskInputModel model;
         private TasksController tasksController;
 
         [SetUp]
@@ -110,6 +113,16 @@ namespace Portfolio.Controllers
         }
 
         [Test]
+        public void Post_Complete_should_add_flash_message()
+        {
+            var command = new CompleteTaskCommand(1);
+            tasksController.Complete(command);
+            FlashMessage flashMessage = tasksController.TempData.GetFlashMessages().First();
+            Assert.AreEqual("success", flashMessage.Key);
+            StringAssert.Contains("Completed task:", flashMessage.Message);
+        }
+
+        [Test]
         public void Post_Complete_should_return_a_JSON_result()
         {
             var result = tasksController.Complete(new CompleteTaskCommand(1));
@@ -122,6 +135,14 @@ namespace Portfolio.Controllers
             var command = new CompleteTaskCommand(1);
             tasksController.Complete(command);
             mockMediator.Verify(x => x.Send(command), Times.Once());
+        }
+
+        [Test]
+        public void Post_Edit_should_redirect_to_index()
+        {
+            model = new TaskInputModel();
+            var result = tasksController.Edit(model);
+            MvcTest.RedirectsToRoute(result, action: "Index");            
         }
     }
 }

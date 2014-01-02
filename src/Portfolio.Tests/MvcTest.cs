@@ -28,6 +28,24 @@ namespace Portfolio
             return default(TModel);
         }
 
+        public static void RedirectsToRoute(ActionResult actionResult, string controller = null, string action = null)
+        {
+            RedirectToRouteResult redirectToRouteResult = actionResult as RedirectToRouteResult;
+            if (redirectToRouteResult != null)
+            {
+                if (action != null)
+                {
+                    Assert.AreEqual(action, redirectToRouteResult.RouteValues["action"]);
+                }
+                if (controller != null)
+                {
+                    Assert.AreEqual(controller, redirectToRouteResult.RouteValues["controller"]);
+                }
+                Assert.Pass();
+            }
+            Assert.Fail();
+        }
+
         public static void SetupControllerContext(Controller controller)
         {
             HttpContextBase httpContext = Mock.Of<HttpContextBase>();
