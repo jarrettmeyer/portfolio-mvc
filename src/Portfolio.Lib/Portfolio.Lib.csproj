@@ -184,6 +184,8 @@
     <Compile Include="Queries\TagsQueryHandler.cs" />
     <Compile Include="Queries\TaskByIdQuery.cs" />
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
+    <Compile Include="Queries\TasksByTagQuery.cs" />
+    <Compile Include="Queries\TasksByTagQueryHandler.cs" />
     <Compile Include="Queries\UserByUsernameQuery.cs" />
     <Compile Include="Queries\UserByUsernameQueryHandler.cs" />
     <Compile Include="Commands\LogonCommandHandler.cs" />

@@ -47,9 +47,8 @@ namespace Portfolio.Lib.Models
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Tag)obj);
+            if (ReferenceEquals(this, obj)) return true;            
+            return Equals(obj as Tag);
         }
 
         public override int GetHashCode()
@@ -73,6 +72,9 @@ namespace Portfolio.Lib.Models
 
         protected bool Equals(Tag other)
         {
+            if (other == null)
+                return false;
+
             return Id == other.Id && string.Equals(Slug, other.Slug, StringComparison.InvariantCultureIgnoreCase);
         }
     }
