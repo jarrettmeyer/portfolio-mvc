@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Portfolio.Lib.Commands;
-using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.ViewModels
@@ -86,16 +85,6 @@ namespace Portfolio.ViewModels
         public UpdateTagCommand ToUpdateTagCommand()
         {
             return new UpdateTagCommand
-            {
-                Description = this.Description,
-                Id = this.Id,
-                Slug = this.Slug
-            };
-        }
-
-        public TagDTO ToTagDTO()
-        {
-            return new TagDTO
             {
                 Description = this.Description,
                 Id = this.Id,

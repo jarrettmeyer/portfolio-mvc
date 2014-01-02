@@ -5,7 +5,6 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using Portfolio.Lib;
 using Portfolio.Lib.Commands;
-using Portfolio.Lib.DTOs;
 using Portfolio.Lib.Models;
 
 namespace Portfolio.ViewModels
@@ -96,18 +95,6 @@ namespace Portfolio.ViewModels
                 DueOn = this.DueOn.SafeParseDateTime(),
                 Id = this.Id,
                 TagIds = this.Tags.Select(t => t.Id),
-                Title = this.Title
-            };
-        }
-
-        public TaskDTO ToTaskDTO()
-        {
-            return new TaskDTO
-            {
-                Description = this.Description,
-                DueOn = this.DueOn.SafeParseDateTime(),
-                Id = this.Id,
-                Tags = this.Tags.Select(t => new TagDTO(t.Id, t.Slug, t.Description)).ToArray(),
                 Title = this.Title
             };
         }
