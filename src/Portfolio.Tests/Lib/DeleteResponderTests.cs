@@ -8,20 +8,24 @@ using Moq;
 using MvcFlashMessages;
 using NUnit.Framework;
 using Portfolio.Controllers;
+using Portfolio.Lib.Commands;
 
 namespace Portfolio.Lib
 {
     [TestFixture]
     public class DeleteResponderTests
     {
+        private ICommand<object> command;
         private ApplicationController controller;
         private DeleteResponder deleteResponder;
-        private Mock<HttpContextBase> mockHttpContext;        
+        private Mock<HttpContextBase> mockHttpContext;
+        private Mock<IMediator> mockMediator;
 
         [SetUp]
         public void Before_each_test()
         {            
             mockHttpContext = new Mock<HttpContextBase>();
+            mockMediator = new Mock<IMediator>();
 
             controller = new FakeController();
             controller.ControllerContext = new ControllerContext(mockHttpContext.Object, new RouteData(), controller);
@@ -29,37 +33,37 @@ namespace Portfolio.Lib
             controller.RouteData.Values.Add("action", "Delete");
 
             deleteResponder = new DeleteResponder(controller);
+
+            command = new FakeCommand();
         }
 
-        [Test, Ignore]
+        [Test]
         public void Should_add_flash_message()
         {
-            //deleteResponder.RespondWith<ITaskDeletionService>(x => x.DeleteTask(1));
+            deleteResponder.RespondWith(mockMediator.Object, command);
             var flashMessage = controller.TempData.GetFlashMessages().First();
             flashMessage.Key.Should().Be("success");
             flashMessage.Message.Should().Be("Successfully deleted task");
         }
 
-        [Test, Ignore]
-        public void Should_invoke_the_expected_service()
+        [Test]
+        public void Should_send_command_to_mediator()
         {
-            //deleteResponder.RespondWith<ITaskDeletionService>(x => x.DeleteTask(1));
-            //MockServiceLocator.GetMock<ITaskDeletionService>().Verify(x => x.DeleteTask(1), Times.Once());
+            deleteResponder.RespondWith(mockMediator.Object, command);
+            mockMediator.Verify(x => x.Send(command));            
         }
 
-        [Test, Ignore]
+        [Test]
         public void Should_return_a_JSON_result()
         {
-            //var actionResult = deleteResponder.RespondWith<ITaskDeletionService>(x => x.DeleteTask(1));
-            //actionResult.Should().BeAssignableTo<JsonResult>();
-
-            //var jsonResult = (JsonResult)actionResult;
-            //var objectDictionary = jsonResult.Data.ToDictionary();
-            //objectDictionary["success"].Should().Be(true);
+            var actionResult = deleteResponder.RespondWith(mockMediator.Object, command);
+            var jsonResult = MvcTest.HasExpectedActionResult<JsonResult>(actionResult);
+            var objectDictionary = jsonResult.Data.ToDictionary();
+            objectDictionary["success"].Should().Be(true);
         }
 
-        class FakeController : ApplicationController
-        {
-        }
+        class FakeController : ApplicationController { }
+        
+        class FakeCommand : ICommand<object> { }
     }
 }

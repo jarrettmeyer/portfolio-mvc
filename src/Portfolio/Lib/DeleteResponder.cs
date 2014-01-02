@@ -31,8 +31,7 @@ namespace Portfolio.Lib
 
             mediator.Send(command);
             AddSuccessFlashMessage(addSuccessMessageToFlash);
-            if (afterCommandSent != null)
-                afterCommandSent.Invoke();
+            InvokeCallback(afterCommandSent);
             var jsonResult = CreateSuccessfulJsonResult();
             return jsonResult;
         }
@@ -43,7 +42,10 @@ namespace Portfolio.Lib
             {
                 var resourceKey = string.Format("flash_{0}_{1}_success", controllerName, controllerAction);
                 message = Resources.ResourceManager.GetString(resourceKey, Resources.Culture);
-                controller.Flash("success", message);
+                if (message != null)
+                {
+                    controller.Flash("success", message);
+                }
             }            
         }
 
@@ -56,6 +58,12 @@ namespace Portfolio.Lib
                 message = this.message
             };
             return jsonResult;
+        }
+
+        private static void InvokeCallback(Action afterCommandSent)
+        {
+            if (afterCommandSent != null)
+                afterCommandSent.Invoke();
         }
     }
 }
