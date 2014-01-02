@@ -74,6 +74,9 @@
     <Reference Include="log4net">
       <HintPath>..\..\lib\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\lib\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\lib\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -183,11 +186,9 @@
     <Compile Include="Queries\TaskByIdQueryHandler.cs" />
     <Compile Include="Queries\UserByUsernameQuery.cs" />
     <Compile Include="Queries\UserByUsernameQueryHandler.cs" />
-    <Compile Include="Services\IServiceLocator.cs" />
     <Compile Include="Commands\LogonCommandHandler.cs" />
     <Compile Include="NinjectConfig.cs" />
-    <Compile Include="Services\NinjectServiceLocator.cs" />
-    <Compile Include="Services\ServiceLocator.cs" />
+    <Compile Include="NinjectServiceLocator.cs" />
     <Compile Include="Commands\DeleteTagCommandHandler.cs" />
     <Compile Include="Commands\UpdateTagCommandHandler.cs" />
     <Compile Include="Commands\CompleteTaskCommandHandler.cs" />

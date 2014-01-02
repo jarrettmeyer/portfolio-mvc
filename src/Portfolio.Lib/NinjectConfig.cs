@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using System.Web;
+using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Ninject;
 using Portfolio.Lib.Commands;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
-using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
 {
@@ -50,8 +50,8 @@ namespace Portfolio.Lib
         }
 
         private static void ConfigureSingletonInstances(IKernel kernel)
-        {            
-            ServiceLocator.Instance = new NinjectServiceLocator(kernel);
+        {
+            ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(kernel));
         }
     }
 }

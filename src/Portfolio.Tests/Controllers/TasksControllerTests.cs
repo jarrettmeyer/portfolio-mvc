@@ -7,7 +7,6 @@ using NUnit.Framework;
 using Portfolio.Lib;
 using Portfolio.Lib.Commands;
 using Portfolio.Lib.Queries;
-using Portfolio.Lib.Services;
 using Portfolio.ViewModels;
 
 namespace Portfolio.Controllers
@@ -23,7 +22,7 @@ namespace Portfolio.Controllers
         public void Before_each_test()
         {
             mockMediator = new Mock<IMediator> { DefaultValue = DefaultValue.Mock };            
-            ServiceLocator.Instance = new MockServiceLocator();
+            //ServiceLocator.Instance = new MockServiceLocator();
             tasksController = new TasksController(mockMediator.Object);
             MvcTest.SetupControllerContext(tasksController);
         }
@@ -31,7 +30,7 @@ namespace Portfolio.Controllers
         [TearDown]
         public void After_each_test()
         {
-            ServiceLocator.Instance = null;
+            //ServiceLocator.Instance = null;
         }
 
         [Test]

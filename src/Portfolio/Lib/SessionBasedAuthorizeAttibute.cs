@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Microsoft.Practices.ServiceLocation;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
-using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
 {
@@ -18,7 +18,7 @@ namespace Portfolio.Lib
             IHttpSessionAdapter httpSessionAdapter = HttpSessionAdapter.Deserialize(httpContext.Session);
             if (httpSessionAdapter.IsAuthenticated)
             {
-                var mediator = ServiceLocator.Instance.GetService<IMediator>();
+                var mediator = ServiceLocator.Current.GetInstance<IMediator>();
                 var query = new UserByUsernameQuery(httpSessionAdapter.Username);
                 var user = mediator.Request(query);
                 httpContext.User = user ?? new Guest();

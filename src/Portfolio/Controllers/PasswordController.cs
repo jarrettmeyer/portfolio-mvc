@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
+using Microsoft.Practices.ServiceLocation;
 using Portfolio.Lib;
-using Portfolio.Lib.Services;
 using Portfolio.Lib.ViewModels;
 
 namespace Portfolio.Controllers
@@ -18,7 +18,7 @@ namespace Portfolio.Controllers
         public ActionResult Test(PasswordTestViewModel model)
         {
             model = model ?? new PasswordTestViewModel();
-            var passwordUtility = ServiceLocator.Instance.GetService<IPasswordUtility>();
+            var passwordUtility = ServiceLocator.Current.GetInstance<IPasswordUtility>();
             model.HashedPassword = passwordUtility.HashText(model.Password);
             return View(model);
         }

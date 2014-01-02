@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Controllers;
 using Portfolio.Lib.Commands;
-using Portfolio.Lib.Services;
 using Portfolio.Properties;
 
 namespace Portfolio.Lib
@@ -57,13 +56,6 @@ namespace Portfolio.Lib
                 message = this.message
             };
             return jsonResult;
-        }
-
-        private void InvokeService<TService>(Action<TService> action) 
-            where TService : class
-        {
-            var service = ServiceLocator.Instance.GetService<TService>();
-            action(service);
         }
     }
 }

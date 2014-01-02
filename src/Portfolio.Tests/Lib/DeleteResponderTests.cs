@@ -3,11 +3,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using FluentAssertions;
+using Microsoft.Practices.ServiceLocation;
 using Moq;
 using MvcFlashMessages;
 using NUnit.Framework;
 using Portfolio.Controllers;
-using Portfolio.Lib.Services;
 
 namespace Portfolio.Lib
 {
@@ -16,16 +16,11 @@ namespace Portfolio.Lib
     {
         private ApplicationController controller;
         private DeleteResponder deleteResponder;
-        private Mock<HttpContextBase> mockHttpContext;
-        private MockServiceLocator mockServiceLocator;
+        private Mock<HttpContextBase> mockHttpContext;        
 
         [SetUp]
         public void Before_each_test()
         {            
-            MockServiceLocator.Reset();
-            mockServiceLocator = new MockServiceLocator();            
-            ServiceLocator.Instance = mockServiceLocator;
-
             mockHttpContext = new Mock<HttpContextBase>();
 
             controller = new FakeController();
