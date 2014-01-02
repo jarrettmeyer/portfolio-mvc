@@ -6,7 +6,7 @@ using Portfolio.Lib;
 
 namespace Portfolio.API.Results
 {
-    public class ApiResult<TData> where TData : class, new()
+    public class ApiResult<TData> where TData : class
     {
         private readonly TData data;
         private readonly IList<ErrorDef> errors = new List<ErrorDef>();
@@ -14,7 +14,7 @@ namespace Portfolio.API.Results
 
         public ApiResult(bool isSuccessful = true)
         {
-            this.data = new TData();
+            this.data = null;
             this.IsSuccessful = isSuccessful;
         }
 

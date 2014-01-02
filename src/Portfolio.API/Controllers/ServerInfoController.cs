@@ -10,11 +10,13 @@ namespace Portfolio.API.Controllers
     {
         public ApiResult<GetServerInfo> Get(HttpRequestMessage message)
         {
-            var result = new ApiResult<GetServerInfo>();
-            result.IsSuccessful = true;
-            result.Data.MachineName = Environment.MachineName;
-            result.Data.OperatingSystem = Environment.OSVersion.Platform.ToString();
-            result.Data.Version = Environment.Version.ToString();
+            var data = new GetServerInfo
+            {
+                MachineName = Environment.MachineName,
+                OperatingSystem = Environment.OSVersion.Platform.ToString(),
+                Version = Environment.Version.ToString()
+            };
+            var result = new ApiResult<GetServerInfo>(data);
             return result;
         }
     }
