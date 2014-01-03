@@ -1,5 +1,6 @@
-﻿using System.Web.Optimization;
-using Portfolio.Lib;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Optimization;
 
 namespace Portfolio.API.App_Start
 {
@@ -7,7 +8,7 @@ namespace Portfolio.API.App_Start
     {
         public static void ConfigureBundles(BundleCollection bundles)
         {
-            Ensure.ArgumentIsNotNull(bundles, "bundles");
+            Contract.Requires<ArgumentNullException>(bundles != null);
             ConfigureCssBundles(bundles);
             ConfigureJsBundles(bundles);
         }
@@ -33,6 +34,8 @@ namespace Portfolio.API.App_Start
             var appJsBundle = new ScriptBundle("~/Scripts/js/app")
                 .Include("~/Scripts/app/views/MainWindowView.js") // Keep app/views/MainWindowView first, just for a bit of sanity.
                 .Include("~/Scripts/app/models/CurrentUser.js")
+                .Include("~/Scripts/app/models/Tag.js")
+                .Include("~/Scripts/app/collections/TagCollection.js")
                 .Include("~/Scripts/app/views/LogonView.js");
                 
 
