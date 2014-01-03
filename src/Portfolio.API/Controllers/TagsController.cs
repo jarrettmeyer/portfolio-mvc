@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Portfolio.API.Models;
 using Portfolio.Lib;
+using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
 
 namespace Portfolio.API.Controllers
@@ -19,6 +20,13 @@ namespace Portfolio.API.Controllers
             var tags = mediator.Request(new TagsQuery());
             var data = new GetTagsResult(tags);
             return new ApiResult<GetTagsResult>(data);
+        }
+
+        public ApiResult<GetTagResult> Get(int id)
+        {
+            Tag tag = mediator.Request(new TagByIdQuery(id));
+            GetTagResult getTagResult = new GetTagResult(tag);
+            return new ApiResult<GetTagResult>(getTagResult);
         }
 
         public ApiResult<PutTagResult> Put(PutTagRequest model)

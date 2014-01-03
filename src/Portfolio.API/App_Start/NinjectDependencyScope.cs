@@ -1,43 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Web.Http.Dependencies;
-using Ninject;
+using Ninject.Activation;
+using Ninject.Activation.Blocks;
+using Ninject.Parameters;
 
 namespace Portfolio.API.App_Start
 {
     public class NinjectDependencyScope : IDependencyScope
     {
-        private readonly IKernel kernel;
+        private readonly IActivationBlock activationBlock;
 
-        public NinjectDependencyScope(IKernel kernel)
+        public NinjectDependencyScope(IActivationBlock activationBlock)
         {
-            Contract.Requires(kernel != null);
-            this.kernel = kernel;
+            Contract.Requires(activationBlock != null);
+            this.activationBlock = activationBlock;
         }
 
         public void Dispose()
         {
-            if (CanDisposeOfKernel)
+            if (CanDisposeOfActivationBlock)
             {
-                kernel.Dispose();                
+                activationBlock.Dispose();                
             }
         }
 
         public object GetService(Type serviceType)
         {
-            var service = kernel.TryGet(serviceType);
-            return service;            
+            return GetServices(serviceType).FirstOrDefault();
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
-        {            
-            return kernel.GetAll(serviceType);
+        {
+            IRequest request = activationBlock.CreateRequest(serviceType, null, new IParameter[] { }, true, false);
+            IEnumerable<object> services = activationBlock.Resolve(request);
+            return services;
         }
 
-        private bool CanDisposeOfKernel
+        private bool CanDisposeOfActivationBlock
         {
-            get { return kernel != null && !kernel.IsDisposed; }
+            get { return activationBlock != null && !activationBlock.IsDisposed; }
         }
     }
 }

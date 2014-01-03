@@ -181,6 +181,7 @@
     <Compile Include="App_Start\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\NinjectDependencyScope.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Models\GetTaskRequest.cs" />
     <Compile Include="Models\GetTaskResult.cs" />
     <Compile Include="Models\GetTasksResult.cs" />
     <Compile Include="Models\PostSessionRequest.cs" />
@@ -195,6 +196,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostTaskRequest.cs" />
+    <Compile Include="Models\PostTaskResult.cs" />
     <Compile Include="Models\PutTagRequest.cs" />
     <Compile Include="Models\PutTagResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
