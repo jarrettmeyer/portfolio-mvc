@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Security.Principal;
 
 namespace Portfolio.Lib.Models
@@ -59,6 +60,7 @@ namespace Portfolio.Lib.Models
 
         public virtual void SetHashedPassword(string plainTextPassword, IPasswordUtility passwordUtility)
         {
+            Contract.Requires<ArgumentNullException>(passwordUtility != null);
             this.HashedPassword = passwordUtility.HashText(plainTextPassword);
         }
 

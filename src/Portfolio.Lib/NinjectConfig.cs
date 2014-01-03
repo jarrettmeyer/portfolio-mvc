@@ -4,6 +4,7 @@ using System.Web;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Ninject;
+using Ninject.Web.Common;
 using Portfolio.Lib.Commands;
 using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
@@ -19,7 +20,7 @@ namespace Portfolio.Lib
 
             // Data layer bindings
             kernel.Bind<ISessionFactory>().ToConstant(NHibernateConfig.SessionFactory).InSingletonScope();
-            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession());
+            kernel.Bind<ISession>().ToMethod(ctx => ctx.Kernel.Get<ISessionFactory>().OpenSession()).InRequestScope();
             
             // Service layer bindings
             kernel.Bind<HttpRequestBase>().ToMethod(ctx => ctx.Kernel.Get<HttpContextBase>().Request);
@@ -42,6 +43,7 @@ namespace Portfolio.Lib
             kernel.Bind<IQueryHandler<TagByIdQuery, Tag>>().To<TagByIdQueryHandler>();
             kernel.Bind<IQueryHandler<TagsQuery, TagCollection>>().To<TagsQueryHandler>();
             kernel.Bind<IQueryHandler<TaskByIdQuery, Task>>().To<TaskByIdQueryHandler>();
+            kernel.Bind<IQueryHandler<UserByUsernameQuery, User>>().To<UserByUsernameQueryHandler>();
 
             // Web layer and generic service bindings
             kernel.Bind<IClock>().To<SystemClock>();

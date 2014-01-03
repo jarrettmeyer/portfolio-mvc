@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MvcFlashMessages</id>
+    <version>0.2.2</version>
+    <title>MVC Flash Messages</title>
+    <authors>Jarrett Meyer</authors>
+    <owners>Jarrett Meyer</owners>
+    <projectUrl>https://github.com/jarrettmeyer/mvcflashmessages</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Adds support for adding and displaying Rails "flash" messages to MVC. Works with any version of MVC 3.0 and higher. See the project URL for more examples.</description>
+    <releaseNotes>See the project page for release info.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>Flash MVC MVC3 MVC4 MVC5 Messages CSS</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,25 +1,42 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Http;
-using Portfolio.API.ApiModels;
-using Portfolio.API.Results;
+using Portfolio.API.Models;
+using Portfolio.Lib;
+using Portfolio.Lib.Commands;
 
 namespace Portfolio.API.Controllers
 {
     public class SessionController : ApiController
     {
-        public ApiResult<GetSession> Get(HttpRequestMessage message)
+        private readonly IMediator mediator;
+
+        public SessionController(IMediator mediator)
         {
-            AuthenticationHeaderValue authentication  = message.Headers.Authorization;
-            var result = new ApiResult<GetSession>();
-            result.IsSuccessful = false;
-            return result;
+            this.mediator = mediator;
         }
 
-        public ApiResult<PostSession> Post(PostSessionRequest form)
+        public ApiResult<PostSessionResult> Post(PostSessionRequest model)
         {
-            var result = new ApiResult<PostSession>();
-            return result;
+            Contract.Requires<ArgumentNullException>(model != null);
+
+            LogonCommand command = model.ToLogonCommand();
+            LogonResult logonResult = mediator.Send(command);
+            var apiResult = new ApiResult<PostSessionResult>();
+            
+            apiResult.IsSuccessful = logonResult.IsSuccessful;
+            if (logonResult.IsSuccessful)
+            {
+                apiResult.Data.Id = logonResult.User.Id;
+                apiResult.Data.SessionId = "";
+                apiResult.Data.Username = logonResult.User.Username;
+            }
+            else
+            {
+                apiResult.AddError(new ErrorDef("Invalid credentials."));
+            }
+            
+            return apiResult;
         }
     }
 }

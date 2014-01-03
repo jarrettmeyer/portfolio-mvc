@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using Portfolio.API.Results;
+using Portfolio.API.Models;
 using Portfolio.Lib;
 using Portfolio.Lib.Queries;
 
@@ -14,11 +14,18 @@ namespace Portfolio.API.Controllers
             this.mediator = mediator;
         }
 
-        public ApiResult<GetTags> Get()
+        public ApiResult<GetTagsResult> Get()
         {
             var tags = mediator.Request(new TagsQuery());
-            var data = new GetTags(tags);
-            return new ApiResult<GetTags>(data);
+            var data = new GetTagsResult(tags);
+            return new ApiResult<GetTagsResult>(data);
+        }
+
+        public ApiResult<PutTagResult> Put(PutTagRequest model)
+        {
+            var result = new ApiResult<PutTagResult>(false);
+            result.AddError(new ErrorDef("This method has not yet been implemented."));
+            return result;
         }
     }
 }

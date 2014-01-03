@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
 using NHibernate;
 
@@ -16,7 +17,8 @@ namespace Portfolio.Lib.Data
 
         public UniqueRecordViolationException(Exception innerException)
             : base(innerException.Message, innerException)
-        {            
+        {
+            Contract.Requires<ArgumentNullException>(innerException != null);
             var regex = new Regex(@"Cannot insert duplicate key row in object '(.+)' with unique index '(.+)'\. The duplicate key value is \((.+)\)\.");
             bool isMatch = regex.IsMatch(innerException.Message);
             if (!isMatch)
@@ -36,6 +38,7 @@ namespace Portfolio.Lib.Data
         public UniqueRecordViolationException(NonUniqueObjectException innerException)
             : base(innerException.Message, innerException)
         {
+            Contract.Requires<ArgumentNullException>(innerException != null);
             duplicateKeyValue = innerException.Identifier.ToString();
             table = innerException.EntityName;
             uniqueIndex = "primary_key";

@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Net.Http;
 using System.Web.Http;
-using Portfolio.API.Results;
+using Portfolio.API.Models;
 
 namespace Portfolio.API.Controllers
-{
-    [RoutePrefix("api/serverinfo")]
+{    
     public class ServerInfoController : ApiController
     {
-        public ApiResult<GetServerInfo> Get(HttpRequestMessage message)
+        public ApiResult<GetServerInfoResult> Get(HttpRequestMessage message)
         {
-            var data = new GetServerInfo
+            var data = new GetServerInfoResult
             {
                 MachineName = Environment.MachineName,
                 OperatingSystem = Environment.OSVersion.Platform.ToString(),
                 Version = Environment.Version.ToString()
             };
-            var result = new ApiResult<GetServerInfo>(data);
+            var result = new ApiResult<GetServerInfoResult>(data);
             return result;
         }
     }

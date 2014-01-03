@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Diagnostics.Contracts;
+using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
 namespace Portfolio.API.App_Start
@@ -7,20 +9,19 @@ namespace Portfolio.API.App_Start
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            // Configure Web API to use only bearer token authentication.
-            
-            // Use camel case for JSON data.
+            Contract.Requires<ArgumentNullException>(config != null);            
+            ConfigureJsonSettings(config);
+            RegisterApiRoutes(config);
+        }        
+
+        private static void ConfigureJsonSettings(HttpConfiguration config)
+        {
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        }
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+        private static void RegisterApiRoutes(HttpConfiguration config)
+        {
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
         }
     }
 }
