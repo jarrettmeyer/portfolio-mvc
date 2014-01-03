@@ -180,6 +180,9 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\NinjectDependencyScope.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Models\GetTaskResult.cs" />
+    <Compile Include="Models\GetTasksResult.cs" />
     <Compile Include="Models\PostSessionRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />

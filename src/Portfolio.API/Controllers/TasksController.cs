@@ -1,0 +1,26 @@
+﻿using System.Diagnostics.Contracts;
+using System.Web.Http;
+using Portfolio.API.Models;
+using Portfolio.Lib;
+using Portfolio.Lib.Queries;
+
+namespace Portfolio.API.Controllers
+{
+    public class TasksController : ApiController
+    {
+        private readonly IMediator mediator;
+
+        public TasksController(IMediator mediator)
+        {
+            Contract.Requires(mediator != null);
+            this.mediator = mediator;
+        }
+
+        public ApiResult<GetTasksResult> Get()
+        {
+            var tasks = mediator.Request(new OpenTasksQuery());
+            var getTasksResult = new GetTasksResult(tasks);
+            return new ApiResult<GetTasksResult>(getTasksResult);
+        }
+    }
+}
