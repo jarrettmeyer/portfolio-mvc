@@ -11,7 +11,7 @@ namespace Portfolio.API.Models
             Contract.Requires(task != null);
 
             this.Description = task.Description;
-            this.DueOn = task.DueOn.HasValue ? task.DueOn.Value.ToEpoch() : (long?)null;
+            this.DueOn = task.DueOn.ToEpoch();
             this.Id = task.Id;
             this.Tags = new GetTagsResult(task.Tags);
             this.Title = task.Title;

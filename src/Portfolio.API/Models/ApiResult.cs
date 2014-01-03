@@ -8,8 +8,7 @@ namespace Portfolio.API.Models
 {
     public class ApiResult<TData> where TData : class
     {
-        private readonly IList<ErrorDef> errors = new List<ErrorDef>();
-        //private readonly long timestamp = DateTime.UtcNow.ToEpoch();
+        private readonly IList<ErrorDef> errors = new List<ErrorDef>();        
 
         public ApiResult(bool isSuccessful = true)
         {            
@@ -43,11 +42,6 @@ namespace Portfolio.API.Models
         }
 
         public bool IsSuccessful { get; set; }
-
-        //public long Timestamp
-        //{
-        //    get { return timestamp; }
-        //}
 
         public long Timestamp
         {
