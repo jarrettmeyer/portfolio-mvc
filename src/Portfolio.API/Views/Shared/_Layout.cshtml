@@ -2,22 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Portfolio API Project</title>
     <meta name="description" content="The description of my page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/css")
-
+    
+    <script type="text/javascript" src="/Scripts/require.js" data-main="/Scripts/app/app.js"></script>
 </head>
 <body>
+    
+    <header class="navbar navbar-default navbar-static-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Tasks</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#/tags">Tags</a></li>                
+            </ul>
+            <ul class="nav navbar-nav pull-right" id="current-user">
+                @*@if (sessionAdapter.IsAuthenticated)
+                {
+                    <li><a href="#">@sessionAdapter.Username</a></li>
+                    <li>@Html.ActionLink("Logoff", "Delete", "Session")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Logon", "New", "Session")</li>
+                }*@
+            </ul>
+        </div>
+    </header>
 
     <div class="container body-content">
         @RenderBody()
     </div>
-
-    @Scripts.Render("~/Scripts/js")
-    @Scripts.Render("~/Scripts/js/app")
+    
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
