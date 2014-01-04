@@ -1,24 +1,10 @@
 ﻿/*global require */
-require.config({
-    baseUrl: "/Scripts/app",
-    paths: {
-        "jquery": "../jquery-2.0.3",
-        "underscore": "../underscore",
-        "backbone": "../backbone.min",
-        "templates": "templates"
-    },
-    shim: {
-        "backbone": {
-            deps: ["jquery", "underscore"],
-            exports: "Backbone"
-        }
-    }
-});
 
-require([
+define([
     "util",
     "router"
-], function(Util, Router) {
+], function (Util, Router) {
+    "use strict";
 
     var App = (function () {
         
@@ -31,8 +17,12 @@ require([
             debug: true
         };
 
+        App.prototype.toString = function () {
+            return "instance of App. debug: " + this.options.debug;
+        };
+
         return App;
     })();
-
-    window.app = new App();
+    
+    return App;
 });
