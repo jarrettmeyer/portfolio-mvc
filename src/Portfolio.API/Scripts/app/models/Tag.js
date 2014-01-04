@@ -1,5 +1,8 @@
-﻿(function() {
-    app.Tag = Backbone.Model.extend({        
+﻿define(["backbone"], function(Backbone) {
+
+    var Tag = Backbone.Model.extend({        
         
     });
-})();
+
+    return Tag;
+});

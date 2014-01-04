@@ -1,0 +1,24 @@
+﻿.task-list {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;    
+}
+
+.task-list li {
+    border-top: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.task-list-item {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.task-list .task-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.task-description {
+    padding-left: 3em;
+}

@@ -1,0 +1,27 @@
+﻿tr.inactive {
+    color: #c0c0c0;
+    text-decoration: line-through;
+}
+
+td.no-line-through {
+    text-decoration: none;
+}
+
+.input-validation-error.form-control {
+    border-color: #b94a48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
+span.field-validation-error {
+    color: #b94a48;
+    font-size: 0.9em;
+}
+
+.label-link {
+    cursor: pointer;
+}
+
+.soft {
+    color: #606060;
+}

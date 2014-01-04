@@ -39,8 +39,9 @@ require(["jquery", "underscore", "jasmine-html"], function ($, _, jasmine) {
     };
 
     var specs = [];
-    specs.push("specs/framework-specs");
-    specs.push("specs/app-specs");
+    specs.push("specs/FrameworkSpecs");
+    specs.push("specs/AppSpecs");
+    specs.push("specs/models/TagSpecs");
 
     $(function() {
         require(specs, function() {

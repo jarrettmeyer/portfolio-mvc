@@ -216,7 +216,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\stylesheets\Site.css" />
+    <Content Include="Content\stylesheets\TaskList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -246,8 +247,10 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
-    <Content Include="Scripts\specs\app-specs.js" />
-    <Content Include="Scripts\specs\framework-specs.js" />
+    <Content Include="Scripts\specs\AppSpecs.js" />
+    <Content Include="Scripts\specs\FrameworkSpecs.js" />
+    <Content Include="Scripts\specs\models\TagSpecs.js" />
+    <Content Include="Scripts\specs\SpecRunner.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
