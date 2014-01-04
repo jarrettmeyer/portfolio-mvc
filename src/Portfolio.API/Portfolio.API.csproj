@@ -248,6 +248,7 @@
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\specs\AppSpecs.js" />
+    <Content Include="Scripts\specs\collections\TagCollectionSpecs.js" />
     <Content Include="Scripts\specs\FrameworkSpecs.js" />
     <Content Include="Scripts\specs\models\TagSpecs.js" />
     <Content Include="Scripts\specs\SpecRunner.js" />

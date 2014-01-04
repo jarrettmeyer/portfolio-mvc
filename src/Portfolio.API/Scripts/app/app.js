@@ -1,9 +1,6 @@
 ﻿/*global define */
 
-define([
-    "util",
-    "router"
-], function (Util, Router) {
+define(["util", "router"], function (Util, Router) {
     "use strict";
 
     var App = (function () {

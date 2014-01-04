@@ -1,4 +1,4 @@
-﻿define(["models/tag"], function(Tag) {
+﻿define(["models/Tag"], function(Tag) {
 
     return describe("Tag", function() {
 
