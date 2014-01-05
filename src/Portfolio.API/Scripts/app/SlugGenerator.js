@@ -1,6 +1,7 @@
 ﻿define("SlugGenerator", function() {
 
     var SlugGenerator = (function () {
+        
         function SlugGenerator(options) {
             var defaults = {
                 emptyStringValue: "empty",

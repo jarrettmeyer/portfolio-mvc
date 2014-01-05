@@ -1,5 +1,9 @@
 @{
-  Layout = null;
+    Layout = null;
+    
+    // Quit caching my stuff!
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+    Response.Cache.SetExpires(DateTime.Today.AddDays(-1));
 }
 <!DOCTYPE html>
 <html>

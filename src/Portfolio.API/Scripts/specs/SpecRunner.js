@@ -1,4 +1,6 @@
-﻿require.config({
+﻿var startDelayMs = 100;
+
+require.config({
     baseUrl: "/Scripts/app",
     paths: {
         "backbone": "../backbone",
@@ -27,8 +29,9 @@
 });
 
 require(["jquery", "underscore", "jasmine-html"], function ($, _, jasmine) {
+    
     var jasmineEnv = jasmine.getEnv();
-    jasmineEnv.updateInterval = 1000;
+    jasmineEnv.updateInterval = 5000;
 
     var htmlReporter = new jasmine.HtmlReporter();
 
@@ -42,12 +45,20 @@ require(["jquery", "underscore", "jasmine-html"], function ($, _, jasmine) {
     specs.push("specs/FrameworkSpecs");
     specs.push("specs/AppSpecs");
     specs.push("specs/SlugGeneratorSpecs");
+    specs.push("specs/UtilSpecs");
+    specs.push("specs/LoggerSpecs");
     specs.push("specs/models/TagSpecs");
     specs.push("specs/collections/TagCollectionSpecs");
 
     $(function() {
-        require(specs, function() {
-            jasmineEnv.execute();
+        require(specs, function () {
+            
+            // Wait just a moment for all the specs to load asynchronously.
+            setTimeout(function() {
+                jasmineEnv.execute();
+            }, 100);
+
         });
     });
+    
 });
