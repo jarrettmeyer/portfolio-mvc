@@ -14,6 +14,13 @@
             tagCollection = new TagCollection(tags);
         });
 
+        it("can get active tags", function() {
+            var activeTags = tagCollection.byActive();
+            expect(activeTags.length).toBe(2);
+            expect(activeTags.at(0).get("slug")).toBe("tag-1");
+            expect(activeTags.at(1).get("slug")).toBe("tag-2");
+        });
+
         it("has the expected model type", function () {
             var newModel = new tagCollection.model();
             expect(newModel instanceof Tag).toBeTruthy();
