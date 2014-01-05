@@ -12,21 +12,12 @@
             this.history = [];
         }
 
-        Logger.prototype.log = function(source, message) {
-            var logMessage;
-            if (source && message) {
-                logMessage = source + ": " + message;
-                this.history.push({
-                    source: source,
-                    message: message
-                });
-            } else {                
-                logMessage = source;
-                this.history.push({
-                    source: null,
-                    message: logMessage
-                });
-            }
+        Logger.prototype.log = function (source, message) {
+            this.history.push({
+                source: source,
+                message: message
+            });
+            var logMessage = source + ": " + message;
             if (this.canWriteLog) {
                 console.log(logMessage);
             }
