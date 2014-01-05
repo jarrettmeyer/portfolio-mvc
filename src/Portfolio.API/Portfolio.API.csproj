@@ -235,6 +235,7 @@
     <Content Include="Scripts\app\views\MainWindowView.js" />
     <Content Include="Scripts\app\views\MenuView.js" />
     <Content Include="Scripts\backbone.js" />
+    <Content Include="Scripts\backbone.localStorage.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

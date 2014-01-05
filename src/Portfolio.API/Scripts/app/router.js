@@ -1,9 +1,5 @@
 ﻿/*global app, define */
-define([
-    'jquery',
-    'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+define("Router", ['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
     "use strict";
 
     var Router = Backbone.Router.extend({

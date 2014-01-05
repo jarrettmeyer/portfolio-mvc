@@ -1,6 +1,5 @@
 ﻿/*global console, define */
-define([
-], function () {
+define("Util", [], function () {
     "use strict";
 
     var Util = (function() {

@@ -1,4 +1,4 @@
-﻿define(["backbone", "models/Tag"], function (Backbone, Tag) {
+﻿define("collections/TagCollection", ["backbone", "models/Tag"], function (Backbone, Tag) {
 
     var TagCollection = Backbone.Collection.extend({        
         
