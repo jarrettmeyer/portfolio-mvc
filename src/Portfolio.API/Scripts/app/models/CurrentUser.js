@@ -1,10 +1,6 @@
-﻿(function() {
+﻿define("models/CurrentUser", ["backbone"], function (Backbone) {
 
-    if (!window.app) {
-        window.app = {};
-    }
-
-    window.app.CurrentUser = Backbone.Model.extend({        
+    var CurrentUser = Backbone.Model.extend({        
        
         authenticate: function (result) {
             if (result.success) {
@@ -13,16 +9,23 @@
                     isAuthenticated: true,
                     sessionId: result.sessionId,
                     username: result.username
-                });                
-            }            
+                });
+            }
+            return this;
         },
 
         initialize: function() {
             this.setDefaultValues();
+            return this;
         },
-
+        
+        isAuthenticated: function() {
+            return this.get("isAuthenticated");
+        },
+        
         logoff: function() {
             this.setDefaultValues();
+            return this;
         },
         
         setDefaultValues: function() {
@@ -32,8 +35,11 @@
                 sessionId: null,
                 username: "Guest"
             });
+            return this;
         }
 
     });
 
-})();
+    return CurrentUser;
+
+});

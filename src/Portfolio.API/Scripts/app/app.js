@@ -1,6 +1,6 @@
 ﻿/*global define */
 
-define("App", ["Util", "Router"], function (Util, Router) {
+define("App", ["Util", "Router", "models/CurrentUser"], function (Util, Router, CurrentUser) {
     "use strict";
 
     var App = (function () {
@@ -8,6 +8,7 @@ define("App", ["Util", "Router"], function (Util, Router) {
         function App() {
             this.util = new Util(this.options);
             this.router = new Router();
+            this.currentUser = new CurrentUser();
         }
 
         App.prototype.options = {
@@ -22,4 +23,5 @@ define("App", ["Util", "Router"], function (Util, Router) {
     })();
     
     return App;
+    
 });

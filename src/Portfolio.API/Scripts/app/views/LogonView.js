@@ -1,6 +1,6 @@
-﻿(function () {
+﻿define("view/LogonView", ["backbone"], function (Backbone) {
 
-    window.app.LogonView = Backbone.View.extend({
+    var LogonView = Backbone.View.extend({
         
         currentUser: null,
         
@@ -13,4 +13,7 @@
         }
 
     });
-})();
+
+    return LogonView;
+
+});
