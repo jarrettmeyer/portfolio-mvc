@@ -5,10 +5,15 @@ define("Router", ['jquery', 'underscore', 'backbone'], function ($, _, Backbone)
     var Router = Backbone.Router.extend({
         
         routes: {
+            "logon": "showLogon",
             "tags": "showTags",
             "tasks": "showTasks"
         },
         
+        showLogon: function() {
+            
+        },
+
         showTags: function() {
             app.util.log("Router", "showTags");
         },

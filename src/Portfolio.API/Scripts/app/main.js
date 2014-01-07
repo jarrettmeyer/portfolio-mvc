@@ -5,16 +5,16 @@ require.config({
     paths: {
         "backbone": "../backbone",
         "jquery": "../jquery-2.0.3",
-        "templates": "templates",
+        "text": "../text",
         "underscore": "../underscore"
     },
     shim: {
-        "underscore": {
-            exports: "_"
-        },
         "backbone": {
             deps: ["jquery", "underscore"],
             exports: "Backbone"
+        },
+        "underscore": {
+            exports: "_"
         }
     }
 });

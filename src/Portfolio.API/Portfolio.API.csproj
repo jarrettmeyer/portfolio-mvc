@@ -228,10 +228,13 @@
     <Content Include="Scripts\app\collections\TagCollection.js" />
     <Content Include="Scripts\app\Logger.js" />
     <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\models\Credentials.js" />
     <Content Include="Scripts\app\models\CurrentUser.js" />
     <Content Include="Scripts\app\models\Tag.js" />
     <Content Include="Scripts\app\Router.js" />
     <Content Include="Scripts\app\SlugGenerator.js" />
+    <Content Include="Scripts\app\templates\LogonTemplate.html" />
+    <Content Include="Scripts\app\templates\MainWindowTemplate.html" />
     <Content Include="Scripts\app\Util.js" />
     <Content Include="Scripts\app\views\CurrentUserView.js" />
     <Content Include="Scripts\app\views\LogonView.js" />
@@ -259,9 +262,11 @@
     <Content Include="Scripts\specs\SlugGeneratorSpecs.js" />
     <Content Include="Scripts\specs\SpecRunner.js" />
     <Content Include="Scripts\specs\UtilSpecs.js" />
+    <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\app\templates\CurrentUserTemplate.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

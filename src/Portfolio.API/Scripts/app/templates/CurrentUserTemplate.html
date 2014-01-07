@@ -1,0 +1,9 @@
+﻿<% if (isAuthenticated) { %>
+    <li>
+        <span><%= username %></span>
+        <span>&nbsp;|&nbsp;</span>|
+        <a href="#">Logoff</a>
+    </li>
+<% } else { %>
+    <li><a href="#/logon" id="logon-link">Logon</a></li>
+<% } %>

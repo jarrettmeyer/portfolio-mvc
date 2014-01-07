@@ -1,0 +1,24 @@
+﻿<div class="page-header">
+    <h2>Logon</h2>
+</div>
+
+<form action="/session" method="POST" id="session-form" class="" role="form">
+    <div class="row">
+        <div class="col-lg-push-4 col-lg-4">
+            <div class="form-group">
+                <label for="username" class="control-label">Username</label>
+                <input type="text" name="username" class="form-control"/>
+                <span id="username-validation"></span>
+            </div>
+            <div class="form-group">
+                <label for="password" class="control-label">Password</label>
+                <input type="password" name="password" class="form-control" />
+                <span id="password-validation"></span>                
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="#/password/forgot" class="btn btn-default">Forgot Password</a>
+            </div>
+        </div>
+    </div>
+</form>

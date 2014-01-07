@@ -23,15 +23,6 @@
                 <li><a href="#/tags">Tags</a></li>                
             </ul>
             <ul class="nav navbar-nav pull-right" id="current-user">
-                @*@if (sessionAdapter.IsAuthenticated)
-                {
-                    <li><a href="#">@sessionAdapter.Username</a></li>
-                    <li>@Html.ActionLink("Logoff", "Delete", "Session")</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Logon", "New", "Session")</li>
-                }*@
             </ul>
         </div>
     </header>

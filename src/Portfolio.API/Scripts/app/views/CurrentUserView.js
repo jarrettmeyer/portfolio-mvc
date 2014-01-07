@@ -3,18 +3,19 @@
     function ($, Backbone, currentUserTemplate) {
 
         var CurrentUserView = Backbone.View.extend({
-            $el: "#current-user",
 
-            initialize: function(options) {
-                this.model = options.currentUser;
-            },
+            $el: $("#current-user"),
 
-            render: function() {
-                this.$el.html();
+            el: "#current-user",
+
+            render: function () {
+                var content = this.template(this.model.attributes);
+                this.$el.html(content);
                 return this;
             },
 
-            template: _.template(currentUserTemplate, this.model)
+            template: _.template(currentUserTemplate)
+            
         });
 
         return CurrentUserView;
