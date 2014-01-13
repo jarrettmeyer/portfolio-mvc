@@ -5,7 +5,7 @@ namespace Portfolio.Lib.Models
     /// <summary>
     /// The category for a task.
     /// </summary>
-    public class Tag : IVersionedEntity<int>
+    public class Tag : IVersionedEntity<int>, IEquatable<Tag>
     {
         /// <summary>
         /// The tag ID. This is an identity that will be assigned 
@@ -69,8 +69,8 @@ namespace Portfolio.Lib.Models
                 CreatedAt,
                 UpdatedAt);
         }
-
-        protected bool Equals(Tag other)
+       
+        public virtual bool Equals(Tag other)
         {
             if (other == null)
                 return false;

@@ -12,6 +12,8 @@
 
         public abstract void Add(string key, object value);
 
+        public abstract void Clear();
+
         public abstract object Get(string key);
     }
 }

@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using MvcFlashMessages;
 using Portfolio.Lib;
 using Portfolio.Lib.Commands;
-using Portfolio.Lib.Data;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
 using Portfolio.ViewModels;
@@ -64,18 +63,11 @@ namespace Portfolio.Controllers
         [HttpPost]
         public ActionResult New(TagInputModel model)
         {
-            try
-            {
-                mediator.Send(model.ToCreateTagCommand());
-                UpdateTagSelectList();
-                this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
-                return RedirectToAction("Index");
-            }
-            catch (UniqueRecordViolationException ex)
-            {
-                this.Flash("danger", ex.Message);
-                return View("New", model);                
-            }            
+            Contract.Requires<ArgumentNullException>(model != null);
+            mediator.Send(model.ToCreateTagCommand());
+            UpdateTagSelectList();
+            this.Flash("success", string.Format("Successfully created new Tag: {0}", model.Description));
+            return RedirectToAction("Index");
         }
 
         private void UpdateTagSelectList()

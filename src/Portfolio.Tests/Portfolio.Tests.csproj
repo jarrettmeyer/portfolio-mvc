@@ -117,16 +117,19 @@
     <Compile Include="Lib\BCryptPasswordUtilityTests.cs" />
     <Compile Include="Lib\BooleanExtensions_Tests.cs" />
     <Compile Include="Lib\ByteExtensionsTests.cs" />
+    <Compile Include="Lib\Caching\AspNetHttpCache_Tests.cs" />
     <Compile Include="Lib\Clock_Tests.cs" />
     <Compile Include="Lib\ConfigTests.cs" />
-    <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
     <Compile Include="Lib\DateTimeExtensionsTests.cs" />
     <Compile Include="Lib\DeleteResponderTests.cs" />
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
+    <Compile Include="Lib\Models\Guest_Tests.cs" />
+    <Compile Include="Lib\Models\User_Tests.cs" />
     <Compile Include="Lib\NinjectConfig_Tests.cs" />
     <Compile Include="Lib\NinjectMediatorTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\Comands\LogonCommandHandlerTests.cs" />
+    <Compile Include="Lib\Queries\ActiveTagsQuery_Tests.cs" />
     <Compile Include="Lib\Queries\TasksByTagQueryHandlerTests.cs" />
     <Compile Include="Lib\Queries\TasksByTagQueryTests.cs" />
     <Compile Include="Lib\SessionBasedAuthorizeAttribute_Tests.cs" />
@@ -167,9 +170,7 @@
       <Name>Portfolio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Lib\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

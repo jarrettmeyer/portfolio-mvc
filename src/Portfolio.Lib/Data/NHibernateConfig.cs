@@ -42,12 +42,6 @@ namespace Portfolio.Lib.Data
             set { sessionFactory = value; }
         }
 
-        public ISession GetSession()
-        {
-            InitializeSessionFactory();            
-            return sessionFactory.OpenSession();
-        }
-
         private static void InitializeSessionFactory()
         {
             if (sessionFactory == null)

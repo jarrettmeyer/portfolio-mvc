@@ -30,7 +30,7 @@ namespace Portfolio.Lib.Models
         /// </summary>
         public static PasswordToken GenerateForUser(User user)
         {
-            DateTime dateTime = DateTime.UtcNow;
+            DateTime dateTime = Clock.Instance.Now;
 
             return new PasswordToken
             {

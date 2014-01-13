@@ -4,7 +4,7 @@ using System.Security.Principal;
 
 namespace Portfolio.Lib.Models
 {
-    public class User : IPrincipal
+    public class User : IPrincipal, IEquatable<User>
     {
         /// <summary>
         /// The unique ID for the user. This field is the primary key and set by the database.
@@ -67,6 +67,14 @@ namespace Portfolio.Lib.Models
         public virtual IIdentity Identity
         {
             get { return new ApplicationIdentity(this); }
+        }
+
+        public virtual bool Equals(User other)
+        {
+            if (other == null)
+                return false;
+
+            return Id == other.Id && string.Equals(Username, other.Username, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
