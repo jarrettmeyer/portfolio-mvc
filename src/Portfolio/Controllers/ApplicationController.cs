@@ -26,10 +26,5 @@ namespace Portfolio.Controllers
             if (!ViewData.ModelState.IsValid)
                 onInvalidModelState.Invoke().ExecuteResult(ControllerContext);
         }
-
-        protected override void OnException(ExceptionContext exceptionContext)
-        {
-            base.OnException(exceptionContext);
-        }
     }
 }
