@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
-namespace Portfolio.Web.Lib
+namespace Portfolio.Lib
 {
     public static class CollectionExtensions
     {
@@ -48,7 +49,9 @@ namespace Portfolio.Web.Lib
             if (memberExpression == null)
             {
                 UnaryExpression body = valueExpression.Body as UnaryExpression;
+                Contract.Assert(body != null);
                 memberExpression = body.Operand as MemberExpression;
+                Contract.Assert(memberExpression != null);
             }
 
             return memberExpression.Member.Name;            

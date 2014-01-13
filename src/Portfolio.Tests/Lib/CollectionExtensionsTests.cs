@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Portfolio.Web.Lib
+namespace Portfolio.Lib
 {
     [TestFixture]
     public class CollectionExtensionsTests
