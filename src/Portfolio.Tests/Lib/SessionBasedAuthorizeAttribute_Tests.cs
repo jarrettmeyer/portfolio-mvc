@@ -1,7 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using FluentAssertions;
-using Microsoft.Practices.ServiceLocation;
 using Moq;
 using NUnit.Framework;
 using Portfolio.Lib.Models;

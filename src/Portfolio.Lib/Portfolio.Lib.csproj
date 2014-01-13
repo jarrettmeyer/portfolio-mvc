@@ -165,6 +165,7 @@
     <Compile Include="Logging\Log4NetLogWriter.cs" />
     <Compile Include="Commands\LogonResult.cs" />
     <Compile Include="ApplicationIdentity.cs" />
+    <Compile Include="Mediator.cs" />
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\IVersionedEntity.cs" />
     <Compile Include="Models\Mapping\PasswordTokenMap.cs" />

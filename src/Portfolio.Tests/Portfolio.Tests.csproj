@@ -123,11 +123,13 @@
     <Compile Include="Lib\DateTimeExtensionsTests.cs" />
     <Compile Include="Lib\DeleteResponderTests.cs" />
     <Compile Include="Lib\HtmlTextFormatterTests.cs" />
+    <Compile Include="Lib\NinjectConfig_Tests.cs" />
     <Compile Include="Lib\NinjectMediatorTests.cs" />
     <Compile Include="Lib\ObjectExtensionsTests.cs" />
     <Compile Include="Lib\Comands\LogonCommandHandlerTests.cs" />
     <Compile Include="Lib\Queries\TasksByTagQueryHandlerTests.cs" />
     <Compile Include="Lib\Queries\TasksByTagQueryTests.cs" />
+    <Compile Include="Lib\SessionBasedAuthorizeAttribute_Tests.cs" />
     <Compile Include="Lib\SystemClockTests.cs" />
     <Compile Include="MvcTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
