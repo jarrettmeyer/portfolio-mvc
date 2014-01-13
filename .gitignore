@@ -1,9 +1,12 @@
 bin/
 obj/
+_NCrunch_Portfolio/
 
 TestResult.xml
 error-*.xml
 *.DotSettings
 *.dbmdl
+*.ncrunchproject
+*.ncrunchsolution
 *.suo
 *.user

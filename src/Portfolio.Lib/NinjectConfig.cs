@@ -53,6 +53,7 @@ namespace Portfolio.Lib
 
         private static void ConfigureSingletonInstances(IKernel kernel)
         {
+            Mediator.Instance = kernel.Get<IMediator>();
             ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(kernel));
         }
     }

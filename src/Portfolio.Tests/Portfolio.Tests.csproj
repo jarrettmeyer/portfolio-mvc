@@ -113,8 +113,11 @@
     <Compile Include="Controllers\ApplicationControllerTests.cs" />
     <Compile Include="FakePasswordUtility.cs" />
     <Compile Include="FrameworkTests.cs" />
+    <Compile Include="Lib\ApplicationIdentity_Tests.cs" />
     <Compile Include="Lib\BCryptPasswordUtilityTests.cs" />
+    <Compile Include="Lib\BooleanExtensions_Tests.cs" />
     <Compile Include="Lib\ByteExtensionsTests.cs" />
+    <Compile Include="Lib\Clock_Tests.cs" />
     <Compile Include="Lib\ConfigTests.cs" />
     <Compile Include="Lib\Data\UniqueRecordViolationExceptionTests.cs" />
     <Compile Include="Lib\DateTimeExtensionsTests.cs" />

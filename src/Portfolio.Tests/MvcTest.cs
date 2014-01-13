@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
@@ -49,6 +50,9 @@ namespace Portfolio
         public static void SetupControllerContext(Controller controller)
         {
             HttpContextBase httpContext = Mock.Of<HttpContextBase>();
+            Mock.Get(httpContext).SetupGet(x => x.Items).Returns(new Dictionary<object, object>());
+            Mock.Get(httpContext).SetupGet(x => x.Response).Returns(Mock.Of<HttpResponseBase>());
+            Mock.Get(httpContext.Response).SetupGet(x => x.Cache).Returns(Mock.Of<HttpCachePolicyBase>());
             RouteData routeData = new RouteData();
             ControllerContext controllerContext = new ControllerContext(httpContext, routeData, controller);
             controller.ControllerContext = controllerContext;

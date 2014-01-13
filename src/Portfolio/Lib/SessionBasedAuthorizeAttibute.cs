@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Microsoft.Practices.ServiceLocation;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
 
@@ -18,16 +17,21 @@ namespace Portfolio.Lib
             IHttpSessionAdapter httpSessionAdapter = HttpSessionAdapter.Deserialize(httpContext.Session);
             if (httpSessionAdapter.IsAuthenticated)
             {
-                var mediator = ServiceLocator.Current.GetInstance<IMediator>();
-                var query = new UserByUsernameQuery(httpSessionAdapter.Username);
-                var user = mediator.Request(query);
-                httpContext.User = user ?? new Guest();
+                SetHttpContextUser(httpContext, httpSessionAdapter);
                 return true;
             }
             else
             {
                 return false;
             }            
+        }
+
+        private static void SetHttpContextUser(HttpContextBase httpContext, IHttpSessionAdapter httpSession)
+        {
+            var mediator = Mediator.Instance;
+            var query = new UserByUsernameQuery(httpSession.Username);
+            var user = mediator.Request(query);
+            httpContext.User = user ?? new Guest();
         }
     }
 }

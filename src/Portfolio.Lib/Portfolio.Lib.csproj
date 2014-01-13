@@ -131,7 +131,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="BCryptPasswordUtility.cs" />
     <Compile Include="BooleanExtensions.cs" />
     <Compile Include="ByteExtensions.cs" />
