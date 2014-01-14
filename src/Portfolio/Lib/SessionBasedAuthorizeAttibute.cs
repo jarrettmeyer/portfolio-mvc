@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Diagnostics.Contracts;
+using System.Web;
 using System.Web.Mvc;
 using Portfolio.Lib.Models;
 using Portfolio.Lib.Queries;
@@ -9,21 +10,28 @@ namespace Portfolio.Lib
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            Contract.Requires(httpContext != null, "HTTP Context cannot be null.");
+
             // If the session object has not yet been created, then there is nothing
             // we can do with this authorization.
             if (httpContext.Session == null)
                 return false;
 
-            IHttpSessionAdapter httpSessionAdapter = HttpSessionAdapter.Deserialize(httpContext.Session);
-            if (httpSessionAdapter.IsAuthenticated)
+            IHttpSessionAdapter httpSession = GetHttpSessionAdapter(httpContext);
+            if (httpSession.IsAuthenticated)
             {
-                SetHttpContextUser(httpContext, httpSessionAdapter);
+                SetHttpContextUser(httpContext, httpSession);
                 return true;
             }
             else
             {
                 return false;
             }            
+        }
+
+        private static IHttpSessionAdapter GetHttpSessionAdapter(HttpContextBase httpContext)
+        {
+            return HttpSessionAdapter.Deserialize(httpContext.Session);
         }
 
         private static void SetHttpContextUser(HttpContextBase httpContext, IHttpSessionAdapter httpSession)

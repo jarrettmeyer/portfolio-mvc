@@ -47,7 +47,6 @@ namespace Portfolio.Lib
             AssertUnauthorized();
         }
 
-
         [Test]
         public void Succeeds_when_session_is_authenticated()
         {
