@@ -9,11 +9,9 @@ define("App",
 
             function App() {
                 this.util = new Util(this.options);
-                this.router = new Router();
+                this.router = new Router({ app: this });
                 initializeCurrentUser(this);
-                this.mainWindowView = new MainWindowView({
-                    
-                });
+                initializeMainWindowView(this);
             }
 
             App.prototype.options = {
@@ -31,6 +29,11 @@ define("App",
                     model: app.currentUser
                 });
                 app.currentUserView.render();
+            }
+
+            function initializeMainWindowView(app) {
+                app.mainWindowView = new MainWindowView({ app: app });
+                app.mainWindowView.render();
             }
 
             return App;

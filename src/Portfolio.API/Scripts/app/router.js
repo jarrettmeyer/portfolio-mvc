@@ -4,6 +4,10 @@ define("Router", ['jquery', 'underscore', 'backbone'], function ($, _, Backbone)
 
     var Router = Backbone.Router.extend({
         
+        initialize: function (options) {
+            this.app = options.app;
+        },
+
         routes: {
             "logon": "showLogon",
             "tags": "showTags",
@@ -15,11 +19,12 @@ define("Router", ['jquery', 'underscore', 'backbone'], function ($, _, Backbone)
         },
 
         showTags: function() {
-            app.util.log("Router", "showTags");
+            this.app.util.log("Router", "showTags");
+            this.app.mainWindowView.showTags();
         },
         
         showTasks: function() {
-            app.util.log("Router", "showTasks");
+            this.app.util.log("Router", "showTasks");
         }
         
     });

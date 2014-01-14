@@ -9,28 +9,27 @@
 
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Scripts/js")
-    
-    <script type="text/javascript" src="/Scripts/require.js" data-main="/Scripts/app/main.js"></script>
+
 </head>
 <body>
-    
+
     <header class="navbar navbar-default navbar-static-top" role="banner">
         <div class="container">
             <div class="navbar-header">
                 <a href="#" class="navbar-brand">Tasks</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="#/tags">Tags</a></li>                
+                <li><a href="#/tags">Tags</a></li>
             </ul>
-            <ul class="nav navbar-nav pull-right" id="current-user">
-            </ul>
+            <ul class="nav navbar-nav pull-right" id="current-user"></ul>
         </div>
     </header>
 
-    <div class="container body-content">
+    <div id="body-content" class="container">
         @RenderBody()
     </div>
-    
+
+    <script type="text/javascript" src="/Scripts/require.js" data-main="/Scripts/app/main.js"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
